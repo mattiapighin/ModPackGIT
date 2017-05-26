@@ -1,0 +1,191 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ModPack
+</name>
+</assembly>
+<members>
+<member name="T:ModPack.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ModPack.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ModPack.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.RivestimentiDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.IndiciDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.DistintaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.TipiDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.OrdiniDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.RivestimentiRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.IndiciRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.DistintaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.TipiRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.OrdiniRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.RivestimentiRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.IndiciRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.DistintaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.TipiRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.OrdiniRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.RivestimentiTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.IndiciTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.TipiTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.OrdiniTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.ImballiTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(ModPack.ModPackDBDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(ModPack.ModPackDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(ModPack.ModPackDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.UpdateAll(ModPack.ModPackDBDataSet)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+</members>
+</doc>
