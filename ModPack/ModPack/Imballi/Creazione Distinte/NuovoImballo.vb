@@ -4,12 +4,12 @@
     '2. CREARE RIGA IMBALLO
     '3. CREARE RIGA INDICE
 
-    Private _RigaOrdine As Ordine.RigaOrdineINPUT
-    Public Property RigaOrdine() As Ordine.RigaOrdineINPUT
+    Private _RigaOrdine As RigaOrdineINPUT
+    Public Property RigaOrdine() As RigaOrdineINPUT
         Get
             Return _RigaOrdine
         End Get
-        Set(ByVal value As Ordine.RigaOrdineINPUT)
+        Set(ByVal value As RigaOrdineINPUT)
             _RigaOrdine = value
         End Set
     End Property
@@ -53,9 +53,7 @@
     Private R_M3 As Single
     Private R_Prezzo As Single
 
-    Private Sub CaricaVariabili()
-
-        ' R_NomeImballo = NomeImballo.CreaNome(_RigaOrdine.Tipo)
+    Private Sub CaricaVariabiliDaOrdine()
         R_Riga = _RigaOrdine.Riga
         R_Indice = _RigaOrdine.Indice
         R_Qt = _RigaOrdine.Qt
@@ -78,24 +76,37 @@
         R_Diagonali = _RigaOrdine.Diagonali
     End Sub
 
-    Public Sub Crea(ByVal RigaOrdine As Ordine.RigaOrdineINPUT, Optional _InsertDistinta As Boolean = True, Optional _InsertImballo As Boolean = True, Optional _InsertIndice As Boolean = True)
-        Debug.WriteLine("##### imballo " & _RigaOrdine.Indice & " #####")
-        Debug.WriteLine("Carico Variabili")
-        CaricaVariabili()
+    Public Sub CreaDaOrdine(ByVal RigaOrdine As RigaOrdineINPUT, Optional _InsertDistinta As Boolean = True, Optional _InsertImballo As Boolean = True, Optional _InsertIndice As Boolean = True)
+        CaricaVariabiliDaOrdine()
 
-        Debug.WriteLine("Elaboro tipo")
+        Debug.WriteLine("## Creazione imballo " & R_NomeImballo & "Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##")
+
         Select Case R_Type
+            Case "P"
+                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+            Case "G"
+                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
             Case "GDA"
+                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+            Case "GST"
                 Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
         End Select
 
-        Debug.WriteLine("Creo distinta")
-        If _InsertDistinta = True Then InsertDistinta()
-        Debug.WriteLine("Creo imballo")
-        If _InsertImballo = True Then InsertImballo()
-        Debug.WriteLine("Creo indice")
-        If _InsertIndice = True Then InsertIndice()
 
+        If _InsertDistinta = True Then
+            InsertDistinta()
+            LOG.Write("Creata nuova distinta: " & R_NomeImballo)
+        End If
+
+        If _InsertImballo = True Then
+            InsertImballo()
+            LOG.Write("Creata nuova riga imballo: " & R_NomeImballo)
+        End If
+
+        If _InsertIndice = True Then
+            InsertIndice()
+            LOG.Write("Assegnato imballo " & R_NomeImballo & " a indice " & R_Indice)
+        End If
     End Sub
 
     Private Sub InsertDistinta()
@@ -134,9 +145,7 @@
         Try
 
             Using DT As New ModPackDBDataSetTableAdapters.IndiciTableAdapter
-
                 DT.Insert(R_NomeImballo, R_Indice, R_Codice, R_Note)
-                LOG.Write("INSERT NEW Indice " & R_NomeImballo & " " & R_Indice & " " & R_Codice)
             End Using
 
         Catch ex As Exception
@@ -191,7 +200,6 @@
             If Rivestimento = True Then Priv = PrezzoRivestimento * M2
 
             Prezzo = Pmat + Priv
-            Debug.WriteLine(Prezzo)
 
             Prezzo = Math.Round(Prezzo, 1)
 

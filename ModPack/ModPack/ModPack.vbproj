@@ -72,10 +72,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classi Varie\NomeImballo.vb" />
-    <Compile Include="Classi Varie\Oggetti_Vari.vb" />
+    <Compile Include="ModPackDBDataSet.vb">
+      <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Ordini Aperti\Form_OrdiniAperti.Designer.vb">
+      <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Ordini Aperti\Form_OrdiniAperti.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
+    <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
     <Compile Include="Imballi\Creazione Distinte\NuovoImballo.vb" />
-    <Compile Include="Ordine\NuovoOrdine.vb" />
+    <Compile Include="Carica Ordine\NuovoOrdine.vb" />
     <Compile Include="Imballi\Funzioni_Distinte.vb" />
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
@@ -89,8 +98,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Moduli Vari\Module_Log.vb" />
-    <Compile Include="Moduli Vari\Module_SQL.vb" />
+    <Compile Include="Varie\Moduli Vari\Module_Log.vb" />
+    <Compile Include="Varie\Moduli Vari\Module_SQL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -116,6 +125,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ordini Aperti\Form_OrdiniAperti.resx">
+      <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

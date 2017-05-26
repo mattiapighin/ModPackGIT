@@ -15,4 +15,8 @@
         SQL.Query("TRUNCATE TABLE Ordini")
         Debug.WriteLine("Truncato tutto")
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Form_OrdiniAperti.Show()
+    End Sub
 End Class

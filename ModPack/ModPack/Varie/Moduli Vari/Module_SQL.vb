@@ -2,7 +2,7 @@
 
 Namespace SQL
     Module Module_SQL
-        Public Sub InsertRigaOrdini(ByVal ROW As Ordine.RigaOrdine)
+        Public Sub InsertRigaOrdini(ByVal ROW As RigaOrdine)
 
             Using TA As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
 
