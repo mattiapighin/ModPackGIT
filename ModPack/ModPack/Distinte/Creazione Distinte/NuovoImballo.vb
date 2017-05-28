@@ -179,7 +179,7 @@
         Try
 
             M2 = ((L * P) + (L * H) + (P * H)) * 2
-            M2 = M2 * 10 ^ (-4)
+            M2 = Math.Round(M2 * 10 ^ (-4), 2)
 
         Catch EX As Exception
             MsgBox("Errore nel calcolo M2 - " & R_NomeImballo & vbCrLf & EX.Message)

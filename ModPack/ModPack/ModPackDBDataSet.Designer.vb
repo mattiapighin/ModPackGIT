@@ -37,6 +37,10 @@ Partial Public Class ModPackDBDataSet
     
     Private tableImballi As ImballiDataTable
     
+    Private relationImballi_Indici As Global.System.Data.DataRelation
+    
+    Private relationImballi_Distinta As Global.System.Data.DataRelation
+    
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -314,6 +318,8 @@ Partial Public Class ModPackDBDataSet
                 Me.tableImballi.InitVars
             End If
         End If
+        Me.relationImballi_Indici = Me.Relations("Imballi_Indici")
+        Me.relationImballi_Distinta = Me.Relations("Imballi_Distinta")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -336,6 +342,10 @@ Partial Public Class ModPackDBDataSet
         MyBase.Tables.Add(Me.tableOrdini)
         Me.tableImballi = New ImballiDataTable()
         MyBase.Tables.Add(Me.tableImballi)
+        Me.relationImballi_Indici = New Global.System.Data.DataRelation("Imballi_Indici", New Global.System.Data.DataColumn() {Me.tableImballi.ImballoColumn}, New Global.System.Data.DataColumn() {Me.tableIndici.ImballoColumn}, false)
+        Me.Relations.Add(Me.relationImballi_Indici)
+        Me.relationImballi_Distinta = New Global.System.Data.DataRelation("Imballi_Distinta", New Global.System.Data.DataColumn() {Me.tableImballi.ImballoColumn}, New Global.System.Data.DataColumn() {Me.tableDistinta.ImballoColumn}, false)
+        Me.Relations.Add(Me.relationImballi_Distinta)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -886,9 +896,12 @@ Partial Public Class ModPackDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddIndiciRow(ByVal Imballo As String, ByVal Indice As Integer, ByVal Codice As String, ByVal Note As String) As IndiciRow
+        Public Overloads Function AddIndiciRow(ByVal parentImballiRowByImballi_Indici As ImballiRow, ByVal Indice As Integer, ByVal Codice As String, ByVal Note As String) As IndiciRow
             Dim rowIndiciRow As IndiciRow = CType(Me.NewRow,IndiciRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Imballo, Indice, Codice, Note}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Indice, Codice, Note}
+            If (Not (parentImballiRowByImballi_Indici) Is Nothing) Then
+                columnValuesArray(1) = parentImballiRowByImballi_Indici(1)
+            End If
             rowIndiciRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowIndiciRow)
             Return rowIndiciRow
@@ -1248,9 +1261,12 @@ Partial Public Class ModPackDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDistintaRow(ByVal Imballo As String, ByVal Riga As Byte, ByVal Part As String, ByVal X As Decimal, ByVal Y As Decimal, ByVal Z As Decimal, ByVal N As Short, ByVal Tag As String) As DistintaRow
+        Public Overloads Function AddDistintaRow(ByVal parentImballiRowByImballi_Distinta As ImballiRow, ByVal Riga As Byte, ByVal Part As String, ByVal X As Decimal, ByVal Y As Decimal, ByVal Z As Decimal, ByVal N As Short, ByVal Tag As String) As DistintaRow
             Dim rowDistintaRow As DistintaRow = CType(Me.NewRow,DistintaRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Imballo, Riga, Part, X, Y, Z, N, Tag}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Riga, Part, X, Y, Z, N, Tag}
+            If (Not (parentImballiRowByImballi_Distinta) Is Nothing) Then
+                columnValuesArray(1) = parentImballiRowByImballi_Distinta(1)
+            End If
             rowDistintaRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDistintaRow)
             Return rowDistintaRow
@@ -3251,6 +3267,17 @@ Partial Public Class ModPackDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ImballiRow() As ImballiRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Imballi_Indici")),ImballiRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("Imballi_Indici"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsCodiceNull() As Boolean
             Return Me.IsNull(Me.tableIndici.CodiceColumn)
         End Function
@@ -3389,6 +3416,17 @@ Partial Public Class ModPackDBDataSet
             End Get
             Set
                 Me(Me.tableDistinta.TagColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ImballiRow() As ImballiRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("Imballi_Distinta")),ImballiRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("Imballi_Distinta"))
             End Set
         End Property
         
@@ -4692,6 +4730,26 @@ Partial Public Class ModPackDBDataSet
         Public Sub SetData_CreazioneNull()
             Me(Me.tableImballi.Data_CreazioneColumn) = Global.System.Convert.DBNull
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetIndiciRows() As IndiciRow()
+            If (Me.Table.ChildRelations("Imballi_Indici") Is Nothing) Then
+                Return New IndiciRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Imballi_Indici")),IndiciRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetDistintaRows() As DistintaRow()
+            If (Me.Table.ChildRelations("Imballi_Distinta") Is Nothing) Then
+                Return New DistintaRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("Imballi_Distinta")),DistintaRow())
+            End If
+        End Function
     End Class
     
     '''<summary>
@@ -9045,6 +9103,15 @@ Namespace ModPackDBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateUpdatedRows(ByVal dataSet As ModPackDBDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._imballiTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._imballiTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             If (Not (Me._rivestimentiTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.Rivestimenti.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
@@ -9090,15 +9157,6 @@ Namespace ModPackDBDataSetTableAdapters
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
-            If (Not (Me._imballiTableAdapter) Is Nothing) Then
-                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
-                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
-                If ((Not (updatedRows) Is Nothing)  _
-                            AndAlso (0 < updatedRows.Length)) Then
-                    result = (result + Me._imballiTableAdapter.Update(updatedRows))
-                    allChangedRows.AddRange(updatedRows)
-                End If
-            End If
             Return result
         End Function
         
@@ -9109,6 +9167,14 @@ Namespace ModPackDBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateInsertedRows(ByVal dataSet As ModPackDBDataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._imballiTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._imballiTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._rivestimentiTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.Rivestimenti.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -9149,14 +9215,6 @@ Namespace ModPackDBDataSetTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
-            If (Not (Me._imballiTableAdapter) Is Nothing) Then
-                Dim addedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
-                If ((Not (addedRows) Is Nothing)  _
-                            AndAlso (0 < addedRows.Length)) Then
-                    result = (result + Me._imballiTableAdapter.Update(addedRows))
-                    allAddedRows.AddRange(addedRows)
-                End If
-            End If
             Return result
         End Function
         
@@ -9167,14 +9225,6 @@ Namespace ModPackDBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateDeletedRows(ByVal dataSet As ModPackDBDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._imballiTableAdapter) Is Nothing) Then
-                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
-                If ((Not (deletedRows) Is Nothing)  _
-                            AndAlso (0 < deletedRows.Length)) Then
-                    result = (result + Me._imballiTableAdapter.Update(deletedRows))
-                    allChangedRows.AddRange(deletedRows)
-                End If
-            End If
             If (Not (Me._ordiniTableAdapter) Is Nothing) Then
                 Dim deletedRows() As Global.System.Data.DataRow = dataSet.Ordini.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
@@ -9212,6 +9262,14 @@ Namespace ModPackDBDataSetTableAdapters
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._rivestimentiTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._imballiTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Imballi.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._imballiTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If

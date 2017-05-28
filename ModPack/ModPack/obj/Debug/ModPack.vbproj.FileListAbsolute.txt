@@ -32,3 +32,17 @@ C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.exe
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.xml
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.pdb
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_OrdiniAperti.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.exe.config
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.exe
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.pdb
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.xml
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.vbprojResolveAssemblyReference.cache
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Main.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Resources.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_OrdiniAperti.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.vbproj.GenerateResource.Cache
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.exe
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.xml
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.pdb
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Imballi.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.ScegliOrdine.resources

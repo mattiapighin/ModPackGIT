@@ -1,7 +1,7 @@
 ﻿Namespace NomeImballo
     Module NomeImballo
 
-        Public Function CreaNome(ByVal Tipo As String) As String
+        Public Function CreaNome(ByVal Tipo As String, ByVal HT As Boolean) As String
             Dim Imballo As String = ""
 
             Dim count As Integer
@@ -19,6 +19,8 @@
             End Using
 
             Imballo = "M" & Tipo(0) & count + 1
+
+            If HT = True Then Imballo += "HT"
 
             Return Imballo
         End Function

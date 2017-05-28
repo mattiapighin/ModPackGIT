@@ -35,6 +35,9 @@ Partial Class Form_OrdiniAperti
         Me.Dgw_Ordine = New System.Windows.Forms.DataGridView()
         Me.Bt_Disegni = New System.Windows.Forms.Button()
         Me.Bt_Etichette = New System.Windows.Forms.Button()
+        Me.Bt_ConfermaOrdine = New System.Windows.Forms.Button()
+        Me.Bt_Tutti = New System.Windows.Forms.Button()
+        Me.Print_ConfermaOrdine = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_OrdiniAperti, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Dgw_Ordine, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -52,7 +55,7 @@ Partial Class Form_OrdiniAperti
         Me.DGW_OrdiniAperti.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DGW_OrdiniAperti.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DGW_OrdiniAperti.BackgroundColor = System.Drawing.Color.OldLace
+        Me.DGW_OrdiniAperti.BackgroundColor = System.Drawing.Color.White
         Me.DGW_OrdiniAperti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_OrdiniAperti.ColumnHeadersVisible = False
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -63,7 +66,9 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGW_OrdiniAperti.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGW_OrdiniAperti.GridColor = System.Drawing.SystemColors.ButtonFace
         Me.DGW_OrdiniAperti.Location = New System.Drawing.Point(12, 12)
+        Me.DGW_OrdiniAperti.MultiSelect = False
         Me.DGW_OrdiniAperti.Name = "DGW_OrdiniAperti"
         Me.DGW_OrdiniAperti.ReadOnly = True
         Me.DGW_OrdiniAperti.RowHeadersVisible = False
@@ -72,7 +77,7 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
         Me.DGW_OrdiniAperti.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGW_OrdiniAperti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGW_OrdiniAperti.Size = New System.Drawing.Size(202, 478)
+        Me.DGW_OrdiniAperti.Size = New System.Drawing.Size(202, 437)
         Me.DGW_OrdiniAperti.TabIndex = 0
         '
         'Bt_Refresh
@@ -102,7 +107,7 @@ Partial Class Form_OrdiniAperti
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Dgw_Ordine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.Dgw_Ordine.BackgroundColor = System.Drawing.Color.Moccasin
+        Me.Dgw_Ordine.BackgroundColor = System.Drawing.Color.White
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -120,6 +125,7 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Dgw_Ordine.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Dgw_Ordine.GridColor = System.Drawing.SystemColors.ButtonFace
         Me.Dgw_Ordine.Location = New System.Drawing.Point(220, 12)
         Me.Dgw_Ordine.Name = "Dgw_Ordine"
         Me.Dgw_Ordine.ReadOnly = True
@@ -156,11 +162,41 @@ Partial Class Form_OrdiniAperti
         Me.Bt_Etichette.TabIndex = 4
         Me.Bt_Etichette.UseVisualStyleBackColor = True
         '
+        'Bt_ConfermaOrdine
+        '
+        Me.Bt_ConfermaOrdine.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_ConfermaOrdine.FlatAppearance.BorderSize = 0
+        Me.Bt_ConfermaOrdine.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_ConfermaOrdine.Image = CType(resources.GetObject("Bt_ConfermaOrdine.Image"), System.Drawing.Image)
+        Me.Bt_ConfermaOrdine.Location = New System.Drawing.Point(1123, 150)
+        Me.Bt_ConfermaOrdine.Name = "Bt_ConfermaOrdine"
+        Me.Bt_ConfermaOrdine.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_ConfermaOrdine.TabIndex = 5
+        Me.Bt_ConfermaOrdine.UseVisualStyleBackColor = True
+        '
+        'Bt_Tutti
+        '
+        Me.Bt_Tutti.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Tutti.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Bt_Tutti.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Tutti.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Bt_Tutti.Location = New System.Drawing.Point(12, 455)
+        Me.Bt_Tutti.Name = "Bt_Tutti"
+        Me.Bt_Tutti.Size = New System.Drawing.Size(202, 35)
+        Me.Bt_Tutti.TabIndex = 6
+        Me.Bt_Tutti.Text = "Vedi tutto"
+        Me.Bt_Tutti.UseVisualStyleBackColor = False
+        '
+        'Print_ConfermaOrdine
+        '
+        '
         'Form_OrdiniAperti
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1175, 502)
+        Me.Controls.Add(Me.Bt_Tutti)
+        Me.Controls.Add(Me.Bt_ConfermaOrdine)
         Me.Controls.Add(Me.Bt_Etichette)
         Me.Controls.Add(Me.Bt_Disegni)
         Me.Controls.Add(Me.Bt_Refresh)
@@ -179,4 +215,7 @@ Partial Class Form_OrdiniAperti
     Friend WithEvents Dgw_Ordine As DataGridView
     Friend WithEvents Bt_Disegni As Button
     Friend WithEvents Bt_Etichette As Button
+    Friend WithEvents Bt_ConfermaOrdine As Button
+    Friend WithEvents Bt_Tutti As Button
+    Friend WithEvents Print_ConfermaOrdine As Printing.PrintDocument
 End Class

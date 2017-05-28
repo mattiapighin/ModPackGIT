@@ -72,20 +72,33 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons\Form_Imballi.Designer.vb">
+      <DependentUpon>Form_Imballi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Form_Imballi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ScegliOrdine.Designer.vb">
+      <DependentUpon>ScegliOrdine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ScegliOrdine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModPackDBDataSet.vb">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Ordini Aperti\Form_OrdiniAperti.Designer.vb">
+    <Compile Include="Buttons\Ordini Aperti\Form_OrdiniAperti.Designer.vb">
       <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
     </Compile>
-    <Compile Include="Ordini Aperti\Form_OrdiniAperti.vb">
+    <Compile Include="Buttons\Ordini Aperti\Form_OrdiniAperti.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Stampe\Modulo_Stampe.vb" />
     <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
     <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
-    <Compile Include="Imballi\Creazione Distinte\NuovoImballo.vb" />
-    <Compile Include="Carica Ordine\NuovoOrdine.vb" />
-    <Compile Include="Imballi\Funzioni_Distinte.vb" />
+    <Compile Include="Distinte\Creazione Distinte\NuovoImballo.vb" />
+    <Compile Include="Buttons\Carica Ordine\NuovoOrdine.vb" />
+    <Compile Include="Distinte\Funzioni_Distinte.vb" />
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +130,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Buttons\Form_Imballi.resx">
+      <DependentUpon>Form_Imballi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ScegliOrdine.resx">
+      <DependentUpon>ScegliOrdine.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
@@ -126,7 +145,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ordini Aperti\Form_OrdiniAperti.resx">
+    <EmbeddedResource Include="Buttons\Ordini Aperti\Form_OrdiniAperti.resx">
       <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -152,6 +171,9 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

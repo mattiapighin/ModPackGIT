@@ -707,7 +707,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
   <xs:element name="ModPackDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ModPackDBDataSet" msprop:Generator_UserDSName="ModPackDBDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Rivestimenti" msprop:Generator_TableClassName="RivestimentiDataTable" msprop:Generator_TableVarName="tableRivestimenti" msprop:Generator_RowChangedName="RivestimentiRowChanged" msprop:Generator_TablePropName="Rivestimenti" msprop:Generator_RowDeletingName="RivestimentiRowDeleting" msprop:Generator_RowChangingName="RivestimentiRowChanging" msprop:Generator_RowEvHandlerName="RivestimentiRowChangeEventHandler" msprop:Generator_RowDeletedName="RivestimentiRowDeleted" msprop:Generator_RowClassName="RivestimentiRow" msprop:Generator_UserTableName="Rivestimenti" msprop:Generator_RowEvArgName="RivestimentiRowChangeEvent">
+        <xs:element name="Rivestimenti" msprop:Generator_TableClassName="RivestimentiDataTable" msprop:Generator_TableVarName="tableRivestimenti" msprop:Generator_TablePropName="Rivestimenti" msprop:Generator_RowDeletingName="RivestimentiRowDeleting" msprop:Generator_RowChangingName="RivestimentiRowChanging" msprop:Generator_RowEvHandlerName="RivestimentiRowChangeEventHandler" msprop:Generator_RowDeletedName="RivestimentiRowDeleted" msprop:Generator_UserTableName="Rivestimenti" msprop:Generator_RowChangedName="RivestimentiRowChanged" msprop:Generator_RowEvArgName="RivestimentiRowChangeEvent" msprop:Generator_RowClassName="RivestimentiRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -729,7 +729,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Indici" msprop:Generator_TableClassName="IndiciDataTable" msprop:Generator_TableVarName="tableIndici" msprop:Generator_TablePropName="Indici" msprop:Generator_RowDeletingName="IndiciRowDeleting" msprop:Generator_RowChangingName="IndiciRowChanging" msprop:Generator_RowEvHandlerName="IndiciRowChangeEventHandler" msprop:Generator_RowDeletedName="IndiciRowDeleted" msprop:Generator_UserTableName="Indici" msprop:Generator_RowChangedName="IndiciRowChanged" msprop:Generator_RowEvArgName="IndiciRowChangeEvent" msprop:Generator_RowClassName="IndiciRow">
+        <xs:element name="Indici" msprop:Generator_TableClassName="IndiciDataTable" msprop:Generator_TableVarName="tableIndici" msprop:Generator_RowChangedName="IndiciRowChanged" msprop:Generator_TablePropName="Indici" msprop:Generator_RowDeletingName="IndiciRowDeleting" msprop:Generator_RowChangingName="IndiciRowChanging" msprop:Generator_RowEvHandlerName="IndiciRowChangeEventHandler" msprop:Generator_RowDeletedName="IndiciRowDeleted" msprop:Generator_RowClassName="IndiciRow" msprop:Generator_UserTableName="Indici" msprop:Generator_RowEvArgName="IndiciRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -758,7 +758,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Distinta" msprop:Generator_TableClassName="DistintaDataTable" msprop:Generator_TableVarName="tableDistinta" msprop:Generator_RowChangedName="DistintaRowChanged" msprop:Generator_TablePropName="Distinta" msprop:Generator_RowDeletingName="DistintaRowDeleting" msprop:Generator_RowChangingName="DistintaRowChanging" msprop:Generator_RowEvHandlerName="DistintaRowChangeEventHandler" msprop:Generator_RowDeletedName="DistintaRowDeleted" msprop:Generator_RowClassName="DistintaRow" msprop:Generator_UserTableName="Distinta" msprop:Generator_RowEvArgName="DistintaRowChangeEvent">
+        <xs:element name="Distinta" msprop:Generator_TableClassName="DistintaDataTable" msprop:Generator_TableVarName="tableDistinta" msprop:Generator_TablePropName="Distinta" msprop:Generator_RowDeletingName="DistintaRowDeleting" msprop:Generator_RowChangingName="DistintaRowChanging" msprop:Generator_RowEvHandlerName="DistintaRowChangeEventHandler" msprop:Generator_RowDeletedName="DistintaRowDeleted" msprop:Generator_UserTableName="Distinta" msprop:Generator_RowChangedName="DistintaRowChanged" msprop:Generator_RowEvArgName="DistintaRowChangeEvent" msprop:Generator_RowClassName="DistintaRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -791,7 +791,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Tipi" msprop:Generator_TableClassName="TipiDataTable" msprop:Generator_TableVarName="tableTipi" msprop:Generator_RowChangedName="TipiRowChanged" msprop:Generator_TablePropName="Tipi" msprop:Generator_RowDeletingName="TipiRowDeleting" msprop:Generator_RowChangingName="TipiRowChanging" msprop:Generator_RowEvHandlerName="TipiRowChangeEventHandler" msprop:Generator_RowDeletedName="TipiRowDeleted" msprop:Generator_RowClassName="TipiRow" msprop:Generator_UserTableName="Tipi" msprop:Generator_RowEvArgName="TipiRowChangeEvent">
+        <xs:element name="Tipi" msprop:Generator_TableClassName="TipiDataTable" msprop:Generator_TableVarName="tableTipi" msprop:Generator_TablePropName="Tipi" msprop:Generator_RowDeletingName="TipiRowDeleting" msprop:Generator_RowChangingName="TipiRowChanging" msprop:Generator_RowEvHandlerName="TipiRowChangeEventHandler" msprop:Generator_RowDeletedName="TipiRowDeleted" msprop:Generator_UserTableName="Tipi" msprop:Generator_RowChangedName="TipiRowChanged" msprop:Generator_RowEvArgName="TipiRowChangeEvent" msprop:Generator_RowClassName="TipiRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -820,7 +820,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Ordini" msprop:Generator_TableClassName="OrdiniDataTable" msprop:Generator_TableVarName="tableOrdini" msprop:Generator_TablePropName="Ordini" msprop:Generator_RowDeletingName="OrdiniRowDeleting" msprop:Generator_RowChangingName="OrdiniRowChanging" msprop:Generator_RowEvHandlerName="OrdiniRowChangeEventHandler" msprop:Generator_RowDeletedName="OrdiniRowDeleted" msprop:Generator_UserTableName="Ordini" msprop:Generator_RowChangedName="OrdiniRowChanged" msprop:Generator_RowEvArgName="OrdiniRowChangeEvent" msprop:Generator_RowClassName="OrdiniRow">
+        <xs:element name="Ordini" msprop:Generator_TableClassName="OrdiniDataTable" msprop:Generator_TableVarName="tableOrdini" msprop:Generator_RowChangedName="OrdiniRowChanged" msprop:Generator_TablePropName="Ordini" msprop:Generator_RowDeletingName="OrdiniRowDeleting" msprop:Generator_RowChangingName="OrdiniRowChanging" msprop:Generator_RowEvHandlerName="OrdiniRowChangeEventHandler" msprop:Generator_RowDeletedName="OrdiniRowDeleted" msprop:Generator_RowClassName="OrdiniRow" msprop:Generator_UserTableName="Ordini" msprop:Generator_RowEvArgName="OrdiniRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -919,7 +919,7 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Imballi" msprop:Generator_TableClassName="ImballiDataTable" msprop:Generator_TableVarName="tableImballi" msprop:Generator_RowChangedName="ImballiRowChanged" msprop:Generator_TablePropName="Imballi" msprop:Generator_RowDeletingName="ImballiRowDeleting" msprop:Generator_RowChangingName="ImballiRowChanging" msprop:Generator_RowEvHandlerName="ImballiRowChangeEventHandler" msprop:Generator_RowDeletedName="ImballiRowDeleted" msprop:Generator_RowClassName="ImballiRow" msprop:Generator_UserTableName="Imballi" msprop:Generator_RowEvArgName="ImballiRowChangeEvent">
+        <xs:element name="Imballi" msprop:Generator_TableClassName="ImballiDataTable" msprop:Generator_TableVarName="tableImballi" msprop:Generator_TablePropName="Imballi" msprop:Generator_RowDeletingName="ImballiRowDeleting" msprop:Generator_RowChangingName="ImballiRowChanging" msprop:Generator_RowEvHandlerName="ImballiRowChangeEventHandler" msprop:Generator_RowDeletedName="ImballiRowDeleted" msprop:Generator_UserTableName="Imballi" msprop:Generator_RowChangedName="ImballiRowChanged" msprop:Generator_RowEvArgName="ImballiRowChangeEvent" msprop:Generator_RowClassName="ImballiRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -997,4 +997,10 @@ SELECT Id, Imballo, L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT,
       <xs:field xpath="mstns:Id" />
     </xs:unique>
   </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Imballi_Indici" msdata:parent="Imballi" msdata:child="Indici" msdata:parentkey="Imballo" msdata:childkey="Imballo" msprop:Generator_UserChildTable="Indici" msprop:Generator_ChildPropName="GetIndiciRows" msprop:Generator_UserRelationName="Imballi_Indici" msprop:Generator_RelationVarName="relationImballi_Indici" msprop:Generator_UserParentTable="Imballi" msprop:Generator_ParentPropName="ImballiRow" />
+      <msdata:Relationship name="Imballi_Distinta" msdata:parent="Imballi" msdata:child="Distinta" msdata:parentkey="Imballo" msdata:childkey="Imballo" msprop:Generator_UserChildTable="Distinta" msprop:Generator_ChildPropName="GetDistintaRows" msprop:Generator_UserRelationName="Imballi_Distinta" msprop:Generator_RelationVarName="relationImballi_Distinta" msprop:Generator_UserParentTable="Imballi" msprop:Generator_ParentPropName="ImballiRow" />
+    </xs:appinfo>
+  </xs:annotation>
 </xs:schema>
