@@ -17,6 +17,8 @@
     '                                                                        '   
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+    Dim RowOrdine As New List(Of RigaOrdine)
+    Dim RowIndici As New List(Of Integer)
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "[" & System.Environment.UserName & "] - ModPack - V." & My.Application.Info.Version.ToString
@@ -24,9 +26,9 @@
     End Sub
 
     Private Sub Bt_CaricaOrdine_Click(sender As Object, e As EventArgs) Handles Bt_CaricaOrdine.Click
-        ToolStrip.Text = "Caricamento ordine ..."
+        ToolStrip.Text = "Selezione file ordine"
         ProgressBar.Visible = True
-        Ordine.CaricaOrdine(ProgressBar)
+        Ordine.CaricaOrdine(ProgressBar, ToolStrip)
         ToolStrip.Text = ""
         ProgressBar.Visible = False
     End Sub
@@ -47,16 +49,34 @@
         Form_Imballi.Show()
     End Sub
 
+
+    Private Sub Bt_Preferenze_Click(sender As Object, e As EventArgs) Handles Bt_Preferenze.Click
+        Form_Preferenze.Show()
+    End Sub
+
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-        Stampe.ConfermaDOrdine(sender, e, ScegliOrdine.Ordine)
+        Static PagineStampate = 0
+
+        Static EtichetteTotali As Integer = RowOrdine.Count - 1
+
+        Stampe.Stampa_Distinte(sender, e, RowOrdine.Item(PagineStampate))
+
+        PagineStampate += 1
+
+        If PagineStampate <= EtichetteTotali Then
+            e.HasMorePages = True
+        Else
+            e.HasMorePages = False
+            PagineStampate = 0
+        End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If ScegliOrdine.ShowDialog = DialogResult.OK Then
-            Dim r As New PrintPreviewDialog
-            Stampe.CaricaDSConfermaOrdine(ScegliOrdine.Ordine)
-            r.Document = PrintDocument1
-            r.ShowDialog()
-        End If
+        PrintDocument1.DefaultPageSettings = My.Settings.FormatoStampa
+        RowIndici.AddRange({1, 2, 3})
+        RowOrdine = SQL.ConvertIDLISTtoListRigaOrdine(RowIndici)
+        Dim L As New PrintPreviewDialog With {.Document = PrintDocument1}
+        L.Show()
     End Sub
 End Class

@@ -32,6 +32,9 @@ Partial Class Main
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStrip = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ProgressBar = New System.Windows.Forms.ToolStripProgressBar()
+        Me.Bt_Preferenze = New System.Windows.Forms.Button()
+        Me.Bt_Stampe = New System.Windows.Forms.Button()
+        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,7 +57,7 @@ Partial Class Main
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(497, 12)
+        Me.Button1.Location = New System.Drawing.Point(491, 177)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 1
@@ -100,7 +103,7 @@ Partial Class Main
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(497, 41)
+        Me.Button2.Location = New System.Drawing.Point(491, 206)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 4
@@ -110,9 +113,10 @@ Partial Class Main
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStrip, Me.ProgressBar})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 263)
+        Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 247)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(584, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(578, 22)
         Me.StatusStrip1.TabIndex = 7
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -123,16 +127,60 @@ Partial Class Main
         '
         'ProgressBar
         '
+        Me.ProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ProgressBar.Name = "ProgressBar"
         Me.ProgressBar.Size = New System.Drawing.Size(100, 16)
         Me.ProgressBar.Visible = False
+        '
+        'Bt_Preferenze
+        '
+        Me.Bt_Preferenze.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Bt_Preferenze.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.Bt_Preferenze.FlatAppearance.BorderSize = 2
+        Me.Bt_Preferenze.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Preferenze.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Bt_Preferenze.Image = CType(resources.GetObject("Bt_Preferenze.Image"), System.Drawing.Image)
+        Me.Bt_Preferenze.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Bt_Preferenze.Location = New System.Drawing.Point(12, 196)
+        Me.Bt_Preferenze.Name = "Bt_Preferenze"
+        Me.Bt_Preferenze.Size = New System.Drawing.Size(170, 40)
+        Me.Bt_Preferenze.TabIndex = 8
+        Me.Bt_Preferenze.Text = "PREFERENZE  "
+        Me.Bt_Preferenze.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_Preferenze.UseVisualStyleBackColor = False
+        '
+        'Bt_Stampe
+        '
+        Me.Bt_Stampe.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Bt_Stampe.FlatAppearance.BorderColor = System.Drawing.Color.Silver
+        Me.Bt_Stampe.FlatAppearance.BorderSize = 2
+        Me.Bt_Stampe.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Stampe.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Bt_Stampe.Image = CType(resources.GetObject("Bt_Stampe.Image"), System.Drawing.Image)
+        Me.Bt_Stampe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Bt_Stampe.Location = New System.Drawing.Point(12, 150)
+        Me.Bt_Stampe.Name = "Bt_Stampe"
+        Me.Bt_Stampe.Size = New System.Drawing.Size(170, 40)
+        Me.Bt_Stampe.TabIndex = 9
+        Me.Bt_Stampe.Text = "STAMPE  "
+        Me.Bt_Stampe.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_Stampe.UseVisualStyleBackColor = False
+        '
+        'MonthCalendar1
+        '
+        Me.MonthCalendar1.Location = New System.Drawing.Point(339, 12)
+        Me.MonthCalendar1.Name = "MonthCalendar1"
+        Me.MonthCalendar1.TabIndex = 10
         '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(584, 285)
+        Me.ClientSize = New System.Drawing.Size(578, 269)
+        Me.Controls.Add(Me.MonthCalendar1)
+        Me.Controls.Add(Me.Bt_Stampe)
+        Me.Controls.Add(Me.Bt_Preferenze)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Bt_Imballi)
@@ -157,4 +205,7 @@ Partial Class Main
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStrip As ToolStripStatusLabel
     Friend WithEvents ProgressBar As ToolStripProgressBar
+    Friend WithEvents Bt_Preferenze As Button
+    Friend WithEvents Bt_Stampe As Button
+    Friend WithEvents MonthCalendar1 As MonthCalendar
 End Class

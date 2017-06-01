@@ -8,17 +8,23 @@
             Dim connString = My.Settings.ModPackDBConnectionString
             Using conn As New System.Data.SqlClient.SqlConnection(connString)
 
-                Dim cmd As New System.Data.SqlClient.SqlCommand("SELECT COUNT(*) FROM Imballi", conn)
+                'LE PRIME DUE RIGHE INSERITE HANNO TUTTE LO STESSO CODICE
+                Dim cmd As New System.Data.SqlClient.SqlCommand("SELECT IDENT_CURRENT('Imballi')", conn)
                 Try
                     conn.Open()
-                    count = Convert.ToInt32(cmd.ExecuteScalar())
+                    count = cmd.ExecuteScalar()
 
                 Catch ex As Exception
                     MessageBox.Show(ex.Message)
                 End Try
             End Using
 
-            Imballo = "M" & Tipo(0) & count + 1
+
+            'Prende la prima lettera del "tipo", se è T (pallet con termoretraibile) diventa P
+            Dim Lettera As String = Tipo(0)
+            If Lettera = "T" Then Lettera = "P"
+
+            Imballo = "M" & Tipo(0) & count
 
             If HT = True Then Imballo += "HT"
 

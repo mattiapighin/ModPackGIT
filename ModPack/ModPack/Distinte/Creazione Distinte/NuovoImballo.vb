@@ -52,6 +52,10 @@
     Private R_M2 As Single
     Private R_M3 As Single
     Private R_Prezzo As Single
+    Private R_SottoMF As Integer
+    Private R_SottoMT As Integer
+    Private R_SopraMF As Integer
+    Private R_SopraMT As Integer
 
     Private Sub CaricaVariabiliDaOrdine()
         R_Riga = _RigaOrdine.Riga
@@ -82,14 +86,11 @@
         Debug.WriteLine("## Creazione imballo " & R_NomeImballo & "Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##")
 
         Select Case R_Type
-            Case "P"
-                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "G"
-                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
             Case "GDA"
                 Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "GST"
-                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+            Case Else
+                MsgBox("Tipo non riconosciuto (" & R_Type & ")")
+                Exit Sub
         End Select
 
 
@@ -124,21 +125,31 @@
 
             End Using
         Catch ex As Exception
-
             MsgBox("Errore in INSERT DISTINTA" & R_NomeImballo & vbCrLf & ex.Message)
-
         End Try
 
     End Sub
     Private Sub InsertImballo()
         Try
 
+            If My.Settings.CheckInserimentoImballo = True Then
+                MsgBox("Inserimento imballo " & R_NomeImballo & vbCrLf &
+                       "L " & R_Lunghezza & " P " & R_Profondità & " H " & R_Altezza & vbCrLf &
+                       "Tipo: & " & R_Type & vbCrLf & "Zoccoli: " & R_Zoccoli & vbCrLf & "Rivestimento: " & R_Rivestimento & " " & R_TipoRivestimento & vbCrLf &
+                       "HT:" & R_HT & vbCrLf & "DT: " & R_DT & " BM: " & R_BM & vbCrLf &
+                       "Diagonali: " & R_Diagonali & " F° " & R_GradiF & " T° " & R_GradiT & vbCrLf &
+                       "Primo Morale: " & R_PrimoMOR & vbCrLf &
+                       "M3: " & R_M3 & " M2: " & R_M2 & " € " & R_Prezzo, vbOKOnly, R_NomeImballo)
+            End If
+
+
+
             Using DA As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
-                DA.Insert(R_NomeImballo, R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_Rivestimento, R_TipoRivestimento, R_HT, R_DT, R_BM, R_Diagonali, R_GradiF, R_GradiT, R_PrimoMOR, R_M2, R_M3, R_Prezzo, Nothing, Date.Today.Date)
+                DA.Insert(R_NomeImballo, R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_Rivestimento, R_TipoRivestimento, R_HT, R_DT, R_BM, R_Diagonali, R_GradiF, R_GradiT, R_PrimoMOR, R_M2, R_M3, R_Prezzo, Nothing, Date.Today.Date, R_SottoMF, R_SottoMT, R_SopraMF, R_SopraMT)
             End Using
 
         Catch ex As Exception
-            MsgBox("Errore in INSERT DISTINTA" & R_NomeImballo & vbCrLf & ex.Message)
+            MsgBox("Errore in INSERT IMBALLO" & R_NomeImballo & vbCrLf & ex.Message)
         End Try
     End Sub
     Private Sub InsertIndice()
@@ -149,7 +160,7 @@
             End Using
 
         Catch ex As Exception
-            MsgBox("Errore in INSERT DISTINTA" & R_NomeImballo & vbCrLf & ex.Message)
+            MsgBox("Errore in INSERT INDICE" & R_NomeImballo & vbCrLf & ex.Message)
         End Try
 
     End Sub
@@ -164,11 +175,12 @@
                 M3 += (R.X * R.Y * R.Z * R.N)
             Next
 
-            M3 = M3 * 10 ^ (-6)
+            M3 = Math.Round(M3 * 10 ^ (-6), 3)
 
         Catch ex As Exception
             MsgBox("Errore nel calcolo M3 - " & R_NomeImballo & vbCrLf & ex.Message)
         End Try
+
 
 
         Return M3
@@ -221,7 +233,7 @@
         Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
         Dim Ltav As Integer = 10
-        If L <= 200 Then Ltav = 8
+        If L <= My.Settings.LimiteTavole8 Then Ltav = 8
 
         Dim MontanteSottoF As Integer = 11
         Dim MontanteSottoT As Integer = 4
@@ -260,7 +272,13 @@
 
         D.Add(BTL)
 
-        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali * 3, .Tag = "BTT", .Part = "B"}
+        Dim InterasseMaxTavoleTraIMorali As Integer = 30
+
+        Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
+        Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
+
+
+        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
         D.Add(BTT)
 
 
@@ -273,7 +291,7 @@
 
         'Calcoli per Diagonali
 
-        Dim SpazioFraMontantiF As Integer = (((L + 8) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
+        Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
         Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
 
         Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
@@ -324,8 +342,11 @@
             R_M2 = CalcoloM2(L, P, H)
             R_M3 = CalcoloM3(D)
             R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
-
-            Return D
+        R_SottoMF = MontanteSottoF
+        R_SottoMT = MontanteSottoT
+        R_SopraMF = 4
+        R_SopraMT = 2
+        Return D
 
     End Function
 

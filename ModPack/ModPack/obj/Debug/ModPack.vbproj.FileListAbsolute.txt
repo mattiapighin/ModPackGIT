@@ -46,3 +46,9 @@ C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.xml
 C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.pdb
 C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Imballi.resources
 C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.ScegliOrdine.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Imballi.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.ScegliOrdine.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Preferenze.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_ModificaImballo.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\itextsharp.dll
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\itextsharp.xml

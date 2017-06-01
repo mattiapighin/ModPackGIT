@@ -32,6 +32,11 @@ ModPack
 Represents a strongly typed in-memory cache of data.
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet.RivestimentiDataTable">
 <summary>
 Represents the strongly named DataTable class.
@@ -57,11 +62,6 @@ Represents the strongly named DataTable class.
 Represents the strongly named DataTable class.
 </summary>
 </member>
-<member name="T:ModPack.ModPackDBDataSet.ImballiDataTable">
-<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member>
 <member name="T:ModPack.ModPackDBDataSet.RivestimentiRow">
 <summary>
 Represents strongly named DataRow class.
@@ -77,17 +77,17 @@ Represents strongly named DataRow class.
 Represents strongly named DataRow class.
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet.TipiRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSet.OrdiniRow">
-<summary>
-Represents strongly named DataRow class.
-</summary>
-</member>
-<member name="T:ModPack.ModPackDBDataSet.ImballiRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
@@ -107,17 +107,17 @@ Row event argument class
 Row event argument class
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.ImballiRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet.TipiRowChangeEvent">
 <summary>
 Row event argument class
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSet.OrdiniRowChangeEvent">
-<summary>
-Row event argument class
-</summary>
-</member>
-<member name="T:ModPack.ModPackDBDataSet.ImballiRowChangeEvent">
 <summary>
 Row event argument class
 </summary>

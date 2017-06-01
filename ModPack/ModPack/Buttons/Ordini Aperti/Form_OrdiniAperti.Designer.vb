@@ -22,6 +22,7 @@ Partial Class Form_OrdiniAperti
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -36,10 +37,20 @@ Partial Class Form_OrdiniAperti
         Me.Bt_Disegni = New System.Windows.Forms.Button()
         Me.Bt_Etichette = New System.Windows.Forms.Button()
         Me.Bt_ConfermaOrdine = New System.Windows.Forms.Button()
-        Me.Bt_Tutti = New System.Windows.Forms.Button()
         Me.Print_ConfermaOrdine = New System.Drawing.Printing.PrintDocument()
+        Me.Print_Etichette = New System.Drawing.Printing.PrintDocument()
+        Me.Bt_Evaso = New System.Windows.Forms.Button()
+        Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Bt_SeeAll = New System.Windows.Forms.Button()
+        Me.Bt_CheckList = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Lbl_Ordine = New System.Windows.Forms.Label()
+        Me.Print_CheckList = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_OrdiniAperti, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Dgw_Ordine, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DGW_OrdiniAperti
@@ -77,19 +88,22 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
         Me.DGW_OrdiniAperti.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGW_OrdiniAperti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGW_OrdiniAperti.Size = New System.Drawing.Size(202, 437)
+        Me.DGW_OrdiniAperti.Size = New System.Drawing.Size(202, 478)
         Me.DGW_OrdiniAperti.TabIndex = 0
         '
         'Bt_Refresh
         '
-        Me.Bt_Refresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Refresh.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Bt_Refresh.FlatAppearance.BorderSize = 0
         Me.Bt_Refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Refresh.Image = CType(resources.GetObject("Bt_Refresh.Image"), System.Drawing.Image)
-        Me.Bt_Refresh.Location = New System.Drawing.Point(1123, 12)
+        Me.Bt_Refresh.Location = New System.Drawing.Point(3, 144)
         Me.Bt_Refresh.Name = "Bt_Refresh"
-        Me.Bt_Refresh.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Refresh.Size = New System.Drawing.Size(44, 41)
         Me.Bt_Refresh.TabIndex = 2
+        Me.ToolTip.SetToolTip(Me.Bt_Refresh, "Mostra ordine")
         Me.Bt_Refresh.UseVisualStyleBackColor = True
         '
         'Dgw_Ordine
@@ -126,7 +140,7 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Dgw_Ordine.DefaultCellStyle = DataGridViewCellStyle6
         Me.Dgw_Ordine.GridColor = System.Drawing.SystemColors.ButtonFace
-        Me.Dgw_Ordine.Location = New System.Drawing.Point(220, 12)
+        Me.Dgw_Ordine.Location = New System.Drawing.Point(220, 41)
         Me.Dgw_Ordine.Name = "Dgw_Ordine"
         Me.Dgw_Ordine.ReadOnly = True
         Me.Dgw_Ordine.RowHeadersVisible = False
@@ -135,77 +149,177 @@ Partial Class Form_OrdiniAperti
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
         Me.Dgw_Ordine.RowsDefaultCellStyle = DataGridViewCellStyle7
         Me.Dgw_Ordine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Dgw_Ordine.Size = New System.Drawing.Size(897, 478)
+        Me.Dgw_Ordine.Size = New System.Drawing.Size(889, 449)
         Me.Dgw_Ordine.TabIndex = 0
         '
         'Bt_Disegni
         '
-        Me.Bt_Disegni.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Disegni.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Bt_Disegni.FlatAppearance.BorderSize = 0
         Me.Bt_Disegni.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Disegni.Image = CType(resources.GetObject("Bt_Disegni.Image"), System.Drawing.Image)
-        Me.Bt_Disegni.Location = New System.Drawing.Point(1123, 58)
+        Me.Bt_Disegni.Location = New System.Drawing.Point(3, 332)
         Me.Bt_Disegni.Name = "Bt_Disegni"
-        Me.Bt_Disegni.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Disegni.Size = New System.Drawing.Size(44, 41)
         Me.Bt_Disegni.TabIndex = 3
+        Me.ToolTip.SetToolTip(Me.Bt_Disegni, "Stampa distinte")
         Me.Bt_Disegni.UseVisualStyleBackColor = True
         '
         'Bt_Etichette
         '
-        Me.Bt_Etichette.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Etichette.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Bt_Etichette.FlatAppearance.BorderSize = 0
         Me.Bt_Etichette.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Etichette.Image = CType(resources.GetObject("Bt_Etichette.Image"), System.Drawing.Image)
-        Me.Bt_Etichette.Location = New System.Drawing.Point(1123, 104)
+        Me.Bt_Etichette.Location = New System.Drawing.Point(3, 285)
         Me.Bt_Etichette.Name = "Bt_Etichette"
-        Me.Bt_Etichette.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Etichette.Size = New System.Drawing.Size(44, 41)
         Me.Bt_Etichette.TabIndex = 4
+        Me.ToolTip.SetToolTip(Me.Bt_Etichette, "Stampa etichette (ctrl+click per stampare singola etichetta)")
         Me.Bt_Etichette.UseVisualStyleBackColor = True
         '
         'Bt_ConfermaOrdine
         '
-        Me.Bt_ConfermaOrdine.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_ConfermaOrdine.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Bt_ConfermaOrdine.FlatAppearance.BorderSize = 0
         Me.Bt_ConfermaOrdine.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_ConfermaOrdine.Image = CType(resources.GetObject("Bt_ConfermaOrdine.Image"), System.Drawing.Image)
-        Me.Bt_ConfermaOrdine.Location = New System.Drawing.Point(1123, 150)
+        Me.Bt_ConfermaOrdine.Location = New System.Drawing.Point(3, 379)
         Me.Bt_ConfermaOrdine.Name = "Bt_ConfermaOrdine"
-        Me.Bt_ConfermaOrdine.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_ConfermaOrdine.Size = New System.Drawing.Size(44, 41)
         Me.Bt_ConfermaOrdine.TabIndex = 5
+        Me.ToolTip.SetToolTip(Me.Bt_ConfermaOrdine, "Stampa conferma d'ordine")
         Me.Bt_ConfermaOrdine.UseVisualStyleBackColor = True
         '
-        'Bt_Tutti
-        '
-        Me.Bt_Tutti.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Bt_Tutti.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Bt_Tutti.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bt_Tutti.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Bt_Tutti.Location = New System.Drawing.Point(12, 455)
-        Me.Bt_Tutti.Name = "Bt_Tutti"
-        Me.Bt_Tutti.Size = New System.Drawing.Size(202, 35)
-        Me.Bt_Tutti.TabIndex = 6
-        Me.Bt_Tutti.Text = "Vedi tutto"
-        Me.Bt_Tutti.UseVisualStyleBackColor = False
-        '
         'Print_ConfermaOrdine
+        '
+        '
+        'Print_Etichette
+        '
+        '
+        'Bt_Evaso
+        '
+        Me.Bt_Evaso.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Evaso.FlatAppearance.BorderSize = 0
+        Me.Bt_Evaso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Evaso.Image = CType(resources.GetObject("Bt_Evaso.Image"), System.Drawing.Image)
+        Me.Bt_Evaso.Location = New System.Drawing.Point(3, 3)
+        Me.Bt_Evaso.Name = "Bt_Evaso"
+        Me.Bt_Evaso.Size = New System.Drawing.Size(44, 41)
+        Me.Bt_Evaso.TabIndex = 7
+        Me.ToolTip.SetToolTip(Me.Bt_Evaso, "Segna come EVASO (ctrl+click per annullare)")
+        Me.Bt_Evaso.UseVisualStyleBackColor = True
+        '
+        'ToolTip
+        '
+        Me.ToolTip.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        '
+        'Bt_SeeAll
+        '
+        Me.Bt_SeeAll.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_SeeAll.FlatAppearance.BorderSize = 0
+        Me.Bt_SeeAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_SeeAll.Image = CType(resources.GetObject("Bt_SeeAll.Image"), System.Drawing.Image)
+        Me.Bt_SeeAll.Location = New System.Drawing.Point(3, 191)
+        Me.Bt_SeeAll.Name = "Bt_SeeAll"
+        Me.Bt_SeeAll.Size = New System.Drawing.Size(44, 41)
+        Me.Bt_SeeAll.TabIndex = 8
+        Me.ToolTip.SetToolTip(Me.Bt_SeeAll, "Vedi tutti gli imballi da evadere")
+        Me.Bt_SeeAll.UseVisualStyleBackColor = True
+        '
+        'Bt_CheckList
+        '
+        Me.Bt_CheckList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Bt_CheckList.FlatAppearance.BorderSize = 0
+        Me.Bt_CheckList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_CheckList.Image = CType(resources.GetObject("Bt_CheckList.Image"), System.Drawing.Image)
+        Me.Bt_CheckList.Location = New System.Drawing.Point(3, 426)
+        Me.Bt_CheckList.Name = "Bt_CheckList"
+        Me.Bt_CheckList.Size = New System.Drawing.Size(44, 47)
+        Me.Bt_CheckList.TabIndex = 9
+        Me.ToolTip.SetToolTip(Me.Bt_CheckList, "Stampa lista di controllo")
+        Me.Bt_CheckList.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
+        Me.Panel1.Location = New System.Drawing.Point(1118, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(52, 478)
+        Me.Panel1.TabIndex = 8
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_Evaso, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_CheckList, 0, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_ConfermaOrdine, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_Disegni, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_Etichette, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_SeeAll, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_Refresh, 0, 3)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 10
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(50, 476)
+        Me.TableLayoutPanel1.TabIndex = 10
+        '
+        'Lbl_Ordine
+        '
+        Me.Lbl_Ordine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Lbl_Ordine.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lbl_Ordine.Location = New System.Drawing.Point(220, 12)
+        Me.Lbl_Ordine.Name = "Lbl_Ordine"
+        Me.Lbl_Ordine.Size = New System.Drawing.Size(889, 23)
+        Me.Lbl_Ordine.TabIndex = 9
+        Me.Lbl_Ordine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Print_CheckList
         '
         '
         'Form_OrdiniAperti
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1175, 502)
-        Me.Controls.Add(Me.Bt_Tutti)
-        Me.Controls.Add(Me.Bt_ConfermaOrdine)
-        Me.Controls.Add(Me.Bt_Etichette)
-        Me.Controls.Add(Me.Bt_Disegni)
-        Me.Controls.Add(Me.Bt_Refresh)
+        Me.ClientSize = New System.Drawing.Size(1179, 502)
+        Me.Controls.Add(Me.Lbl_Ordine)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Dgw_Ordine)
         Me.Controls.Add(Me.DGW_OrdiniAperti)
         Me.Name = "Form_OrdiniAperti"
         Me.Text = "Ordini Aperti"
         CType(Me.DGW_OrdiniAperti, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Dgw_Ordine, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -216,6 +330,14 @@ Partial Class Form_OrdiniAperti
     Friend WithEvents Bt_Disegni As Button
     Friend WithEvents Bt_Etichette As Button
     Friend WithEvents Bt_ConfermaOrdine As Button
-    Friend WithEvents Bt_Tutti As Button
     Friend WithEvents Print_ConfermaOrdine As Printing.PrintDocument
+    Friend WithEvents Print_Etichette As Printing.PrintDocument
+    Friend WithEvents ToolTip As ToolTip
+    Friend WithEvents Bt_Evaso As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Bt_SeeAll As Button
+    Friend WithEvents Lbl_Ordine As Label
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Bt_CheckList As Button
+    Friend WithEvents Print_CheckList As Printing.PrintDocument
 End Class

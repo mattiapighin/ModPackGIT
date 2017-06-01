@@ -156,8 +156,39 @@
 
             Return Esiste
         End Function
+        Public Function Check_Riga(ByVal Riga As RigaOrdineINPUT, ByVal Nome As String) As Boolean
+            Dim Esiste As Boolean = False
 
-        Public Sub CaricaOrdine(Optional Progressbar As ToolStripProgressBar = Nothing)
+            Using Con As New System.Data.SqlClient.SqlConnection(My.Settings.ModPackDBConnectionString)
+                Con.Open()
+                'Get a row from the order and checks if in table imballi exist a corresponding one
+                'If so it returns the name of the found one
+
+                Using Cmd As New System.Data.SqlClient.SqlCommand("SELECT L, P, H, Tipo, Zoccoli, Rivestimento, Tipo_Rivestimento, HT, DT, BM, Diagonali, Imballo FROM Imballi WHERE Imballo = '" & Nome & "'", Con)
+                    Using MYREADER As System.Data.SqlClient.SqlDataReader = Cmd.ExecuteReader()
+
+                        Do While MYREADER.Read
+
+                            If MYREADER.GetValue(0) = Riga.L And MYREADER.GetValue(1) = Riga.P And MYREADER.GetValue(2) = Riga.H _
+                                And MYREADER.GetValue(3) = Riga.Tipo And MYREADER.GetValue(4) = Riga.Zoccoli And MYREADER.GetValue(5) = Riga.Rivestimento _
+                                And MYREADER.GetValue(6) = Riga.TipoRivestimento And MYREADER.GetValue(7) = Riga.HT And MYREADER.GetValue(8) = Riga.DT _
+                                And MYREADER.GetValue(9) = Riga.BM And MYREADER.GetValue(10) = Riga.Diagonali Then
+
+                                Esiste = True
+                                ImballoName = MYREADER.GetValue(11)
+                                Exit Do
+
+                            End If
+                        Loop
+
+                    End Using
+                End Using
+            End Using
+
+            Return Esiste
+        End Function
+
+        Public Sub CaricaOrdine(Optional Progressbar As ToolStripProgressBar = Nothing, Optional Label As ToolStripStatusLabel = Nothing)
 
             '   Quando ha finito di cercare di ottimizzare questa sub
             '   E ti sei accorto che è stata una pessima idea
@@ -174,7 +205,7 @@
             If OpenFile.ShowDialog = DialogResult.OK Then
 
                 Try
-
+                    If Not Label Is Nothing Then Label.Text = "Caricamento ordine"
                     Dim NumeroOrdine As String = IO.Path.GetFileNameWithoutExtension(OpenFile.FileName)
                     LOG.Write("Presa in carico ordine " & NumeroOrdine)
                     '1 - Controlla che l'ordine non sia già stato caricato (in base al nome del file)
@@ -209,6 +240,7 @@
                         Progressbar.Value = 0
                         Progressbar.Maximum = Lista.Count
                     End If
+                    If Not Label Is Nothing Then Label.Text = "Caricamento ordine"
 
                 Catch ex As Exception
                     MsgBox("Problema con la presa in carico dell'ordine" & vbCrLf & ex.Message)
@@ -217,7 +249,7 @@
                 '################################# ELABORA LA LISTA APPENA CREATA ###############################
 
                 Try
-
+                    If Not Label Is Nothing Then Label.Text = "Preparazione elaborazione ordine"
                     Dim Magazzino As String = InputBox("Magazzino:", "Carica ordine", "1")
                     If String.IsNullOrEmpty(Magazzino) Then Magazzino = 0
 
@@ -226,8 +258,11 @@
                     For Each PACK As RigaOrdineINPUT In Lista
                         If Not Progressbar Is Nothing Then Progressbar.Value += 1
                         Debug.WriteLine("Controllo su indice " & PACK.Indice)
+                        If Not Label Is Nothing Then Label.Text = "Elaborazione indice " & PACK.Indice
 
-                        If IndiceEXIST(PACK.Indice) Then
+                        Dim IndiceEsiste As Boolean = IndiceEXIST(PACK.Indice)
+
+                        If IndiceEsiste = True Then
 
                             '6.1 - Prima controlla che sia già stato caricato in passato uno uguale (in base al suo indice)
                             ImballoName = ConvertIndiceToImballo(PACK.Indice)
@@ -238,13 +273,24 @@
                                 '6.1.1 - Se trova un indice corrispondente controlla che esista effettivamente anche un imballo
                                 '        corrispondente, se è tutto a posto carica la riga nella OrdiniTable
 
-                                Debug.WriteLine("L'imballo " & ImballoName & " è presente in memoria")
-                                Dim RIGA_ORDINE As New RigaOrdine With {.NumeroOrdine = PACK.NumeroOrdine, .Riga = PACK.Riga, .Imballo = ImballoName, .Indice = PACK.Indice, .Qt = PACK.Qt, .Cliente = PACK.Cliente, .Codice = PACK.Codice, .Commessa = PACK.Commessa,
+                                If Check_Riga(PACK, ImballoName) Then
+                                    Debug.WriteLine("L'imballo " & ImballoName & " è presente in memoria")
+                                    Dim RIGA_ORDINE As New RigaOrdine With {.NumeroOrdine = PACK.NumeroOrdine, .Riga = PACK.Riga, .Imballo = ImballoName, .Indice = PACK.Indice, .Qt = PACK.Qt, .Cliente = PACK.Cliente, .Codice = PACK.Codice, .Commessa = PACK.Commessa,
                                     .L = PACK.L, .P = PACK.P, .H = PACK.H, .Tipo = PACK.Tipo, .Zoccoli = PACK.Zoccoli, .Rivestimento = PACK.Rivestimento, .TipoRivestimento = PACK.TipoRivestimento, .Note = PACK.Note, .DataConsegna = PACK.DataConsegna, .HT = PACK.HT, .DT = PACK.DT, .BM = PACK.BM, .Rivest_Tot = PACK.Rivest_Tot, .Magazzino = Magazzino, .Diagonali = PACK.Diagonali,
                                     .Stampato = False, .Produzione = False, .Evaso = False}
-                                SQL.InsertRigaOrdini(RIGA_ORDINE)
+                                    SQL.InsertRigaOrdini(RIGA_ORDINE)
+                                Else
 
-                            Else
+                                    '6.1.1 - L'indice esiste, l'imballo esiste ma le righe non corrispondono. Elimina l'indice si comporta come se fosse una nuovariga
+                                    If MsgBox("ATTENZIONE: L'indice " & PACK.Indice & " non corrisponde alla riga imballo " & ImballoName & " a cui era associato" & vbCrLf & "Vuoi creare una imballo nuovo?", vbYesNo, "Carica Ordine") = MsgBoxResult.Yes Then
+                                        ImballoName = NomeImballo.CreaNome(PACK.Tipo, PACK.HT)
+                                        SQL.Query("DELETE FROM Indici WHERE indice = '" & PACK.Indice & "'")
+                                        IndiceEsiste = False
+                                    End If
+
+                                End If
+
+                                    Else
 
                                 '6.1.1 - Se esiste in memoria un indice, ma non la riga imballo qualcuno ha messo mani dove non doveva
                                 '        Permette comunque di aggiustare le cose CREANDO una riga imballo e una distinta con il vecchio
@@ -263,7 +309,9 @@
 
                             End If
 
-                        Else
+                        End If
+
+                        If IndiceEsiste = False Then
 
                             '6.2 - Non esiste in memoria un indice come quello della riga dell'ordine
 
@@ -276,7 +324,7 @@
 
                             If CONFRONTO_IMBALLI(PACK) = False Then
                                 '7.1 - Se non trova niente, crea l'imballo da zero con il codice creato in precedenza
-
+                                If Not Label Is Nothing Then Label.Text = "Creazione imballo " & ImballoName
                                 Debug.WriteLine("Verrà creato il nuovo imballo: " & PACK.Indice & " = " & ImballoName)
 
                                 Dim Nuovo As New NuovoImballo With {.RigaOrdine = PACK, .Nome = ImballoName}
@@ -318,7 +366,7 @@
             '8 - Se la lista dei nuovi imballi non è vuota permette di stamparla 
             StampaListaNuovi(ListaNuovi)
             If Not Progressbar Is Nothing Then Progressbar.Value = 0
-
+            If Not Label Is Nothing Then Label.Text = "Caricamento completato"
         End Sub
 
         Private Sub StampaListaNuovi(ByVal Lista As List(Of String))

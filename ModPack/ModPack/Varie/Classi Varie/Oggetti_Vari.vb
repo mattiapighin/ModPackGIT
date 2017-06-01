@@ -409,6 +409,16 @@ Public Class RigaOrdine
             _Evaso = value
         End Set
     End Property
+
+    Private _DataOrdine As Date
+    Public Property Data_Ordine() As Date
+        Get
+            Return _DataOrdine
+        End Get
+        Set(ByVal value As Date)
+            _DataOrdine = value
+        End Set
+    End Property
 End Class
 
 Public Class RigaOrdineINPUT
@@ -805,5 +815,42 @@ Public Class RigaImballi
             _DataCreazione = value
         End Set
     End Property
+    Private _SottoMontanteF As Integer
+    Public Property SottoMF() As Integer
+        Get
+            Return _SottoMontanteF
+        End Get
+        Set(ByVal value As Integer)
+            _SottoMontanteF = value
+        End Set
+    End Property
+    Private _SottoMontanteT As Integer
+    Public Property SottoMT() As Integer
+        Get
+            Return _SottoMontanteT
+        End Get
+        Set(ByVal value As Integer)
+            _SottoMontanteT = value
+        End Set
+    End Property
+    Private _SopraMontanteF As Integer
+    Public Property SopraMF() As Integer
+        Get
+            Return _SopraMontanteF
+        End Get
+        Set(ByVal value As Integer)
+            _SopraMontanteF = value
+        End Set
+    End Property
+    Private _SopraMontanteT As Integer
+    Public Property SopraMT() As Integer
+        Get
+            Return _SopraMontanteT
+        End Get
+        Set(ByVal value As Integer)
+            _SopraMontanteT = value
+        End Set
+    End Property
+
 End Class
 

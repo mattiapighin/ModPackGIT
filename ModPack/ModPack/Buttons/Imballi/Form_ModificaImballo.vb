@@ -1,0 +1,219 @@
+﻿Public Class Form_ModificaImballo
+
+    Dim R As ModPackDBDataSet.ImballiRow
+
+    Private Sub Form_ModificaImballo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: questa riga di codice carica i dati nella tabella 'ModPackDBDataSet.Indici'. È possibile spostarla o rimuoverla se necessario.
+
+        'TODO: questa riga di codice carica i dati nella tabella 'ModPackDBDataSet.Imballi'. È possibile spostarla o rimuoverla se necessario.
+        Me.ImballiTableAdapter.Fill(Me.ModPackDBDataSet.Imballi)
+    End Sub
+    Private Sub EliminaImballo()
+
+        Dim IdImballo As Integer = R.Id
+        Dim NomeImballo As String = R.Imballo
+
+        If MsgBox("Eliminare tutti i dati relativi all'imballo [" & IdImballo & "] " & NomeImballo & "?", vbYesNo, "Elimina") Then
+            If MsgBox("Sicuro?", vbYesNo, "Elimina") Then
+                SQL.Query("DELETE FROM Imballi WHERE Id = '" & IdImballo & "'")
+                SQL.Query("DELETE FROM Indici WHERE Imballo = '" & NomeImballo & "'")
+                SQL.Query("DELETE FROM Distinta WHERE Imballo = '" & NomeImballo & "'")
+                LOG.Write("Id " & IdImballo & " - " & NomeImballo & " eliminato")
+            End If
+        End If
+
+            PulisciTutto()
+        Me.ImballiTableAdapter.Fill(Me.ModPackDBDataSet.Imballi)
+
+    End Sub
+    Private Sub CaricaCodice()
+        Try
+            R = CType(ImballiBindingSource.Current, DataRowView).Row
+
+            If CbImballo.Text = R.Imballo Then
+                'TODO: questa riga di codice carica i dati nella tabella 'ModPackDBDataSet.Distinta'. È possibile spostarla o rimuoverla se necessario.
+                Me.DistintaTableAdapter.Fill(Me.ModPackDBDataSet.Distinta)
+                Me.IndiciTableAdapter.Fill(Me.ModPackDBDataSet.Indici)
+                DGWDistinta.DataSource = ImballiDistintaBindingSource
+                DgwIndici.DataSource = ImballiIndiciBindingSource
+
+                txtL.Text = R.L
+                txtP.Text = R.P
+                txtH.Text = R.H
+                txtTipo.Text = R.Tipo
+                txtZoccoli.Text = R.Zoccoli
+                ckRivestimento.Checked = R.Rivestimento
+                txtTipoRivestimento.Text = R.Tipo_Rivestimento
+                ckHT.Checked = R.HT
+                ckBM.Checked = R.BM
+                ckDT.Checked = R.DT
+                ckDiagonali.Checked = R.Diagonali
+                txtGradiF.Text = R.Gradi_F
+                txtGradiT.Text = R.Gradi_T
+                txtPrimoMorale.Text = R.Primo_Morale
+                txtM2.Text = R.M2
+                txtM3.Text = R.M3
+                txtPrezzo.Text = R.Prezzo
+                TxtSottoMF.Text = R.SottoMF
+                TxtSopraMF.Text = R.SopraMF
+                TxtSottoMT.Text = R.SottoMT
+                TxtSopraMT.Text = R.SopraMT
+
+                If Not R.IsImgNull Then PbImg.BackgroundImage = Immagine.ConvertFromBytes(R.Img)
+
+                PanelCodice.Enabled = False
+                PanelModifica.Enabled = True
+                PanelButtons.Enabled = True
+            Else
+                MsgBox("L'imballo non esiste", vbInformation, "Modifica")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+    Private Sub PulisciTutto()
+        txtL.Text = ""
+        txtP.Text = ""
+        txtH.Text = ""
+        txtTipo.Text = ""
+        txtZoccoli.Text = ""
+        txtTipoRivestimento.Text = ""
+        txtGradiT.Text = ""
+        txtGradiF.Text = ""
+        txtPrimoMorale.Text = ""
+        txtM2.Text = ""
+        txtM3.Text = ""
+        txtPrezzo.Text = ""
+        PbImg.BackgroundImage = Nothing
+        DGWDistinta.DataSource = Nothing
+        DgwIndici.DataSource = Nothing
+        PanelModifica.Enabled = False
+        PanelCodice.Enabled = True
+        PanelButtons.Enabled = False
+    End Sub
+    Private Sub Bt_StartEdit_Click(sender As Object, e As EventArgs) Handles Bt_StartEdit.Click
+        CaricaCodice()
+    End Sub
+    Private Sub Bt_LoadImage_Click(sender As Object, e As EventArgs) Handles Bt_LoadImage.Click
+        Dim LoadImage As New OpenFileDialog With {.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|Bitmap (*.bmp)|*.bmp"}
+        If LoadImage.ShowDialog = DialogResult.OK Then
+
+            Dim infoReader As System.IO.FileInfo
+            infoReader = My.Computer.FileSystem.GetFileInfo(LoadImage.FileName)
+            If infoReader.Length <= 512000 Then
+                PbImg.BackgroundImage = Image.FromFile(LoadImage.FileName)
+            Else
+                MsgBox("Selezionare un'immagine di dimensioni inferiori a 500kb")
+            End If
+
+        End If
+    End Sub
+    Private Sub Bt_Salva_Click(sender As Object, e As EventArgs) Handles Bt_Salva.Click
+        If MsgBox("ATTENZIONE: Le modifiche colpiranno tutti gli indici associati all'imballo. Continuare?", vbYesNo) = MsgBoxResult.Yes Then
+
+            Dim IR As ModPackDBDataSet.ImballiRow = CType(ImballiBindingSource.Current, DataRowView).Row
+
+            'Aggiorno la distinta
+            DistintaTableAdapter.Update(ModPackDBDataSet)
+            LOG.Write("Aggiornamento Distinta: " & IR.Imballo)
+
+            IndiciTableAdapter.Update(ModPackDBDataSet)
+            LOG.Write("Aggiornamento Indici: " & IR.Imballo)
+
+            'Aggiorno le altre righe
+            IR.L = txtL.Text
+            IR.P = txtP.Text
+            IR.H = txtH.Text
+            IR.Tipo = txtTipo.Text
+            IR.Zoccoli = txtZoccoli.Text
+            IR.Rivestimento = ckRivestimento.Checked
+            IR.Tipo_Rivestimento = txtTipoRivestimento.Text
+            IR.HT = ckHT.Checked
+            IR.BM = ckBM.Checked
+            IR.DT = ckDT.Checked
+            IR.Diagonali = ckDiagonali.Checked
+            IR.Gradi_F = txtGradiF.Text
+            IR.Gradi_T = txtGradiT.Text
+            IR.Primo_Morale = txtPrimoMorale.Text
+            IR.M2 = txtM2.Text
+            IR.M3 = txtM3.Text
+            IR.Prezzo = txtPrezzo.Text
+            IR.SottoMF = TxtSottoMF.Text
+            IR.SopraMF = TxtSopraMF.Text
+            IR.SottoMT = TxtSottoMT.Text
+            IR.SopraMT = TxtSopraMT.Text
+
+            LOG.Write("Aggiornamento riga imballo: " & IR.Imballo)
+
+            'Converte l'immagine in bytes e la salva
+            If Not PbImg.BackgroundImage Is Nothing Then
+                IR.Img = Immagine.ConvertToBytes(PbImg.BackgroundImage)
+            Else
+                IR.Img = Nothing
+            End If
+
+            ImballiTableAdapter.Update(IR)
+
+            If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
+            If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
+            If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Imballo.Ricalcolo_Prezzo(IR.Imballo)
+
+            ImballiTableAdapter.Update(IR)
+            CaricaCodice()
+        End If
+    End Sub
+
+    Private Sub Bt_Cancel_Click(sender As Object, e As EventArgs) Handles Bt_Cancel.Click
+        PulisciTutto()
+    End Sub
+
+    Private Sub Bt_NoImg_Click(sender As Object, e As EventArgs) Handles Bt_NoImg.Click
+        PbImg.BackgroundImage = Nothing
+    End Sub
+
+    Private Sub Bt_EliminaCodice_Click(sender As Object, e As EventArgs) Handles Bt_EliminaCodice.Click
+        EliminaImballo()
+    End Sub
+
+    Private Sub Bt_Duplica_Click(sender As Object, e As EventArgs) Handles Bt_Duplica.Click
+        Try
+
+
+            If MsgBox("Vuoi duplicare l'imballo selezionato?", vbYesNo, "Duplica") = MsgBoxResult.Yes Then
+
+                Dim NuovoNome As String = NomeImballo.CreaNome(R.Tipo, R.HT)
+
+                If MsgBox("Assegnare un nome personalizzato?", vbYesNo, "Nome imballo") = MsgBoxResult.Yes Then
+                    NuovoNome = InputBox("Nome imballo", "Nome", NuovoNome)
+                    If String.IsNullOrEmpty(NuovoNome) Then NuovoNome = NomeImballo.CreaNome(R.Tipo, R.HT)
+                End If
+
+                MsgBox("Il nuovo imballo non avrà indici associati", vbInformation, "Duplica")
+
+                'Copia riga imballo
+                Using TA As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+
+                    TA.Insert(NuovoNome, R.L, R.P, R.H, R.Tipo, R.Zoccoli, R.Rivestimento, R.Tipo_Rivestimento, R.HT, R.DT, R.BM, R.Diagonali, R.Gradi_F,
+                              R.Gradi_T, R.Primo_Morale, R.M2, R.M3, R.Prezzo, Nothing, R.Data_Creazione, R.SottoMF, R.SottoMT, R.SopraMF, R.SopraMT)
+                End Using
+
+                'Copia righe distinta
+                Using TA As New ModPackDBDataSetTableAdapters.DistintaTableAdapter
+                    For Each row As ModPackDBDataSet.DistintaRow In ModPackDBDataSet.Distinta.Rows
+                        If row.Imballo = R.Imballo Then
+                            TA.Insert(NuovoNome, row.Riga, row.Part, row.X, row.Y, row.Z, row.N, row.Tag)
+                        End If
+                    Next
+                End Using
+
+
+                LOG.Write("Creata nuova riga imballo: " & NuovoNome & " Duplicato di " & R.Imballo)
+
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+End Class

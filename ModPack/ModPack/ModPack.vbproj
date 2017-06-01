@@ -47,6 +47,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\Imballi-Modine-Resources\Info\itextsharp\itextsharp-dll-core\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -72,10 +75,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\Form_Imballi.Designer.vb">
+    <Compile Include="Buttons\Imballi\Form_Imballi.Designer.vb">
       <DependentUpon>Form_Imballi.vb</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\Form_Imballi.vb">
+    <Compile Include="Buttons\Imballi\Form_Imballi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Imballi\Form_ModificaImballo.Designer.vb">
+      <DependentUpon>Form_ModificaImballo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Imballi\Form_ModificaImballo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\Form_Preferenze.Designer.vb">
+      <DependentUpon>Form_Preferenze.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\Form_Preferenze.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\ScegliOrdine.Designer.vb">
@@ -94,6 +109,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Stampe\Modulo_Stampe.vb" />
+    <Compile Include="Stampe\Stampe_Distinta.vb" />
     <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
     <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
     <Compile Include="Distinte\Creazione Distinte\NuovoImballo.vb" />
@@ -111,6 +127,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Varie\Moduli Vari\Module_Barcode.vb" />
+    <Compile Include="Varie\Moduli Vari\Module_IMG.vb" />
     <Compile Include="Varie\Moduli Vari\Module_Log.vb" />
     <Compile Include="Varie\Moduli Vari\Module_SQL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -130,8 +148,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Buttons\Form_Imballi.resx">
+    <EmbeddedResource Include="Buttons\Imballi\Form_Imballi.resx">
       <DependentUpon>Form_Imballi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Imballi\Form_ModificaImballo.resx">
+      <DependentUpon>Form_ModificaImballo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
+      <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ScegliOrdine.resx">
       <DependentUpon>ScegliOrdine.vb</DependentUpon>

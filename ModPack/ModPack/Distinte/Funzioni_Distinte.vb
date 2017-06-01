@@ -43,9 +43,24 @@
 
         End Function
         Public Function NumeroMorali(BTL, PrimoMorale, interasseMAX)
-            Dim N As Integer
-            Dim CentroEsterni As Single = BTL - (PrimoMorale * 2)
-            N = Math.Ceiling((CentroEsterni / interasseMAX) + 1)
+            Dim N As Integer = 1
+            Dim Interasse As Single = interasseMAX + 10
+
+            Do Until Interasse < interasseMAX
+                N += 1
+                Interasse = (BTL - (PrimoMorale * 2)) / (N - 1)
+            Loop
+
+            Return N
+        End Function
+        Public Function NumeroTavoleSopra(Interasse, interasseMAX)
+            Dim N As Integer = 0
+
+            Do Until Interasse < interasseMAX
+                N += 1
+                Interasse = (Interasse / (N + 1))
+            Loop
+
             Return N
         End Function
         Public Function NumeroTavole(Superficie, SpazioMAX, Ltav)
@@ -77,6 +92,9 @@
             radTOT = radIPO - radTAV
 
             GRADI = radTOT * 180 / Math.PI
+
+            If Ltav1 < 0 Then Ltav1 = 0
+
             Return Ltav1
         End Function
         Function Diagonali_gradi(Base, Altezza, Ltav)
@@ -96,10 +114,124 @@
             radTOT = radIPO - radTAV
 
             GRADI = radTOT * 180 / Math.PI
+
+            If GRADI < 0 Then GRADI = 0
+
             Return GRADI
         End Function
 
+        Function Ricalcolo_M3(ByVal Imballo As String) As Single
 
+            Dim M3 As Single
+
+            Dim TABLE As New ModPackDBDataSet.DistintaDataTable
+            Using DA As New ModPackDBDataSetTableAdapters.DistintaTableAdapter
+                DA.Fill(TABLE)
+            End Using
+
+
+
+            For Each Row As ModPackDBDataSet.DistintaRow In TABLE.Rows
+                If Row.Imballo = Imballo Then
+
+                    Dim M3Riga As Single = (Row.X * Row.Y * Row.Z) * Row.N
+                    M3 += M3Riga
+
+                End If
+            Next
+
+            M3 = M3 * 10 ^ (-6)
+
+            Return Math.Round(M3, 3)
+        End Function
+        Function Ricalcolo_M2(ByVal Imballo As String) As Single
+            Dim M2 As Double
+
+            Dim TABLE As New ModPackDBDataSet.ImballiDataTable
+            Using DA As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+                DA.Fill(TABLE)
+            End Using
+
+            For Each Row As ModPackDBDataSet.ImballiRow In TABLE.Rows
+                If Row.Imballo = Imballo Then
+
+                    Dim L As Integer = Row.L
+                    Dim P As Integer = Row.P
+                    Dim H As Integer = Row.H
+
+
+                    M2 = ((L * P) + (L * H) + (P * H)) * 2
+                    M2 = Math.Round(M2 * 10 ^ (-4), 2)
+
+                End If
+            Next
+
+
+            Return Math.Round(M2, 3)
+        End Function
+        Function Ricalcolo_Prezzo(ByVal Imballo As String) As Single
+            Dim prezzo As Single
+
+            Dim Tipo As String = ""
+            Dim PrezzoMateriale As Single = 0
+            Dim PrezzoRivestimento As Single = 0
+            Dim HT As Boolean
+            Dim Riv As Boolean
+            Dim TipoRivestimento As String = ""
+            Dim M3 As Single = 0
+            Dim M2 As Single = 0
+
+            Dim TableImballi As New ModPackDBDataSet.ImballiDataTable
+            Using DA As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+                DA.Fill(TableImballi)
+
+                For Each Row As ModPackDBDataSet.ImballiRow In TableImballi.Rows
+                    If Row.Imballo = Imballo Then
+                        Tipo = Row.Tipo
+                        M3 = Row.M3
+                        M2 = Row.M2
+                        HT = Row.HT
+                        Riv = Row.Rivestimento
+                        TipoRivestimento = Row.Tipo_Rivestimento
+                        Exit For
+                    End If
+                Next
+            End Using
+
+            Dim TableTipi As New ModPackDBDataSet.TipiDataTable
+            Using DA As New ModPackDBDataSetTableAdapters.TipiTableAdapter
+                DA.Fill(TableTipi)
+
+                For Each Row As ModPackDBDataSet.TipiRow In TableTipi.Rows
+                    If Row.Tipo = Tipo Then
+
+                        If HT = True Then
+                            PrezzoMateriale = Row.PrezzoM3HT
+                        Else
+                            PrezzoMateriale = Row.PrezzoM3
+                        End If
+
+                    End If
+                Next
+            End Using
+
+            If Riv = True Then
+                Dim TableRivestimenti As New ModPackDBDataSet.RivestimentiDataTable
+                Using DA As New ModPackDBDataSetTableAdapters.RivestimentiTableAdapter
+                    DA.Fill(TableRivestimenti)
+
+                    For Each Row As ModPackDBDataSet.RivestimentiRow In TableRivestimenti.Rows
+                        If Row.Tipo_Rivestimento = TipoRivestimento Then
+                            PrezzoRivestimento = Row.Prezzo_m2
+                        End If
+                    Next
+                End Using
+            End If
+
+            prezzo = (PrezzoMateriale * M3) + (PrezzoRivestimento * M2)
+
+            Return Math.Round(prezzo, 1)
+        End Function
 
     End Module
 End Namespace

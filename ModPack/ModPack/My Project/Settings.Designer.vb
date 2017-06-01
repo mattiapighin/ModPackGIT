@@ -100,6 +100,221 @@ Namespace My
                 Return CType(Me("ModPackDBConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property FormatoStampa() As Global.System.Drawing.Printing.PageSettings
+            Get
+                Return CType(Me("FormatoStampa"),Global.System.Drawing.Printing.PageSettings)
+            End Get
+            Set
+                Me("FormatoStampa") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("110")>  _
+        Public Property Etichette_DimensioneX() As Integer
+            Get
+                Return CType(Me("Etichette_DimensioneX"),Integer)
+            End Get
+            Set
+                Me("Etichette_DimensioneX") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("69")>  _
+        Public Property Etichette_DimensioneY() As Integer
+            Get
+                Return CType(Me("Etichette_DimensioneY"),Integer)
+            End Get
+            Set
+                Me("Etichette_DimensioneY") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Etichette_MargineTop() As Integer
+            Get
+                Return CType(Me("Etichette_MargineTop"),Integer)
+            End Get
+            Set
+                Me("Etichette_MargineTop") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Etichette_MargineBottom() As Integer
+            Get
+                Return CType(Me("Etichette_MargineBottom"),Integer)
+            End Get
+            Set
+                Me("Etichette_MargineBottom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Etichette_MargineLeft() As Integer
+            Get
+                Return CType(Me("Etichette_MargineLeft"),Integer)
+            End Get
+            Set
+                Me("Etichette_MargineLeft") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Etichette_MargineRight() As Integer
+            Get
+                Return CType(Me("Etichette_MargineRight"),Integer)
+            End Get
+            Set
+                Me("Etichette_MargineRight") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("\\10.0.0.5\TSC TTP-246M Pro")>  _
+        Public Property Etichette_Stampante() As String
+            Get
+                Return CType(Me("Etichette_Stampante"),String)
+            End Get
+            Set
+                Me("Etichette_Stampante") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CK_ConfermaEvaso() As Boolean
+            Get
+                Return CType(Me("CK_ConfermaEvaso"),Boolean)
+            End Get
+            Set
+                Me("CK_ConfermaEvaso") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property OrdiniAperti_ColoraScaduti() As Boolean
+            Get
+                Return CType(Me("OrdiniAperti_ColoraScaduti"),Boolean)
+            End Get
+            Set
+                Me("OrdiniAperti_ColoraScaduti") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property OrdiniAperti_ColoraEvasi() As Boolean
+            Get
+                Return CType(Me("OrdiniAperti_ColoraEvasi"),Boolean)
+            End Get
+            Set
+                Me("OrdiniAperti_ColoraEvasi") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CheckInserimentoImballo() As Boolean
+            Get
+                Return CType(Me("CheckInserimentoImballo"),Boolean)
+            End Get
+            Set
+                Me("CheckInserimentoImballo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property StampaBarcodeDistinte() As Boolean
+            Get
+                Return CType(Me("StampaBarcodeDistinte"),Boolean)
+            End Get
+            Set
+                Me("StampaBarcodeDistinte") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property StampaBarcodeSoloCodice() As String
+            Get
+                Return CType(Me("StampaBarcodeSoloCodice"),String)
+            End Get
+            Set
+                Me("StampaBarcodeSoloCodice") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("12")>  _
+        Public Property DimensioneFontDistinta() As Integer
+            Get
+                Return CType(Me("DimensioneFontDistinta"),Integer)
+            End Get
+            Set
+                Me("DimensioneFontDistinta") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("15")>  _
+        Public Property NumeroRigheDistinta() As String
+            Get
+                Return CType(Me("NumeroRigheDistinta"),String)
+            End Get
+            Set
+                Me("NumeroRigheDistinta") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property PrintBiancoNero() As Boolean
+            Get
+                Return CType(Me("PrintBiancoNero"),Boolean)
+            End Get
+            Set
+                Me("PrintBiancoNero") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("200")>  _
+        Public Property LimiteTavole8() As Integer
+            Get
+                Return CType(Me("LimiteTavole8"),Integer)
+            End Get
+            Set
+                Me("LimiteTavole8") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
