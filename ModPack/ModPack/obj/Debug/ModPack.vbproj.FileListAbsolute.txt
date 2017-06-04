@@ -52,3 +52,6 @@ C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_ModificaImballo.resources
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\itextsharp.dll
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\itextsharp.xml
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\itextsharp.xml
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_ModificaImballo.resources
+C:\Users\Mattia\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Preferenze.resources

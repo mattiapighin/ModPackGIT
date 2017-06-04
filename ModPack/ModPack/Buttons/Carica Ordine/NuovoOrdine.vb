@@ -284,6 +284,7 @@
                                     '6.1.1 - L'indice esiste, l'imballo esiste ma le righe non corrispondono. Elimina l'indice si comporta come se fosse una nuovariga
                                     If MsgBox("ATTENZIONE: L'indice " & PACK.Indice & " non corrisponde alla riga imballo " & ImballoName & " a cui era associato" & vbCrLf & "Vuoi creare una imballo nuovo?", vbYesNo, "Carica Ordine") = MsgBoxResult.Yes Then
                                         ImballoName = NomeImballo.CreaNome(PACK.Tipo, PACK.HT)
+                                        NomeImballo.AggiornaConteggio()
                                         SQL.Query("DELETE FROM Indici WHERE indice = '" & PACK.Indice & "'")
                                         IndiceEsiste = False
                                     End If
@@ -329,7 +330,7 @@
 
                                 Dim Nuovo As New NuovoImballo With {.RigaOrdine = PACK, .Nome = ImballoName}
                                 Nuovo.CreaDaOrdine(PACK, True, True, True) ' INSERT in Distinta, Imballi, Indici
-
+                                NomeImballo.AggiornaConteggio()
                                 '7.1.1 - L'imballo appena creato viene trasformato in oggetto RigaOrdine
                                 Dim RIGA_ORDINE As New RigaOrdine With {.NumeroOrdine = PACK.NumeroOrdine, .Riga = PACK.Riga, .Imballo = Nuovo.Nome, .Indice = PACK.Indice, .Qt = PACK.Qt, .Cliente = PACK.Cliente, .Codice = PACK.Codice, .Commessa = PACK.Commessa,
                                 .L = PACK.L, .P = PACK.P, .H = PACK.H, .Tipo = PACK.Tipo, .Zoccoli = PACK.Zoccoli, .Rivestimento = PACK.Rivestimento, .TipoRivestimento = PACK.TipoRivestimento, .Note = PACK.Note, .DataConsegna = PACK.DataConsegna, .HT = PACK.HT, .DT = PACK.DT, .BM = PACK.BM, .Rivest_Tot = PACK.Rivest_Tot, .Magazzino = Magazzino, .Diagonali = PACK.Diagonali,

@@ -315,6 +315,18 @@ Namespace My
                 Me("LimiteTavole8") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\ModPack\ModPackConfig.xml")>  _
+        Public Property XMLpath() As String
+            Get
+                Return CType(Me("XMLpath"),String)
+            End Get
+            Set
+                Me("XMLpath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

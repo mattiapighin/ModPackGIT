@@ -20,7 +20,47 @@
     Dim RowOrdine As New List(Of RigaOrdine)
     Dim RowIndici As New List(Of Integer)
 
+    Private Sub CreaXML()
+        If IO.File.Exists(My.Settings.XMLpath) = False Then
+
+            MsgBox("Verrà creato il file di configurazione", vbInformation, "Primo avvio")
+
+            Dim settings As New System.Xml.XmlWriterSettings()
+            settings.Indent = True
+            Dim XmlWrt As System.Xml.XmlWriter = System.Xml.XmlWriter.Create(My.Settings.XMLpath, settings)
+
+            With XmlWrt
+
+                ' Write the Xml declaration.
+                .WriteStartDocument()
+
+                ' Write a comment.
+                .WriteComment("Configurazioni ModPack")
+
+                ' Write the root element.
+                .WriteStartElement("Data")
+
+                ' Start our first person.
+                .WriteStartElement("CodeCount")
+
+                .WriteValue("0")
+                ' The end of this person.
+                .WriteEndElement()
+
+                ' Close the XmlTextWriter.
+                .WriteEndDocument()
+                .Close()
+
+                MessageBox.Show("XML di configurazione creato")
+
+            End With
+
+
+        End If
+    End Sub
+
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CreaXML()
         Me.Text = "[" & System.Environment.UserName & "] - ModPack - V." & My.Application.Info.Version.ToString
         LOG.Write("Inizio sessione")
     End Sub
@@ -38,6 +78,7 @@
         SQL.Query("TRUNCATE TABLE Imballi")
         SQL.Query("TRUNCATE TABLE Indici")
         SQL.Query("TRUNCATE TABLE Ordini")
+        IO.File.Delete(My.Settings.XMLpath)
         Debug.WriteLine("Truncato tutto")
     End Sub
 

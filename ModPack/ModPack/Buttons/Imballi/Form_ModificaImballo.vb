@@ -91,6 +91,7 @@
         PanelModifica.Enabled = False
         PanelCodice.Enabled = True
         PanelButtons.Enabled = False
+        Me.ImballiTableAdapter.Fill(Me.ModPackDBDataSet.Imballi)
     End Sub
     Private Sub Bt_StartEdit_Click(sender As Object, e As EventArgs) Handles Bt_StartEdit.Click
         CaricaCodice()
@@ -156,9 +157,10 @@
             ImballiTableAdapter.Update(IR)
 
             If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
+            ImballiTableAdapter.Update(IR)
             If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
+            ImballiTableAdapter.Update(IR)
             If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Imballo.Ricalcolo_Prezzo(IR.Imballo)
-
             ImballiTableAdapter.Update(IR)
             CaricaCodice()
         End If
@@ -203,17 +205,22 @@
                     For Each row As ModPackDBDataSet.DistintaRow In ModPackDBDataSet.Distinta.Rows
                         If row.Imballo = R.Imballo Then
                             TA.Insert(NuovoNome, row.Riga, row.Part, row.X, row.Y, row.Z, row.N, row.Tag)
+                            If NuovoNome = NomeImballo.CreaNome(R.Tipo, R.HT) Then NomeImballo.AggiornaConteggio()
                         End If
                     Next
                 End Using
 
 
                 LOG.Write("Creata nuova riga imballo: " & NuovoNome & " Duplicato di " & R.Imballo)
-
+                PulisciTutto()
             End If
 
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub Bt_SpostaIndice_Click(sender As Object, e As EventArgs) Handles Bt_SpostaIndice.Click
+        'TODO assegnare l'indice selezionato ad un altro imballo
     End Sub
 End Class

@@ -79,6 +79,7 @@ Partial Class Form_ModificaImballo
         Me.DistintaTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter()
         Me.Bt_Salva = New System.Windows.Forms.Button()
         Me.PanelModifica = New System.Windows.Forms.Panel()
+        Me.Bt_SpostaIndice = New System.Windows.Forms.Button()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -98,8 +99,8 @@ Partial Class Form_ModificaImballo
         Me.Bt_NoImg = New System.Windows.Forms.Button()
         Me.Bt_Cancel = New System.Windows.Forms.Button()
         Me.PanelButtons = New System.Windows.Forms.Panel()
-        Me.Bt_Duplica = New System.Windows.Forms.Button()
         Me.Bt_EliminaCodice = New System.Windows.Forms.Button()
+        Me.Bt_Duplica = New System.Windows.Forms.Button()
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelCodice.SuspendLayout()
@@ -644,6 +645,7 @@ Partial Class Form_ModificaImballo
         '
         'PanelModifica
         '
+        Me.PanelModifica.Controls.Add(Me.Bt_SpostaIndice)
         Me.PanelModifica.Controls.Add(Me.TableLayoutPanel2)
         Me.PanelModifica.Controls.Add(Me.DgwIndici)
         Me.PanelModifica.Controls.Add(Me.Panel1)
@@ -654,6 +656,15 @@ Partial Class Form_ModificaImballo
         Me.PanelModifica.Name = "PanelModifica"
         Me.PanelModifica.Size = New System.Drawing.Size(866, 504)
         Me.PanelModifica.TabIndex = 7
+        '
+        'Bt_SpostaIndice
+        '
+        Me.Bt_SpostaIndice.Image = CType(resources.GetObject("Bt_SpostaIndice.Image"), System.Drawing.Image)
+        Me.Bt_SpostaIndice.Location = New System.Drawing.Point(823, 348)
+        Me.Bt_SpostaIndice.Name = "Bt_SpostaIndice"
+        Me.Bt_SpostaIndice.Size = New System.Drawing.Size(36, 36)
+        Me.Bt_SpostaIndice.TabIndex = 33
+        Me.Bt_SpostaIndice.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
         '
@@ -767,7 +778,7 @@ Partial Class Form_ModificaImballo
         Me.DgwIndici.Location = New System.Drawing.Point(226, 348)
         Me.DgwIndici.Name = "DgwIndici"
         Me.DgwIndici.RowHeadersWidth = 10
-        Me.DgwIndici.Size = New System.Drawing.Size(633, 150)
+        Me.DgwIndici.Size = New System.Drawing.Size(591, 150)
         Me.DgwIndici.TabIndex = 31
         '
         'IdDataGridViewTextBoxColumn1
@@ -848,17 +859,6 @@ Partial Class Form_ModificaImballo
         Me.PanelButtons.Size = New System.Drawing.Size(334, 42)
         Me.PanelButtons.TabIndex = 9
         '
-        'Bt_Duplica
-        '
-        Me.Bt_Duplica.FlatAppearance.BorderSize = 0
-        Me.Bt_Duplica.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bt_Duplica.Image = CType(resources.GetObject("Bt_Duplica.Image"), System.Drawing.Image)
-        Me.Bt_Duplica.Location = New System.Drawing.Point(3, 1)
-        Me.Bt_Duplica.Name = "Bt_Duplica"
-        Me.Bt_Duplica.Size = New System.Drawing.Size(40, 40)
-        Me.Bt_Duplica.TabIndex = 9
-        Me.Bt_Duplica.UseVisualStyleBackColor = True
-        '
         'Bt_EliminaCodice
         '
         Me.Bt_EliminaCodice.FlatAppearance.BorderSize = 0
@@ -869,6 +869,17 @@ Partial Class Form_ModificaImballo
         Me.Bt_EliminaCodice.Size = New System.Drawing.Size(40, 40)
         Me.Bt_EliminaCodice.TabIndex = 10
         Me.Bt_EliminaCodice.UseVisualStyleBackColor = True
+        '
+        'Bt_Duplica
+        '
+        Me.Bt_Duplica.FlatAppearance.BorderSize = 0
+        Me.Bt_Duplica.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Duplica.Image = CType(resources.GetObject("Bt_Duplica.Image"), System.Drawing.Image)
+        Me.Bt_Duplica.Location = New System.Drawing.Point(3, 1)
+        Me.Bt_Duplica.Name = "Bt_Duplica"
+        Me.Bt_Duplica.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Duplica.TabIndex = 9
+        Me.Bt_Duplica.UseVisualStyleBackColor = True
         '
         'Form_ModificaImballo
         '
@@ -978,4 +989,5 @@ Partial Class Form_ModificaImballo
     Friend WithEvents TxtSopraMT As TextBox
     Friend WithEvents Bt_EliminaCodice As Button
     Friend WithEvents Bt_Duplica As Button
+    Friend WithEvents Bt_SpostaIndice As Button
 End Class

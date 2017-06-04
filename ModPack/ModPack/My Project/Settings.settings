@@ -73,5 +73,8 @@
     <Setting Name="LimiteTavole8" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
+    <Setting Name="XMLpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Z:\ModPack\ModPackConfig.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
