@@ -22,6 +22,16 @@ ModPack
   ricerche di risorse eseguite utilizzando questa classe di risorse fortemente tipizzata.
 </summary>
 </member>
+<member name="P:ModPack.My.Resources.Resources.GDA">
+<summary>
+  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ModPack.My.Resources.Resources.GST">
+<summary>
+  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:ModPack.My.Resources.Resources.Logo">
 <summary>
   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
@@ -62,6 +72,16 @@ Represents the strongly named DataTable class.
 Represents the strongly named DataTable class.
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.MemoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.QueriesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet.RivestimentiRow">
 <summary>
 Represents strongly named DataRow class.
@@ -88,6 +108,16 @@ Represents strongly named DataRow class.
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSet.OrdiniRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.MemoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.QueriesRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
@@ -122,6 +152,16 @@ Row event argument class
 Row event argument class
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.MemoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.QueriesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSetTableAdapters.OrdiniTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
@@ -148,6 +188,16 @@ Represents the connection and commands used to retrieve and save data.
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSetTableAdapters.TipiTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.MemoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.QueriesTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
 </summary>

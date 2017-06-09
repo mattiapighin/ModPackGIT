@@ -854,3 +854,34 @@ Public Class RigaImballi
 
 End Class
 
+Public Class Memo
+    Private _Data As Date
+    Public Property Data() As Date
+        Get
+            Return _Data
+        End Get
+        Set(ByVal value As Date)
+            _Data = value
+        End Set
+    End Property
+
+    Private _Memo As String
+    Public Property Memo() As String
+        Get
+            Return _Memo
+        End Get
+        Set(ByVal value As String)
+            _Memo = value
+        End Set
+    End Property
+
+    Private _Imballo As String
+    Public Property Imballo() As String
+        Get
+            Return _Imballo
+        End Get
+        Set(ByVal value As String)
+            _Imballo = value
+        End Set
+    End Property
+End Class

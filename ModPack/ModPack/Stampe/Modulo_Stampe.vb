@@ -4,23 +4,29 @@
 
 
         Public Sub ImmagineInRettangolo(Immagine As Image, Rettangolo As Rectangle, e As Printing.PrintPageEventArgs)
-            'Dim IMGScalata As New Size(((Rettangolo.Height * Immagine.Width) / Immagine.Height), Rettangolo.Height)
-            'Dim IMGScalataPoint As New Point((Rettangolo.X + (Rettangolo.Width / 2) - (IMGScalata.Width / 2)), Rettangolo.Y)
-            'e.Graphics.DrawImage(Immagine, IMGScalataPoint.X + 5, IMGScalataPoint.Y + 5, IMGScalata.Width - 10, IMGScalata.Height - 10)
 
+            Dim xml = XDocument.Load(My.Settings.XMLpath)
 
-            Dim imgscalata As New Size
-            If Immagine.Height >= Immagine.Width Then
-                imgscalata.Height = Rettangolo.Height
-                imgscalata.Width = ((Rettangolo.Height * Immagine.Width) / Immagine.Height)
+            Dim TipoScala As Integer = xml.<Data>.<TipoScalaIMG>.Value
+            'Tipo scala IMG 0 = scala normale
+            'Tipo scala IMG 1 = scala XY
+
+            If TipoScala = 0 Then
+                Dim IMGScalata As New Size(((Rettangolo.Height * Immagine.Width) / Immagine.Height), Rettangolo.Height)
+                Dim IMGScalataPoint As New Point((Rettangolo.X + (Rettangolo.Width / 2) - (IMGScalata.Width / 2)), Rettangolo.Y)
+                e.Graphics.DrawImage(Immagine, IMGScalataPoint.X + 5, IMGScalataPoint.Y + 5, IMGScalata.Width - 10, IMGScalata.Height - 10)
             Else
-                imgscalata.Width = Rettangolo.Width
-                imgscalata.Height = ((Immagine.Height * Rettangolo.Width) / Immagine.Width)
-
+                Dim imgscalata As New Size
+                If Immagine.Height >= Immagine.Width Then
+                    imgscalata.Height = Rettangolo.Height
+                    imgscalata.Width = ((Rettangolo.Height * Immagine.Width) / Immagine.Height)
+                Else
+                    imgscalata.Width = Rettangolo.Width
+                    imgscalata.Height = ((Immagine.Height * Rettangolo.Width) / Immagine.Width)
+                End If
+                Dim IMGScalataPoint As New Point((Rettangolo.X + (Rettangolo.Width / 2) - (imgscalata.Width / 2)), (Rettangolo.Y + (Rettangolo.Height / 2) - (imgscalata.Height / 2)))
+                e.Graphics.DrawImage(Immagine, IMGScalataPoint.X + 15, IMGScalataPoint.Y + 15, imgscalata.Width - 30, imgscalata.Height - 30)
             End If
-
-            Dim IMGScalataPoint As New Point((Rettangolo.X + (Rettangolo.Width / 2) - (imgscalata.Width / 2)), (Rettangolo.Y + (Rettangolo.Height / 2) - (imgscalata.Height / 2)))
-            e.Graphics.DrawImage(Immagine, IMGScalataPoint.X + 15, IMGScalataPoint.Y + 15, imgscalata.Width - 30, imgscalata.Height - 30)
 
         End Sub
 
@@ -32,6 +38,7 @@
             Dim FontTitoloBold As New Font("Calibri", 16, FontStyle.Bold)
             Dim FontTitolo As New Font("Calibri", 16)
             Dim FontRighe As New Font("Calibri", 8)
+            Dim FontEvaso As New Font("Calibri", 8, FontStyle.Strikeout)
 
             Dim RectLogo As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top, 200, 50)
             Dim RectTitolo As New Rectangle(RectLogo.Right, e.MarginBounds.Top, e.MarginBounds.Width - 350, 50)
@@ -62,13 +69,14 @@
             Dim U As Single = RectTitoli.Width / 19
 
             Dim RectTitoloRiga As New Rectangle(RectTitoli.X, RectTitoli.Y, U, RectTitoli.Height)
-            Dim RectTitoloImballo As New Rectangle(RectTitoloRiga.Right, RectTitoli.Y, U * 3, RectTitoli.Height)
-            Dim RectTitoloQt As New Rectangle(RectTitoloImballo.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
-            Dim RectTitoloDescrizione As New Rectangle(RectTitoloQt.Right, RectTitoli.Y, U * 5, RectTitoli.Height)
+            Dim RectTitoloImballo As New Rectangle(RectTitoloRiga.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
+            Dim RectTitoloQt As New Rectangle(RectTitoloImballo.Right, RectTitoli.Y, U, RectTitoli.Height)
+            Dim RectTitoloDC As New Rectangle(RectTitoloQt.Right, RectTitoli.Y, U * 4.5, RectTitoli.Height)
+            Dim RectTitoloDescrizione As New Rectangle(RectTitoloDC.Right, RectTitoli.Y, U * 4, RectTitoli.Height)
             Dim RectTitoloIndice As New Rectangle(RectTitoloDescrizione.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
-            Dim RectTitoloFinito As New Rectangle(RectTitoloIndice.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
-            Dim RectTitoloCaricato As New Rectangle(RectTitoloFinito.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
-            Dim RectTitoloEvaso As New Rectangle(RectTitoloCaricato.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
+            Dim RectTitoloFinito As New Rectangle(RectTitoloIndice.Right, RectTitoli.Y, U * 1.5, RectTitoli.Height)
+            Dim RectTitoloCaricato As New Rectangle(RectTitoloFinito.Right, RectTitoli.Y, U * 1.5, RectTitoli.Height)
+            Dim RectTitoloEvaso As New Rectangle(RectTitoloCaricato.Right, RectTitoli.Y, U * 1.5, RectTitoli.Height)
 
 
             'e.Graphics.DrawRectangles(Pens.Black, {RectTitoloRiga, RectTitoloImballo, RectTitoloQt, RectTitoloDescrizione, RectTitoloIndice, RectTitoloM3, RectTitoloRivestimento, RectTitoloPrezzo, RectTitoloPrezzoTot})
@@ -76,6 +84,7 @@
             e.Graphics.DrawString("Riga", FontRighe, Brushes.Black, RectTitoloRiga, FMT)
             e.Graphics.DrawString("Imballo", FontRighe, Brushes.Black, RectTitoloImballo, FMT)
             e.Graphics.DrawString("Qt", FontRighe, Brushes.Black, RectTitoloQt, FMT)
+            e.Graphics.DrawString("Disegno \ Commessa", FontRighe, Brushes.Black, RectTitoloDC, FMT)
             e.Graphics.DrawString("Descrizione", FontRighe, Brushes.Black, RectTitoloDescrizione, FMT)
             e.Graphics.DrawString("Indice", FontRighe, Brushes.Black, RectTitoloIndice, FMT)
             e.Graphics.DrawString("Finito", FontRighe, Brushes.Black, RectTitoloFinito, FMT)
@@ -92,7 +101,7 @@
 
             Dim PosX = RectTabella.Left
             Dim PosY = RectTabella.Top
-            Dim Hriga = 25
+            Dim Hriga = 40
 
             'Numero di righe che possono essere stampate in una pagina
             Dim righePerPagina As Integer = Math.Ceiling(RectTabella.Height / Hriga) 'Altezza righe
@@ -111,35 +120,45 @@
             For i As Integer = RigheStampate To RigheStampate + righePerPagina - 2
 
                 Dim RectRiga As New Rectangle(PosX, PosY, U, Hriga)
-                Dim RectImballo As New Rectangle(RectTitoloRiga.Right, PosY, U * 3, Hriga)
-                Dim RectQt As New Rectangle(RectTitoloImballo.Right, PosY, U * 2, Hriga)
-                Dim RectDescrizione As New Rectangle(RectTitoloQt.Right, PosY, U * 5, Hriga)
+                Dim RectImballo As New Rectangle(RectTitoloRiga.Right, PosY, U * 2, Hriga)
+                Dim RectQt As New Rectangle(RectTitoloImballo.Right, PosY, U, Hriga)
+                Dim RectD As New Rectangle(RectTitoloQt.Right, PosY, U * 4.5, Hriga / 2)
+                Dim RectC As New Rectangle(RectTitoloQt.Right, PosY + Hriga / 2, U * 4.5, Hriga / 2)
+                Dim RectDescrizione As New Rectangle(RectTitoloDC.Right, PosY, U * 4, Hriga)
                 Dim RectIndice As New Rectangle(RectTitoloDescrizione.Right, PosY, U * 2, Hriga)
-                Dim RectFinito As New Rectangle(RectTitoloIndice.Right, PosY, U * 2, Hriga)
-                Dim RectCaricato As New Rectangle(RectTitoloFinito.Right, PosY, U * 2, Hriga)
-                Dim RectEvaso As New Rectangle(RectTitoloCaricato.Right, PosY, U * 2, Hriga)
+                Dim RectFinito As New Rectangle(RectTitoloIndice.Right, PosY, U * 1.5, Hriga)
+                Dim RectCaricato As New Rectangle(RectTitoloFinito.Right, PosY, U * 1.5, Hriga)
+                Dim RectEvaso As New Rectangle(RectTitoloCaricato.Right, PosY, U * 1.5, Hriga)
 
 
-                If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightBlue, PosX, PosY, e.MarginBounds.Width, 25)
-                e.Graphics.DrawRectangles(Pens.LightGray, {RectRiga, RectImballo, RectQt, RectDescrizione, RectIndice, RectFinito, RectCaricato, RectEvaso})
+                If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightBlue, PosX, PosY, e.MarginBounds.Width, Hriga)
+                e.Graphics.DrawRectangles(Pens.LightGray, {RectRiga, RectImballo, RectQt, RectD, RectC, RectDescrizione, RectIndice, RectFinito, RectCaricato, RectEvaso})
 
                 With DS.Tables(0).Rows(RigheStampate)
 
-                    Dim Descrizione As String = .Item(3) & " Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6)
+                    Dim Descrizione As String = " Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6) & " " & .Item(3)
+                    ' Dim Descrizione As String = "Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6) & " " & .Item(3)
 
                     e.Graphics.DrawString(.Item(0), FontRighe, Brushes.Black, RectRiga, FMT)
                     e.Graphics.DrawString(.Item(1), FontRighe, Brushes.Black, RectImballo, FMT)
                     e.Graphics.DrawString(.Item(2), FontRighe, Brushes.Black, RectQt, FMT)
                     e.Graphics.DrawString(Descrizione, FontRighe, Brushes.Black, RectDescrizione, FMT)
                     e.Graphics.DrawString(.Item(7), FontRighe, Brushes.Black, RectIndice, FMT)
-                    If .Item(10) = False Then
-                        e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectFinito, FMT)
-                        e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectCaricato, FMT)
-                        e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectEvaso, FMT)
-                    Else
+
+                    e.Graphics.DrawString("D: " & .Item(9), FontRighe, Brushes.Black, RectD, FMT)
+                    e.Graphics.DrawString("C: " & .Item(10), FontRighe, Brushes.Black, RectC, FMT)
+
+
+                    e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectFinito, FMT)
+                    e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectCaricato, FMT)
+                    e.Graphics.DrawString("⃝", FontRighe, Brushes.Black, RectEvaso, FMT)
+
+                    If .Item(8) = True Then
+
                         e.Graphics.DrawString("X", FontRighe, Brushes.Black, RectFinito, FMT)
                         e.Graphics.DrawString("X", FontRighe, Brushes.Black, RectCaricato, FMT)
                         e.Graphics.DrawString("X", FontRighe, Brushes.Black, RectEvaso, FMT)
+
                     End If
 
                 End With
@@ -272,9 +291,12 @@
 
                 With DS.Tables(0).Rows(RigheStampate)
 
-                    Dim Descrizione As String = .Item(3) & " Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6)
-                    Dim Prezzo As Decimal = .Item(10)
-                    Dim PrezzoTot As Decimal = Prezzo * .Item(2)
+
+
+                    Dim Descrizione As String = " Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6) & " " & .Item(3)
+
+                    Dim prezzo As Decimal = .Item(10)
+                    Dim PrezzoTot As Decimal = prezzo * .Item(2)
 
                     e.Graphics.DrawString(.Item(0), FontRighe, Brushes.Black, RectRiga, FMT)
                     e.Graphics.DrawString(.Item(1), FontRighe, Brushes.Black, RectImballo, FMT)
@@ -283,7 +305,7 @@
                     e.Graphics.DrawString(.Item(7), FontRighe, Brushes.Black, RectIndice, FMT)
                     e.Graphics.DrawString(.Item(8), FontRighe, Brushes.Black, RectM3, FMT)
                     e.Graphics.DrawString(.Item(9), FontRighe, Brushes.Black, RectRivestimento, FMT)
-                    e.Graphics.DrawString("€ " & Prezzo.ToString("N2"), FontRighe, Brushes.Black, RectPrezzo, FMT)
+                    e.Graphics.DrawString("€ " & prezzo.ToString("N2"), FontRighe, Brushes.Black, RectPrezzo, FMT)
                     e.Graphics.DrawString("€ " & PrezzoTot.ToString("N2"), FontRighe, Brushes.Black, RectPrezzoTot, FMT)
 
                     TotaleEuro += PrezzoTot
@@ -395,6 +417,121 @@
 
             LOG.Write("Stampa etichetta " & Imballo & " - " & Quantita)
         End Sub
+        Public Sub ListaMorali(sender As Object, e As Printing.PrintPageEventArgs, Ordine As String, DS As DataSet)
+            Dim FMT As StringFormat = Stampe.FMT
 
+            Dim FontTitoloBold As New Font("Calibri", 16, FontStyle.Bold)
+            Dim FontTitolo As New Font("Calibri", 16)
+            Dim FontRighe As New Font("Calibri", 14)
+
+            Dim RectLogo As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top, 200, 50)
+            Dim RectTitolo As New Rectangle(RectLogo.Right, e.MarginBounds.Top, e.MarginBounds.Width - 350, 50)
+            Dim RectData As New Rectangle(RectTitolo.Right, e.MarginBounds.Top, 150, 50)
+
+            e.Graphics.DrawRectangles(New Pen(Color.LightGray, 2), {RectLogo, RectTitolo, RectData})
+
+            Dim Titolo As String = DS.Tables(0).TableName
+
+
+            Stampe.ImmagineInRettangolo(My.Resources.Logo, RectLogo, e)
+            e.Graphics.DrawString(Titolo, FontTitolo, Brushes.Gray, RectTitolo, FMT)
+            e.Graphics.DrawString(Date.Today.Date, FontTitolo, Brushes.Gray, RectData, FMT)
+
+            e.Graphics.FillRectangle(Brushes.LightGray, e.MarginBounds.Left, e.MarginBounds.Top + 55, e.MarginBounds.Width, 5)
+
+            Dim RectNumeroOrdine As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top + 65, e.MarginBounds.Width, 30)
+            e.Graphics.DrawRectangle(New Pen(Color.LightGray, 2), RectNumeroOrdine)
+            e.Graphics.DrawString(Ordine, FontTitolo, Brushes.Gray, RectNumeroOrdine, FMT)
+
+            Dim RectTitoli As New Rectangle(e.MarginBounds.Left, RectNumeroOrdine.Bottom + 5, e.MarginBounds.Width, 20)
+            e.Graphics.FillRectangle(Brushes.LightBlue, RectTitoli)
+            e.Graphics.DrawRectangle(New Pen(Color.LightGray, 2), RectTitoli)
+
+            Dim RectSotto As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Bottom - 30, e.MarginBounds.Width, 30)
+            e.Graphics.DrawRectangle(New Pen(Color.LightGray, 2), RectSotto)
+
+            Dim RectTabella As New Rectangle(e.MarginBounds.Left, RectNumeroOrdine.Bottom + 30, e.MarginBounds.Width, e.MarginBounds.Height - 125 - 35)
+            'e.Graphics.DrawRectangle(New Pen(Color.LightGray, 2), RectTabella)
+
+            Dim U As Single = RectTitoli.Width
+
+            Dim RectTitoloRiga As New Rectangle(RectTitoli.X, RectTitoli.Y, U, RectTitoli.Height)
+
+
+            '--- FINE INTESTAZIONE
+
+
+            Dim TotaleRighe As Integer = DS.Tables(0).Rows.Count
+            Static RigheStampate As Integer = 0
+            Static PagineStampate As Integer = 0
+
+            Dim PosX = RectTabella.Left
+            Dim PosY = RectTabella.Top
+            Dim Hriga = 35
+
+            'Numero di righe che possono essere stampate in una pagina
+            Dim righePerPagina As Integer = Math.Ceiling(RectTabella.Height / Hriga) 'Altezza righe
+
+            'Calcola il numero di pagine che verranno stampate
+            Dim nPagine As Integer
+
+            If TotaleRighe Mod righePerPagina > 0 Then
+                nPagine = (TotaleRighe \ righePerPagina) + 1
+            Else
+                nPagine = (TotaleRighe \ righePerPagina)
+            End If
+
+            PagineStampate += 1
+
+            For i As Integer = RigheStampate To RigheStampate + righePerPagina - 2
+
+                Dim RectRiga As New Rectangle(PosX, PosY, U, Hriga)
+
+
+                If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightGray, PosX, PosY, e.MarginBounds.Width, Hriga)
+                e.Graphics.DrawRectangle(Pens.LightGray, RectRiga)
+
+                With DS.Tables(0).Rows(RigheStampate)
+
+                    Dim X As Decimal = .Item(0)
+                    Dim Y As Decimal = .Item(1)
+                    Dim Z As Decimal = .Item(2)
+                    Dim N As Decimal = .Item(3)
+
+
+                    e.Graphics.DrawString("Cm " & X.ToString("0.##") & " x " & Y.ToString("0.##") & " x " & Z.ToString("0.##") & " = " & N.ToString("0.##"), FontRighe, Brushes.Black, RectRiga, FMT)
+
+                End With
+
+
+                Dim RectPagine As New Rectangle(RectSotto.X, RectSotto.Y, 100, RectSotto.Height)
+
+                e.Graphics.DrawString("Pag. " & PagineStampate & "/" & nPagine, FontRighe, Brushes.Gray, RectPagine, FMT)
+
+                'Se le righe stampate sono tutte interrompe il ciclo For…Next
+                If i = TotaleRighe - 1 Then
+                    e.HasMorePages = False
+                    Exit For
+                End If
+
+                'stampa della riga
+
+                RigheStampate += 1
+                PosY += Hriga
+
+            Next
+
+            'Controlla se vi sono altre pagine da stampare
+            If PagineStampate < nPagine Then
+                e.HasMorePages = True
+                PosY = e.MarginBounds.Top
+            Else
+                e.HasMorePages = False
+                RigheStampate = 0
+                PagineStampate = 0
+
+            End If
+
+        End Sub
     End Module
 End Namespace

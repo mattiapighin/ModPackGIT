@@ -368,7 +368,7 @@
             '############## FOTO ##########################
             Dim RectIMG As New Rectangle(e.MarginBounds.Right - 305, e.MarginBounds.Top + 175, 300, 300)
             If Not IMG Is Nothing Then
-                'e.Graphics.DrawRectangle(Pens.Red, RectIMG)
+                e.Graphics.DrawRectangle(Pens.LightGray, RectIMG)
                 ImmagineInRettangolo(IMG, RectIMG, e)
             End If
 
@@ -427,9 +427,9 @@
 
             '######### RIVESTIMENTO ##########
 
+
+
             If riga.Rivestimento = True Then
-
-
 
                 Dim Riga1RIV As New Rectangle(RectIMG.Left, RectIMG.Bottom + 5, RectIMG.Width, 25)
                 Dim Riga2RIV As New Rectangle(Riga1RIV.Left, Riga1RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
@@ -480,8 +480,9 @@
 
                 Dim RectRIV As New Rectangle(Riga1RIV.Left, Riga1RIV.Top, Riga1RIV.Width, 100)
                 e.Graphics.DrawRectangle(New Pen(Color.LightGray, 3), RectRIV)
-
             End If
+
+
 
         End Sub
         Private Sub StampaRiga(Sender As Object, e As Printing.PrintPageEventArgs, Riga As Rectangle, X As Decimal, Y As Decimal, Z As Decimal, N As Integer, Tag As String, QT As Integer)

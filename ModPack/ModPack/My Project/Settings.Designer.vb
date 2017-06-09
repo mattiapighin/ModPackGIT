@@ -327,6 +327,174 @@ Namespace My
                 Me("XMLpath") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property NuoviPath() As String
+            Get
+                Return CType(Me("NuoviPath"),String)
+            End Get
+            Set
+                Me("NuoviPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("NO_REPLY@bicciatoserafino.com")>  _
+        Public Property MAIL_username() As String
+            Get
+                Return CType(Me("MAIL_username"),String)
+            End Get
+            Set
+                Me("MAIL_username") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("estate-2016")>  _
+        Public Property MAIL_password() As String
+            Get
+                Return CType(Me("MAIL_password"),String)
+            End Get
+            Set
+                Me("MAIL_password") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("smtp.bicciatoserafino.com")>  _
+        Public Property MAIL_server() As String
+            Get
+                Return CType(Me("MAIL_server"),String)
+            End Get
+            Set
+                Me("MAIL_server") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("25")>  _
+        Public Property MAIL_port() As String
+            Get
+                Return CType(Me("MAIL_port"),String)
+            End Get
+            Set
+                Me("MAIL_port") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_Destinatario1() As String
+            Get
+                Return CType(Me("MAIL_Destinatario1"),String)
+            End Get
+            Set
+                Me("MAIL_Destinatario1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_Destinatario2() As String
+            Get
+                Return CType(Me("MAIL_Destinatario2"),String)
+            End Get
+            Set
+                Me("MAIL_Destinatario2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_Destinatario3() As String
+            Get
+                Return CType(Me("MAIL_Destinatario3"),String)
+            End Get
+            Set
+                Me("MAIL_Destinatario3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_Destinatario4() As String
+            Get
+                Return CType(Me("MAIL_Destinatario4"),String)
+            End Get
+            Set
+                Me("MAIL_Destinatario4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_PDFPrinter() As String
+            Get
+                Return CType(Me("MAIL_PDFPrinter"),String)
+            End Get
+            Set
+                Me("MAIL_PDFPrinter") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property MAIL_DefaultPathCO() As String
+            Get
+                Return CType(Me("MAIL_DefaultPathCO"),String)
+            End Get
+            Set
+                Me("MAIL_DefaultPathCO") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property GiorniMantenimentoBackup() As Integer
+            Get
+                Return CType(Me("GiorniMantenimentoBackup"),Integer)
+            End Get
+            Set
+                Me("GiorniMantenimentoBackup") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\ModPack\")>  _
+        Public Property Root() As String
+            Get
+                Return CType(Me("Root"),String)
+            End Get
+            Set
+                Me("Root") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Program Files (x86)\Microsoft Office\Office12\Excel.exe")>  _
+        Public Property ExcelPath() As String
+            Get
+                Return CType(Me("ExcelPath"),String)
+            End Get
+            Set
+                Me("ExcelPath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

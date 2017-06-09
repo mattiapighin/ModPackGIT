@@ -76,5 +76,47 @@
     <Setting Name="XMLpath" Type="System.String" Scope="User">
       <Value Profile="(Default)">Z:\ModPack\ModPackConfig.xml</Value>
     </Setting>
+    <Setting Name="NuoviPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NO_REPLY@bicciatoserafino.com</Value>
+    </Setting>
+    <Setting Name="MAIL_password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">estate-2016</Value>
+    </Setting>
+    <Setting Name="MAIL_server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.bicciatoserafino.com</Value>
+    </Setting>
+    <Setting Name="MAIL_port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="MAIL_Destinatario1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_Destinatario2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_Destinatario3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_Destinatario4" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_PDFPrinter" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MAIL_DefaultPathCO" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GiorniMantenimentoBackup" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="Root" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Z:\ModPack\</Value>
+    </Setting>
+    <Setting Name="ExcelPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Microsoft Office\Office12\Excel.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

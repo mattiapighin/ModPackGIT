@@ -5,46 +5,9 @@ Namespace NomeImballo
 
         Dim Count As String
 
-        Private Sub CreaXML()
-            If IO.File.Exists(My.Settings.XMLpath) = False Then
 
-                Dim settings As New XmlWriterSettings()
-                settings.Indent = True
-                Dim XmlWrt As XmlWriter = XmlWriter.Create(My.Settings.XMLpath, settings)
-
-                With XmlWrt
-
-                    ' Write the Xml declaration.
-                    .WriteStartDocument()
-
-                    ' Write a comment.
-                    .WriteComment("Configurazioni ModPack")
-
-                    ' Write the root element.
-                    .WriteStartElement("Data")
-
-                    ' Start our first person.
-                    .WriteStartElement("CodeCount")
-
-                    .WriteValue("0")
-                    ' The end of this person.
-                    .WriteEndElement()
-
-                    ' Close the XmlTextWriter.
-                    .WriteEndDocument()
-                    .Close()
-
-                    MessageBox.Show("XML configurazioni creato")
-
-                End With
-
-
-            End If
-        End Sub
 
         Public Function CreaNome(ByVal Tipo As String, ByVal HT As Boolean) As String
-
-            CreaXML()
 
             Dim xml = XDocument.Load(My.Settings.XMLpath)
 
@@ -58,10 +21,6 @@ Namespace NomeImballo
             Imballo = "M" & Lettera & Count
             If HT = True Then Imballo += "HT"
 
-
-
-            'Funzia ma ogni volta che si apre va su il conteggio anche se non salva il codice
-
             Return Imballo
         End Function
         Public Sub AggiornaConteggio()
@@ -69,6 +28,20 @@ Namespace NomeImballo
             xml.<Data>.<CodeCount>.Value = Count
             xml.Save(My.Settings.XMLpath)
         End Sub
+
+        Public Function CreaDescrizione(ByVal L, P, H, Zoccoli, Tipo, HT, DT, BM, M3, Rivestimento, Optional TipoRivestimento = "") As String
+            Dim Descrizione As String = ""
+
+            Descrizione = "CM " & L & " x " & P
+            If Tipo <> "P" And Tipo <> "T" Then Descrizione += " x " & H
+            Descrizione += " " & Tipo & " " & Zoccoli
+
+            If Rivestimento = True Then Descrizione += " (" & TipoRivestimento & ")"
+
+            Descrizione += " - MC " & M3
+
+            Return Descrizione
+        End Function
 
     End Module
 End Namespace

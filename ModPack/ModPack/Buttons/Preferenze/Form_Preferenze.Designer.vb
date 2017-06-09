@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Preferenze
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_Preferenze
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Bt_FormatoStampa = New System.Windows.Forms.Button()
         Me.GB_etichette = New System.Windows.Forms.GroupBox()
@@ -53,6 +53,16 @@ Partial Class Form_Preferenze
         Me.CkBarcodeSoloCodice = New System.Windows.Forms.CheckBox()
         Me.Ck_Barcode = New System.Windows.Forms.CheckBox()
         Me.Ck_BiancoNero = New System.Windows.Forms.CheckBox()
+        Me.Bt_PathNuovi = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.TxtScegliExcel = New System.Windows.Forms.Label()
+        Me.LblNuoviPath = New System.Windows.Forms.Label()
+        Me.Bt_ScegliExcel = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Bt_SettingsEmail = New System.Windows.Forms.Button()
+        Me.Bt_TestConnessioni = New System.Windows.Forms.Button()
         Me.GB_etichette.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -60,11 +70,13 @@ Partial Class Form_Preferenze
         Me.GroupBox2.SuspendLayout()
         CType(Me.Nu_RigheDistinta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Nu_FontDistinta, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Bt_FormatoStampa
         '
-        Me.Bt_FormatoStampa.Location = New System.Drawing.Point(396, 12)
+        Me.Bt_FormatoStampa.Location = New System.Drawing.Point(6, 19)
         Me.Bt_FormatoStampa.Name = "Bt_FormatoStampa"
         Me.Bt_FormatoStampa.Size = New System.Drawing.Size(120, 23)
         Me.Bt_FormatoStampa.TabIndex = 0
@@ -245,7 +257,7 @@ Partial Class Form_Preferenze
         'Bt_Salva
         '
         Me.Bt_Salva.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Bt_Salva.Location = New System.Drawing.Point(426, 325)
+        Me.Bt_Salva.Location = New System.Drawing.Point(538, 411)
         Me.Bt_Salva.Name = "Bt_Salva"
         Me.Bt_Salva.Size = New System.Drawing.Size(90, 38)
         Me.Bt_Salva.TabIndex = 12
@@ -375,24 +387,124 @@ Partial Class Form_Preferenze
         'Ck_BiancoNero
         '
         Me.Ck_BiancoNero.AutoSize = True
-        Me.Ck_BiancoNero.Location = New System.Drawing.Point(407, 41)
+        Me.Ck_BiancoNero.Location = New System.Drawing.Point(132, 23)
         Me.Ck_BiancoNero.Name = "Ck_BiancoNero"
         Me.Ck_BiancoNero.Size = New System.Drawing.Size(92, 17)
         Me.Ck_BiancoNero.TabIndex = 6
         Me.Ck_BiancoNero.Text = "Bianco e nero"
         Me.Ck_BiancoNero.UseVisualStyleBackColor = True
         '
+        'Bt_PathNuovi
+        '
+        Me.Bt_PathNuovi.Location = New System.Drawing.Point(5, 34)
+        Me.Bt_PathNuovi.Name = "Bt_PathNuovi"
+        Me.Bt_PathNuovi.Size = New System.Drawing.Size(47, 23)
+        Me.Bt_PathNuovi.TabIndex = 16
+        Me.Bt_PathNuovi.Text = "..."
+        Me.Bt_PathNuovi.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.TxtScegliExcel)
+        Me.GroupBox3.Controls.Add(Me.LblNuoviPath)
+        Me.GroupBox3.Controls.Add(Me.Bt_ScegliExcel)
+        Me.GroupBox3.Controls.Add(Me.Bt_PathNuovi)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 331)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(378, 121)
+        Me.GroupBox3.TabIndex = 17
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Riferimenti"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 71)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(84, 13)
+        Me.Label10.TabIndex = 23
+        Me.Label10.Text = "Eseguibile Excel"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 18)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(236, 13)
+        Me.Label9.TabIndex = 22
+        Me.Label9.Text = "Directory in cui verranno salvati i file NuoviCodici"
+        '
+        'TxtScegliExcel
+        '
+        Me.TxtScegliExcel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtScegliExcel.Location = New System.Drawing.Point(59, 87)
+        Me.TxtScegliExcel.Name = "TxtScegliExcel"
+        Me.TxtScegliExcel.Size = New System.Drawing.Size(313, 23)
+        Me.TxtScegliExcel.TabIndex = 19
+        Me.TxtScegliExcel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LblNuoviPath
+        '
+        Me.LblNuoviPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblNuoviPath.Location = New System.Drawing.Point(58, 34)
+        Me.LblNuoviPath.Name = "LblNuoviPath"
+        Me.LblNuoviPath.Size = New System.Drawing.Size(313, 23)
+        Me.LblNuoviPath.TabIndex = 17
+        Me.LblNuoviPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Bt_ScegliExcel
+        '
+        Me.Bt_ScegliExcel.Location = New System.Drawing.Point(6, 87)
+        Me.Bt_ScegliExcel.Name = "Bt_ScegliExcel"
+        Me.Bt_ScegliExcel.Size = New System.Drawing.Size(47, 23)
+        Me.Bt_ScegliExcel.TabIndex = 18
+        Me.Bt_ScegliExcel.Text = "..."
+        Me.Bt_ScegliExcel.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Bt_FormatoStampa)
+        Me.GroupBox4.Controls.Add(Me.Ck_BiancoNero)
+        Me.GroupBox4.Location = New System.Drawing.Point(396, 12)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(229, 54)
+        Me.GroupBox4.TabIndex = 18
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Generali"
+        '
+        'Bt_SettingsEmail
+        '
+        Me.Bt_SettingsEmail.Location = New System.Drawing.Point(396, 77)
+        Me.Bt_SettingsEmail.Name = "Bt_SettingsEmail"
+        Me.Bt_SettingsEmail.Size = New System.Drawing.Size(229, 23)
+        Me.Bt_SettingsEmail.TabIndex = 19
+        Me.Bt_SettingsEmail.Text = "Opzioni Email"
+        Me.Bt_SettingsEmail.UseVisualStyleBackColor = True
+        '
+        'Bt_TestConnessioni
+        '
+        Me.Bt_TestConnessioni.Location = New System.Drawing.Point(396, 106)
+        Me.Bt_TestConnessioni.Name = "Bt_TestConnessioni"
+        Me.Bt_TestConnessioni.Size = New System.Drawing.Size(229, 23)
+        Me.Bt_TestConnessioni.TabIndex = 20
+        Me.Bt_TestConnessioni.Text = "Test Connessioni"
+        Me.Bt_TestConnessioni.UseVisualStyleBackColor = True
+        '
         'Form_Preferenze
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(525, 375)
-        Me.Controls.Add(Me.Ck_BiancoNero)
+        Me.ClientSize = New System.Drawing.Size(637, 461)
+        Me.Controls.Add(Me.Bt_TestConnessioni)
+        Me.Controls.Add(Me.Bt_SettingsEmail)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GB_etichette)
         Me.Controls.Add(Me.Bt_Salva)
-        Me.Controls.Add(Me.Bt_FormatoStampa)
         Me.Name = "Form_Preferenze"
         Me.Text = "Form_Preferenze"
         Me.GB_etichette.ResumeLayout(False)
@@ -407,8 +519,11 @@ Partial Class Form_Preferenze
         Me.GroupBox2.PerformLayout()
         CType(Me.Nu_RigheDistinta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Nu_FontDistinta, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -443,4 +558,14 @@ Partial Class Form_Preferenze
     Friend WithEvents Nu_RigheDistinta As NumericUpDown
     Friend WithEvents Nu_FontDistinta As NumericUpDown
     Friend WithEvents Ck_BiancoNero As CheckBox
+    Friend WithEvents Bt_PathNuovi As Button
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents LblNuoviPath As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Bt_SettingsEmail As Button
+    Friend WithEvents Bt_TestConnessioni As Button
+    Friend WithEvents TxtScegliExcel As Label
+    Friend WithEvents Bt_ScegliExcel As Button
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
 End Class

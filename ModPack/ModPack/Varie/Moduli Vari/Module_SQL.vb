@@ -83,5 +83,52 @@ Namespace SQL
             Return Rows
         End Function
 
+        Public Function ImballoInOrdine(ByVal Imballo As String) As Boolean
+            'Check on the OrdiniTable if the order was already loaded
+            Dim Exist As Boolean = False
+            Dim Count As Int16
+
+            Using Con As New System.Data.SqlClient.SqlConnection(My.Settings.ModPackDBConnectionString)
+                Using Cmd As New System.Data.SqlClient.SqlCommand("SELECT COUNT(Imballo) FROM Ordini WHERE Imballo = '" & Imballo & "' AND Evaso = 'False'", Con)
+
+                    Try
+                        Con.Open()
+
+                        Count = Convert.ToInt16(Cmd.ExecuteScalar())
+                        If Count > 0 Then Exist = True
+
+                    Catch ex As System.Exception
+                        MsgBox(ex.Message & vbCrLf & "OrdineEXIST")
+                    End Try
+
+                End Using
+            End Using
+
+            Return Exist
+        End Function
+
+        Public Sub FillDGW_SQL(Query As String, DGW As DataGridView)
+            Dim DS As New DataSet
+            Using Con As New SqlConnection(My.Settings.ModPackDBConnectionString)
+
+                Try
+
+                    Con.Open()   'Apre la connessione al db
+
+                    Using adapter As New SqlDataAdapter(Query, Con)   'Crea la nuova tabella
+                        adapter.Fill(DS)    'Riempie la tabella coi risultati della query
+                    End Using
+
+                    DGW.DataSource = DS.Tables(0)   'Assegna alla DGW la tabella creata
+
+                Catch ex As Exception
+                    MsgBox(ex.ToString)
+                End Try
+
+
+
+            End Using
+        End Sub
+
     End Module
 End Namespace

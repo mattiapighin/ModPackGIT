@@ -46,6 +46,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icoBig.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\Imballi-Modine-Resources\Info\itextsharp\itextsharp-dll-core\itextsharp.dll</HintPath>
@@ -54,6 +57,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -87,10 +92,34 @@
     <Compile Include="Buttons\Imballi\Form_ModificaImballo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Buttons\Memo\Form_Agenda.Designer.vb">
+      <DependentUpon>Form_Agenda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Memo\Form_Agenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Memo\Form_Memo.Designer.vb">
+      <DependentUpon>Form_Memo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Memo\Form_Memo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.Designer.vb">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\Form_Preferenze_Email.Designer.vb">
+      <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\Form_Preferenze_Email.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Tabelle\Form_Tabelle.Designer.vb">
+      <DependentUpon>Form_Tabelle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Tabelle\Form_Tabelle.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\ScegliOrdine.Designer.vb">
@@ -146,6 +175,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Varie\Moduli Vari\Module_XML.vb" />
+    <Compile Include="Varie\MsgBox\MsgMoraliFrescoHT.Designer.vb">
+      <DependentUpon>MsgMoraliFrescoHT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Varie\MsgBox\MsgMoraliFrescoHT.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Buttons\Imballi\Form_Imballi.resx">
@@ -154,8 +190,20 @@
     <EmbeddedResource Include="Buttons\Imballi\Form_ModificaImballo.resx">
       <DependentUpon>Form_ModificaImballo.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Memo\Form_Agenda.resx">
+      <DependentUpon>Form_Agenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Memo\Form_Memo.resx">
+      <DependentUpon>Form_Memo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze_Email.resx">
+      <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Tabelle\Form_Tabelle.resx">
+      <DependentUpon>Form_Tabelle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ScegliOrdine.resx">
       <DependentUpon>ScegliOrdine.vb</DependentUpon>
@@ -171,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Ordini Aperti\Form_OrdiniAperti.resx">
       <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Varie\MsgBox\MsgMoraliFrescoHT.resx">
+      <DependentUpon>MsgMoraliFrescoHT.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +249,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GDA.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GST.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icoBig.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

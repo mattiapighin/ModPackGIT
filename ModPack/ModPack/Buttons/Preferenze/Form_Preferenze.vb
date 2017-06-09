@@ -1,4 +1,5 @@
 ﻿Public Class Form_Preferenze
+
     Private Sub Bt_FormatoStampa_Click(sender As Object, e As EventArgs) Handles Bt_FormatoStampa.Click
         Dim PageFormat As New PageSetupDialog With {.Document = New Printing.PrintDocument, .EnableMetric = True}
 
@@ -56,7 +57,6 @@
         Nu_FontDistinta.Value = My.Settings.DimensioneFontDistinta
         Nu_RigheDistinta.Value = My.Settings.NumeroRigheDistinta
     End Sub
-
     Private Sub SalvaSettingsDistinta()
         My.Settings.StampaBarcodeDistinte = Ck_Barcode.Checked
         My.Settings.StampaBarcodeSoloCodice = CkBarcodeSoloCodice.Checked
@@ -64,17 +64,31 @@
         My.Settings.NumeroRigheDistinta = Nu_RigheDistinta.Value
     End Sub
 
+    Private Sub CaricaRiferimenti()
+        LblNuoviPath.Text = My.Settings.NuoviPath
+        TxtScegliExcel.Text = My.Settings.ExcelPath
+    End Sub
+    Private Sub SalvaRiferimenti()
+        My.Settings.NuoviPath = LblNuoviPath.Text
+        My.Settings.ExcelPath = TxtScegliExcel.Text
+    End Sub
+
+
+
     Private Sub Form_Preferenze_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CaricaSettingsEtichette()
         CaricaSettingsCK()
         CaricaSettingsDistinta()
-    End Sub
+        CaricaRiferimenti()
 
+    End Sub
     Private Sub Bt_Salva_Click(sender As Object, e As EventArgs) Handles Bt_Salva.Click
         If MsgBox("Salvare le modifiche?", vbYesNo, "Preferenze") = MsgBoxResult.Yes Then
             SalvaSettingsEtichette()
             SalvaSettingsCK()
             SalvaSettingsDistinta()
+            SalvaRiferimenti()
+
             MsgBox("Modifiche salvate", vbOKOnly, "Preferenze")
             LOG.Write("Modificate preferenze")
 
@@ -89,5 +103,42 @@
 
     Private Sub Ck_BiancoNero_CheckedChanged(sender As Object, e As EventArgs) Handles Ck_BiancoNero.CheckedChanged
 
+    End Sub
+
+    Private Sub Bt_PathNuovi_Click(sender As Object, e As EventArgs) Handles Bt_PathNuovi.Click
+        Dim Dialog As New FolderBrowserDialog
+        If Dialog.ShowDialog = DialogResult.OK Then
+            LblNuoviPath.Text = Dialog.SelectedPath
+        End If
+    End Sub
+
+    Private Sub Bt_SettingsEmail_Click(sender As Object, e As EventArgs) Handles Bt_SettingsEmail.Click
+        Form_Preferenze_Email.Show()
+    End Sub
+
+    Private Sub Bt_TestConnessioni_Click(sender As Object, e As EventArgs) Handles Bt_TestConnessioni.Click
+        Dim xml = XDocument.Load(My.Settings.XMLpath)
+        Dim Ip_produzione As String = xml.<Data>.<IP_Produzione>.Value
+        Dim Ip_sezionatrice As String = xml.<Data>.<IP_Sezionatrice>.Value
+
+        If My.Computer.Network.Ping(Ip_produzione) Then
+            MsgBox("PC Produzione connesso", vbOKOnly, "Test")
+        Else
+            MsgBox("PC Produzione disconnesso", vbCritical, "Test")
+        End If
+
+
+        If My.Computer.Network.Ping(Ip_sezionatrice) Then
+            MsgBox("PC Sezionatrice connesso", vbOKOnly, "Test")
+        Else
+            MsgBox("PC Sezionatrice disconnesso", vbCritical, "Test")
+        End If
+    End Sub
+
+    Private Sub Bt_ScegliExcel_Click(sender As Object, e As EventArgs) Handles Bt_ScegliExcel.Click
+        Dim Dialog As New OpenFileDialog With {.Filter = ("Excel|*.exe"), .FileName = "Excel.exe", .Title = "Riferimento a Excel.exe"}
+        If Dialog.ShowDialog = DialogResult.OK Then
+            TxtScegliExcel.Text = Dialog.FileName
+        End If
     End Sub
 End Class
