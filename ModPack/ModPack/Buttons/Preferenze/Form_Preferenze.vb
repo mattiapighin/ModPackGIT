@@ -41,14 +41,14 @@
         Ck_ColoraScaduti.Checked = My.Settings.OrdiniAperti_ColoraScaduti
         Ck_ColoraEvasi.Checked = My.Settings.OrdiniAperti_ColoraEvasi
         Ck_CheckCaricamento.Checked = My.Settings.CheckInserimentoImballo
-        Ck_BiancoNero.Checked = My.Settings.PrintBiancoNero
+        Ck_BiancoNero.Checked = My.Settings.FormatoStampa.Color
     End Sub
     Private Sub SalvaSettingsCK()
         My.Settings.CK_ConfermaEvaso = Ck_Evaso.Checked
         My.Settings.OrdiniAperti_ColoraScaduti = Ck_ColoraScaduti.Checked
         My.Settings.OrdiniAperti_ColoraEvasi = Ck_ColoraEvasi.Checked
         My.Settings.CheckInserimentoImballo = Ck_CheckCaricamento.Checked
-        My.Settings.PrintBiancoNero = Ck_BiancoNero.Checked
+        My.Settings.FormatoStampa.Color = Ck_BiancoNero.Checked
     End Sub
 
     Private Sub CaricaSettingsDistinta()
@@ -65,14 +65,17 @@
     End Sub
 
     Private Sub CaricaRiferimenti()
-        LblNuoviPath.Text = My.Settings.NuoviPath
+        RBexcel_nuovi.Checked = My.Settings.ListaNuoviExcel
+        RBtext_nuovi.Checked = Not My.Settings.ListaNuoviExcel
         TxtScegliExcel.Text = My.Settings.ExcelPath
+        CkDeveloper.Checked = My.Settings.Developer
     End Sub
     Private Sub SalvaRiferimenti()
-        My.Settings.NuoviPath = LblNuoviPath.Text
+        My.Settings.ListaNuoviExcel = RBexcel_nuovi.Checked
+        My.Settings.ListaNuoviExcel = Not RBtext_nuovi.Checked
         My.Settings.ExcelPath = TxtScegliExcel.Text
+        My.Settings.Developer = CkDeveloper.Checked
     End Sub
-
 
 
     Private Sub Form_Preferenze_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,24 +95,9 @@
             MsgBox("Modifiche salvate", vbOKOnly, "Preferenze")
             LOG.Write("Modificate preferenze")
 
-            If My.Settings.PrintBiancoNero = False Then
-                My.Settings.FormatoStampa.Color = False
-            Else
-                My.Settings.FormatoStampa.Color = True
-            End If
+
         End If
 
-    End Sub
-
-    Private Sub Ck_BiancoNero_CheckedChanged(sender As Object, e As EventArgs) Handles Ck_BiancoNero.CheckedChanged
-
-    End Sub
-
-    Private Sub Bt_PathNuovi_Click(sender As Object, e As EventArgs) Handles Bt_PathNuovi.Click
-        Dim Dialog As New FolderBrowserDialog
-        If Dialog.ShowDialog = DialogResult.OK Then
-            LblNuoviPath.Text = Dialog.SelectedPath
-        End If
     End Sub
 
     Private Sub Bt_SettingsEmail_Click(sender As Object, e As EventArgs) Handles Bt_SettingsEmail.Click
@@ -141,4 +129,6 @@
             TxtScegliExcel.Text = Dialog.FileName
         End If
     End Sub
+
+
 End Class

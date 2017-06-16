@@ -5,7 +5,6 @@ Imports System.Net.Mail
 
 Public Class Form_OrdiniAperti
 
-    Dim ListaMoraliDS As New DataSet
     Dim ConfermaOrdineDS As New DataSet
     Dim EtichetteDS As New DataSet
     Dim CheckListDS As New DataSet
@@ -342,98 +341,157 @@ Public Class Form_OrdiniAperti
     Private Sub Bt_ListaMorali_Click(sender As Object, e As EventArgs) Handles Bt_ListaMorali.Click
         If Not DGW_OrdiniAperti.SelectedRows.Count = 0 Then
 
-            Dim DialogStampa As New PrintDialog
+            Liste.Ordine = DGW_OrdiniAperti.CurrentCell.Value
+            Form_StampaListe.ShowDialog()
 
-            If DialogStampa.ShowDialog = DialogResult.OK Then
-
-                Ordine = DGW_OrdiniAperti.CurrentRow.Cells(0).Value
-                ListaMoraliDS.Clear()
-
-                Dim Query As String = ""
-                Dim NomeTabella As String = ""
-
-                Select Case MsgMoraliFrescoHT.ShowDialog
-                    Case DialogResult.Yes
-                        Query = "SELECT Distinta.X, Distinta.Y, Distinta.Z, SUM(Distinta.N * Ordini.QT) FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo WHERE Ordini.Ordine = '" & Ordine & "' AND Distinta.Tag = 'Mor' AND Ordini.HT = 'True' GROUP BY X, Y, Z ORDER BY Z DESC"
-                        NomeTabella = "LISTA MORALI HT"
-                    Case DialogResult.No
-                        Query = "SELECT Distinta.X, Distinta.Y, Distinta.Z, SUM(Distinta.N * Ordini.QT) FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo WHERE Ordini.Ordine = '" & Ordine & "' AND Distinta.Tag = 'Mor' AND Ordini.HT = 'False' GROUP BY X, Y, Z ORDER BY Z DESC"
-                        NomeTabella = "LISTA MORALI"
-                    Case Else
-                        Exit Sub
-                End Select
-
-                Using Con As New System.Data.SqlClient.SqlConnection(My.Settings.ModPackDBConnectionString)
-
-                    Try
-                        Con.Open()
-                        Dim adapter As New System.Data.SqlClient.SqlDataAdapter(Query, Con)
-                        adapter.Fill(ListaMoraliDS)
-                    Catch ex As Exception
-                        MsgBox(ex.ToString)
-                    End Try
-
-                End Using
-
-                ListaMoraliDS.Tables(0).TableName = NomeTabella
-
-                LOG.Write("Stampata lista morali " & Ordine)
-                Print_Morali.DefaultPageSettings = My.Settings.FormatoStampa
-                Print_Morali.PrinterSettings = DialogStampa.PrinterSettings
-
-                Print_Morali.DocumentName = "MOR" & Ordine
-                Print_Morali.Print()
-
-            End If
         Else
             MsgBox("Selezionare prima un'ordine nella lista di sinistra", vbInformation, "Attenzione")
         End If
     End Sub
     Private Sub Bt_Disegni_Click(sender As Object, e As EventArgs) Handles Bt_Disegni.Click
+        RowOrdine.Clear()
         Ordine = DGW_OrdiniAperti.CurrentRow.Cells(0).Value
-        Dim OrdineTable As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
-        Dim Ds As New ModPackDBDataSet.OrdiniDataTable
 
-        OrdineTable.Fill(Ds)
+        Using OrdineTable As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+            Using Ds As New ModPackDBDataSet.OrdiniDataTable
 
-        If Not My.Computer.Keyboard.CtrlKeyDown Then
-            'Se non è premuto CTRL stampa tutto l'ordine
-            For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
-                If Row.Ordine = Ordine Then
-                    Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
-                        .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
-                        .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
-                    RowOrdine.Add(Riga)
+                OrdineTable.Fill(Ds)
+
+                If Not My.Computer.Keyboard.CtrlKeyDown Then
+
+                    'Se non è premuto CTRL stampa tutto l'ordine
+                    For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
+                        If Row.Ordine = Ordine Then
+                            Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
+                                .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
+                                .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                            RowOrdine.Add(Riga)
+                        End If
+                        Row.Stampato = True
+                    Next
+
+                Else
+
+                    'Se è premuto CTRL stampa solo le righe selezionate
+                    For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
+                        For Each RigaSelezionata As DataGridViewRow In Dgw_Ordine.SelectedRows
+                            If Row.Ordine = Ordine And Row.Id = RigaSelezionata.Cells(0).Value Then
+                                Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
+                                    .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
+                                    .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                                RowOrdine.Add(Riga)
+                                Row.Stampato = True
+                            End If
+                        Next
+                    Next
+
                 End If
-                Row.Stampato = True
-            Next
 
-        Else
-            'Se è premuto CTRL stampa solo le righe selezionate
-            For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
-                For Each RigaSelezionata As DataGridViewRow In Dgw_Ordine.SelectedRows
-                    If Row.Ordine = Ordine And Row.Id = RigaSelezionata.Cells(0).Value Then
-                        Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
-                            .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
-                            .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
-                        RowOrdine.Add(Riga)
-                    End If
-                    Row.Stampato = True
-                Next
-            Next
+                If Not RowOrdine.Count = 0 Then
+                    OrdineTable.Update(Ds)
+                    Print_Distinte.DefaultPageSettings = My.Settings.FormatoStampa
+                    Dim L As New PrintPreviewDialog With {.Document = Print_Distinte}
+                    L.Show()
+                End If
 
-        End If
-
-        If Not RowOrdine.Count = 0 Then
-            OrdineTable.Update(Ds)
-
-            Print_Distinte.DefaultPageSettings = My.Settings.FormatoStampa
-            Dim L As New PrintPreviewDialog With {.Document = Print_Distinte}
-            L.Show()
-        End If
-
+            End Using
+        End Using
         CaricaOrdineSelezionato(Ordine)
-        Ds.Clear()
+    End Sub
+    Private Sub Bt_ListaRivestimenti_Click(sender As Object, e As EventArgs) Handles Bt_ListaRivestimenti.Click
+        If MsgBox("Inviare il file Rivestimenti alla sezionatrice?", vbYesNo, "Rivestimenti") = MsgBoxResult.Yes Then
+            Dim xml = XDocument.Load(My.Settings.XMLpath)
+            Dim Ip_sezionatrice As String = xml.<Data>.<IP_Sezionatrice>.Value
+
+            'Controlla che il pc della sezionatrice sia connesso
+            If My.Computer.Network.Ping(Ip_sezionatrice) Then
+
+                Try
+
+                    Dim Ordine As String = DGW_OrdiniAperti.CurrentCell.Value
+                    Dim Path As String = "\\" & Ip_sezionatrice & "\sezionatrice\ModPack"
+
+
+
+                    Dim Righe As New List(Of String)
+                    Dim Magazzino As String = ""
+
+                    Using TA As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+                        Using Table As New ModPackDBDataSet.OrdiniDataTable
+
+                            TA.Fill(Table)
+
+
+                            For Each Row As ModPackDBDataSet.OrdiniRow In Table.Rows
+                                If Row.Ordine = Ordine Then
+                                    If Row.Rivestimento = True Then
+
+                                        If Not Row.IsMagazzinoNull Then
+                                            Magazzino = Row.Magazzino
+                                        End If
+
+                                        Dim Imballo As String = Row.Codice
+                                        Dim Qt As String = Row.Qt
+                                        Dim Rivestimento As String = ""
+                                        If Not Row.IsTipo_RivestimentoNull Then Rivestimento = SQL.GetSQLValue("SELECT Descrizione FROM Rivestimenti WHERE Tipo_Rivestimento = '" & Row.Tipo_Rivestimento & "'")
+                                        Dim BC As String = (Row.L - 5) & " x " & (Row.P - 5) & " = " & (Row.Qt * 2)
+                                        Dim F As String = (Row.L - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
+                                        Dim T As String = (Row.P - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
+
+                                        Dim Note1 As String = ""
+                                        Dim Note2 As String = ""
+
+                                        If Not Row.IsNoteNull Then Note1 = Row.Note
+                                        If Not Row.IsRivest_TotNull Then Note2 = Row.Rivest_Tot
+
+                                        'Solo su GST cartonplast su coperchio e faesite su base
+                                        If Row.Tipo = "GST" Then BC = (Row.L - 5) & " x " & (Row.P - 5) & " = " & (Row.Qt) & " (+ " & (Row.Qt) & " FAESITE)"
+
+                                        Righe.Add(Imballo & "|" & Qt & "|" & Rivestimento & "|" & BC & "|" & F & "|" & T & "|" & Note1 & "|" & Note2)
+
+                                    End If
+                                End If
+                            Next
+
+                        End Using
+                    End Using
+
+                    Dim NomeFile As String = Path & "\" & "MAG" & Magazzino & " RIV-" & Ordine & ".txt"
+
+                    If Not My.Computer.FileSystem.DirectoryExists(Path) Then
+                        'Controlla che esista la directory ModPack se no la crea
+                        My.Computer.FileSystem.CreateDirectory(Path)
+                        MsgBox("Creata")
+                    End If
+
+                    If IO.File.Exists(NomeFile) Then
+                        'Controlla che non sia già stata creata la lista
+                        If MsgBox("Il file esiste già, vuoi dargli un'altro nome?", vbYesNo, "Nome") = MsgBoxResult.Yes Then
+                            Dim NuovoNome As String = InputBox("Nome:", "Rivestimenti", IO.Path.GetFileNameWithoutExtension(NomeFile))
+                            If String.IsNullOrEmpty(NomeFile) Then Exit Sub
+
+                            NomeFile = ""
+                            NomeFile = Path & "\" & "MAG" & Magazzino & " RIV-" & NuovoNome & ".txt"
+
+                        Else
+                            Exit Sub
+                        End If
+
+                    End If
+
+                    IO.File.WriteAllLines(NomeFile, Righe)
+                    MsgBox("File '" & IO.Path.GetFileNameWithoutExtension(NomeFile) & "' inviato!", vbInformation, "Rivestimenti")
+                Catch ex As Exception
+                    MsgBox(ex)
+                End Try
+
+            Else
+                MsgBox("Sezionatrice non raggiungibile!" & vbCrLf & "Controllare la connessione", vbCritical, "Test")
+            End If
+        End If
+
+
+
     End Sub
 
     '### STAMPE ###
@@ -464,105 +522,19 @@ Public Class Form_OrdiniAperti
     End Sub
     Private Sub Print_Distinte_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Print_Distinte.PrintPage
         Static PagineStampate = 0
-
-        Static EtichetteTotali As Integer = RowOrdine.Count - 1
+        Dim DistinteTotali As Integer = RowOrdine.Count - 1
 
         Stampe.Stampa_Distinte(sender, e, RowOrdine.Item(PagineStampate))
 
         PagineStampate += 1
 
-        If PagineStampate <= EtichetteTotali Then
+        If PagineStampate <= DistinteTotali Then
             e.HasMorePages = True
         Else
             e.HasMorePages = False
             PagineStampate = 0
         End If
     End Sub
-    Private Sub Print_Morali_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Print_Morali.PrintPage
-        Stampe.ListaMorali(sender, e, DGW_OrdiniAperti.CurrentCell.Value, ListaMoraliDS)
-    End Sub
-
-    Private Sub Bt_ListaRivestimenti_Click(sender As Object, e As EventArgs) Handles Bt_ListaRivestimenti.Click
-        Dim xml = XDocument.Load(My.Settings.XMLpath)
-        Dim Ip_sezionatrice As String = xml.<Data>.<IP_Sezionatrice>.Value
-
-        'Controlla che il pc della sezionatrice sia connesso
-        If My.Computer.Network.Ping(Ip_sezionatrice) Then
-
-            Try
-
-                Dim Ordine As String = DGW_OrdiniAperti.CurrentCell.Value
-                Dim Path As String = "\\" & Ip_sezionatrice & "\sezionatrice\ModPack"
-
-
-
-                Dim Righe As New List(Of String)
-                Dim Magazzino As String = ""
-
-                Using TA As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
-                    Using Table As New ModPackDBDataSet.OrdiniDataTable
-
-                        TA.Fill(Table)
-
-
-                        For Each Row As ModPackDBDataSet.OrdiniRow In Table.Rows
-                            If Row.Ordine = Ordine Then
-                                If Row.Rivestimento = True Then
-
-                                    If Not Row.IsMagazzinoNull Then
-                                        Magazzino = Row.Magazzino
-                                    End If
-
-                                    Dim Imballo As String = Row.Codice
-                                    Dim Qt As String = Row.Qt
-                                    Dim Rivestimento As String = ""
-                                    If Not Row.IsTipo_RivestimentoNull Then Rivestimento = SQL.GetSQLValue("SELECT Descrizione FROM Rivestimenti WHERE Tipo_Rivestimento = '" & Row.Tipo_Rivestimento & "'")
-                                    Dim BC As String = (Row.L - 5) & " x " & (Row.P - 5) & " = " & (Row.Qt * 2)
-                                    Dim F As String = (Row.L - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
-                                    Dim T As String = (Row.P - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
-
-                                    Righe.Add(Imballo & "|" & Qt & "|" & Rivestimento & "|" & BC & "|" & F & "|" & T)
-
-                                End If
-                            End If
-                        Next
-
-                    End Using
-                End Using
-
-                Dim NomeFile As String = Path & "\" & "MAG" & Magazzino & " RIV-" & Ordine & ".txt"
-
-                If Not My.Computer.FileSystem.DirectoryExists(Path) Then
-                    'Controlla che esista la directory ModPack se no la crea
-                    My.Computer.FileSystem.CreateDirectory(Path)
-                    MsgBox("Creata")
-                End If
-
-                If IO.File.Exists(NomeFile) Then
-                    'Controlla che non sia già stata creata la lista
-                    If MsgBox("Il file esiste già, vuoi dargli un'altro nome?", vbYesNo, "Nome") = MsgBoxResult.Yes Then
-                        NomeFile = InputBox("Nome:", "Rivestimenti", IO.Path.GetFileNameWithoutExtension(NomeFile)) & ".txt"
-                        If String.IsNullOrEmpty(NomeFile) Then Exit Sub
-                    Else
-                        Exit Sub
-                    End If
-
-                End If
-
-                IO.File.WriteAllLines(NomeFile, Righe)
-                MsgBox("File '" & IO.Path.GetFileNameWithoutExtension(NomeFile) & "' inviato!", vbInformation, "Rivestimenti")
-            Catch ex As Exception
-                MsgBox(ex)
-            End Try
-
-        Else
-            MsgBox("Il Pc della sezionatrice non è raggiungibile", vbCritical, "Test")
-        End If
-
-
-    End Sub
-
-
 
 
 End Class

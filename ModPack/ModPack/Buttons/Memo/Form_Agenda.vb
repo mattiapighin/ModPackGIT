@@ -1,6 +1,5 @@
 ﻿Public Class Form_Agenda
     Private Sub Form_Agenda_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: questa riga di codice carica i dati nella tabella 'ModPackDBDataSet.Memo'. È possibile spostarla o rimuoverla se necessario.
         Me.MemoTableAdapter.Fill(Me.ModPackDBDataSet.Memo)
 
     End Sub

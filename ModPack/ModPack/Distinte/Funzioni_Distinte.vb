@@ -120,6 +120,29 @@
             Return GRADI
         End Function
 
+        Function Ricalcolo_M3_Morali(ByVal Imballo As String) As Single
+
+            Dim M3 As Single
+
+            Dim TABLE As New ModPackDBDataSet.DistintaDataTable
+            Using DA As New ModPackDBDataSetTableAdapters.DistintaTableAdapter
+                DA.Fill(TABLE)
+            End Using
+
+
+
+            For Each Row As ModPackDBDataSet.DistintaRow In TABLE.Rows
+                If Row.Imballo = Imballo Then
+                    If Row.Tag = "MOR" Then
+                        M3 = (Row.X * Row.Y * Row.Z) * Row.N
+                    End If
+                End If
+            Next
+
+            M3 = M3 * 10 ^ (-6)
+
+            Return Math.Round(M3, 3)
+        End Function
         Function Ricalcolo_M3(ByVal Imballo As String) As Single
 
             Dim M3 As Single

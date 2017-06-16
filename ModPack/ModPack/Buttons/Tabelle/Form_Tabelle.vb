@@ -100,7 +100,6 @@
                         Try
                             DRW(DTB.Columns(CLS).ColumnName.ToString) = dgv.Rows(RWS).Cells(CLS).Value.ToString
                         Catch ex As Exception
-
                         End Try
                     Next
 
@@ -122,10 +121,6 @@
         End If
     End Sub
 
-    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-
-    End Sub
-
     Private Sub Bt_Info_Click(sender As Object, e As EventArgs) Handles Bt_Info.Click
         If SplitContainer1.Panel2Collapsed = True Then
             SplitContainer1.Panel2Collapsed = False
@@ -133,5 +128,11 @@
             SplitContainer1.Panel2Collapsed = True
         End If
 
+    End Sub
+
+    Private Sub TxtQuery_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtQuery.KeyDown
+        If e.KeyCode = Keys.Return Then
+            Bt_Test_Click(sender, e)
+        End If
     End Sub
 End Class

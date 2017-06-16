@@ -294,18 +294,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property PrintBiancoNero() As Boolean
-            Get
-                Return CType(Me("PrintBiancoNero"),Boolean)
-            End Get
-            Set
-                Me("PrintBiancoNero") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("200")>  _
         Public Property LimiteTavole8() As Integer
             Get
@@ -325,18 +313,6 @@ Namespace My
             End Get
             Set
                 Me("XMLpath") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property NuoviPath() As String
-            Get
-                Return CType(Me("NuoviPath"),String)
-            End Get
-            Set
-                Me("NuoviPath") = value
             End Set
         End Property
         
@@ -493,6 +469,66 @@ Namespace My
             End Get
             Set
                 Me("ExcelPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ListaNuoviExcel() As Boolean
+            Get
+                Return CType(Me("ListaNuoviExcel"),Boolean)
+            End Get
+            Set
+                Me("ListaNuoviExcel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property Developer() As Boolean
+            Get
+                Return CType(Me("Developer"),Boolean)
+            End Get
+            Set
+                Me("Developer") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Scarto() As Integer
+            Get
+                Return CType(Me("Scarto"),Integer)
+            End Get
+            Set
+                Me("Scarto") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property MisurePari() As Boolean
+            Get
+                Return CType(Me("MisurePari"),Boolean)
+            End Get
+            Set
+                Me("MisurePari") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ArrL5() As Boolean
+            Get
+                Return CType(Me("ArrL5"),Boolean)
+            End Get
+            Set
+                Me("ArrL5") = value
             End Set
         End Property
     End Class

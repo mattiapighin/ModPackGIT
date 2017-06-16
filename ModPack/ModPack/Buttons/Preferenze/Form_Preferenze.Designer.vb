@@ -53,16 +53,17 @@ Partial Class Form_Preferenze
         Me.CkBarcodeSoloCodice = New System.Windows.Forms.CheckBox()
         Me.Ck_Barcode = New System.Windows.Forms.CheckBox()
         Me.Ck_BiancoNero = New System.Windows.Forms.CheckBox()
-        Me.Bt_PathNuovi = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.RBexcel_nuovi = New System.Windows.Forms.RadioButton()
+        Me.RBtext_nuovi = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtScegliExcel = New System.Windows.Forms.Label()
-        Me.LblNuoviPath = New System.Windows.Forms.Label()
         Me.Bt_ScegliExcel = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Bt_SettingsEmail = New System.Windows.Forms.Button()
         Me.Bt_TestConnessioni = New System.Windows.Forms.Button()
+        Me.CkDeveloper = New System.Windows.Forms.CheckBox()
         Me.GB_etichette.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -387,30 +388,22 @@ Partial Class Form_Preferenze
         'Ck_BiancoNero
         '
         Me.Ck_BiancoNero.AutoSize = True
-        Me.Ck_BiancoNero.Location = New System.Drawing.Point(132, 23)
+        Me.Ck_BiancoNero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Ck_BiancoNero.Location = New System.Drawing.Point(171, 22)
         Me.Ck_BiancoNero.Name = "Ck_BiancoNero"
-        Me.Ck_BiancoNero.Size = New System.Drawing.Size(92, 17)
+        Me.Ck_BiancoNero.Size = New System.Drawing.Size(52, 17)
         Me.Ck_BiancoNero.TabIndex = 6
-        Me.Ck_BiancoNero.Text = "Bianco e nero"
+        Me.Ck_BiancoNero.Text = "Colori"
         Me.Ck_BiancoNero.UseVisualStyleBackColor = True
-        '
-        'Bt_PathNuovi
-        '
-        Me.Bt_PathNuovi.Location = New System.Drawing.Point(5, 34)
-        Me.Bt_PathNuovi.Name = "Bt_PathNuovi"
-        Me.Bt_PathNuovi.Size = New System.Drawing.Size(47, 23)
-        Me.Bt_PathNuovi.TabIndex = 16
-        Me.Bt_PathNuovi.Text = "..."
-        Me.Bt_PathNuovi.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.RBexcel_nuovi)
+        Me.GroupBox3.Controls.Add(Me.RBtext_nuovi)
         Me.GroupBox3.Controls.Add(Me.Label10)
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.TxtScegliExcel)
-        Me.GroupBox3.Controls.Add(Me.LblNuoviPath)
         Me.GroupBox3.Controls.Add(Me.Bt_ScegliExcel)
-        Me.GroupBox3.Controls.Add(Me.Bt_PathNuovi)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 331)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(378, 121)
@@ -418,10 +411,32 @@ Partial Class Form_Preferenze
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Riferimenti"
         '
+        'RBexcel_nuovi
+        '
+        Me.RBexcel_nuovi.AutoSize = True
+        Me.RBexcel_nuovi.Location = New System.Drawing.Point(205, 16)
+        Me.RBexcel_nuovi.Name = "RBexcel_nuovi"
+        Me.RBexcel_nuovi.Size = New System.Drawing.Size(51, 17)
+        Me.RBexcel_nuovi.TabIndex = 25
+        Me.RBexcel_nuovi.TabStop = True
+        Me.RBexcel_nuovi.Text = "Excel"
+        Me.RBexcel_nuovi.UseVisualStyleBackColor = True
+        '
+        'RBtext_nuovi
+        '
+        Me.RBtext_nuovi.AutoSize = True
+        Me.RBtext_nuovi.Location = New System.Drawing.Point(262, 14)
+        Me.RBtext_nuovi.Name = "RBtext_nuovi"
+        Me.RBtext_nuovi.Size = New System.Drawing.Size(46, 17)
+        Me.RBtext_nuovi.TabIndex = 24
+        Me.RBtext_nuovi.TabStop = True
+        Me.RBtext_nuovi.Text = "Text"
+        Me.RBtext_nuovi.UseVisualStyleBackColor = True
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 71)
+        Me.Label10.Location = New System.Drawing.Point(6, 72)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(84, 13)
         Me.Label10.TabIndex = 23
@@ -432,31 +447,22 @@ Partial Class Form_Preferenze
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(6, 18)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(236, 13)
+        Me.Label9.Size = New System.Drawing.Size(193, 13)
         Me.Label9.TabIndex = 22
-        Me.Label9.Text = "Directory in cui verranno salvati i file NuoviCodici"
+        Me.Label9.Text = "Tipo di visualizzazione lista nuovi imballi"
         '
         'TxtScegliExcel
         '
         Me.TxtScegliExcel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtScegliExcel.Location = New System.Drawing.Point(59, 87)
+        Me.TxtScegliExcel.Location = New System.Drawing.Point(59, 88)
         Me.TxtScegliExcel.Name = "TxtScegliExcel"
         Me.TxtScegliExcel.Size = New System.Drawing.Size(313, 23)
         Me.TxtScegliExcel.TabIndex = 19
         Me.TxtScegliExcel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'LblNuoviPath
-        '
-        Me.LblNuoviPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LblNuoviPath.Location = New System.Drawing.Point(58, 34)
-        Me.LblNuoviPath.Name = "LblNuoviPath"
-        Me.LblNuoviPath.Size = New System.Drawing.Size(313, 23)
-        Me.LblNuoviPath.TabIndex = 17
-        Me.LblNuoviPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'Bt_ScegliExcel
         '
-        Me.Bt_ScegliExcel.Location = New System.Drawing.Point(6, 87)
+        Me.Bt_ScegliExcel.Location = New System.Drawing.Point(6, 88)
         Me.Bt_ScegliExcel.Name = "Bt_ScegliExcel"
         Me.Bt_ScegliExcel.Size = New System.Drawing.Size(47, 23)
         Me.Bt_ScegliExcel.TabIndex = 18
@@ -492,11 +498,24 @@ Partial Class Form_Preferenze
         Me.Bt_TestConnessioni.Text = "Test Connessioni"
         Me.Bt_TestConnessioni.UseVisualStyleBackColor = True
         '
+        'CkDeveloper
+        '
+        Me.CkDeveloper.AutoSize = True
+        Me.CkDeveloper.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CkDeveloper.Location = New System.Drawing.Point(457, 432)
+        Me.CkDeveloper.Name = "CkDeveloper"
+        Me.CkDeveloper.Size = New System.Drawing.Size(75, 17)
+        Me.CkDeveloper.TabIndex = 26
+        Me.CkDeveloper.Text = "Developer"
+        Me.CkDeveloper.UseVisualStyleBackColor = True
+        '
         'Form_Preferenze
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(637, 461)
+        Me.Controls.Add(Me.CkDeveloper)
         Me.Controls.Add(Me.Bt_TestConnessioni)
         Me.Controls.Add(Me.Bt_SettingsEmail)
         Me.Controls.Add(Me.GroupBox4)
@@ -505,8 +524,9 @@ Partial Class Form_Preferenze
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GB_etichette)
         Me.Controls.Add(Me.Bt_Salva)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form_Preferenze"
-        Me.Text = "Form_Preferenze"
+        Me.Text = "Preferenze"
         Me.GB_etichette.ResumeLayout(False)
         Me.GB_etichette.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
@@ -524,6 +544,7 @@ Partial Class Form_Preferenze
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -558,9 +579,7 @@ Partial Class Form_Preferenze
     Friend WithEvents Nu_RigheDistinta As NumericUpDown
     Friend WithEvents Nu_FontDistinta As NumericUpDown
     Friend WithEvents Ck_BiancoNero As CheckBox
-    Friend WithEvents Bt_PathNuovi As Button
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents LblNuoviPath As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents Bt_SettingsEmail As Button
     Friend WithEvents Bt_TestConnessioni As Button
@@ -568,4 +587,7 @@ Partial Class Form_Preferenze
     Friend WithEvents Bt_ScegliExcel As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents RBexcel_nuovi As RadioButton
+    Friend WithEvents RBtext_nuovi As RadioButton
+    Friend WithEvents CkDeveloper As CheckBox
 End Class

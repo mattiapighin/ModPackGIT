@@ -25,12 +25,12 @@ Partial Class Form_ModificaImballo
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_ModificaImballo))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.CbImballo = New System.Windows.Forms.ComboBox()
         Me.ImballiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ModPackDBDataSet = New ModPack.ModPackDBDataSet()
         Me.ImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.ImballiTableAdapter()
         Me.PanelCodice = New System.Windows.Forms.Panel()
         Me.Bt_StartEdit = New System.Windows.Forms.Button()
+        Me.CbImballo = New System.Windows.Forms.ComboBox()
         Me.ImballiIndiciBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.IndiciTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.IndiciTableAdapter()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -95,12 +95,16 @@ Partial Class Form_ModificaImballo
         Me.IndiceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CodiceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NoteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RivestTotDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NoteBICDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballiIndiciBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Bt_NoImg = New System.Windows.Forms.Button()
         Me.Bt_Cancel = New System.Windows.Forms.Button()
         Me.PanelButtons = New System.Windows.Forms.Panel()
         Me.Bt_EliminaCodice = New System.Windows.Forms.Button()
         Me.Bt_Duplica = New System.Windows.Forms.Button()
+        Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelCodice.SuspendLayout()
@@ -112,8 +116,10 @@ Partial Class Form_ModificaImballo
         Me.PanelModifica.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImballiIndiciBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.PanelButtons.SuspendLayout()
+        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -125,16 +131,6 @@ Partial Class Form_ModificaImballo
         Me.Label1.Size = New System.Drawing.Size(58, 19)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "CODICE"
-        '
-        'CbImballo
-        '
-        Me.CbImballo.DataSource = Me.ImballiBindingSource
-        Me.CbImballo.DisplayMember = "Imballo"
-        Me.CbImballo.FormattingEnabled = True
-        Me.CbImballo.Location = New System.Drawing.Point(62, 11)
-        Me.CbImballo.Name = "CbImballo"
-        Me.CbImballo.Size = New System.Drawing.Size(227, 21)
-        Me.CbImballo.TabIndex = 1
         '
         'ImballiBindingSource
         '
@@ -173,6 +169,19 @@ Partial Class Form_ModificaImballo
         Me.Bt_StartEdit.Size = New System.Drawing.Size(30, 30)
         Me.Bt_StartEdit.TabIndex = 2
         Me.Bt_StartEdit.UseVisualStyleBackColor = False
+        '
+        'CbImballo
+        '
+        Me.CbImballo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.CbImballo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CbImballo.DataSource = Me.ImballiBindingSource
+        Me.CbImballo.DisplayMember = "Imballo"
+        Me.CbImballo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.CbImballo.FormattingEnabled = True
+        Me.CbImballo.Location = New System.Drawing.Point(62, 11)
+        Me.CbImballo.Name = "CbImballo"
+        Me.CbImballo.Size = New System.Drawing.Size(227, 21)
+        Me.CbImballo.TabIndex = 1
         '
         'ImballiIndiciBindingSource
         '
@@ -538,6 +547,7 @@ Partial Class Form_ModificaImballo
         '
         'PbImg
         '
+        Me.PbImg.BackColor = System.Drawing.SystemColors.GrayText
         Me.PbImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PbImg.Location = New System.Drawing.Point(3, 36)
@@ -549,7 +559,7 @@ Partial Class Form_ModificaImballo
         'DGWDistinta
         '
         Me.DGWDistinta.AutoGenerateColumns = False
-        Me.DGWDistinta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGWDistinta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGWDistinta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGWDistinta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn, Me.ImballoDataGridViewTextBoxColumn, Me.RigaDataGridViewTextBoxColumn, Me.PartDataGridViewTextBoxColumn, Me.XDataGridViewTextBoxColumn, Me.YDataGridViewTextBoxColumn, Me.ZDataGridViewTextBoxColumn, Me.NDataGridViewTextBoxColumn, Me.TagDataGridViewTextBoxColumn})
         Me.DGWDistinta.DataSource = Me.ImballiDistintaBindingSource
@@ -579,49 +589,42 @@ Partial Class Form_ModificaImballo
         Me.RigaDataGridViewTextBoxColumn.DataPropertyName = "Riga"
         Me.RigaDataGridViewTextBoxColumn.HeaderText = "Riga"
         Me.RigaDataGridViewTextBoxColumn.Name = "RigaDataGridViewTextBoxColumn"
-        Me.RigaDataGridViewTextBoxColumn.Width = 54
         '
         'PartDataGridViewTextBoxColumn
         '
         Me.PartDataGridViewTextBoxColumn.DataPropertyName = "Part"
         Me.PartDataGridViewTextBoxColumn.HeaderText = "Part"
         Me.PartDataGridViewTextBoxColumn.Name = "PartDataGridViewTextBoxColumn"
-        Me.PartDataGridViewTextBoxColumn.Width = 51
         '
         'XDataGridViewTextBoxColumn
         '
         Me.XDataGridViewTextBoxColumn.DataPropertyName = "X"
         Me.XDataGridViewTextBoxColumn.HeaderText = "X"
         Me.XDataGridViewTextBoxColumn.Name = "XDataGridViewTextBoxColumn"
-        Me.XDataGridViewTextBoxColumn.Width = 39
         '
         'YDataGridViewTextBoxColumn
         '
         Me.YDataGridViewTextBoxColumn.DataPropertyName = "Y"
         Me.YDataGridViewTextBoxColumn.HeaderText = "Y"
         Me.YDataGridViewTextBoxColumn.Name = "YDataGridViewTextBoxColumn"
-        Me.YDataGridViewTextBoxColumn.Width = 39
         '
         'ZDataGridViewTextBoxColumn
         '
         Me.ZDataGridViewTextBoxColumn.DataPropertyName = "Z"
         Me.ZDataGridViewTextBoxColumn.HeaderText = "Z"
         Me.ZDataGridViewTextBoxColumn.Name = "ZDataGridViewTextBoxColumn"
-        Me.ZDataGridViewTextBoxColumn.Width = 39
         '
         'NDataGridViewTextBoxColumn
         '
         Me.NDataGridViewTextBoxColumn.DataPropertyName = "N"
         Me.NDataGridViewTextBoxColumn.HeaderText = "N"
         Me.NDataGridViewTextBoxColumn.Name = "NDataGridViewTextBoxColumn"
-        Me.NDataGridViewTextBoxColumn.Width = 40
         '
         'TagDataGridViewTextBoxColumn
         '
         Me.TagDataGridViewTextBoxColumn.DataPropertyName = "Tag"
         Me.TagDataGridViewTextBoxColumn.HeaderText = "Tag"
         Me.TagDataGridViewTextBoxColumn.Name = "TagDataGridViewTextBoxColumn"
-        Me.TagDataGridViewTextBoxColumn.Width = 51
         '
         'ImballiDistintaBindingSource
         '
@@ -770,11 +773,15 @@ Partial Class Form_ModificaImballo
         '
         'DgwIndici
         '
+        Me.DgwIndici.AllowUserToAddRows = False
+        Me.DgwIndici.AllowUserToResizeColumns = False
+        Me.DgwIndici.AllowUserToResizeRows = False
         Me.DgwIndici.AutoGenerateColumns = False
+        Me.DgwIndici.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DgwIndici.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgwIndici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgwIndici.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn1, Me.ImballoDataGridViewTextBoxColumn1, Me.IndiceDataGridViewTextBoxColumn, Me.CodiceDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn})
-        Me.DgwIndici.DataSource = Me.ImballiIndiciBindingSource
+        Me.DgwIndici.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn1, Me.ImballoDataGridViewTextBoxColumn1, Me.IndiceDataGridViewTextBoxColumn, Me.CodiceDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn, Me.RivestTotDataGridViewTextBoxColumn, Me.NoteBICDataGridViewTextBoxColumn})
+        Me.DgwIndici.DataSource = Me.ImballiIndiciBindingSource2
         Me.DgwIndici.Location = New System.Drawing.Point(226, 348)
         Me.DgwIndici.Name = "DgwIndici"
         Me.DgwIndici.RowHeadersWidth = 10
@@ -811,8 +818,25 @@ Partial Class Form_ModificaImballo
         'NoteDataGridViewTextBoxColumn
         '
         Me.NoteDataGridViewTextBoxColumn.DataPropertyName = "Note"
-        Me.NoteDataGridViewTextBoxColumn.HeaderText = "Note"
+        Me.NoteDataGridViewTextBoxColumn.HeaderText = "Note1"
         Me.NoteDataGridViewTextBoxColumn.Name = "NoteDataGridViewTextBoxColumn"
+        '
+        'RivestTotDataGridViewTextBoxColumn
+        '
+        Me.RivestTotDataGridViewTextBoxColumn.DataPropertyName = "Rivest_Tot"
+        Me.RivestTotDataGridViewTextBoxColumn.HeaderText = "Note2"
+        Me.RivestTotDataGridViewTextBoxColumn.Name = "RivestTotDataGridViewTextBoxColumn"
+        '
+        'NoteBICDataGridViewTextBoxColumn
+        '
+        Me.NoteBICDataGridViewTextBoxColumn.DataPropertyName = "Note_BIC"
+        Me.NoteBICDataGridViewTextBoxColumn.HeaderText = "Note Bicciato"
+        Me.NoteBICDataGridViewTextBoxColumn.Name = "NoteBICDataGridViewTextBoxColumn"
+        '
+        'ImballiIndiciBindingSource2
+        '
+        Me.ImballiIndiciBindingSource2.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource2.DataSource = Me.ImballiBindingSource
         '
         'Panel1
         '
@@ -881,15 +905,22 @@ Partial Class Form_ModificaImballo
         Me.Bt_Duplica.TabIndex = 9
         Me.Bt_Duplica.UseVisualStyleBackColor = True
         '
+        'ImballiIndiciBindingSource1
+        '
+        Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
+        '
         'Form_ModificaImballo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FloralWhite
         Me.ClientSize = New System.Drawing.Size(885, 576)
         Me.Controls.Add(Me.PanelButtons)
         Me.Controls.Add(Me.PanelModifica)
         Me.Controls.Add(Me.PanelCodice)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
         Me.Name = "Form_ModificaImballo"
         Me.Text = "Form_ModificaImballo"
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -906,15 +937,16 @@ Partial Class Form_ModificaImballo
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImballiIndiciBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.PanelButtons.ResumeLayout(False)
+        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents CbImballo As ComboBox
     Friend WithEvents ModPackDBDataSet As ModPackDBDataSet
     Friend WithEvents ImballiBindingSource As BindingSource
     Friend WithEvents ImballiTableAdapter As ModPackDBDataSetTableAdapters.ImballiTableAdapter
@@ -972,11 +1004,6 @@ Partial Class Form_ModificaImballo
     Friend WithEvents Bt_Cancel As Button
     Friend WithEvents PanelButtons As Panel
     Friend WithEvents DgwIndici As DataGridView
-    Friend WithEvents IdDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents ImballoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents IndiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CodiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Bt_NoImg As Button
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Label18 As Label
@@ -990,4 +1017,14 @@ Partial Class Form_ModificaImballo
     Friend WithEvents Bt_EliminaCodice As Button
     Friend WithEvents Bt_Duplica As Button
     Friend WithEvents Bt_SpostaIndice As Button
+    Friend WithEvents CbImballo As ComboBox
+    Friend WithEvents IdDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents ImballoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents IndiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CodiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents RivestTotDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NoteBICDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ImballiIndiciBindingSource2 As BindingSource
+    Friend WithEvents ImballiIndiciBindingSource1 As BindingSource
 End Class

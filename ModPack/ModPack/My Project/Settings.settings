@@ -67,17 +67,11 @@
     <Setting Name="NumeroRigheDistinta" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="PrintBiancoNero" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="LimiteTavole8" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="XMLpath" Type="System.String" Scope="User">
       <Value Profile="(Default)">Z:\ModPack\ModPackConfig.xml</Value>
-    </Setting>
-    <Setting Name="NuoviPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MAIL_username" Type="System.String" Scope="User">
       <Value Profile="(Default)">NO_REPLY@bicciatoserafino.com</Value>
@@ -117,6 +111,21 @@
     </Setting>
     <Setting Name="ExcelPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files (x86)\Microsoft Office\Office12\Excel.exe</Value>
+    </Setting>
+    <Setting Name="ListaNuoviExcel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Developer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Scarto" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MisurePari" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ArrL5" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

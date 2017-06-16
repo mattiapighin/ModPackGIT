@@ -22,8 +22,9 @@ Partial Class Main
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
@@ -39,17 +40,18 @@ Partial Class Main
         Me.Bt_Imballi = New System.Windows.Forms.Button()
         Me.Bt_OrdiniAperti = New System.Windows.Forms.Button()
         Me.Bt_CaricaOrdine = New System.Windows.Forms.Button()
+        Me.Notify = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DGW_Memo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(368, 259)
+        Me.Button1.Location = New System.Drawing.Point(741, 252)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(105, 23)
         Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Svuota DB"
+        Me.Button1.Text = "Azzeramento"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'StatusStrip1
@@ -85,22 +87,22 @@ Partial Class Main
         '
         Me.DGW_Memo.AllowUserToAddRows = False
         Me.DGW_Memo.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.SeaShell
-        Me.DGW_Memo.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.SeaShell
+        Me.DGW_Memo.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DGW_Memo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGW_Memo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DGW_Memo.BackgroundColor = System.Drawing.Color.White
         Me.DGW_Memo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_Memo.ColumnHeadersVisible = False
         Me.DGW_Memo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Memo})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGW_Memo.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGW_Memo.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGW_Memo.Location = New System.Drawing.Point(455, 12)
         Me.DGW_Memo.Name = "DGW_Memo"
         Me.DGW_Memo.ReadOnly = True
@@ -217,6 +219,12 @@ Partial Class Main
         Me.Bt_CaricaOrdine.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Bt_CaricaOrdine.UseVisualStyleBackColor = False
         '
+        'Notify
+        '
+        Me.Notify.Icon = CType(resources.GetObject("Notify.Icon"), System.Drawing.Icon)
+        Me.Notify.Text = "ModPack"
+        Me.Notify.Visible = True
+        '
         'Main
         '
         Me.AllowDrop = True
@@ -225,7 +233,6 @@ Partial Class Main
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(874, 319)
         Me.Controls.Add(Me.Bt_Memo)
-        Me.Controls.Add(Me.DGW_Memo)
         Me.Controls.Add(Me.Calendario)
         Me.Controls.Add(Me.Bt_Stampe)
         Me.Controls.Add(Me.Bt_Preferenze)
@@ -234,6 +241,7 @@ Partial Class Main
         Me.Controls.Add(Me.Bt_OrdiniAperti)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Bt_CaricaOrdine)
+        Me.Controls.Add(Me.DGW_Memo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -261,4 +269,5 @@ Partial Class Main
     Friend WithEvents DGW_Memo As DataGridView
     Friend WithEvents Memo As DataGridViewTextBoxColumn
     Friend WithEvents Bt_Memo As Button
+    Friend WithEvents Notify As NotifyIcon
 End Class

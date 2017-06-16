@@ -365,6 +365,7 @@
             e.Graphics.DrawRectangle(Pens.LightGray, Quote_Morali)
             Riempi_QuoteMorali(sender, e, Quote_Morali, PrimoMorale, NMOR, LunBTL)
 
+
             '############## FOTO ##########################
             Dim RectIMG As New Rectangle(e.MarginBounds.Right - 305, e.MarginBounds.Top + 175, 300, 300)
             If Not IMG Is Nothing Then
@@ -403,8 +404,8 @@
             Dim RectNote2 As New Rectangle(RectNote1.Left, RectNote1.Bottom + 5, RectNote1.Width, 120)
             e.Graphics.DrawString("NOTE 1", New Font("Calibri", 8), Brushes.LightGray, RectNote1)
             e.Graphics.DrawString("NOTE 2", New Font("Calibri", 8), Brushes.LightGray, RectNote2)
-            e.Graphics.DrawString(riga.Note, fnt, Brushes.Black, RectNote1, FMT)
-            e.Graphics.DrawString(riga.Rivest_Tot, fnt, Brushes.Black, RectNote2, FMT)
+            e.Graphics.DrawString(riga.Note & vbCrLf & riga.Rivest_Tot, fnt, Brushes.Black, RectNote1, FMT)
+            e.Graphics.DrawString(SQL.Get_NoteBic(riga.Indice), fnt, Brushes.Black, RectNote2, FMT)
             e.Graphics.DrawRectangles(Pens.LightGray, {RectNote1, RectNote2})
 
             '######### BARCODE ############
@@ -427,7 +428,7 @@
 
             '######### RIVESTIMENTO ##########
 
-
+            Dim RectRivestimento As New Rectangle(RectIMG.Left, RectIMG.Bottom + 5, RectIMG.Width, 100)
 
             If riga.Rivestimento = True Then
 
@@ -466,15 +467,17 @@
                 e.Graphics.DrawString(riga.L - 5 & " x " & riga.H - 10, fnt, Brushes.Black, RectFRivValore, FMT)
                 e.Graphics.DrawString(riga.P - 5 & " x " & riga.H - 10, fnt, Brushes.Black, RectTRivValore, FMT)
 
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectBCRivQt, FMT)
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectFRivQt, FMT)
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectTRivQt, FMT)
 
-                If riga.Qt > 1 Then
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
-                End If
+                e.Graphics.DrawString("2", fnt, Brushes.Black, RectBCRivQt, FMT)
+                    e.Graphics.DrawString("2", fnt, Brushes.Black, RectFRivQt, FMT)
+                    e.Graphics.DrawString("2", fnt, Brushes.Black, RectTRivQt, FMT)
+
+                    If riga.Qt > 1 Then
+                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
+                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
+                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
+                    End If
+
 
                 e.Graphics.DrawString(DescrizioneRivestimento, New Font("Calibri", My.Settings.DimensioneFontDistinta, FontStyle.Bold), Brushes.Black, Riga1RIV, FMT)
 
@@ -482,7 +485,15 @@
                 e.Graphics.DrawRectangle(New Pen(Color.LightGray, 3), RectRIV)
             End If
 
+            '######### INFO TIPO GABBIA ##########
 
+            Dim InfoTipo As String = SQL.GetInfoTipo(riga.Tipo)
+
+            If InfoTipo <> "" Then
+                Dim RectInfoTipo As New Rectangle(RectRivestimento.Left, RectRivestimento.Bottom + 15, RectRivestimento.Width, 100)
+                e.Graphics.FillRectangle(Brushes.LightYellow, RectInfoTipo)
+                e.Graphics.DrawString(InfoTipo.ToUpper, New Font("Calibri", fnt.Size, FontStyle.Bold), Brushes.Black, RectInfoTipo, FMT)
+            End If
 
         End Sub
         Private Sub StampaRiga(Sender As Object, e As Printing.PrintPageEventArgs, Riga As Rectangle, X As Decimal, Y As Decimal, Z As Decimal, N As Integer, Tag As String, QT As Integer)
@@ -492,31 +503,36 @@
             Dim FNT As New Font("Calibri", My.Settings.DimensioneFontDistinta)
             Dim FNT1 As New Font("Calibri", My.Settings.DimensioneFontDistinta - 2)
             Dim FNT_Tag As New Font("Calibri", 8, FontStyle.Italic)
+            Dim FNT_TagBold As New Font("Calibri", 10, FontStyle.Underline Xor FontStyle.Bold)
 
             Dim Unit As Double = Riga.Width / 21
 
-            Dim R_CM As New Rectangle(Riga.Left, Riga.Top, Unit * 3, Riga.Height)
-            Dim R_mX As New Rectangle(R_CM.Right, Riga.Top, Unit * 2, Riga.Height)
+            Dim R_CM As New Rectangle(Riga.Left, Riga.Top, Unit * 2, Riga.Height)
+            Dim R_mX As New Rectangle(R_CM.Right, Riga.Top, Unit * 3, Riga.Height)
             Dim R_x1 As New Rectangle(R_mX.Right, Riga.Top, Unit, Riga.Height)
-            Dim R_mY As New Rectangle(R_x1.Right, Riga.Top, Unit * 2, Riga.Height)
+            Dim R_mY As New Rectangle(R_x1.Right, Riga.Top, Unit * 3, Riga.Height)
             Dim R_x2 As New Rectangle(R_mY.Right, Riga.Top, Unit, Riga.Height)
             Dim R_mZ As New Rectangle(R_x2.Right, Riga.Top, Unit * 3, Riga.Height)
             Dim R_Ug As New Rectangle(R_mZ.Right, Riga.Top, Unit, Riga.Height)
             Dim R_N As New Rectangle(R_Ug.Right, Riga.Top, Unit * 3, Riga.Height)
-            Dim R_Vuota As New Rectangle(R_N.Right, Riga.Top, Unit, Riga.Height)
-            Dim R_Ntot As New Rectangle(R_Vuota.Right, Riga.Top, Unit * 2, Riga.Height)
+            Dim R_Ntot As New Rectangle(R_N.Right, Riga.Top, Unit * 4, Riga.Height)
             Dim R_Tag As New Rectangle(R_Ntot.Right, Riga.Top, Unit * 2, Riga.Height)
 
-            e.Graphics.DrawRectangle(New Pen(Color.LightGray, 0.5), R_Ntot)
+            'e.Graphics.DrawRectangle(New Pen(Color.LightGray, 0.5), R_Ntot)
 
-            e.Graphics.DrawString("Cm", FNT, Brushes.Black, R_CM, Format)
+            e.Graphics.DrawString("Cm", FNT1, Brushes.Black, R_CM, Format)
             e.Graphics.DrawString("x", FNT, Brushes.Black, R_x1, Format)
             e.Graphics.DrawString("x", FNT, Brushes.Black, R_x2, Format)
             e.Graphics.DrawString("=", FNT, Brushes.Black, R_Ug, Format)
 
-            e.Graphics.DrawString(X, FNT, Brushes.Black, R_mX, Format)
-            e.Graphics.DrawString(Y, FNT, Brushes.Black, R_mY, Format)
-            e.Graphics.DrawString(Z, FNT, Brushes.Black, R_mZ, Format)
+            Dim R_mX_L As New Rectangle(R_mX.Left - Unit, R_mX.Top, R_mX.Width + (Unit * 2), R_mX.Height)
+            Dim R_mY_L As New Rectangle(R_mY.Left - Unit, R_mY.Top, R_mY.Width + (Unit * 2), R_mY.Height)
+            Dim R_mZ_L As New Rectangle(R_mZ.Left - Unit, R_mZ.Top, R_mZ.Width + (Unit * 2), R_mZ.Height)
+
+            'Rettangoli più larghi cosi non si tronca
+            e.Graphics.DrawString(X, FNT, Brushes.Black, R_mX_L, Format)
+            e.Graphics.DrawString(Y, FNT, Brushes.Black, R_mY_L, Format)
+            e.Graphics.DrawString(Z, FNT, Brushes.Black, R_mZ_L, Format)
 
 
             If Tag = "BTL" And DT = True Then
@@ -526,6 +542,8 @@
             End If
 
             If Not QT = 1 Then e.Graphics.DrawString("[" & N * QT & "]", FNT1, Brushes.Gray, R_Ntot, Format)
+
+            If Tag = "FD" Or Tag = "TD" Then FNT_Tag = FNT_TagBold
             e.Graphics.DrawString(Tag, FNT_Tag, Brushes.Gray, R_Tag, Format)
 
         End Sub

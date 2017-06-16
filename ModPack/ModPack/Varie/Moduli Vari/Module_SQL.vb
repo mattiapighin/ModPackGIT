@@ -130,5 +130,135 @@ Namespace SQL
             End Using
         End Sub
 
+        Public Function GetPrezzoMateriale(ByVal Materiale As String) As Decimal
+            Dim Prezzo As Decimal
+
+            Using Table As New ModPackDBDataSetTableAdapters.MaterialiTableAdapter
+                Using DS As New ModPackDBDataSet.MaterialiDataTable
+
+                    Table.Fill(DS)
+
+                    Dim Result() As DataRow = DS.Select("Materiale = '" & Materiale & "'")
+
+                    Prezzo = Result(0)(4)
+
+                End Using
+            End Using
+
+
+            Return Prezzo
+        End Function
+
+        Public Function GetInfoTipo(ByVal Tipo As String) As String
+            Dim Info As String
+
+            Using Table As New ModPackDBDataSetTableAdapters.TipiTableAdapter
+                Using DS As New ModPackDBDataSet.TipiDataTable
+
+                    Table.Fill(DS)
+
+                    Dim Result() As DataRow = DS.Select("Tipo = '" & Tipo & "'")
+
+                    If Not IsDBNull(Result(0)(9)) Then
+                        Info = Result(0)(9)
+                    Else
+                        Info = ""
+                    End If
+
+
+                End Using
+            End Using
+
+
+            Return Info
+        End Function
+
+        Public Function GetImballInputFromImballoName(ByVal ImballoName As String) As RigaOrdineINPUT
+            Dim Riga As New RigaOrdineINPUT
+
+            Using Table As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+                Using DS As New ModPackDBDataSet.ImballiDataTable
+                    Table.Fill(DS)
+
+                    Dim Valori() As DataRow = DS.Select("Imballo = '" & ImballoName & "'")
+
+                    Riga.L = Valori(0)(2)
+                    Riga.P = Valori(0)(3)
+                    Riga.H = Valori(0)(4)
+                    Riga.Tipo = Valori(0)(5)
+                    Riga.Zoccoli = Valori(0)(6)
+                    Riga.Rivestimento = Valori(0)(7)
+                    Riga.TipoRivestimento = Valori(0)(8)
+                    Riga.HT = Valori(0)(9)
+                    Riga.DT = Valori(0)(10)
+                    Riga.BM = Valori(0)(11)
+                    Riga.Diagonali = Valori(0)(12)
+
+
+
+                End Using
+            End Using
+
+            Return Riga
+        End Function
+
+        Public Sub SendIndex(ByVal Imballo As String, ByVal Indice As String, Optional Codice As String = "", Optional Note As String = "", Optional Rivest_Tot As String = "", Optional Note_BiC As String = "")
+            Using DS As New ModPackDBDataSet
+
+                Using IndexTable As New ModPackDBDataSetTableAdapters.IndiciTableAdapter
+                    Using ImballiTable As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+
+                        IndexTable.Fill(DS.Indici)
+                        ImballiTable.Fill(DS.Imballi)
+
+                        Dim RowImballo() As DataRow = DS.Imballi.Select("Imballo = '" & Imballo & "'")
+
+                        'Prima di fare qualsiasi cosa controlla che esista l'imballo a cui si vuole inviare l'indice
+                        If RowImballo.Length > 0 Then
+
+                            Dim RowIndice() As DataRow = DS.Indici.Select("Indice = '" & Indice & "'")
+                            If RowIndice.Length > 0 Then
+                                For K = 0 To RowIndice.Length - 1
+                                    'Se l'indice esisteva già nella tabella lo elimina prima di assegnarlo ad nuovo imballo
+                                    IndexTable.Delete(RowIndice(K)(0), RowIndice(K)(1), RowIndice(K)(2), RowIndice(K)(3))
+                                    LOG.Write("Eliminato indice (" & RowIndice(K)(2) & ") Da (" & RowIndice(K)(1) & ")")
+                                Next
+                            End If
+
+                            'Invia l'indice al nuovo imballo
+                            IndexTable.Insert(Imballo.ToUpper, Indice, Codice, Note, Rivest_Tot, Note_BiC)
+
+                            IndexTable.Update(DS.Indici)
+                            LOG.Write("Inviato indice (" & Indice & ") -> (" & Imballo & ")")
+
+                        Else
+                            MsgBox("Non esiste nessun imballo '" & Imballo & "'")
+                        End If
+
+                    End Using
+                End Using
+            End Using
+        End Sub
+
+        Public Function Get_NoteBic(ByVal Indice As Integer)
+            Dim Nota As String = ""
+
+            Using DS As New ModPackDBDataSet.IndiciDataTable
+                Using Table As New ModPackDBDataSetTableAdapters.IndiciTableAdapter
+                    Table.Fill(DS)
+
+                    Dim Row() As DataRow = DS.Select("Indice = '" & Indice & "'")
+
+                    If Row.Length > 0 Then
+                        Nota = Row(0)(6)
+                    End If
+
+
+                End Using
+            End Using
+
+            Return Nota
+        End Function
+
     End Module
 End Namespace

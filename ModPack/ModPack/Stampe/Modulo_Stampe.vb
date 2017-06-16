@@ -251,7 +251,7 @@
 
             '--- FINE INTESTAZIONE
 
-            Dim TotaleEuro As Decimal = 0
+            Static TotaleEuro As Decimal = 0
             Dim TotaleRighe As Integer = DS.Tables(0).Rows.Count
             Static RigheStampate As Integer = 0
             Static PagineStampate As Integer = 0
@@ -293,7 +293,10 @@
 
 
 
-                    Dim Descrizione As String = " Cm " & .Item(4) & " x " & .Item(5) & " x " & .Item(6) & " " & .Item(3)
+                    Dim Descrizione As String = " Cm " & .Item(4) & " x " & .Item(5)
+                    If Not .Item(6) = 0 Then Descrizione += " x " & .Item(6)
+                    Descrizione += " " & .Item(3)
+
 
                     Dim prezzo As Decimal = .Item(10)
                     Dim PrezzoTot As Decimal = prezzo * .Item(2)
@@ -417,7 +420,7 @@
 
             LOG.Write("Stampa etichetta " & Imballo & " - " & Quantita)
         End Sub
-        Public Sub ListaMorali(sender As Object, e As Printing.PrintPageEventArgs, Ordine As String, DS As DataSet)
+        Public Sub ListaMorali(sender As Object, e As Printing.PrintPageEventArgs, Ordine As String, DS As DataGridView)
             Dim FMT As StringFormat = Stampe.FMT
 
             Dim FontTitoloBold As New Font("Calibri", 16, FontStyle.Bold)
@@ -430,11 +433,9 @@
 
             e.Graphics.DrawRectangles(New Pen(Color.LightGray, 2), {RectLogo, RectTitolo, RectData})
 
-            Dim Titolo As String = DS.Tables(0).TableName
-
 
             Stampe.ImmagineInRettangolo(My.Resources.Logo, RectLogo, e)
-            e.Graphics.DrawString(Titolo, FontTitolo, Brushes.Gray, RectTitolo, FMT)
+            'e.Graphics.DrawString(Titolo, FontTitolo, Brushes.Gray, RectTitolo, FMT)
             e.Graphics.DrawString(Date.Today.Date, FontTitolo, Brushes.Gray, RectData, FMT)
 
             e.Graphics.FillRectangle(Brushes.LightGray, e.MarginBounds.Left, e.MarginBounds.Top + 55, e.MarginBounds.Width, 5)
@@ -461,7 +462,7 @@
             '--- FINE INTESTAZIONE
 
 
-            Dim TotaleRighe As Integer = DS.Tables(0).Rows.Count
+            Dim TotaleRighe As Integer = DS.Rows.Count
             Static RigheStampate As Integer = 0
             Static PagineStampate As Integer = 0
 
@@ -491,12 +492,12 @@
                 If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightGray, PosX, PosY, e.MarginBounds.Width, Hriga)
                 e.Graphics.DrawRectangle(Pens.LightGray, RectRiga)
 
-                With DS.Tables(0).Rows(RigheStampate)
+                With DS.Rows(RigheStampate)
 
-                    Dim X As Decimal = .Item(0)
-                    Dim Y As Decimal = .Item(1)
-                    Dim Z As Decimal = .Item(2)
-                    Dim N As Decimal = .Item(3)
+                    Dim X As Decimal = .Cells(0).Value
+                    Dim Y As Decimal = .Cells(1).Value
+                    Dim Z As Decimal = .Cells(2).Value
+                    Dim N As Decimal = .Cells(3).Value
 
 
                     e.Graphics.DrawString("Cm " & X.ToString("0.##") & " x " & Y.ToString("0.##") & " x " & Z.ToString("0.##") & " = " & N.ToString("0.##"), FontRighe, Brushes.Black, RectRiga, FMT)

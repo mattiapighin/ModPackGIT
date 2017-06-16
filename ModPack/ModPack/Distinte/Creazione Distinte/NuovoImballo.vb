@@ -1,5 +1,12 @@
 ﻿Public Class NuovoImballo
 
+    '########## CREAZIONE DI UN NUOVO TIPO DI IMBALLO: ISTRUZIONI ##########
+    '1) Creare la sua funzione per la distinta se necessario su (Distinte\Creazione Distinte\Nuovoimballo)
+    '2) Aggiungere Tipo al Select Case (NUOVOIMBALLO/CREA DA ORDINE)
+    '3) Aggiungere il tipo al select case (MODIFICA IMBALLO/ BT-SALVA CLICK)
+    '4) Creare la sua funzione per il prezzo se necessario su (Distinte\Module_Prezzi)
+    '#######################################################################
+
     '1. CREARE DISTINTA
     '2. CREARE RIGA IMBALLO
     '3. CREARE RIGA INDICE
@@ -83,7 +90,7 @@
     Public Sub CreaDaOrdine(ByVal RigaOrdine As RigaOrdineINPUT, Optional _InsertDistinta As Boolean = True, Optional _InsertImballo As Boolean = True, Optional _InsertIndice As Boolean = True)
         CaricaVariabiliDaOrdine()
 
-        Debug.WriteLine("## Creazione imballo " & R_NomeImballo & "Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##")
+        Debug.WriteLine("(## Creazione nuovo imballo " & R_NomeImballo & " Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##)")
 
         Select Case R_Type
             Case "GDA"
@@ -97,6 +104,8 @@
             Case "GST"
                 Distinta = Crea_GST(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
             Case "C"
+                Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+            Case "CL"
                 Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
             Case Else
                 MsgBox("Tipo non riconosciuto (" & R_Type & ")")
@@ -126,7 +135,7 @@
 
                 Dim I As Integer = 1
                 For Each R As Riga_Distinta In Distinta
-                    DA.Insert(R_NomeImballo, I, R.Part, R.X, R.Y, R.Z, R.N, R.Tag)
+                    DA.Insert(R_NomeImballo, I, R.Part.ToUpper, R.X, R.Y, R.Z, R.N, R.Tag.ToUpper)
                     I += 1
                 Next
 
@@ -168,7 +177,7 @@
         Try
 
             Using DT As New ModPackDBDataSetTableAdapters.IndiciTableAdapter
-                DT.Insert(R_NomeImballo, R_Indice, R_Codice, R_Note)
+                DT.Insert(R_NomeImballo, R_Indice, R_Codice, R_Note, R_Rivest_Tot, "")
             End Using
 
         Catch ex As Exception
@@ -211,28 +220,6 @@
 
 
         Return M2
-    End Function
-    Private Function CalcoloPrezzo(M3, M2, PrezzoMateriale, PrezzoRivestimento, Rivestimento, HT) As Single
-        Dim Prezzo As Single = 0
-
-        Try
-
-            Dim Pmat As Single = 0
-            Dim Priv As Single = 0
-
-            Pmat = PrezzoMateriale * M3
-            If Rivestimento = True Then Priv = PrezzoRivestimento * M2
-
-            Prezzo = Pmat + Priv
-
-            Prezzo = Math.Round(Prezzo, 1)
-
-        Catch ex As Exception
-            MsgBox("Errore nel calcolo del prezzo - " & R_NomeImballo & vbCrLf & ex.Message)
-        End Try
-
-
-        Return Prezzo
     End Function
 
 
@@ -301,8 +288,6 @@
 
         D.AddRange({CTL, CTT})
 
-        'Calcoli per Diagonali
-
         Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
         Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
 
@@ -325,8 +310,6 @@
 
         '############ FIANCATE ############
 
-        '-- TODO -- Diagonali e gradi diagonali
-
         Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
         Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF + 4), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
 
@@ -337,11 +320,7 @@
             D.Add(FD)
         End If
 
-
-
         '############ TESTE ############
-
-        '-- TODO -- Diagonali e gradi diagonali
 
         Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N, .Tag = "TTL", .Part = "T"}
         Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT + 2, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
@@ -353,26 +332,14 @@
             D.Add(TD)
         End If
 
-
-
         '############ INFO ############
-
-        Dim Prezzo_Materiale As Single = 0
-        Dim Prezzo_Rivestimento As Single
-        If HT = False Then
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3 FROM Tipi WHERE Tipo = '" & Type & "'")
-        Else
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        End If
-
-        Prezzo_Rivestimento = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
 
         R_GradiF = GRADIdiagF
         R_GradiT = GRADIdiagT
         R_PrimoMOR = Primomorale
         R_M2 = CalcoloM2(L, P, H)
         R_M3 = CalcoloM3(D)
-        R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
+        R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
         R_SottoMF = MontanteSottoF
         R_SottoMT = MontanteSottoT
         R_SopraMF = 4
@@ -444,22 +411,13 @@
 
         '############ INFO ############
 
-        Dim Prezzo_Materiale As Single = 0
-        Dim Prezzo_Rivestimento As Single
-        If HT = False Then
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3 FROM Tipi WHERE Tipo = '" & Type & "'")
-        Else
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        End If
-
-        Prezzo_Rivestimento = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
 
         R_GradiF = 0
         R_GradiT = 0
         R_PrimoMOR = Primomorale
         R_M2 = CalcoloM2(L, P, H)
         R_M3 = CalcoloM3(D)
-        R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
+        R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
         R_SottoMF = 0
         R_SottoMT = 0
         R_SopraMF = 0
@@ -467,6 +425,69 @@
         Return D
 
     End Function
+    Private Function Crea_C(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
+        Dim D As New List(Of Riga_Distinta)
+
+        Dim M3MOR As Single
+
+
+        D.Clear()
+
+        Dim TIPO As Tipo = Imballo.GetTipo(Type)
+
+        '############ BANCALE ############
+
+        Dim Primomorale As Integer = 6
+        Dim NMorali As Integer = Imballo.NumeroMorali(L, Primomorale, TIPO.InterasseMax)
+
+        Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 2), .N = NMorali, .Tag = "Mor", .Part = "B"}
+        Dim BAS As New Riga_Distinta With {.X = L, .Y = 1.2, .Z = P, .N = 1, .Tag = "BAS", .Part = "B"}
+        D.AddRange({Mor, BAS})
+
+        M3MOR = (10 * 5 * (P + 2) * NMorali) * (10 ^ -6)
+
+
+        '############ COPERCHIO ############
+
+        Dim COP As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = P + 2, .N = 1, .Tag = "COP", .Part = "C"}
+        D.Add(COP)
+
+
+
+        '############ FIANCATE ############
+
+
+        Dim FIA As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = H + 1.5, .N = 2, .Tag = "FIA", .Part = "F"}
+        D.Add(FIA)
+
+
+
+        '############ TESTE ############
+
+        Dim TES As New Riga_Distinta With {.X = P, .Y = 1.2, .Z = H + 1.5, .N = 2, .Tag = "TES", .Part = "T"}
+        D.Add(TES)
+
+
+
+        '############ INFO ############
+
+        R_GradiF = 0
+        R_GradiT = 0
+        R_PrimoMOR = Primomorale
+
+        R_M2 = CalcoloM2(L, P, H)
+        R_M3 = M3MOR
+
+        R_SottoMF = 0
+        R_SottoMT = 0
+        R_SopraMF = 0
+        R_SopraMT = 0
+
+
+        R_Prezzo = Prezzi.C(M3MOR, L, P, H, "C")
+        Return D
+    End Function
+
     Private Function Crea_GDA(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
         Dim D As New List(Of Riga_Distinta)
 
@@ -571,22 +592,12 @@
 
         '############ INFO ############
 
-        Dim Prezzo_Materiale As Single = 0
-        Dim Prezzo_Rivestimento As Single
-        If HT = False Then
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3 FROM Tipi WHERE Tipo = '" & Type & "'")
-        Else
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        End If
-
-        Prezzo_Rivestimento = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
-
         R_GradiF = GRADIdiagF
-            R_GradiT = GRADIdiagT
-            R_PrimoMOR = Primomorale
-            R_M2 = CalcoloM2(L, P, H)
-            R_M3 = CalcoloM3(D)
-            R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
+        R_GradiT = GRADIdiagT
+        R_PrimoMOR = Primomorale
+        R_M2 = CalcoloM2(L, P, H)
+        R_M3 = CalcoloM3(D)
+        R_Prezzo = Prezzi.Base("GDA", R_M3, R_M2, R_TipoRivestimento, R_HT)
         R_SottoMF = MontanteSottoF
         R_SottoMT = MontanteSottoT
         R_SopraMF = 4
@@ -680,15 +691,9 @@
 
         '############ INFO ############
 
-        Dim Prezzo_Materiale As Single = 0
-        Dim Prezzo_Rivestimento As Single
-        If HT = False Then
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3 FROM Tipi WHERE Tipo = '" & Type & "'")
-        Else
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        End If
-
-        Prezzo_Rivestimento = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
+        Dim Prezzo_Materiale As Single = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
+        Dim Prezzo_Rivestimento As Single = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
+        Dim Prezzo_Faesite As Single = SQL.GetSQLValue("SELECT Prezzo FROM Materiali WHERE Materiale = 'FAES'")
 
         R_Zoccoli = "EUR"
         R_GradiF = GRADIdiagF
@@ -696,89 +701,22 @@
         R_PrimoMOR = Primomorale
         R_M2 = CalcoloM2(L, P, H)
         R_M3 = CalcoloM3(D)
-        R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
+        ' R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
         R_SottoMF = MontanteSottoF
         R_SottoMT = MontanteSottoT
         R_SopraMF = 0
         R_SopraMT = 0
-        Return D
-
-    End Function
-    Private Function Crea_C(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
-        Dim D As New List(Of Riga_Distinta)
-
-        Dim M3MOR As Single
-        Dim M3OSB As Single
 
 
-        D.Clear()
-
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
-
-        '############ BANCALE ############
-
-        Dim Primomorale As Integer = 6
-        Dim NMorali As Integer = Imballo.NumeroMorali(L, Primomorale, TIPO.InterasseMax)
-
-        Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 2), .N = NMorali, .Tag = "Mor", .Part = "B"}
-        Dim BAS As New Riga_Distinta With {.X = L, .Y = 1.2, .Z = P, .N = 1, .Tag = "BAS", .Part = "B"}
-        D.AddRange({Mor, BAS})
-
-        M3MOR = (10 * 5 * (P + 2) * NMorali) * (10 ^ -6)
-        M3OSB = (L * 1.2 * P * 1)
-
-        '############ COPERCHIO ############
-
-        Dim COP As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = P + 2, .N = 1, .Tag = "COP", .Part = "C"}
-        D.Add(COP)
-
-        M3OSB += ((L + 2.5) * 1.2 * (P + 2) * 1)
-
-        '############ FIANCATE ############
 
 
-        Dim FIA As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = H + 1.5, .N = 2, .Tag = "FIA", .Part = "F"}
-        D.Add(FIA)
+        R_Prezzo = Prezzi.GST(R_M3, R_Lunghezza, R_Profondità, R_Altezza, R_TipoRivestimento, R_HT)
 
-        M3OSB += ((L + 2.5) * 0.9 * (H + 1.5) * 2)
-
-        '############ TESTE ############
-
-        Dim TES As New Riga_Distinta With {.X = P, .Y = 1.2, .Z = H + 1.5, .N = 2, .Tag = "TES", .Part = "T"}
-        D.Add(TES)
-
-        M3OSB += (P * 1.2 * (H + 1.5) * 2)
-        M3OSB = M3OSB * (10 ^ -6)
-
-        '############ INFO ############
-
-        'sE
-
-        Dim Prezzo_Materiale As Single = 0
-        Dim Prezzo_Rivestimento As Single
-
-        If HT = False Then
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3 FROM Tipi WHERE Tipo = '" & Type & "'")
-        Else
-            Prezzo_Materiale = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        End If
-
-        Prezzo_Rivestimento = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
-
-        R_GradiF = 0
-        R_GradiT = 0
-        R_PrimoMOR = Primomorale
-
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = M3MOR
-        R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
-
-        R_SottoMF = 0
-        R_SottoMT = 0
-        R_SopraMF = 0
-        R_SopraMT = 0
+        'MsgBox("Prezzo totale gabbia:" & vbCrLf & "Legno: " & Prezzo_Materiale & " x " & R_M3 & vbCrLf & "Cartonplast: " & Prezzo_Rivestimento & " x " & M2_CartonPlast & vbCrLf & "Faesite su base: " & Prezzo_Faesite & " x " & M2_Faesite & vbCrLf & "TOTALE: €" & R_Prezzo)
 
         Return D
     End Function
+
+
 
 End Class

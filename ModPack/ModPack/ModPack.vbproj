@@ -49,6 +49,9 @@
   <PropertyGroup>
     <ApplicationIcon>icoBig.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\Imballi-Modine-Resources\Info\itextsharp\itextsharp-dll-core\itextsharp.dll</HintPath>
@@ -104,6 +107,12 @@
     <Compile Include="Buttons\Memo\Form_Memo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Buttons\Ordini Aperti\Form_StampaListe.Designer.vb">
+      <DependentUpon>Form_StampaListe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Ordini Aperti\Form_StampaListe.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.Designer.vb">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </Compile>
@@ -128,6 +137,7 @@
     <Compile Include="Dialogs\ScegliOrdine.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Distinte\Module_Prezzi.vb" />
     <Compile Include="ModPackDBDataSet.vb">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
@@ -196,6 +206,9 @@
     <EmbeddedResource Include="Buttons\Memo\Form_Memo.resx">
       <DependentUpon>Form_Memo.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Ordini Aperti\Form_StampaListe.resx">
+      <DependentUpon>Form_StampaListe.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +249,7 @@
     <None Include="ModPackDBDataSet.xss">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

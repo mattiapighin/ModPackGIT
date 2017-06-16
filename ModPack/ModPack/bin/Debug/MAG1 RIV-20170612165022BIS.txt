@@ -1,0 +1,4 @@
+99981---------|2|CARTONE|220 x 95 = 4|220 x 83 = 4|95 x 83 = 4||
+95043---------|2|CARTONPLAST|185 x 95 = 2 + 2 FAESITE|185 x 42 = 4|95 x 42 = 4|f2     x3   rivesti con cartonplast|TAVOLE A PIENO           ENO CARTONPLASTSULLA BASEBICC: FAESITE100X85     2ASSEMBLA CON            VITI
+B01622---------|1|CARTONE|430 x 62 = 2|430 x 25 = 2|62 x 25 = 2|f6    x10|
+93916---------|2|CARTONPLAST|185 x 190 = 2 + 2 FAESITE|185 x 65 = 4|190 x 65 = 4|att. reggettare le prime 2 batt. sotto|1    RIVESTIMENTOCON CARTONPLAST

@@ -174,16 +174,22 @@
   </data>
   <data name="Bt_SpostaIndice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJ
-        TUUH4QYCDRkh6zR1uQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVEhL
-        5ZYxDgFBFIZXFHSUDuAewi1Eq3IgLkCpUijEEUhcQEtHIxSC/xcrb543O7MbjfiTL9k3897/b2aSzSbQ
-        FBwzOIAJ0FoAqz+Fc0OQ3CM4A6kasPo0N2BuaC5Aqg6sPgtzUTMHUiWwAlavximuoAmqggrwifszID00
-        TqGPIqQOOAHpoXGKPAEx5sQpYgMscx7vUq0Rp4gJ8Jn3AEUPuecUoYCQObUG6d6GC7I5KyDGnCqDxgs+
-        OwO+gFhzU3LICmiDwuaUHLQCeI6yJ5c5JYetgD6INeeZyxcag3dBfHcwAFvQfVZ+8WKl3x44C76AWP1B
-        AC9Rf67z0ALS7yPg2/x+wA4Ef1uKgt+WZPQAdidTFhFCBv4AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAG
+        VAAABlQBxPCNnQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHbSURBVEhLrZW9
+        SsRAEMcP/ECxsLRR/Er2/EAbGyu1Fh9AsfUJfAI7EfEQUblsRMFKgtip2ZxwhaCNjyAIFiqInjnRQ1Dj
+        zF0Mm81oLscVP5LM/Pc/m9nNJuV5XmI6LzKtVJyCDMah5czxtM3XqZwKGYwDCzDBPWCLysuQwTj8Ai9A
+        kdnGJqX5hQzGUW6R4M/+WxSBDUqHkME4lAIes3kx7dBrEgnEMXZlNOmCz4QK+EXgmlH1oQeVYctqZo45
+        DWaHTBi3YOCWsfkjc/h7YC4Xsfma7BEyDIKW1QAGi2BegIG4mGGj/3HhDVcDL9kYGTze6QbRNYCvTBlU
+        g6s7fCVSoF/sdjFh3oPgSxlQAwa001wOzPtyRjvs6TqZI0oBeDiAxEdUWBPhFukiOwGL+koIayG6yDD7
+        U0IogzvpCVqIex+3Kk6mBIR11DYdFfttkHyIik1s1w1wyRxjQTvJDuE64SDN4ZNVf2ia4POVBZHElRke
+        9Z6ZHeoAJNFRAb0/D4SCfwMF3THnKPEviQ47SN6hULf5J97jh0YJZRId19JM3IGcMUKJVPwCOCb+hwOi
+        EmyrN7jOUgKKcouq/WWieVqY21TyLxL99GHmfCq/1Egl60GqJ7/XQiXqg5f6AeFdCcvFTWxJAAAAAElF
+        TkSuQmCC
 </value>
   </data>
+  <metadata name="ImballiIndiciBindingSource2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>220, 56</value>
+  </metadata>
   <data name="Bt_Cancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -249,6 +255,9 @@
         vY2L7J0+MILdbZfupdySmulw3VQ9DScSnzQ8Q85hA+r+A9Jt+kepm7t+AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ImballiIndiciBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>
   </metadata>

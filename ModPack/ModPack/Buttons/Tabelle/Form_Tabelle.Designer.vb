@@ -158,7 +158,7 @@ Partial Class Form_Tabelle
         Me.Tree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Tree.Location = New System.Drawing.Point(0, 0)
         Me.Tree.Name = "Tree"
-        Me.Tree.Size = New System.Drawing.Size(222, 616)
+        Me.Tree.Size = New System.Drawing.Size(96, 100)
         Me.Tree.TabIndex = 8
         '
         'SplitContainer1
