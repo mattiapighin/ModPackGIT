@@ -179,6 +179,7 @@ Public Class Form_OrdiniAperti
                 Row.Cells("Evaso").Value = False
             Next
         End If
+        ColoraEvasi()
     End Sub
     Private Sub Bt_SeeAll_Click(sender As Object, e As EventArgs) Handles Bt_SeeAll.Click
         CaricaTuttiNonEvasi()
@@ -338,16 +339,7 @@ Public Class Form_OrdiniAperti
         End If
 
     End Sub
-    Private Sub Bt_ListaMorali_Click(sender As Object, e As EventArgs) Handles Bt_ListaMorali.Click
-        If Not DGW_OrdiniAperti.SelectedRows.Count = 0 Then
 
-            Liste.Ordine = DGW_OrdiniAperti.CurrentCell.Value
-            Form_StampaListe.ShowDialog()
-
-        Else
-            MsgBox("Selezionare prima un'ordine nella lista di sinistra", vbInformation, "Attenzione")
-        End If
-    End Sub
     Private Sub Bt_Disegni_Click(sender As Object, e As EventArgs) Handles Bt_Disegni.Click
         RowOrdine.Clear()
         Ordine = DGW_OrdiniAperti.CurrentRow.Cells(0).Value
@@ -364,12 +356,11 @@ Public Class Form_OrdiniAperti
                         If Row.Ordine = Ordine Then
                             Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
                                 .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
-                                .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                                .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = Row.Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
                             RowOrdine.Add(Riga)
+                            Row.Stampato = True
                         End If
-                        Row.Stampato = True
                     Next
-
                 Else
 
                     'Se è premuto CTRL stampa solo le righe selezionate
@@ -378,7 +369,7 @@ Public Class Form_OrdiniAperti
                             If Row.Ordine = Ordine And Row.Id = RigaSelezionata.Cells(0).Value Then
                                 Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
                                     .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
-                                    .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = .Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                                    .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = Row.Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
                                 RowOrdine.Add(Riga)
                                 Row.Stampato = True
                             End If
@@ -390,7 +381,7 @@ Public Class Form_OrdiniAperti
                 If Not RowOrdine.Count = 0 Then
                     OrdineTable.Update(Ds)
                     Print_Distinte.DefaultPageSettings = My.Settings.FormatoStampa
-                    Dim L As New PrintPreviewDialog With {.Document = Print_Distinte}
+                    Dim L As New PrintPreviewDialog With {.Document = Print_Distinte, .TopMost = False, .WindowState = FormWindowState.Normal}
                     L.Show()
                 End If
 

@@ -172,7 +172,7 @@ Partial Class Form_ModificaImballo
         '
         'CbImballo
         '
-        Me.CbImballo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.CbImballo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.CbImballo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CbImballo.DataSource = Me.ImballiBindingSource
         Me.CbImballo.DisplayMember = "Imballo"

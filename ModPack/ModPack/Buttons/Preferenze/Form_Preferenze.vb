@@ -65,12 +65,14 @@
     End Sub
 
     Private Sub CaricaRiferimenti()
+        Txt_LimiteStorico.Text = My.Settings.OrdiniNRecords
         RBexcel_nuovi.Checked = My.Settings.ListaNuoviExcel
         RBtext_nuovi.Checked = Not My.Settings.ListaNuoviExcel
         TxtScegliExcel.Text = My.Settings.ExcelPath
         CkDeveloper.Checked = My.Settings.Developer
     End Sub
     Private Sub SalvaRiferimenti()
+        My.Settings.OrdiniNRecords = Txt_LimiteStorico.Text
         My.Settings.ListaNuoviExcel = RBexcel_nuovi.Checked
         My.Settings.ListaNuoviExcel = Not RBtext_nuovi.Checked
         My.Settings.ExcelPath = TxtScegliExcel.Text

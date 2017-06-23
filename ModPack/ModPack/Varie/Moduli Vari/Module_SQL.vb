@@ -2,6 +2,9 @@
 
 Namespace SQL
     Module Module_SQL
+
+
+
         Public Sub InsertRigaOrdini(ByVal ROW As RigaOrdine)
 
             Using TA As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
@@ -259,6 +262,173 @@ Namespace SQL
 
             Return Nota
         End Function
+
+        Public Sub ListaMorali(Ordini As List(Of String), Datagridview As DataGridView)
+            Datagridview.DataSource = Nothing
+
+            'Inizia la stringa degli ordini
+            Dim StringaOrdini As String = "("
+            For K = 0 To Ordini.Count - 1
+
+                StringaOrdini += "Ordini.Ordine = '" & Ordini(K) & "'"
+
+                If Not K = Ordini.Count - 1 Then
+                    'Se non è l'ulimo della lista mette OR
+                    StringaOrdini += " OR "
+                Else
+                    'Se è l'ultimo chiude la stringa
+                    StringaOrdini += ")"
+                End If
+
+            Next
+
+            Dim Query As String = "SELECT Distinta.X, Distinta.Y, Distinta.Z, SUM(Distinta.N * Ordini.QT) AS N, Ordini.HT FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo WHERE " & StringaOrdini & " AND Distinta.Tag = 'Mor' GROUP BY X, Y, Z, HT ORDER BY HT ASC, Z DESC"
+            SQL.FillDGW_SQL(Query, Datagridview)
+        End Sub
+        Public Sub ListaDiagonaliF(Ordini As List(Of String), Datagridview As DataGridView)
+            Datagridview.DataSource = Nothing
+
+            'Inizia la stringa degli ordini
+            Dim StringaOrdini As String = "("
+            For K = 0 To Ordini.Count - 1
+
+                StringaOrdini += "Ordini.Ordine = '" & Ordini(K) & "'"
+
+                If Not K = Ordini.Count - 1 Then
+                    'Se non è l'ulimo della lista mette OR
+                    StringaOrdini += " OR "
+                Else
+                    'Se è l'ultimo chiude la stringa
+                    StringaOrdini += ")"
+                End If
+
+            Next
+
+            Dim Query As String =
+                "SELECT Ordini.Ordine, Ordini.Imballo, SUM(Ordini.QT) as QT, Distinta.X, Distinta.Y, Distinta.Z, concat(sum(Distinta.N * Ordini.QT), ' (F)') AS N, concat(Imballi.Gradi_F, '°')  AS GRADI, Ordini.HT " &
+                "FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo LEFT JOIN Imballi ON Distinta.Imballo = Imballi.Imballo " &
+                "WHERE " & StringaOrdini & " AND Distinta.Tag = 'FD' " &
+                "GROUP BY Ordini.Ordine, Ordini.Imballo, Imballi.Gradi_F, Distinta.X, Distinta.Y, Distinta.Z, Ordini.HT " &
+                "ORDER BY HT ASC, Z DESC"
+
+
+
+            SQL.FillDGW_SQL(Query, Datagridview)
+        End Sub
+        Public Sub ListaDiagonaliT(Ordini As List(Of String), Datagridview As DataGridView)
+            Datagridview.DataSource = Nothing
+
+            'Inizia la stringa degli ordini
+            Dim StringaOrdini As String = "("
+            For K = 0 To Ordini.Count - 1
+
+                StringaOrdini += "Ordini.Ordine = '" & Ordini(K) & "'"
+
+                If Not K = Ordini.Count - 1 Then
+                    'Se non è l'ulimo della lista mette OR
+                    StringaOrdini += " OR "
+                Else
+                    'Se è l'ultimo chiude la stringa
+                    StringaOrdini += ")"
+                End If
+
+            Next
+
+            Dim Query As String =
+                "SELECT Ordini.Ordine, Ordini.Imballo, SUM(Ordini.QT) as QT, Distinta.X, Distinta.Y, Distinta.Z, concat(sum(Distinta.N * Ordini.QT), ' (T)') AS N, concat(Imballi.Gradi_T, '°')  AS GRADI, Ordini.HT " &
+                "FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo LEFT JOIN Imballi ON Distinta.Imballo = Imballi.Imballo " &
+                "WHERE " & StringaOrdini & " AND Distinta.Tag = 'TD' " &
+                "GROUP BY Ordini.Ordine, Ordini.Imballo, Imballi.Gradi_T, Distinta.X, Distinta.Y, Distinta.Z, Ordini.HT " &
+                "ORDER BY HT ASC, Z DESC"
+
+
+
+            SQL.FillDGW_SQL(Query, Datagridview)
+        End Sub
+        Public Sub ListaDiagonaliTOT(Ordini As List(Of String), Datagridview As DataGridView)
+            Datagridview.DataSource = Nothing
+
+            'Inizia la stringa degli ordini
+            Dim StringaOrdini As String = "("
+            For K = 0 To Ordini.Count - 1
+
+                StringaOrdini += "Ordini.Ordine = '" & Ordini(K) & "'"
+
+                If Not K = Ordini.Count - 1 Then
+                    'Se non è l'ulimo della lista mette OR
+                    StringaOrdini += " OR "
+                Else
+                    'Se è l'ultimo chiude la stringa
+                    StringaOrdini += ")"
+                End If
+
+            Next
+
+            Dim QueryFiancate As String =
+                "SELECT Ordini.Ordine, Ordini.Imballo, SUM(Ordini.QT) as QT, Distinta.X, Distinta.Y, Distinta.Z, concat(sum(Distinta.N * Ordini.QT), ' (F)') AS N, concat(Imballi.Gradi_F, '°')  AS GRADI, Ordini.HT " &
+                "FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo LEFT JOIN Imballi ON Distinta.Imballo = Imballi.Imballo " &
+                "WHERE " & StringaOrdini & " AND Distinta.Tag = 'FD' " &
+                "GROUP BY Ordini.Ordine, Ordini.Imballo, Imballi.Gradi_F, Distinta.X, Distinta.Y, Distinta.Z, Ordini.HT "
+
+            Dim QueryTeste As String =
+                "SELECT Ordini.Ordine, Ordini.Imballo, SUM(Ordini.QT) as QT, Distinta.X, Distinta.Y, Distinta.Z, concat(sum(Distinta.N * Ordini.QT), ' (T)') AS N, concat(Imballi.Gradi_T, '°')  AS GRADI, Ordini.HT " &
+                "FROM Ordini LEFT JOIN Distinta ON Ordini.Imballo = Distinta.Imballo LEFT JOIN Imballi ON Distinta.Imballo = Imballi.Imballo " &
+                "WHERE " & StringaOrdini & " AND Distinta.Tag = 'TD' " &
+                "GROUP BY Ordini.Ordine, Ordini.Imballo, Imballi.Gradi_T, Distinta.X, Distinta.Y, Distinta.Z, Ordini.HT "
+
+
+            Dim Query As String = QueryFiancate & " UNION ALL " & QueryTeste & " ORDER BY HT DESC, Imballo ASC, Z DESC"
+
+
+            SQL.FillDGW_SQL(Query, Datagridview)
+        End Sub
+
+        Public Sub PuliziaOrdini()
+            Try
+                Dim xml = XDocument.Load(My.Settings.XMLpath)
+
+                Dim Pulizia As String = xml.<Data>.<Pulizia_Ordini>.Value
+
+                If Pulizia = "True" Then
+
+                    Dim Giorni As Integer = xml.<Data>.<Giorni_Memoria_Ordine>.Value
+
+                    LOG.Write("Pulizia periodica ordini [START] Ultima data valida: " & Date.Today.Date.AddDays(-Giorni))
+
+                    Dim ListaIndici As New List(Of Integer)
+                    Dim UltimoId As Integer = 0
+
+
+                    Using Table As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+                        Using DS As New ModPackDBDataSet.OrdiniDataTable
+                            Table.Fill(DS)
+
+                            For Each Row As ModPackDBDataSet.OrdiniRow In DS
+                                If Row.Data_Ordine <= Date.Today.Date.AddDays(-Giorni) Then
+                                    ListaIndici.Add(Row.Id)
+                                End If
+                            Next
+
+                        End Using
+                    End Using
+
+                    If Not ListaIndici.Count = 0 Then
+                        UltimoId = ListaIndici.Max
+                        'Elimina tutte le righe di ordine con data inferiore a quella scelta e evasi
+                        SQL.Query("DELETE FROM Ordini WHERE Id <= '" & UltimoId & "' AND Evaso = 'True'")
+                        LOG.Write("Pulizia periodica ordini [STOP] Eliminate " & ListaIndici.Count & " righe con data ordine inferiore a " & Date.Today.Date.AddDays(-Giorni))
+                    End If
+
+                End If
+
+            Catch ex As Exception
+                MsgBox("Si è verificato un'errore durante la pulizia periodica degli ordini" & vbCrLf & ex.Message)
+                LOG.Write("Errore durante pulizia periodica ordini")
+            End Try
+
+
+
+        End Sub
 
     End Module
 End Namespace

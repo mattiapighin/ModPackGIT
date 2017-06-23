@@ -329,9 +329,6 @@ Partial Class Form_OrdiniAperti
         'Print_Distinte
         '
         '
-        'Print_Morali
-        '
-        '
         'Form_OrdiniAperti
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

@@ -22,10 +22,10 @@ Partial Class Form_Preferenze_Email
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Txt_Mail_Password = New System.Windows.Forms.TextBox()
         Me.Txt_Mail_Username = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Txt_Mail_ServerSMTP = New System.Windows.Forms.TextBox()
@@ -33,30 +33,29 @@ Partial Class Form_Preferenze_Email
         Me.Txt_Mail_PortaSMTP = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Txt_Dest4 = New System.Windows.Forms.TextBox()
-        Me.Txt_Dest3 = New System.Windows.Forms.TextBox()
-        Me.Txt_Dest2 = New System.Windows.Forms.TextBox()
-        Me.Txt_Dest1 = New System.Windows.Forms.TextBox()
+        Me.DGWDestinatari = New System.Windows.Forms.DataGridView()
+        Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NomeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EmailDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DestinatariEmailBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ModPackDBDataSet = New ModPack.ModPackDBDataSet()
         Me.Bt_Salva = New System.Windows.Forms.Button()
         Me.Bt_TestMail = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TxtPDFPrinter = New System.Windows.Forms.TextBox()
-        Me.Bt_StampantePDF = New System.Windows.Forms.Button()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Txt_DefaultPathCO = New System.Windows.Forms.TextBox()
-        Me.Bt_DefaultPathCO = New System.Windows.Forms.Button()
+        Me.DestinatariEmailTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DestinatariEmailTableAdapter()
+        Me.Txt_Mail_Password = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
+        CType(Me.DGWDestinatari, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DestinatariEmailBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Txt_Mail_Password)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.Txt_Mail_Password)
         Me.GroupBox1.Controls.Add(Me.Txt_Mail_Username)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -82,13 +81,6 @@ Partial Class Form_Preferenze_Email
         Me.Label1.Size = New System.Drawing.Size(55, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Username"
-        '
-        'Txt_Mail_Password
-        '
-        Me.Txt_Mail_Password.Location = New System.Drawing.Point(65, 45)
-        Me.Txt_Mail_Password.Name = "Txt_Mail_Password"
-        Me.Txt_Mail_Password.Size = New System.Drawing.Size(243, 20)
-        Me.Txt_Mail_Password.TabIndex = 1
         '
         'Txt_Mail_Username
         '
@@ -144,10 +136,7 @@ Partial Class Form_Preferenze_Email
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Txt_Dest4)
-        Me.GroupBox3.Controls.Add(Me.Txt_Dest3)
-        Me.GroupBox3.Controls.Add(Me.Txt_Dest2)
-        Me.GroupBox3.Controls.Add(Me.Txt_Dest1)
+        Me.GroupBox3.Controls.Add(Me.DGWDestinatari)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 146)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(314, 130)
@@ -155,37 +144,57 @@ Partial Class Form_Preferenze_Email
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Destinatari"
         '
-        'Txt_Dest4
+        'DGWDestinatari
         '
-        Me.Txt_Dest4.Location = New System.Drawing.Point(11, 97)
-        Me.Txt_Dest4.Name = "Txt_Dest4"
-        Me.Txt_Dest4.Size = New System.Drawing.Size(297, 20)
-        Me.Txt_Dest4.TabIndex = 3
+        Me.DGWDestinatari.AutoGenerateColumns = False
+        Me.DGWDestinatari.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGWDestinatari.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DGWDestinatari.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGWDestinatari.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn, Me.NomeDataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn})
+        Me.DGWDestinatari.DataSource = Me.DestinatariEmailBindingSource
+        Me.DGWDestinatari.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGWDestinatari.Location = New System.Drawing.Point(3, 16)
+        Me.DGWDestinatari.Name = "DGWDestinatari"
+        Me.DGWDestinatari.RowHeadersWidth = 15
+        Me.DGWDestinatari.Size = New System.Drawing.Size(308, 111)
+        Me.DGWDestinatari.TabIndex = 0
         '
-        'Txt_Dest3
+        'IdDataGridViewTextBoxColumn
         '
-        Me.Txt_Dest3.Location = New System.Drawing.Point(11, 71)
-        Me.Txt_Dest3.Name = "Txt_Dest3"
-        Me.Txt_Dest3.Size = New System.Drawing.Size(297, 20)
-        Me.Txt_Dest3.TabIndex = 2
+        Me.IdDataGridViewTextBoxColumn.DataPropertyName = "Id"
+        Me.IdDataGridViewTextBoxColumn.HeaderText = "Id"
+        Me.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn"
+        Me.IdDataGridViewTextBoxColumn.ReadOnly = True
+        Me.IdDataGridViewTextBoxColumn.Visible = False
+        Me.IdDataGridViewTextBoxColumn.Width = 41
         '
-        'Txt_Dest2
+        'NomeDataGridViewTextBoxColumn
         '
-        Me.Txt_Dest2.Location = New System.Drawing.Point(11, 45)
-        Me.Txt_Dest2.Name = "Txt_Dest2"
-        Me.Txt_Dest2.Size = New System.Drawing.Size(297, 20)
-        Me.Txt_Dest2.TabIndex = 1
+        Me.NomeDataGridViewTextBoxColumn.DataPropertyName = "Nome"
+        Me.NomeDataGridViewTextBoxColumn.HeaderText = "Nome"
+        Me.NomeDataGridViewTextBoxColumn.Name = "NomeDataGridViewTextBoxColumn"
+        Me.NomeDataGridViewTextBoxColumn.Width = 60
         '
-        'Txt_Dest1
+        'EmailDataGridViewTextBoxColumn
         '
-        Me.Txt_Dest1.Location = New System.Drawing.Point(11, 19)
-        Me.Txt_Dest1.Name = "Txt_Dest1"
-        Me.Txt_Dest1.Size = New System.Drawing.Size(297, 20)
-        Me.Txt_Dest1.TabIndex = 0
+        Me.EmailDataGridViewTextBoxColumn.DataPropertyName = "Email"
+        Me.EmailDataGridViewTextBoxColumn.HeaderText = "Email"
+        Me.EmailDataGridViewTextBoxColumn.Name = "EmailDataGridViewTextBoxColumn"
+        Me.EmailDataGridViewTextBoxColumn.Width = 57
+        '
+        'DestinatariEmailBindingSource
+        '
+        Me.DestinatariEmailBindingSource.DataMember = "DestinatariEmail"
+        Me.DestinatariEmailBindingSource.DataSource = Me.ModPackDBDataSet
+        '
+        'ModPackDBDataSet
+        '
+        Me.ModPackDBDataSet.DataSetName = "ModPackDBDataSet"
+        Me.ModPackDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Bt_Salva
         '
-        Me.Bt_Salva.Location = New System.Drawing.Point(251, 402)
+        Me.Bt_Salva.Location = New System.Drawing.Point(250, 282)
         Me.Bt_Salva.Name = "Bt_Salva"
         Me.Bt_Salva.Size = New System.Drawing.Size(75, 23)
         Me.Bt_Salva.TabIndex = 3
@@ -194,74 +203,30 @@ Partial Class Form_Preferenze_Email
         '
         'Bt_TestMail
         '
-        Me.Bt_TestMail.Location = New System.Drawing.Point(12, 402)
+        Me.Bt_TestMail.Location = New System.Drawing.Point(11, 282)
         Me.Bt_TestMail.Name = "Bt_TestMail"
         Me.Bt_TestMail.Size = New System.Drawing.Size(75, 23)
         Me.Bt_TestMail.TabIndex = 4
         Me.Bt_TestMail.Text = "Test"
         Me.Bt_TestMail.UseVisualStyleBackColor = True
         '
-        'GroupBox4
+        'DestinatariEmailTableAdapter
         '
-        Me.GroupBox4.Controls.Add(Me.TxtPDFPrinter)
-        Me.GroupBox4.Controls.Add(Me.Bt_StampantePDF)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 282)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(314, 52)
-        Me.GroupBox4.TabIndex = 5
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Stampante PDF"
+        Me.DestinatariEmailTableAdapter.ClearBeforeFill = True
         '
-        'TxtPDFPrinter
+        'Txt_Mail_Password
         '
-        Me.TxtPDFPrinter.Location = New System.Drawing.Point(92, 19)
-        Me.TxtPDFPrinter.Name = "TxtPDFPrinter"
-        Me.TxtPDFPrinter.Size = New System.Drawing.Size(216, 20)
-        Me.TxtPDFPrinter.TabIndex = 1
-        '
-        'Bt_StampantePDF
-        '
-        Me.Bt_StampantePDF.Location = New System.Drawing.Point(11, 19)
-        Me.Bt_StampantePDF.Name = "Bt_StampantePDF"
-        Me.Bt_StampantePDF.Size = New System.Drawing.Size(75, 21)
-        Me.Bt_StampantePDF.TabIndex = 0
-        Me.Bt_StampantePDF.Text = "Scegli"
-        Me.Bt_StampantePDF.UseVisualStyleBackColor = True
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Txt_DefaultPathCO)
-        Me.GroupBox5.Controls.Add(Me.Bt_DefaultPathCO)
-        Me.GroupBox5.Location = New System.Drawing.Point(12, 340)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(314, 56)
-        Me.GroupBox5.TabIndex = 6
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Default Path Conferme d'ordine"
-        '
-        'Txt_DefaultPathCO
-        '
-        Me.Txt_DefaultPathCO.Location = New System.Drawing.Point(42, 22)
-        Me.Txt_DefaultPathCO.Name = "Txt_DefaultPathCO"
-        Me.Txt_DefaultPathCO.Size = New System.Drawing.Size(266, 20)
-        Me.Txt_DefaultPathCO.TabIndex = 1
-        '
-        'Bt_DefaultPathCO
-        '
-        Me.Bt_DefaultPathCO.Location = New System.Drawing.Point(11, 19)
-        Me.Bt_DefaultPathCO.Name = "Bt_DefaultPathCO"
-        Me.Bt_DefaultPathCO.Size = New System.Drawing.Size(25, 23)
-        Me.Bt_DefaultPathCO.TabIndex = 0
-        Me.Bt_DefaultPathCO.Text = "..."
-        Me.Bt_DefaultPathCO.UseVisualStyleBackColor = True
+        Me.Txt_Mail_Password.Location = New System.Drawing.Point(65, 44)
+        Me.Txt_Mail_Password.Name = "Txt_Mail_Password"
+        Me.Txt_Mail_Password.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.Txt_Mail_Password.Size = New System.Drawing.Size(243, 20)
+        Me.Txt_Mail_Password.TabIndex = 5
         '
         'Form_Preferenze_Email
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(337, 435)
-        Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
+        Me.ClientSize = New System.Drawing.Size(337, 314)
         Me.Controls.Add(Me.Bt_TestMail)
         Me.Controls.Add(Me.Bt_Salva)
         Me.Controls.Add(Me.GroupBox3)
@@ -275,11 +240,9 @@ Partial Class Form_Preferenze_Email
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
+        CType(Me.DGWDestinatari, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DestinatariEmailBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -287,7 +250,6 @@ Partial Class Form_Preferenze_Email
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents Txt_Mail_Password As TextBox
     Friend WithEvents Txt_Mail_Username As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Txt_Mail_ServerSMTP As TextBox
@@ -296,15 +258,13 @@ Partial Class Form_Preferenze_Email
     Friend WithEvents Label3 As Label
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Bt_Salva As Button
-    Friend WithEvents Txt_Dest4 As TextBox
-    Friend WithEvents Txt_Dest3 As TextBox
-    Friend WithEvents Txt_Dest2 As TextBox
-    Friend WithEvents Txt_Dest1 As TextBox
     Friend WithEvents Bt_TestMail As Button
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents TxtPDFPrinter As TextBox
-    Friend WithEvents Bt_StampantePDF As Button
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents Txt_DefaultPathCO As TextBox
-    Friend WithEvents Bt_DefaultPathCO As Button
+    Friend WithEvents DGWDestinatari As DataGridView
+    Friend WithEvents ModPackDBDataSet As ModPackDBDataSet
+    Friend WithEvents DestinatariEmailBindingSource As BindingSource
+    Friend WithEvents DestinatariEmailTableAdapter As ModPackDBDataSetTableAdapters.DestinatariEmailTableAdapter
+    Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NomeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents EmailDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Txt_Mail_Password As MaskedTextBox
 End Class

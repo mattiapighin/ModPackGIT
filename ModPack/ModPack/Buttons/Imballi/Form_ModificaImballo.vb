@@ -59,9 +59,11 @@
 
                 If Not R.IsImgNull Then PbImg.BackgroundImage = Immagine.ConvertFromBytes(R.Img)
 
+
                 PanelCodice.Enabled = False
                 PanelModifica.Enabled = True
                 PanelButtons.Enabled = True
+
             Else
                 MsgBox("L'imballo non esiste", vbInformation, "Modifica")
             End If
@@ -70,6 +72,50 @@
         End Try
 
     End Sub
+    Public Sub CaricaCodiceNoEdit()
+        Try
+            R = CType(ImballiBindingSource.Current, DataRowView).Row
+
+            If CbImballo.Text = R.Imballo Then
+
+                Me.DistintaTableAdapter.Fill(Me.ModPackDBDataSet.Distinta)
+                Me.IndiciTableAdapter.Fill(Me.ModPackDBDataSet.Indici)
+                DGWDistinta.DataSource = ImballiDistintaBindingSource
+                DgwIndici.DataSource = ImballiIndiciBindingSource
+
+                txtL.Text = R.L
+                txtP.Text = R.P
+                txtH.Text = R.H
+                txtTipo.Text = R.Tipo
+                txtZoccoli.Text = R.Zoccoli
+                ckRivestimento.Checked = R.Rivestimento
+                txtTipoRivestimento.Text = R.Tipo_Rivestimento
+                ckHT.Checked = R.HT
+                ckBM.Checked = R.BM
+                ckDT.Checked = R.DT
+                ckDiagonali.Checked = R.Diagonali
+                txtGradiF.Text = R.Gradi_F
+                txtGradiT.Text = R.Gradi_T
+                txtPrimoMorale.Text = R.Primo_Morale
+                txtM2.Text = R.M2
+                txtM3.Text = R.M3
+                txtPrezzo.Text = R.Prezzo
+                TxtSottoMF.Text = R.SottoMF
+                TxtSopraMF.Text = R.SopraMF
+                TxtSottoMT.Text = R.SottoMT
+                TxtSopraMT.Text = R.SopraMT
+
+                If Not R.IsImgNull Then PbImg.BackgroundImage = Immagine.ConvertFromBytes(R.Img)
+
+            Else
+                MsgBox("L'imballo non esiste", vbInformation, "Modifica")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
     Private Sub PulisciTutto()
         txtL.Text = ""
         txtP.Text = ""
@@ -93,6 +139,7 @@
     End Sub
     Private Sub Bt_StartEdit_Click(sender As Object, e As EventArgs) Handles Bt_StartEdit.Click
         CaricaCodice()
+
     End Sub
     Private Sub Bt_LoadImage_Click(sender As Object, e As EventArgs) Handles Bt_LoadImage.Click
         Dim LoadImage As New OpenFileDialog With {.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|Bitmap (*.bmp)|*.bmp"}
@@ -193,7 +240,11 @@
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3_Morali(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.C(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
-
+                    Case "GRO"
+                        If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
+                        If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3_Morali(IR.Imballo)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
+                        LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case Else
                         MsgBox("Tipo non riconosciuto")
                 End Select

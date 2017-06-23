@@ -366,78 +366,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_Destinatario1() As String
-            Get
-                Return CType(Me("MAIL_Destinatario1"),String)
-            End Get
-            Set
-                Me("MAIL_Destinatario1") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_Destinatario2() As String
-            Get
-                Return CType(Me("MAIL_Destinatario2"),String)
-            End Get
-            Set
-                Me("MAIL_Destinatario2") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_Destinatario3() As String
-            Get
-                Return CType(Me("MAIL_Destinatario3"),String)
-            End Get
-            Set
-                Me("MAIL_Destinatario3") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_Destinatario4() As String
-            Get
-                Return CType(Me("MAIL_Destinatario4"),String)
-            End Get
-            Set
-                Me("MAIL_Destinatario4") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_PDFPrinter() As String
-            Get
-                Return CType(Me("MAIL_PDFPrinter"),String)
-            End Get
-            Set
-                Me("MAIL_PDFPrinter") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAIL_DefaultPathCO() As String
-            Get
-                Return CType(Me("MAIL_DefaultPathCO"),String)
-            End Get
-            Set
-                Me("MAIL_DefaultPathCO") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
         Public Property GiorniMantenimentoBackup() As Integer
             Get
@@ -529,6 +457,42 @@ Namespace My
             End Get
             Set
                 Me("ArrL5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("011111010100000011101")>  _
+        Public Property FiltroColonneImballi() As String
+            Get
+                Return CType(Me("FiltroColonneImballi"),String)
+            End Get
+            Set
+                Me("FiltroColonneImballi") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property ImballiNRecords() As Integer
+            Get
+                Return CType(Me("ImballiNRecords"),Integer)
+            End Get
+            Set
+                Me("ImballiNRecords") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property OrdiniNRecords() As Integer
+            Get
+                Return CType(Me("OrdiniNRecords"),Integer)
+            End Get
+            Set
+                Me("OrdiniNRecords") = value
             End Set
         End Property
     End Class

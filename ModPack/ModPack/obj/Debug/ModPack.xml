@@ -37,6 +37,11 @@ ModPack
   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:ModPack.My.Resources.Resources.ROV">
+<summary>
+  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet">
 <summary>
 Represents a strongly typed in-memory cache of data.
@@ -87,6 +92,11 @@ Represents the strongly named DataTable class.
 Represents the strongly named DataTable class.
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.DestinatariEmailDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSet.RivestimentiRow">
 <summary>
 Represents strongly named DataRow class.
@@ -128,6 +138,11 @@ Represents strongly named DataRow class.
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSet.MaterialiRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSet.DestinatariEmailRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
@@ -177,6 +192,11 @@ Row event argument class
 Row event argument class
 </summary>
 </member>
+<member name="T:ModPack.ModPackDBDataSet.DestinatariEmailRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="T:ModPack.ModPackDBDataSetTableAdapters.OrdiniTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
@@ -218,6 +238,11 @@ Represents the connection and commands used to retrieve and save data.
 </summary>
 </member>
 <member name="T:ModPack.ModPackDBDataSetTableAdapters.MaterialiTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:ModPack.ModPackDBDataSetTableAdapters.DestinatariEmailTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
 </summary>

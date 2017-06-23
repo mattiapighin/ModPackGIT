@@ -105,17 +105,33 @@
             Dim radTOT As Object
             Dim GRADI As Object
 
-            Dim A As Integer = Altezza
-
-            IPO = Math.Sqrt((A ^ 2) + (Base ^ 2))
+            IPO = Math.Sqrt((Altezza ^ 2) + (Base ^ 2))
             Ltav1 = Math.Sqrt((IPO ^ 2) - (Ltav ^ 2))
-            radIPO = Math.Atan(Base / A)
+            radIPO = Math.Atan(Base / Altezza)
             radTAV = Math.Atan(Ltav / Ltav1)
             radTOT = radIPO - radTAV
 
             GRADI = radTOT * 180 / Math.PI
-
             If GRADI < 0 Then GRADI = 0
+
+            Dim xml = XDocument.Load(My.Settings.XMLpath)
+
+            If xml.<Data>.<Diagonali>.<Inverti>.Value = "True" Then
+                If GRADI > xml.<Data>.<Diagonali>.<Max_Gradi>.Value Then
+
+                    Dim BaseRov = Altezza
+                    Dim AltezzaRov = Base
+
+                    IPO = Math.Sqrt((AltezzaRov ^ 2) + (BaseRov ^ 2))
+                    Ltav1 = Math.Sqrt((IPO ^ 2) - (Ltav ^ 2))
+                    radIPO = Math.Atan(BaseRov / AltezzaRov)
+                    radTAV = Math.Atan(Ltav / Ltav1)
+                    radTOT = radIPO - radTAV
+
+                    GRADI = radTOT * 180 / Math.PI
+
+                End If
+            End If
 
             Return GRADI
         End Function

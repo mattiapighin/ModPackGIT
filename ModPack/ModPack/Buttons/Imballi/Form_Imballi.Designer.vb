@@ -64,21 +64,6 @@ Partial Class Form_Imballi
         Me.TagDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballiDistintaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DgwIndici = New System.Windows.Forms.DataGridView()
-        Me.ImballiIndiciBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_FiltroNome = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Filtro = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Modifica = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_MostraNuovi = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_PulisciNuovi = New System.Windows.Forms.ToolStripButton()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
-        Me.ImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.ImballiTableAdapter()
-        Me.DistintaTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter()
-        Me.IndiciTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.IndiciTableAdapter()
-        Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.IdDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IndiceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -86,13 +71,30 @@ Partial Class Form_Imballi
         Me.NoteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RivestTotDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NoteBICDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.Bt_Colonne = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_FiltroNome = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Filtro = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Modifica = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_StampaImballo = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_MostraNuovi = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_PulisciNuovi = New System.Windows.Forms.ToolStripButton()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+        Me.PrintImballo = New System.Drawing.Printing.PrintDocument()
+        Me.ImballiIndiciBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.ImballiTableAdapter()
+        Me.DistintaTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter()
+        Me.IndiciTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.IndiciTableAdapter()
         CType(Me.DgwImballi, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwDistinta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImballiDistintaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImballiIndiciBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -102,7 +104,7 @@ Partial Class Form_Imballi
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
-        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImballiIndiciBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DgwImballi
@@ -204,11 +206,11 @@ Partial Class Form_Imballi
         'TipoRivestimentoDataGridViewTextBoxColumn
         '
         Me.TipoRivestimentoDataGridViewTextBoxColumn.DataPropertyName = "Tipo_Rivestimento"
-        Me.TipoRivestimentoDataGridViewTextBoxColumn.HeaderText = "Tipo_Rivestimento"
+        Me.TipoRivestimentoDataGridViewTextBoxColumn.HeaderText = "Tipo Riv."
         Me.TipoRivestimentoDataGridViewTextBoxColumn.Name = "TipoRivestimentoDataGridViewTextBoxColumn"
         Me.TipoRivestimentoDataGridViewTextBoxColumn.ReadOnly = True
         Me.TipoRivestimentoDataGridViewTextBoxColumn.Visible = False
-        Me.TipoRivestimentoDataGridViewTextBoxColumn.Width = 120
+        Me.TipoRivestimentoDataGridViewTextBoxColumn.Width = 75
         '
         'HTDataGridViewCheckBoxColumn
         '
@@ -248,29 +250,29 @@ Partial Class Form_Imballi
         'GradiFDataGridViewTextBoxColumn
         '
         Me.GradiFDataGridViewTextBoxColumn.DataPropertyName = "Gradi_F"
-        Me.GradiFDataGridViewTextBoxColumn.HeaderText = "Gradi_F"
+        Me.GradiFDataGridViewTextBoxColumn.HeaderText = "Gradi F"
         Me.GradiFDataGridViewTextBoxColumn.Name = "GradiFDataGridViewTextBoxColumn"
         Me.GradiFDataGridViewTextBoxColumn.ReadOnly = True
         Me.GradiFDataGridViewTextBoxColumn.Visible = False
-        Me.GradiFDataGridViewTextBoxColumn.Width = 69
+        Me.GradiFDataGridViewTextBoxColumn.Width = 66
         '
         'GradiTDataGridViewTextBoxColumn
         '
         Me.GradiTDataGridViewTextBoxColumn.DataPropertyName = "Gradi_T"
-        Me.GradiTDataGridViewTextBoxColumn.HeaderText = "Gradi_T"
+        Me.GradiTDataGridViewTextBoxColumn.HeaderText = "Gradi T"
         Me.GradiTDataGridViewTextBoxColumn.Name = "GradiTDataGridViewTextBoxColumn"
         Me.GradiTDataGridViewTextBoxColumn.ReadOnly = True
         Me.GradiTDataGridViewTextBoxColumn.Visible = False
-        Me.GradiTDataGridViewTextBoxColumn.Width = 70
+        Me.GradiTDataGridViewTextBoxColumn.Width = 67
         '
         'PrimoMoraleDataGridViewTextBoxColumn
         '
         Me.PrimoMoraleDataGridViewTextBoxColumn.DataPropertyName = "Primo_Morale"
-        Me.PrimoMoraleDataGridViewTextBoxColumn.HeaderText = "Primo_Morale"
+        Me.PrimoMoraleDataGridViewTextBoxColumn.HeaderText = "Primo Morale"
         Me.PrimoMoraleDataGridViewTextBoxColumn.Name = "PrimoMoraleDataGridViewTextBoxColumn"
         Me.PrimoMoraleDataGridViewTextBoxColumn.ReadOnly = True
         Me.PrimoMoraleDataGridViewTextBoxColumn.Visible = False
-        Me.PrimoMoraleDataGridViewTextBoxColumn.Width = 96
+        Me.PrimoMoraleDataGridViewTextBoxColumn.Width = 93
         '
         'M2DataGridViewTextBoxColumn
         '
@@ -459,19 +461,79 @@ Partial Class Form_Imballi
         Me.DgwIndici.Size = New System.Drawing.Size(407, 145)
         Me.DgwIndici.TabIndex = 2
         '
-        'ImballiIndiciBindingSource
+        'IdDataGridViewTextBoxColumn2
         '
-        Me.ImballiIndiciBindingSource.DataMember = "Imballi_Indici"
-        Me.ImballiIndiciBindingSource.DataSource = Me.ImballiBindingSource
+        Me.IdDataGridViewTextBoxColumn2.DataPropertyName = "Id"
+        Me.IdDataGridViewTextBoxColumn2.HeaderText = "Id"
+        Me.IdDataGridViewTextBoxColumn2.Name = "IdDataGridViewTextBoxColumn2"
+        Me.IdDataGridViewTextBoxColumn2.ReadOnly = True
+        Me.IdDataGridViewTextBoxColumn2.Visible = False
+        '
+        'ImballoDataGridViewTextBoxColumn2
+        '
+        Me.ImballoDataGridViewTextBoxColumn2.DataPropertyName = "Imballo"
+        Me.ImballoDataGridViewTextBoxColumn2.HeaderText = "Imballo"
+        Me.ImballoDataGridViewTextBoxColumn2.Name = "ImballoDataGridViewTextBoxColumn2"
+        Me.ImballoDataGridViewTextBoxColumn2.ReadOnly = True
+        Me.ImballoDataGridViewTextBoxColumn2.Visible = False
+        '
+        'IndiceDataGridViewTextBoxColumn
+        '
+        Me.IndiceDataGridViewTextBoxColumn.DataPropertyName = "Indice"
+        Me.IndiceDataGridViewTextBoxColumn.HeaderText = "Indice"
+        Me.IndiceDataGridViewTextBoxColumn.Name = "IndiceDataGridViewTextBoxColumn"
+        Me.IndiceDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'CodiceDataGridViewTextBoxColumn
+        '
+        Me.CodiceDataGridViewTextBoxColumn.DataPropertyName = "Codice"
+        Me.CodiceDataGridViewTextBoxColumn.HeaderText = "Codice"
+        Me.CodiceDataGridViewTextBoxColumn.Name = "CodiceDataGridViewTextBoxColumn"
+        Me.CodiceDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'NoteDataGridViewTextBoxColumn
+        '
+        Me.NoteDataGridViewTextBoxColumn.DataPropertyName = "Note"
+        Me.NoteDataGridViewTextBoxColumn.HeaderText = "Note1"
+        Me.NoteDataGridViewTextBoxColumn.Name = "NoteDataGridViewTextBoxColumn"
+        Me.NoteDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'RivestTotDataGridViewTextBoxColumn
+        '
+        Me.RivestTotDataGridViewTextBoxColumn.DataPropertyName = "Rivest_Tot"
+        Me.RivestTotDataGridViewTextBoxColumn.HeaderText = "Note2"
+        Me.RivestTotDataGridViewTextBoxColumn.Name = "RivestTotDataGridViewTextBoxColumn"
+        Me.RivestTotDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'NoteBICDataGridViewTextBoxColumn
+        '
+        Me.NoteBICDataGridViewTextBoxColumn.DataPropertyName = "Note_BIC"
+        Me.NoteBICDataGridViewTextBoxColumn.HeaderText = "Note Bicciato"
+        Me.NoteBICDataGridViewTextBoxColumn.Name = "NoteBICDataGridViewTextBoxColumn"
+        Me.NoteBICDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ImballiIndiciBindingSource1
+        '
+        Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Refresh, Me.Bt_FiltroNome, Me.Bt_Filtro, Me.Bt_Modifica, Me.ToolStripButton1, Me.Bt_MostraNuovi, Me.Bt_PulisciNuovi})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Colonne, Me.Bt_Refresh, Me.Bt_FiltroNome, Me.Bt_Filtro, Me.Bt_Modifica, Me.Bt_StampaImballo, Me.Bt_MostraNuovi, Me.Bt_PulisciNuovi})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1159, 25)
         Me.ToolStrip1.TabIndex = 3
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'Bt_Colonne
+        '
+        Me.Bt_Colonne.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Colonne.Image = CType(resources.GetObject("Bt_Colonne.Image"), System.Drawing.Image)
+        Me.Bt_Colonne.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Colonne.Name = "Bt_Colonne"
+        Me.Bt_Colonne.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_Colonne.Text = "Colonne"
         '
         'Bt_Refresh
         '
@@ -506,13 +568,13 @@ Partial Class Form_Imballi
         Me.Bt_Modifica.Size = New System.Drawing.Size(117, 22)
         Me.Bt_Modifica.Text = "Modifica imballo"
         '
-        'ToolStripButton1
+        'Bt_StampaImballo
         '
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(67, 22)
-        Me.ToolStripButton1.Text = "Stampa"
+        Me.Bt_StampaImballo.Image = CType(resources.GetObject("Bt_StampaImballo.Image"), System.Drawing.Image)
+        Me.Bt_StampaImballo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_StampaImballo.Name = "Bt_StampaImballo"
+        Me.Bt_StampaImballo.Size = New System.Drawing.Size(67, 22)
+        Me.Bt_StampaImballo.Text = "Stampa"
         '
         'Bt_MostraNuovi
         '
@@ -570,6 +632,14 @@ Partial Class Form_Imballi
         Me.SplitContainer2.SplitterDistance = 360
         Me.SplitContainer2.TabIndex = 0
         '
+        'PrintImballo
+        '
+        '
+        'ImballiIndiciBindingSource
+        '
+        Me.ImballiIndiciBindingSource.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource.DataSource = Me.ImballiBindingSource
+        '
         'ImballiTableAdapter
         '
         Me.ImballiTableAdapter.ClearBeforeFill = True
@@ -581,62 +651,6 @@ Partial Class Form_Imballi
         'IndiciTableAdapter
         '
         Me.IndiciTableAdapter.ClearBeforeFill = True
-        '
-        'ImballiIndiciBindingSource1
-        '
-        Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
-        Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
-        '
-        'IdDataGridViewTextBoxColumn2
-        '
-        Me.IdDataGridViewTextBoxColumn2.DataPropertyName = "Id"
-        Me.IdDataGridViewTextBoxColumn2.HeaderText = "Id"
-        Me.IdDataGridViewTextBoxColumn2.Name = "IdDataGridViewTextBoxColumn2"
-        Me.IdDataGridViewTextBoxColumn2.ReadOnly = True
-        Me.IdDataGridViewTextBoxColumn2.Visible = False
-        '
-        'ImballoDataGridViewTextBoxColumn2
-        '
-        Me.ImballoDataGridViewTextBoxColumn2.DataPropertyName = "Imballo"
-        Me.ImballoDataGridViewTextBoxColumn2.HeaderText = "Imballo"
-        Me.ImballoDataGridViewTextBoxColumn2.Name = "ImballoDataGridViewTextBoxColumn2"
-        Me.ImballoDataGridViewTextBoxColumn2.ReadOnly = True
-        Me.ImballoDataGridViewTextBoxColumn2.Visible = False
-        '
-        'IndiceDataGridViewTextBoxColumn
-        '
-        Me.IndiceDataGridViewTextBoxColumn.DataPropertyName = "Indice"
-        Me.IndiceDataGridViewTextBoxColumn.HeaderText = "Indice"
-        Me.IndiceDataGridViewTextBoxColumn.Name = "IndiceDataGridViewTextBoxColumn"
-        Me.IndiceDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'CodiceDataGridViewTextBoxColumn
-        '
-        Me.CodiceDataGridViewTextBoxColumn.DataPropertyName = "Codice"
-        Me.CodiceDataGridViewTextBoxColumn.HeaderText = "Codice"
-        Me.CodiceDataGridViewTextBoxColumn.Name = "CodiceDataGridViewTextBoxColumn"
-        Me.CodiceDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'NoteDataGridViewTextBoxColumn
-        '
-        Me.NoteDataGridViewTextBoxColumn.DataPropertyName = "Note"
-        Me.NoteDataGridViewTextBoxColumn.HeaderText = "Note1"
-        Me.NoteDataGridViewTextBoxColumn.Name = "NoteDataGridViewTextBoxColumn"
-        Me.NoteDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'RivestTotDataGridViewTextBoxColumn
-        '
-        Me.RivestTotDataGridViewTextBoxColumn.DataPropertyName = "Rivest_Tot"
-        Me.RivestTotDataGridViewTextBoxColumn.HeaderText = "Note2"
-        Me.RivestTotDataGridViewTextBoxColumn.Name = "RivestTotDataGridViewTextBoxColumn"
-        Me.RivestTotDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'NoteBICDataGridViewTextBoxColumn
-        '
-        Me.NoteBICDataGridViewTextBoxColumn.DataPropertyName = "Note_BIC"
-        Me.NoteBICDataGridViewTextBoxColumn.HeaderText = "Note Bicciato"
-        Me.NoteBICDataGridViewTextBoxColumn.Name = "NoteBICDataGridViewTextBoxColumn"
-        Me.NoteBICDataGridViewTextBoxColumn.ReadOnly = True
         '
         'Form_Imballi
         '
@@ -654,7 +668,7 @@ Partial Class Form_Imballi
         CType(Me.DgwDistinta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImballiDistintaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImballiIndiciBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -665,7 +679,7 @@ Partial Class Form_Imballi
         Me.SplitContainer2.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
-        CType(Me.ImballiIndiciBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImballiIndiciBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -695,7 +709,21 @@ Partial Class Form_Imballi
     Friend WithEvents TagDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Bt_Modifica As ToolStripButton
     Friend WithEvents Bt_Refresh As ToolStripButton
-    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents Bt_StampaImballo As ToolStripButton
+    Friend WithEvents Bt_Filtro As ToolStripButton
+    Friend WithEvents Bt_FiltroNome As ToolStripButton
+    Friend WithEvents Bt_MostraNuovi As ToolStripButton
+    Friend WithEvents Bt_PulisciNuovi As ToolStripButton
+    Friend WithEvents IdDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents ImballoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents IndiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CodiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents RivestTotDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NoteBICDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ImballiIndiciBindingSource1 As BindingSource
+    Friend WithEvents PrintImballo As Printing.PrintDocument
+    Friend WithEvents Bt_Colonne As ToolStripButton
     Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ImballoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents LDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -717,16 +745,4 @@ Partial Class Form_Imballi
     Friend WithEvents PrezzoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ImgDataGridViewImageColumn As DataGridViewImageColumn
     Friend WithEvents DataCreazioneDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents Bt_Filtro As ToolStripButton
-    Friend WithEvents Bt_FiltroNome As ToolStripButton
-    Friend WithEvents Bt_MostraNuovi As ToolStripButton
-    Friend WithEvents Bt_PulisciNuovi As ToolStripButton
-    Friend WithEvents IdDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents ImballoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents IndiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CodiceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents RivestTotDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NoteBICDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ImballiIndiciBindingSource1 As BindingSource
 End Class

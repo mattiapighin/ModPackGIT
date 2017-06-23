@@ -22,6 +22,7 @@ Partial Class Form_Tabelle
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Tabelle))
         Me.DGW_Result = New System.Windows.Forms.DataGridView()
         Me.TxtQuery = New System.Windows.Forms.TextBox()
@@ -34,7 +35,9 @@ Partial Class Form_Tabelle
         Me.Bt_Esporta = New System.Windows.Forms.Button()
         Me.Tree = New System.Windows.Forms.TreeView()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.Bt_Invia = New System.Windows.Forms.Button()
         Me.Bt_Info = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DGW_Result, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGW_queries, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,6 +130,7 @@ Partial Class Form_Tabelle
         Me.Bt_Esegui.Name = "Bt_Esegui"
         Me.Bt_Esegui.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Esegui.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.Bt_Esegui, "Esegui")
         Me.Bt_Esegui.UseVisualStyleBackColor = True
         '
         'Bt_Elimina
@@ -139,6 +143,7 @@ Partial Class Form_Tabelle
         Me.Bt_Elimina.Name = "Bt_Elimina"
         Me.Bt_Elimina.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Elimina.TabIndex = 6
+        Me.ToolTip1.SetToolTip(Me.Bt_Elimina, "Elimina la query selezionata")
         Me.Bt_Elimina.UseVisualStyleBackColor = True
         '
         'Bt_Esporta
@@ -151,6 +156,7 @@ Partial Class Form_Tabelle
         Me.Bt_Esporta.Name = "Bt_Esporta"
         Me.Bt_Esporta.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Esporta.TabIndex = 7
+        Me.ToolTip1.SetToolTip(Me.Bt_Esporta, "Esporta tabella")
         Me.Bt_Esporta.UseVisualStyleBackColor = True
         '
         'Tree
@@ -171,6 +177,7 @@ Partial Class Form_Tabelle
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Bt_Invia)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Bt_Info)
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox1)
         Me.SplitContainer1.Panel1.Controls.Add(Me.DGW_Result)
@@ -187,16 +194,30 @@ Partial Class Form_Tabelle
         Me.SplitContainer1.SplitterDistance = 884
         Me.SplitContainer1.TabIndex = 9
         '
+        'Bt_Invia
+        '
+        Me.Bt_Invia.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Invia.FlatAppearance.BorderSize = 0
+        Me.Bt_Invia.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Invia.Image = CType(resources.GetObject("Bt_Invia.Image"), System.Drawing.Image)
+        Me.Bt_Invia.Location = New System.Drawing.Point(165, 569)
+        Me.Bt_Invia.Name = "Bt_Invia"
+        Me.Bt_Invia.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Invia.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.Bt_Invia, "Invia tabella")
+        Me.Bt_Invia.UseVisualStyleBackColor = True
+        '
         'Bt_Info
         '
         Me.Bt_Info.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Bt_Info.FlatAppearance.BorderSize = 0
         Me.Bt_Info.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Info.Image = CType(resources.GetObject("Bt_Info.Image"), System.Drawing.Image)
-        Me.Bt_Info.Location = New System.Drawing.Point(165, 569)
+        Me.Bt_Info.Location = New System.Drawing.Point(119, 569)
         Me.Bt_Info.Name = "Bt_Info"
         Me.Bt_Info.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Info.TabIndex = 8
+        Me.ToolTip1.SetToolTip(Me.Bt_Info, "Mostra database")
         Me.Bt_Info.UseVisualStyleBackColor = True
         '
         'Form_Tabelle
@@ -232,4 +253,6 @@ Partial Class Form_Tabelle
     Friend WithEvents Tree As TreeView
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents Bt_Info As Button
+    Friend WithEvents Bt_Invia As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

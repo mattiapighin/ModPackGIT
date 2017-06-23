@@ -85,24 +85,6 @@
     <Setting Name="MAIL_port" Type="System.String" Scope="User">
       <Value Profile="(Default)">25</Value>
     </Setting>
-    <Setting Name="MAIL_Destinatario1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAIL_Destinatario2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAIL_Destinatario3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAIL_Destinatario4" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAIL_PDFPrinter" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAIL_DefaultPathCO" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="GiorniMantenimentoBackup" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
@@ -126,6 +108,15 @@
     </Setting>
     <Setting Name="ArrL5" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FiltroColonneImballi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">011111010100000011101</Value>
+    </Setting>
+    <Setting Name="ImballiNRecords" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="OrdiniNRecords" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>

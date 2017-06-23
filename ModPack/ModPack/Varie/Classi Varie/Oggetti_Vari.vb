@@ -885,3 +885,25 @@ Public Class Memo
         End Set
     End Property
 End Class
+
+Public Class DestinatarioMail
+    Private _Nome As String
+    Public Property Nome() As String
+        Get
+            Return _Nome
+        End Get
+        Set(ByVal value As String)
+            _Nome = value
+        End Set
+    End Property
+
+    Private _Email As String
+    Public Property Email() As String
+        Get
+            Return _Email
+        End Get
+        Set(ByVal value As String)
+            _Email = value
+        End Set
+    End Property
+End Class

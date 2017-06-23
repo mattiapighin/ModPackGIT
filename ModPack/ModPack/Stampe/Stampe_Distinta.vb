@@ -125,7 +125,7 @@
             e.Graphics.DrawString(Riga.Indice, FontN, Brushes.Black, RectIndice, FMT)
             DescrizioneRivestimento = SQL.GetSQLValue("SELECT Descrizione FROM Rivestimenti WHERE Tipo_Rivestimento = '" & Riga.TipoRivestimento & "'")
             e.Graphics.DrawString(DescrizioneRivestimento, FontN, Brushes.Black, RectRivestimento, FMT)
-            e.Graphics.DrawString(Riga.NumeroOrdine, FontN, Brushes.Black, RectOrdine, FMT)
+            e.Graphics.DrawString(Riga.NumeroOrdine & " (" & Riga.Riga & ")", FontN, Brushes.Black, RectOrdine, FMT)
             e.Graphics.DrawString(Riga.DataConsegna, FontN, Brushes.Black, RectConsegna, FMT)
 
             'Intestazioni
@@ -202,6 +202,8 @@
 
             e.Graphics.DrawString(DiagF, FONT, Brushes.Black, RbDiagF, FMT)
             e.Graphics.DrawString(DiagT, FONT, Brushes.Black, RbDiagT, FMT)
+
+            e.Graphics.DrawString(riga.Data_Ordine, FONT, Brushes.Gray, RbVuoto2, FMT)
 
             e.Graphics.DrawString(m2, FONT, Brushes.Black, Rbm2, FMT)
             e.Graphics.DrawString(m3, FONT, Brushes.Black, Rbm3, FMT)
@@ -541,7 +543,7 @@
                 e.Graphics.DrawString(N, FNT, Brushes.Black, R_N, Format)
             End If
 
-            If Not QT = 1 Then e.Graphics.DrawString("[" & N * QT & "]", FNT1, Brushes.Gray, R_Ntot, Format)
+            If Not QT <= 1 Then e.Graphics.DrawString("[" & N * QT & "]", FNT1, Brushes.Gray, R_Ntot, Format)
 
             If Tag = "FD" Or Tag = "TD" Then FNT_Tag = FNT_TagBold
             e.Graphics.DrawString(Tag, FNT_Tag, Brushes.Gray, R_Tag, Format)
@@ -589,10 +591,16 @@
         End Sub
 
         Public Sub Stampa_Distinte(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine)
-            CaricaDati(Riga)
-            Intestazione(sender, e, Riga)
-            PieDiPagina(sender, e, Riga)
-            Distinta(sender, e, Riga)
+            Try
+                CaricaDati(Riga)
+                Intestazione(sender, e, Riga)
+                PieDiPagina(sender, e, Riga)
+                Distinta(sender, e, Riga)
+            Catch ex As Exception
+                MsgBox("Errore durante la stampa della seguente riga:" & vbCrLf & "Ordine: " & Riga.NumeroOrdine & " Riga: " & Riga.Riga &
+                       vbCrLf & "Imballo: " & Riga.Imballo & " Pz. " & Riga.Qt & vbCrLf & ex.Message)
+            End Try
+
         End Sub
 
     End Module

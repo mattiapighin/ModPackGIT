@@ -23,9 +23,6 @@ Public Class Main
     Dim RowOrdine As New List(Of RigaOrdine)
     Dim RowIndici As New List(Of Integer)
 
-
-
-
     Public Sub CaricaMemo()
 
         Using MemoTable As New ModPackDBDataSetTableAdapters.MemoTableAdapter
@@ -56,10 +53,17 @@ Public Class Main
         Next
     End Sub
     Private Sub OperazioniPreliminari()
+
+        If Not My.Computer.FileSystem.FileExists(My.Settings.FileLogPath) Then
+            IO.File.Create(My.Settings.FileLogPath)
+        End If
+
         XML.CreaXML()
         Me.Text = "[" & System.Environment.UserName & "] - ModPack - V." & My.Application.Info.Version.ToString
-        LOG.Write("Inizio sessione")
+
+        'LOG.Write("Inizio sessione")
         CaricaMemo()
+        SQL.PuliziaOrdini()
         My.Settings.Scarto = SQL.GetPrezzoMateriale("SCART")
         My.Settings.Save()
     End Sub
@@ -68,30 +72,6 @@ Public Class Main
         OperazioniPreliminari()
     End Sub
 
-    Private Sub Bt_CaricaOrdine_Click(sender As Object, e As EventArgs) Handles Bt_CaricaOrdine.Click
-        ToolStrip.Text = "Selezione file ordine"
-        ProgressBar.Visible = True
-        'Ordine.CaricaOrdine(ProgressBar, ToolStrip, Notify)
-        Ordine.CaricaFileOrdine(ProgressBar, ToolStrip, Notify)
-        ToolStrip.Text = ""
-        ProgressBar.Visible = False
-
-    End Sub
-    Private Sub Bt_OrdiniAperti_Click(sender As Object, e As EventArgs) Handles Bt_OrdiniAperti.Click
-        Form_OrdiniAperti.Show()
-    End Sub
-    Private Sub Bt_Imballi_Click(sender As Object, e As EventArgs) Handles Bt_Imballi.Click
-        Form_Imballi.Show()
-    End Sub
-    Private Sub Bt_Preferenze_Click(sender As Object, e As EventArgs) Handles Bt_Preferenze.Click
-        Form_Preferenze.Show()
-    End Sub
-    Private Sub Bt_Memo_Click(sender As Object, e As EventArgs) Handles Bt_Memo.Click
-        Form_Memo.Show()
-    End Sub
-    Private Sub Bt_Stampe_Click(sender As Object, e As EventArgs) Handles Bt_Stampe.Click
-        Form_Tabelle.Show()
-    End Sub
 
     Private Sub Calendario_DateChanged(sender As Object, e As DateRangeEventArgs) Handles Calendario.DateChanged
         MostraMemo()
@@ -125,5 +105,100 @@ Public Class Main
                 ProgressBar.Visible = False
             End If
         Next
+    End Sub
+
+
+    Private Sub CaricaOrdiniAperti()
+        OrdiniTree.Nodes.Clear()
+
+        Using Table As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+            Using DS As New ModPackDBDataSet.OrdiniDataTable
+                Table.Fill(DS)
+
+                Dim names = From row In DS.AsEnumerable()
+                            Select row.Field(Of String)("Ordine") Distinct
+
+                Dim I As Integer = 0
+
+                For Each Ordine As String In names
+
+                    Dim Evaso = True
+                    Dim row() As DataRow = DS.Select("Ordine = '" & Ordine & "'")
+
+                    'Prima scorre tutto l'ordine per cercare se ci sono imballi non evasi
+
+                    For K = 0 To row.Length - 1
+                        If row(K)(26) = False Then Evaso = False
+                    Next
+
+
+                    If Evaso = False Then
+                        OrdiniTree.Nodes.Add(Ordine)
+                        For K = 0 To row.Length - 1
+                            If row(K)(26) = False Then
+                                OrdiniTree.Nodes(I).Nodes.Add(row(K)(3) & "  (" & row(K)(5) & ")" & "  (" & row(K)(7) & ")  (" & row(K)(8) & ")")
+                            End If
+                        Next
+                        I += 1
+                    End If
+
+                Next
+            End Using
+        End Using
+    End Sub
+    Private Sub Main_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        CaricaOrdiniAperti()
+    End Sub
+    Private Sub OrdiniTree_DoubleClick(sender As Object, e As EventArgs) Handles OrdiniTree.DoubleClick
+        If Not OrdiniTree.SelectedNode Is Nothing Then
+            Dim Imballo() As String = Split(OrdiniTree.SelectedNode.Text, "  ")
+            If Imballo.Length = 4 Then
+                Form_Imballi.ImballiBindingSource.Filter = Nothing
+                Form_Imballi.Show()
+                Form_Imballi.ImballiBindingSource.Filter = "Imballo = '" & Imballo(0) & "'"
+            End If
+        End If
+    End Sub
+
+    '### TOOLSTRIP ###
+    Private Sub TS_CaricaOrdine_Click(sender As Object, e As EventArgs) Handles TS_CaricaOrdine.Click
+        ToolStrip.Text = "Selezione file ordine"
+        ProgressBar.Visible = True
+        'Ordine.CaricaOrdine(ProgressBar, ToolStrip, Notify)
+        Ordine.CaricaFileOrdine(ProgressBar, ToolStrip, Notify)
+        ToolStrip.Text = ""
+        ProgressBar.Visible = False
+    End Sub
+    Private Sub TS_OrdiniAperti_Click(sender As Object, e As EventArgs) Handles TS_OrdiniAperti.Click
+        Form_OrdiniAperti.Show()
+    End Sub
+    Private Sub TS_StoricoOrdini_Click(sender As Object, e As EventArgs) Handles TS_StoricoOrdini.Click
+        Form_StoricoOrdini.Show()
+    End Sub
+    Private Sub TS_Imballi_Click(sender As Object, e As EventArgs) Handles TS_Imballi.Click
+        Form_Imballi.Show()
+    End Sub
+    Private Sub TS_Tabelle_Click(sender As Object, e As EventArgs) Handles TS_Tabelle.Click
+        Form_Tabelle.Show()
+    End Sub
+    Private Sub TS_Memo_Click(sender As Object, e As EventArgs) Handles TS_Memo.Click
+        Form_Memo.Show()
+    End Sub
+    Private Sub Ts_Preferenze_Click(sender As Object, e As EventArgs) Handles Ts_Preferenze.Click
+        Form_Preferenze.Show()
+    End Sub
+    Private Sub TS_ControlloOrdine_Click(sender As Object, e As EventArgs) Handles TS_ControlloOrdine.Click
+        Form_ControlloOrdineInput.Show()
+    End Sub
+    Private Sub TS_ListaElementi_Click(sender As Object, e As EventArgs) Handles TS_ListaElementi.Click
+        Form_ListaElementi.Show()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        SQL.PuliziaOrdini()
+    End Sub
+
+    Private Sub Main_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        LOG.CheckSize()
     End Sub
 End Class

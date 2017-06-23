@@ -198,6 +198,11 @@
             End If
         End Sub
         Public Sub CaricaOrdine(ByVal FileOrdine As String, Optional Progressbar As ToolStripProgressBar = Nothing, Optional Label As ToolStripStatusLabel = Nothing, Optional Notify As NotifyIcon = Nothing)
+
+            Dim ListaTipi As List(Of String) = Controlli.RiempiListaTipi
+            Dim ListaRivestimenti As List(Of String) = Controlli.RiempiListaRivestimenti
+
+
             Dim ts1 As New TimeSpan(Now.Ticks)
             If Not Label Is Nothing Then Label.Text = "Caricamento ordine"
             Dim NumeroOrdine As String = IO.Path.GetFileNameWithoutExtension(FileOrdine)
@@ -206,13 +211,15 @@
 
             Try
                 If Ordine.OrdineEXIST(IO.Path.GetFileNameWithoutExtension(FileOrdine)) = True Then
-                    LOG.Write("Ordine " & NumeroOrdine & " è già stato caricato")
+                    LOG.Write("Ordine " & NumeroOrdine & " già in carico")
                     If MsgBox("L'ordine che si stà cercando di caricare è già presente!" & vbCrLf & "Vuoi proseguire lo stesso?", vbYesNo, "Carica ordine") = MsgBoxResult.Yes Then
                         Dim NuovoNome As String = InputBox("Nuovo numero d'ordine:", "Carica Ordine", NumeroOrdine)
 
                         If Not String.IsNullOrEmpty(NuovoNome) Then
                             NumeroOrdine = NuovoNome
+                            LOG.Write("Nuovo numero d'ordine: " & NumeroOrdine)
                         Else
+                            LOG.Write("Caricamento annullato")
                             Exit Sub
                         End If
 
@@ -232,29 +239,45 @@
 
                     '4 - Trasforma ogni riga letta in un oggetto RigaOrdineINPUT
                     Dim R() As String = Split(Record, ";")
-                    Dim Riga_INPUT As New RigaOrdineINPUT With
+
+                    If R.Length = 20 Then ' Controlla che la riga sia formattata correttamente (non prende in considerazione righe vuote o sbagliate
+
+                        Dim Riga_INPUT As New RigaOrdineINPUT With
                             {.Riga = R(0), .Indice = R(1), .Qt = R(2), .Cliente = R(3), .Codice = R(4), .Commessa = R(5), .L = R(6), .P = R(7), .H = R(8), .Tipo = R(9), .Zoccoli = R(10),
                             .Rivestimento = R(11), .TipoRivestimento = R(12), .Note = R(13), .DataConsegna = R(14), .HT = R(15), .DT = R(16), .BM = R(17), .Rivest_Tot = R(18), .Diagonali = R(19),
                             .NumeroOrdine = NumeroOrdine}
 
-                    'Se è un pallet non tiene conto dell'altezza
-                    If R(9) = "P" Or R(9) = "T" Then Riga_INPUT.H = 0
+                        If Riga_INPUT.Rivestimento = False Then Riga_INPUT.TipoRivestimento = "" 'Se rivestimento = false non ci deve essere il tipo rivestimento
 
-                    If My.Settings.MisurePari = True Then
-                        'Se la misura è dispari aumenta 1
-                        If Riga_INPUT.L Mod 2 <> 0 Then Riga_INPUT.L += 1
-                        If Riga_INPUT.P Mod 2 <> 0 Then Riga_INPUT.P += 1
-                        If Riga_INPUT.H Mod 2 <> 0 Then Riga_INPUT.H += 1
+                        If Controlli.CheckTipiRivestimenti(Riga_INPUT, ListaTipi, ListaRivestimenti) = True Then
+                            'Controlli sulla riga input
 
-                        If My.Settings.ArrL5 = True Then Riga_INPUT.L = (Math.Round(Riga_INPUT.L / 5)) * 5
+                            'Se è un pallet non tiene conto dell'altezza
+                            If R(9) = "P" Or R(9) = "T" Then Riga_INPUT.H = 0
 
+                            If My.Settings.MisurePari = True Then
+                                'Se la misura è dispari aumenta 1
+                                If Riga_INPUT.L Mod 2 <> 0 Then Riga_INPUT.L += 1
+                                If Riga_INPUT.P Mod 2 <> 0 Then Riga_INPUT.P += 1
+                                If Riga_INPUT.H Mod 2 <> 0 Then Riga_INPUT.H += 1
+                                'Se attivato arrL5 la lunghezza viene arrotondata al 5 più vicino
+                                If My.Settings.ArrL5 = True Then Riga_INPUT.L = (Math.Round(Riga_INPUT.L / 5)) * 5
+                            End If
+
+                            '5 - Aggiunge l'oggetto appena creato alla lista "imballi da caricare"
+                            Lista.Add(Riga_INPUT)
+
+                        End If
+
+
+                    Else
+                        MsgBox("Attenzione, è stata trovata una riga vuota o non formattata correttamente:" & vbCrLf & "[" & Record & "]")
                     End If
 
-                    '5 - Aggiunge l'oggetto appena creato alla lista "imballi da caricare"
-                    Lista.Add(Riga_INPUT)
                 Next
 
-                Debug.WriteLine("Fine presa in carico ordine " & IO.Path.GetFileNameWithoutExtension(FileOrdine) & " numero totale di elementi:  " & Lista.Count)
+                    Debug.WriteLine("Fine presa in carico ordine " & IO.Path.GetFileNameWithoutExtension(FileOrdine) & " numero totale di elementi:  " & Lista.Count)
+
                 If Not Progressbar Is Nothing Then
                     Progressbar.Value = 0
                     Progressbar.Maximum = Lista.Count
@@ -263,15 +286,15 @@
 
             Catch ex As Exception
                 MsgBox("Problema con la presa in carico dell'ordine" & vbCrLf & ex.Message)
-                Exit Sub
+            Exit Sub
             End Try
 
             '################################# ELABORA LA LISTA APPENA CREATA ###############################
 
             Try
                 If Not Label Is Nothing Then Label.Text = "Elaborazione Ordine"
-                Dim Magazzino As String = InputBox("Magazzino:", "Carica ordine", "1")
-                If String.IsNullOrEmpty(Magazzino) Then Magazzino = 0
+                Dim Magazzino As String = InputBox("ORDINE: " & NumeroOrdine & vbCrLf & "Sono stati trovati " & Lista.Count & " imballi" & vbCrLf & "Selezionare magazzino:", "Carica ordine", "1")
+                If String.IsNullOrEmpty(Magazzino) Then Exit Sub
 
                 '6 - Legge la lista appena creata e controlla se esistono in memoria imballi corrispondenti
 
@@ -398,24 +421,22 @@
 
                 Next
 
+                Dim ts2 As New TimeSpan(Now.Ticks)
+
                 If Not Notify Is Nothing Then
                     Notify.BalloonTipTitle = "ModPack"
-                    Notify.BalloonTipText = "Caricamento ordine '" & NumeroOrdine & "' completato!"
+                    Notify.BalloonTipText = "Caricamento ordine '" & NumeroOrdine & "' completato in " & (ts2 - ts1).TotalSeconds.ToString & " secondi"
                     Notify.ShowBalloonTip(2000)
                 End If
 
+                LOG.Write("Tempo elaborazione ordine: " & (ts2 - ts1).TotalSeconds.ToString & " secondi")
+
+                If Not Progressbar Is Nothing Then Progressbar.Value = 0
+                If Not Label Is Nothing Then Label.Text = "Caricamento completato in " & (ts2 - ts1).TotalSeconds.ToString & " secondi"
 
             Catch ex As Exception
                 MsgBox("Problema con l'elaborazione dell'ordine" & vbCrLf & ex.Message)
             End Try
-
-            Dim ts2 As New TimeSpan(Now.Ticks)
-            LOG.Write("Tempo elaborazione ordine: " & (ts2 - ts1).ToString)
-
-            If My.Settings.Developer = True Then
-                MessageBox.Show("Tempo impiegato per elaborare l'ordine: " & (ts2 - ts1).ToString)
-
-            End If
 
             '8 - Se la lista dei nuovi imballi non è vuota permette di stamparla 
             If ListaNuovi.Count > 0 Then
@@ -425,8 +446,6 @@
                 End If
             End If
 
-            If Not Progressbar Is Nothing Then Progressbar.Value = 0
-            If Not Label Is Nothing Then Label.Text = "Caricamento completato"
         End Sub
 
         Public Sub MostraNuovi()
@@ -566,9 +585,9 @@
                     DRW(DTB.Columns(0).ColumnName.ToString) = lista.Item(RWS)
                     DRW(DTB.Columns(1).ColumnName.ToString) = Descrizione
                     DRW(DTB.Columns(2).ColumnName.ToString) = ListaNuovi.Item(RWS).M3
-                    DRW(DTB.Columns(2).ColumnName.ToString) = ListaNuovi.Item(RWS).Prezzo
+                DRW(DTB.Columns(3).ColumnName.ToString) = ListaNuovi.Item(RWS).Prezzo
 
-                    DTB.Rows.Add(DRW)
+                DTB.Rows.Add(DRW)
 
                 Next
 

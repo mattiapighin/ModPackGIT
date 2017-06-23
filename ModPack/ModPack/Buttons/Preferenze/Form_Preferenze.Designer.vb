@@ -43,7 +43,9 @@ Partial Class Form_Preferenze
         Me.Ck_Evaso = New System.Windows.Forms.CheckBox()
         Me.Ck_ColoraScaduti = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Txt_LimiteStorico = New System.Windows.Forms.TextBox()
         Me.Ck_CheckCaricamento = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Ck_ColoraEvasi = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -268,6 +270,7 @@ Partial Class Form_Preferenze
         'Ck_Evaso
         '
         Me.Ck_Evaso.AutoSize = True
+        Me.Ck_Evaso.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Ck_Evaso.Location = New System.Drawing.Point(15, 19)
         Me.Ck_Evaso.Name = "Ck_Evaso"
         Me.Ck_Evaso.Size = New System.Drawing.Size(335, 17)
@@ -278,7 +281,8 @@ Partial Class Form_Preferenze
         'Ck_ColoraScaduti
         '
         Me.Ck_ColoraScaduti.AutoSize = True
-        Me.Ck_ColoraScaduti.Location = New System.Drawing.Point(15, 42)
+        Me.Ck_ColoraScaduti.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Ck_ColoraScaduti.Location = New System.Drawing.Point(15, 43)
         Me.Ck_ColoraScaduti.Name = "Ck_ColoraScaduti"
         Me.Ck_ColoraScaduti.Size = New System.Drawing.Size(346, 17)
         Me.Ck_ColoraScaduti.TabIndex = 13
@@ -287,31 +291,52 @@ Partial Class Form_Preferenze
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Txt_LimiteStorico)
         Me.GroupBox1.Controls.Add(Me.Ck_CheckCaricamento)
+        Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Ck_ColoraEvasi)
         Me.GroupBox1.Controls.Add(Me.Ck_Evaso)
         Me.GroupBox1.Controls.Add(Me.Ck_ColoraScaduti)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 134)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(378, 114)
+        Me.GroupBox1.Size = New System.Drawing.Size(378, 144)
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Preferenze"
         '
+        'Txt_LimiteStorico
+        '
+        Me.Txt_LimiteStorico.Location = New System.Drawing.Point(146, 112)
+        Me.Txt_LimiteStorico.Name = "Txt_LimiteStorico"
+        Me.Txt_LimiteStorico.Size = New System.Drawing.Size(48, 20)
+        Me.Txt_LimiteStorico.TabIndex = 28
+        '
         'Ck_CheckCaricamento
         '
         Me.Ck_CheckCaricamento.AutoSize = True
-        Me.Ck_CheckCaricamento.Location = New System.Drawing.Point(15, 88)
+        Me.Ck_CheckCaricamento.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Ck_CheckCaricamento.Location = New System.Drawing.Point(15, 91)
         Me.Ck_CheckCaricamento.Name = "Ck_CheckCaricamento"
         Me.Ck_CheckCaricamento.Size = New System.Drawing.Size(228, 17)
         Me.Ck_CheckCaricamento.TabIndex = 15
         Me.Ck_CheckCaricamento.Text = "Controllo su caricamento di ogni riga ordine"
         Me.Ck_CheckCaricamento.UseVisualStyleBackColor = True
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(18, 115)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(257, 13)
+        Me.Label11.TabIndex = 27
+        Me.Label11.Text = "Carica nello storico ultimi                      ordini (0 = tutti)"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'Ck_ColoraEvasi
         '
         Me.Ck_ColoraEvasi.AutoSize = True
-        Me.Ck_ColoraEvasi.Location = New System.Drawing.Point(15, 65)
+        Me.Ck_ColoraEvasi.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Ck_ColoraEvasi.Location = New System.Drawing.Point(15, 67)
         Me.Ck_ColoraEvasi.Name = "Ck_ColoraEvasi"
         Me.Ck_ColoraEvasi.Size = New System.Drawing.Size(267, 17)
         Me.Ck_ColoraEvasi.TabIndex = 14
@@ -326,7 +351,7 @@ Partial Class Form_Preferenze
         Me.GroupBox2.Controls.Add(Me.Nu_FontDistinta)
         Me.GroupBox2.Controls.Add(Me.CkBarcodeSoloCodice)
         Me.GroupBox2.Controls.Add(Me.Ck_Barcode)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 254)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 284)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(378, 71)
         Me.GroupBox2.TabIndex = 15
@@ -404,9 +429,9 @@ Partial Class Form_Preferenze
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.TxtScegliExcel)
         Me.GroupBox3.Controls.Add(Me.Bt_ScegliExcel)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 331)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 361)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(378, 121)
+        Me.GroupBox3.Size = New System.Drawing.Size(378, 88)
         Me.GroupBox3.TabIndex = 17
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Riferimenti"
@@ -436,7 +461,7 @@ Partial Class Form_Preferenze
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 72)
+        Me.Label10.Location = New System.Drawing.Point(6, 41)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(84, 13)
         Me.Label10.TabIndex = 23
@@ -454,7 +479,7 @@ Partial Class Form_Preferenze
         'TxtScegliExcel
         '
         Me.TxtScegliExcel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtScegliExcel.Location = New System.Drawing.Point(59, 88)
+        Me.TxtScegliExcel.Location = New System.Drawing.Point(59, 57)
         Me.TxtScegliExcel.Name = "TxtScegliExcel"
         Me.TxtScegliExcel.Size = New System.Drawing.Size(313, 23)
         Me.TxtScegliExcel.TabIndex = 19
@@ -462,7 +487,7 @@ Partial Class Form_Preferenze
         '
         'Bt_ScegliExcel
         '
-        Me.Bt_ScegliExcel.Location = New System.Drawing.Point(6, 88)
+        Me.Bt_ScegliExcel.Location = New System.Drawing.Point(6, 57)
         Me.Bt_ScegliExcel.Name = "Bt_ScegliExcel"
         Me.Bt_ScegliExcel.Size = New System.Drawing.Size(47, 23)
         Me.Bt_ScegliExcel.TabIndex = 18
@@ -590,4 +615,6 @@ Partial Class Form_Preferenze
     Friend WithEvents RBexcel_nuovi As RadioButton
     Friend WithEvents RBtext_nuovi As RadioButton
     Friend WithEvents CkDeveloper As CheckBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Txt_LimiteStorico As TextBox
 End Class

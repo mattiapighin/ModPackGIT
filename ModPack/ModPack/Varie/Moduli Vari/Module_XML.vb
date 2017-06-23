@@ -47,6 +47,27 @@
                     .WriteValue("0")
                     .WriteEndElement()
 
+                    .WriteStartElement("Pulizia_Ordine")
+                    .WriteValue("True")
+                    .WriteEndElement()
+
+                    .WriteStartElement("Giorni_Memoria_Ordine")
+                    .WriteValue("60")
+                    .WriteEndElement()
+
+                    .WriteStartElement("Max_LOG")
+                    .WriteValue("1048576")
+                    .WriteEndElement()
+
+                    .WriteStartElement("Diagonali")
+                    .WriteStartElement("Max_Gradi")
+                    .WriteValue("45")
+                    .WriteEndElement()
+                    .WriteStartElement("Inverti")
+                    .WriteValue("True")
+                    .WriteEndElement()
+                    .WriteEndElement()
+
                     .WriteEndDocument()
                     .Close()
 

@@ -4,8 +4,12 @@
         Dim FileLog As String = My.Settings.FileLogPath
 
         Public Sub CheckSize()
+
+            Dim xml = XDocument.Load(My.Settings.XMLpath)
+            Dim Valore As Integer = xml.<Data>.<Max_LOG>.Value
+
             Try
-                'Se il log non esiste o viene eliminato lo crea
+                'Se il log non esiste o è stato eliminato lo crea
                 If Not My.Computer.FileSystem.FileExists(FileLog) Then
                     IO.File.Create(FileLog)
                 Else
@@ -14,21 +18,19 @@
                     Dim infoReader As System.IO.FileInfo
                     infoReader = My.Computer.FileSystem.GetFileInfo(My.Settings.FileLogPath)
 
-                    Debug.WriteLine("Log file size : " & infoReader.Length)
-                    Debug.WriteLine("Log file size : " & infoReader.DirectoryName)
-
-                    If infoReader.Length > My.Settings.MaxLengthLog Then
-
+                    If infoReader.Length > Valore Then
                         IO.File.Copy(FileLog, infoReader.DirectoryName & "\BackupLog.txt", True)
-
+                        IO.File.Delete(FileLog)
+                        MsgBox("Pulizia file log effettuata!")
                     End If
-                    LOG.Clean()
+
                 End If
 
             Catch ex As Exception
-                MsgBox(ex.Message)
+
             End Try
         End Sub
+
         Public Sub Clean()
             Try
                 IO.File.WriteAllText(FileLog, "")

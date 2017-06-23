@@ -83,6 +83,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons\Imballi\Form_Imballi_Colonne.Designer.vb">
+      <DependentUpon>Form_Imballi_Colonne.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Imballi\Form_Imballi_Colonne.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Imballi\Form_Imballi_Filtro.Designer.vb">
+      <DependentUpon>Form_Imballi_Filtro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Imballi\Form_Imballi_Filtro.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Buttons\Imballi\Form_Imballi.Designer.vb">
       <DependentUpon>Form_Imballi.vb</DependentUpon>
     </Compile>
@@ -107,28 +119,28 @@
     <Compile Include="Buttons\Memo\Form_Memo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Buttons\Ordini Aperti\Form_StampaListe.Designer.vb">
-      <DependentUpon>Form_StampaListe.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\Ordini Aperti\Form_StampaListe.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.Designer.vb">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Buttons\Preferenze\Form_Preferenze_Email.Designer.vb">
+    <Compile Include="Email\Form_Preferenze_Email.Designer.vb">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\Preferenze\Form_Preferenze_Email.vb">
+    <Compile Include="Email\Form_Preferenze_Email.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Buttons\Tabelle\Form_Tabelle.Designer.vb">
       <DependentUpon>Form_Tabelle.vb</DependentUpon>
     </Compile>
     <Compile Include="Buttons\Tabelle\Form_Tabelle.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controlli\Form_ControlloOrdineInput.Designer.vb">
+      <DependentUpon>Form_ControlloOrdineInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controlli\Form_ControlloOrdineInput.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\ScegliOrdine.Designer.vb">
@@ -138,6 +150,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Distinte\Module_Prezzi.vb" />
+    <Compile Include="Email\Mail_ScegliDestinatari.Designer.vb">
+      <DependentUpon>Mail_ScegliDestinatari.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Email\Mail_ScegliDestinatari.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email\Mail.vb" />
     <Compile Include="ModPackDBDataSet.vb">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
@@ -149,6 +168,18 @@
     </Compile>
     <Compile Include="Stampe\Modulo_Stampe.vb" />
     <Compile Include="Stampe\Stampe_Distinta.vb" />
+    <Compile Include="Tools\Form_ListaElementi.Designer.vb">
+      <DependentUpon>Form_ListaElementi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Form_ListaElementi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Form_StoricoOrdini.Designer.vb">
+      <DependentUpon>Form_StoricoOrdini.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Form_StoricoOrdini.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
     <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
     <Compile Include="Distinte\Creazione Distinte\NuovoImballo.vb" />
@@ -167,6 +198,7 @@
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Varie\Moduli Vari\Module_Barcode.vb" />
+    <Compile Include="Controlli\Module_Controlli.vb" />
     <Compile Include="Varie\Moduli Vari\Module_IMG.vb" />
     <Compile Include="Varie\Moduli Vari\Module_Log.vb" />
     <Compile Include="Varie\Moduli Vari\Module_SQL.vb" />
@@ -194,6 +226,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Buttons\Imballi\Form_Imballi_Colonne.resx">
+      <DependentUpon>Form_Imballi_Colonne.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Imballi\Form_Imballi_Filtro.resx">
+      <DependentUpon>Form_Imballi_Filtro.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Imballi\Form_Imballi.resx">
       <DependentUpon>Form_Imballi.vb</DependentUpon>
     </EmbeddedResource>
@@ -206,20 +244,23 @@
     <EmbeddedResource Include="Buttons\Memo\Form_Memo.resx">
       <DependentUpon>Form_Memo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Buttons\Ordini Aperti\Form_StampaListe.resx">
-      <DependentUpon>Form_StampaListe.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze_Email.resx">
+    <EmbeddedResource Include="Email\Form_Preferenze_Email.resx">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Tabelle\Form_Tabelle.resx">
       <DependentUpon>Form_Tabelle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controlli\Form_ControlloOrdineInput.resx">
+      <DependentUpon>Form_ControlloOrdineInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ScegliOrdine.resx">
       <DependentUpon>ScegliOrdine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Email\Mail_ScegliDestinatari.resx">
+      <DependentUpon>Mail_ScegliDestinatari.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
@@ -232,6 +273,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Ordini Aperti\Form_OrdiniAperti.resx">
       <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Form_ListaElementi.resx">
+      <DependentUpon>Form_ListaElementi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Form_StoricoOrdini.resx">
+      <DependentUpon>Form_StoricoOrdini.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Varie\MsgBox\MsgMoraliFrescoHT.resx">
       <DependentUpon>MsgMoraliFrescoHT.vb</DependentUpon>
@@ -272,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icoBig.ico" />
+    <None Include="Resources\ROV.jpg" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
