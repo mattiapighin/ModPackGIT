@@ -430,5 +430,24 @@ Namespace SQL
 
         End Sub
 
+        Public Function Fresata(ByVal Tipo As String) As Boolean
+            Dim Fres As Boolean = False
+            Using Tipi As New ModPackDBDataSetTableAdapters.TipiTableAdapter
+                Using DS As New ModPackDBDataSet.TipiDataTable
+                    Tipi.Fill(DS)
+
+                    Dim Row() As DataRow = DS.Select("Tipo = '" & Tipo & "'")
+
+                    If Row.Length > 0 Then
+                        Fres = Row(0)(12)
+                    End If
+
+                End Using
+            End Using
+
+            Return Fres
+        End Function
+
+
     End Module
 End Namespace

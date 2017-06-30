@@ -22,6 +22,8 @@
 
         Dim IMG As Image
 
+        Dim Xmor As Single
+        Dim Ymor As Single
 
         Private Sub CaricaDati(Riga As RigaOrdine)
             PrimoMorale = 0
@@ -72,6 +74,56 @@
 
                 End Using
             End Using
+        End Sub
+
+        Private Sub QR_Code(sender As Object, e As Printing.PrintPageEventArgs, riga As RigaOrdine, x As Integer, y As Integer, width As Integer)
+
+            Dim STRINGA As String =
+                            riga.Imballo & " PZ. " & riga.Qt & vbCrLf &
+                            "ORD. " & riga.NumeroOrdine & " DEL " & riga.Data_Ordine & vbCrLf &
+                            "D: " & riga.Codice & vbCrLf &
+                            "C: " & riga.Commessa & vbCrLf &
+                            "MAGAZZINO " & riga.Magazzino & vbCrLf &
+                            "DATA CONSEGNA " & riga.DataConsegna & vbCrLf &
+                            "INDICE " & riga.Indice
+
+            e.Graphics.DrawImage(BarCode.QR(STRINGA, width), x, y)
+
+        End Sub
+        Private Sub Morale(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine, X As Integer, Y As Integer)
+            If Riga.Zoccoli = "2V" Then
+
+                Dim Fresata As Boolean = SQL.Fresata(Riga.Tipo)
+
+
+                Dim Fontz As New Font("Calibri", 7)
+
+                Dim Xmorale = Xmor * 2
+                Dim Ymorale = Ymor * 2
+
+                Dim R As New Rectangle(X, Y, 60, 60)
+                e.Graphics.DrawRectangle(Pens.Gray, R)
+
+                Dim Centro As New PointF(R.X + (R.Width / 2), R.Y + (R.Height / 2))
+                Dim Morale As New Rectangle(Centro.X - (Xmorale / 2), Centro.Y - (Ymorale / 2), Xmorale, Ymorale)
+
+                Dim RmisuraX As New Rectangle(R.X, R.Y, R.Width, 20)
+                Dim RmisuraY As New Rectangle(R.Right - 20, R.Y, 20, R.Height)
+                Dim Rfresato As New Rectangle(R.X, R.Bottom - 15, R.Width, 15)
+
+                e.Graphics.FillRectangle(Brushes.Wheat, Morale)
+                e.Graphics.DrawRectangle(Pens.Black, Morale)
+
+                e.Graphics.DrawString(Xmor, Fontz, Brushes.Black, RmisuraX, FMT)
+                e.Graphics.DrawString(Ymor, Fontz, Brushes.Black, RmisuraY, FMT)
+
+
+                If Fresata = True Then
+                    e.Graphics.DrawString("FRESARE", New Font("Calibri", 7, FontStyle.Bold), Brushes.Black, Rfresato, FMT)
+                End If
+
+
+            End If
         End Sub
 
         Private Sub Intestazione(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine)
@@ -211,6 +263,9 @@
         End Sub
 
         Private Sub Distinta(sender As Object, e As Printing.PrintPageEventArgs, riga As RigaOrdine)
+
+            ' QR_Code(sender, e, riga, 400, 400, 150)
+
             Dim DS As New DataSet
             Dim LST As New List(Of RowDistinta)
 
@@ -275,6 +330,9 @@
                 e.Graphics.DrawString("BANCALE", fnt, Brushes.Black, Rect_Riga, FMT)
                 Rect_Riga.Y += Rect_Riga.Height
 
+                Xmor = LST(0).X
+                Ymor = LST(0).Y
+
 
                 For Each K As RowDistinta In (From row In LST Where row.Part = "B")
                     If Not K.N = 0 Then
@@ -288,7 +346,7 @@
             If COPERCHIO = True Then
                 e.Graphics.FillRectangle(Brushes.LightGray, Rect_Riga.X, Rect_Riga.Y + 3, Rect_Riga.Width - 3, Rect_Riga.Height - 6)
                 e.Graphics.DrawRectangle(Pens.LightGray, Rect_Riga)
-                e.Graphics.DrawString("COPERCHIO", FNT, Brushes.Black, Rect_Riga, FMT)
+                e.Graphics.DrawString("COPERCHIO", fnt, Brushes.Black, Rect_Riga, FMT)
                 Rect_Riga.Y += Rect_Riga.Height
 
                 For Each K As RowDistinta In (From row In LST Where row.Part = "C")
@@ -303,7 +361,7 @@
             If FIANCATE = True Then
                 e.Graphics.FillRectangle(Brushes.LightGray, Rect_Riga.X, Rect_Riga.Y + 3, Rect_Riga.Width - 3, Rect_Riga.Height - 6)
                 e.Graphics.DrawRectangle(Pens.LightGray, Rect_Riga)
-                e.Graphics.DrawString("FIANCATE", FNT, Brushes.Black, Rect_Riga, FMT)
+                e.Graphics.DrawString("FIANCATE", fnt, Brushes.Black, Rect_Riga, FMT)
                 Rect_Riga.Y += Rect_Riga.Height
 
                 For Each K As RowDistinta In (From row In LST Where row.Part = "F")
@@ -318,7 +376,7 @@
             If TESTE = True Then
                 e.Graphics.FillRectangle(Brushes.LightGray, Rect_Riga.X, Rect_Riga.Y + 3, Rect_Riga.Width - 3, Rect_Riga.Height - 6)
                 e.Graphics.DrawRectangle(Pens.LightGray, Rect_Riga)
-                e.Graphics.DrawString("TESTE", FNT, Brushes.Black, Rect_Riga, FMT)
+                e.Graphics.DrawString("TESTE", fnt, Brushes.Black, Rect_Riga, FMT)
                 Rect_Riga.Y += Rect_Riga.Height
 
                 For Each K As RowDistinta In (From row In LST Where row.Part = "T")
@@ -471,14 +529,14 @@
 
 
                 e.Graphics.DrawString("2", fnt, Brushes.Black, RectBCRivQt, FMT)
-                    e.Graphics.DrawString("2", fnt, Brushes.Black, RectFRivQt, FMT)
-                    e.Graphics.DrawString("2", fnt, Brushes.Black, RectTRivQt, FMT)
+                e.Graphics.DrawString("2", fnt, Brushes.Black, RectFRivQt, FMT)
+                e.Graphics.DrawString("2", fnt, Brushes.Black, RectTRivQt, FMT)
 
-                    If riga.Qt > 1 Then
-                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
-                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
-                        e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
-                    End If
+                If riga.Qt > 1 Then
+                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
+                End If
 
 
                 e.Graphics.DrawString(DescrizioneRivestimento, New Font("Calibri", My.Settings.DimensioneFontDistinta, FontStyle.Bold), Brushes.Black, Riga1RIV, FMT)
@@ -488,6 +546,8 @@
             End If
 
             '######### INFO TIPO GABBIA ##########
+
+            Morale(sender, e, riga, RectIMG.X, RectBarcode.Y) 'Disegno morale
 
             Dim InfoTipo As String = SQL.GetInfoTipo(riga.Tipo)
 
@@ -596,6 +656,7 @@
                 Intestazione(sender, e, Riga)
                 PieDiPagina(sender, e, Riga)
                 Distinta(sender, e, Riga)
+                Pdf.Stampa(Riga.Imballo)
             Catch ex As Exception
                 MsgBox("Errore durante la stampa della seguente riga:" & vbCrLf & "Ordine: " & Riga.NumeroOrdine & " Riga: " & Riga.Riga &
                        vbCrLf & "Imballo: " & Riga.Imballo & " Pz. " & Riga.Qt & vbCrLf & ex.Message)

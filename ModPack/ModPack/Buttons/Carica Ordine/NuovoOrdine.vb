@@ -199,6 +199,7 @@
         End Sub
         Public Sub CaricaOrdine(ByVal FileOrdine As String, Optional Progressbar As ToolStripProgressBar = Nothing, Optional Label As ToolStripStatusLabel = Nothing, Optional Notify As NotifyIcon = Nothing)
 
+            Dim ContaNuovi As Integer = 0
             Dim ListaTipi As List(Of String) = Controlli.RiempiListaTipi
             Dim ListaRivestimenti As List(Of String) = Controlli.RiempiListaRivestimenti
 
@@ -397,6 +398,7 @@
                                 .Stampato = False, .Produzione = False, .Evaso = False}
 
                             ListaNuovi.Add(ImballoName)
+                            ContaNuovi += 1
 
                             '7.1.2 - Limballo appena creato viene inserito nella OrdiniTable
                             SQL.InsertRigaOrdini(RIGA_ORDINE)
@@ -441,7 +443,7 @@
             '8 - Se la lista dei nuovi imballi non è vuota permette di stamparla 
             If ListaNuovi.Count > 0 Then
                 If MsgBox("Durante la presa in carico dell'ordine sono stati creati" & vbCrLf &
-                         ListaNuovi.Count & " imballi nuovi. Vuoi stampare la lista?" & vbCrLf & "(La lista resterà in memoria fino alla chiusura dell'applicazione)", vbYesNo, "Imballi Nuovi") = MsgBoxResult.Yes Then
+                         ContaNuovi & " imballi nuovi. Vuoi stampare la lista? (Totale: " & ListaNuovi.Count & ")" & vbCrLf & "(La lista resterà in memoria fino alla chiusura dell'applicazione)", vbYesNo, "Imballi Nuovi") = MsgBoxResult.Yes Then
                     MostraNuovi()
                 End If
             End If

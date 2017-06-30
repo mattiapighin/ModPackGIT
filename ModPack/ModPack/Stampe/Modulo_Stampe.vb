@@ -422,5 +422,102 @@
             LOG.Write("Stampa etichetta " & Imballo & " - " & Quantita)
         End Sub
 
+        Public Sub EtichettaBarcode(sender As Object, e As Printing.PrintPageEventArgs, Magazzino As String, Cliente As String, Disegno As String, Commessa As String, Imballo As String, Quantita As String, Ordine As String)
+
+            'Fa cagare perchè non si vede il codice a barre
+
+            Dim Font As New Font("Calibri", 20, FontStyle.Regular)
+            Dim FontBold As New Font("Calibri", 20, FontStyle.Bold)
+            Dim Piccolo As New Font("Calibri", 6, FontStyle.Regular)
+
+            Dim Riga1 As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height / 6)
+            Dim Riga2 As New Rectangle(e.MarginBounds.Left, Riga1.Bottom, e.MarginBounds.Width, e.MarginBounds.Height / 6)
+            Dim Riga3 As New Rectangle(e.MarginBounds.Left, Riga2.Bottom, e.MarginBounds.Width, e.MarginBounds.Height / 6)
+            Dim Riga4 As New Rectangle(e.MarginBounds.Left, Riga3.Bottom, e.MarginBounds.Width, e.MarginBounds.Height / 6)
+            Dim Riga5 As New Rectangle(e.MarginBounds.Left, Riga4.Bottom, e.MarginBounds.Width, (e.MarginBounds.Height / 6) * 2)
+
+
+            e.Graphics.DrawRectangle(Pens.Black, Riga1)
+            e.Graphics.DrawRectangle(Pens.Black, Riga2)
+            e.Graphics.DrawRectangle(Pens.Black, Riga3)
+            e.Graphics.DrawRectangle(Pens.Black, Riga4)
+            ' e.Graphics.DrawRectangle(Pens.Black, Riga5)
+
+
+            '# RIGA 1   -   LOGO, MAGAZZINO
+            Dim RectLogo As New Rectangle(Riga1.Left, Riga1.Top, Riga1.Width / 3 * 2, Riga1.Height)
+            Dim RectMagazzino As New Rectangle(RectLogo.Right, Riga1.Top, Riga1.Width / 3, Riga1.Height)
+
+            e.Graphics.DrawRectangle(Pens.Black, RectLogo)
+
+            '# RIGA 2   -   CLIENTE
+            Dim RectCliente As New Rectangle(Riga2.Left, Riga2.Top, Riga2.Width, Riga2.Height)
+
+            '# RIGA 3   -   DISEGNO
+            Dim RectD As New Rectangle(Riga3.Left, Riga3.Top, Riga3.Width / 4, Riga3.Height)
+            Dim RectDisegno As New Rectangle(RectD.Right, Riga3.Top, Riga3.Width / 4 * 3, Riga3.Height)
+
+            e.Graphics.DrawRectangle(Pens.Black, RectD)
+
+            '# RIGA 4   -   COMMESSA
+            Dim RectC As New Rectangle(Riga4.Left, Riga4.Top, Riga4.Width / 4, Riga4.Height)
+            Dim RectCommessa As New Rectangle(RectC.Right, Riga4.Top, Riga4.Width / 4 * 3, Riga4.Height)
+
+            e.Graphics.DrawRectangle(Pens.Black, RectC)
+
+            '# RIGA 5   -   CODICE, QT, ORDINE
+
+            Dim IMG As Image = BarCode.Genera(Imballo & "_" & Quantita & "_" & Ordine, True, Riga5.Height - 10)
+            Dim PointIMG As New PointF((Riga5.Width / 2) - (IMG.Width / 2), Riga5.Y + 10)
+            e.Graphics.DrawImage(IMG, PointIMG)
+
+
+            Dim RectCodice As New Rectangle(Riga5.Left, Riga5.Top, Riga5.Width / 5 * 2, Riga5.Height)
+            Dim RectQt As New Rectangle(RectCodice.Right, Riga5.Top, Riga5.Width / 5, Riga5.Height)
+            Dim RectOrdine As New Rectangle(RectQt.Right, Riga5.Top, Riga5.Width / 5 * 2, Riga5.Height)
+
+            'e.Graphics.FillRectangle(Brushes.LightGray, RectOrdine)
+            'e.Graphics.DrawRectangle(Pens.Black, Riga5)
+            'e.Graphics.DrawRectangle(Pens.Black, RectQt)
+
+            ImmagineInRettangolo(My.Resources.Logo, RectLogo, e)
+
+            ' ################################################################################################################
+
+            e.Graphics.DrawString("MAGAZZINO", Piccolo, Brushes.Gray, RectMagazzino)
+            'e.Graphics.DrawString("CLIENTE", Piccolo, Brushes.Gray, RectCliente)
+            'e.Graphics.DrawString("CODICE", Piccolo, Brushes.Gray, RectCodice)
+            'e.Graphics.DrawString("QT", Piccolo, Brushes.Gray, RectQt)
+
+            ' ################################################################################################################
+
+            e.Graphics.DrawString("MAG." & Magazzino, FontBold, Brushes.Black, RectMagazzino, FMT)
+            e.Graphics.DrawString(Cliente, Font, Brushes.Black, RectCliente, FMT)
+            e.Graphics.DrawString("D", Font, Brushes.Black, RectD, FMT)
+            e.Graphics.DrawString(Disegno, Font, Brushes.Black, RectDisegno, FMT)
+            e.Graphics.DrawString("C", Font, Brushes.Black, RectC, FMT)
+            e.Graphics.DrawString(Commessa, Font, Brushes.Black, RectCommessa, FMT)
+            'e.Graphics.DrawString(Imballo, FontBold, Brushes.Black, RectCodice, FMT)
+            'e.Graphics.DrawString(Quantita, FontBold, Brushes.Black, RectQt, FMT)
+            'e.Graphics.DrawString(Ordine, New Font("Calibri", 12, FontStyle.Bold), Brushes.Black, RectOrdine, FMT)
+
+            LOG.Write("Stampa etichetta " & Imballo & " - " & Quantita)
+        End Sub
+        Public Sub EtichettaQR(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine)
+            Dim STRINGA As String =
+                           Riga.Imballo & " PZ. " & Riga.Qt & vbCrLf &
+                           "ORD. " & Riga.NumeroOrdine & " DEL " & Riga.Data_Ordine & vbCrLf &
+                            Riga.Cliente & vbCrLf &
+                            Riga.Codice & vbCrLf &
+                            Riga.Commessa & vbCrLf &
+                           "MAGAZZINO " & Riga.Magazzino & vbCrLf &
+                           "DATA CONSEGNA " & Riga.DataConsegna & vbCrLf &
+                           "INDICE " & Riga.Indice
+
+            Dim Point As New PointF((e.MarginBounds.Width / 2) - (e.MarginBounds.Height / 2), e.MarginBounds.Top)
+            e.Graphics.DrawImage(BarCode.QR(STRINGA, e.MarginBounds.Height), Point)
+
+        End Sub
+
     End Module
 End Namespace

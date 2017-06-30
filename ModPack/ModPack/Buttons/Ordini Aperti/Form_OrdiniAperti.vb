@@ -17,7 +17,6 @@ Public Class Form_OrdiniAperti
         Bt_ConfermaOrdine.Enabled = False
         Bt_Disegni.Enabled = False
         Bt_CheckList.Enabled = False
-        Bt_ListaMorali.Enabled = False
         Bt_ListaRivestimenti.Enabled = False
     End Sub
     Private Sub SbloccaButtons()
@@ -25,7 +24,6 @@ Public Class Form_OrdiniAperti
         Bt_ConfermaOrdine.Enabled = True
         Bt_Disegni.Enabled = True
         Bt_CheckList.Enabled = True
-        Bt_ListaMorali.Enabled = True
         Bt_ListaRivestimenti.Enabled = True
     End Sub
 
@@ -285,7 +283,6 @@ Public Class Form_OrdiniAperti
                     Print_Etichette.DocumentName = "ET" & Ordine
                     Print_Etichette.Print()
 
-
                 End If
             End If
         Else
@@ -528,4 +525,77 @@ Public Class Form_OrdiniAperti
     End Sub
 
 
+    Private Sub Print_QR_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Print_QR.PrintPage
+        Static QRstampati = 0
+        Static EtichetteTotali As Integer = RowOrdine.Count - 1
+        Stampe.EtichettaQR(sender, e, RowOrdine(QRstampati))
+        QRstampati += 1
+
+        If QRstampati <= EtichetteTotali Then
+            e.HasMorePages = True
+        Else
+            e.HasMorePages = False
+            QRstampati = 0
+        End If
+    End Sub
+
+    Private Sub Bt_QrCodes_Click(sender As Object, e As EventArgs) Handles Bt_QrCodes.Click
+        ' ### SETTA STAMPANTE ###
+        'Carica da my.settings tutti i settaggi per la stampante delle etichette
+        Print_QR.PrinterSettings.PrinterName = My.Settings.Etichette_Stampante
+        Dim psz As New Printing.PaperSize With {.RawKind = Printing.PaperKind.Custom, .Width = (My.Settings.Etichette_DimensioneX / 0.254), .Height = (My.Settings.Etichette_DimensioneY / 0.254)}
+        Print_QR.DefaultPageSettings.PaperSize = psz
+
+        With Print_QR.DefaultPageSettings.Margins
+            .Top = (My.Settings.Etichette_MargineTop / 0.254)
+            .Bottom = (My.Settings.Etichette_MargineBottom / 0.254)
+            .Left = (My.Settings.Etichette_MargineLeft / 0.254)
+            .Right = (My.Settings.Etichette_MargineRight / 0.254)
+        End With
+        ' ##############################
+
+        RowOrdine.Clear()
+        Ordine = DGW_OrdiniAperti.CurrentRow.Cells(0).Value
+
+        Using OrdineTable As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+            Using Ds As New ModPackDBDataSet.OrdiniDataTable
+
+                OrdineTable.Fill(Ds)
+
+                If Not My.Computer.Keyboard.CtrlKeyDown Then
+
+                    'Se non è premuto CTRL stampa tutto l'ordine
+                    For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
+                        If Row.Ordine = Ordine Then
+                            Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
+                                .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
+                                .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = Row.Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                            RowOrdine.Add(Riga)
+                        End If
+                    Next
+                Else
+
+                    'Se è premuto CTRL stampa solo le righe selezionate
+                    For Each Row As ModPackDBDataSet.OrdiniRow In Ds.Rows
+                        For Each RigaSelezionata As DataGridViewRow In Dgw_Ordine.SelectedRows
+                            If Row.Ordine = Ordine And Row.Id = RigaSelezionata.Cells(0).Value Then
+                                Dim Riga As New RigaOrdine With {.NumeroOrdine = Row.Ordine, .Riga = Row.Riga, .Imballo = Row.Imballo, .Indice = Row.Indice, .Qt = Row.Qt, .Cliente = Row.Cliente, .Codice = Row.Codice, .Commessa = Row.Commessa,
+                                    .L = Row.L, .P = Row.P, .H = Row.H, .Tipo = Row.Tipo, .Zoccoli = Row.Zoccoli, .Rivestimento = Row.Rivestimento, .TipoRivestimento = Row.Tipo_Rivestimento, .Note = Row.Note, .DataConsegna = Row.Data_Consegna,
+                                    .HT = Row.HT, .DT = Row.DT, .BM = Row.BM, .Rivest_Tot = Row.Rivest_Tot, .Magazzino = Row.Magazzino, .Diagonali = Row.Diagonali, .Data_Ordine = Row.Data_Ordine, .Evaso = False, .Produzione = False, .Stampato = False}
+                                RowOrdine.Add(Riga)
+                            End If
+                        Next
+                    Next
+
+                End If
+
+                If Not RowOrdine.Count = 0 Then
+                    Dim L As New PrintPreviewDialog With {.Document = Print_QR, .TopMost = False, .WindowState = FormWindowState.Normal}
+                    L.Show()
+                End If
+
+            End Using
+        End Using
+
+    End Sub
 End Class

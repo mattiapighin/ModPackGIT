@@ -23,8 +23,8 @@ Partial Class Main
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
@@ -41,7 +41,9 @@ Partial Class Main
         Me.TS_CaricaOrdine = New System.Windows.Forms.ToolStripMenuItem()
         Me.TS_OrdiniAperti = New System.Windows.Forms.ToolStripMenuItem()
         Me.TS_StoricoOrdini = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TS_Imballi = New System.Windows.Forms.ToolStripButton()
+        Me.TS_Imballi = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.TS_Archivio = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TS_Crea = New System.Windows.Forms.ToolStripMenuItem()
         Me.TS_Tools = New System.Windows.Forms.ToolStripDropDownButton()
         Me.TS_ControlloOrdine = New System.Windows.Forms.ToolStripMenuItem()
         Me.TS_ListaElementi = New System.Windows.Forms.ToolStripMenuItem()
@@ -97,22 +99,22 @@ Partial Class Main
         '
         Me.DGW_Memo.AllowUserToAddRows = False
         Me.DGW_Memo.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent
-        Me.DGW_Memo.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent
+        Me.DGW_Memo.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DGW_Memo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGW_Memo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DGW_Memo.BackgroundColor = System.Drawing.Color.White
         Me.DGW_Memo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_Memo.ColumnHeadersVisible = False
         Me.DGW_Memo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Memo})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.Transparent
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGW_Memo.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Transparent
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGW_Memo.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGW_Memo.Location = New System.Drawing.Point(18, 227)
         Me.DGW_Memo.Name = "DGW_Memo"
         Me.DGW_Memo.ReadOnly = True
@@ -186,12 +188,25 @@ Partial Class Main
         '
         'TS_Imballi
         '
+        Me.TS_Imballi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TS_Archivio, Me.TS_Crea})
         Me.TS_Imballi.Image = CType(resources.GetObject("TS_Imballi.Image"), System.Drawing.Image)
         Me.TS_Imballi.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.TS_Imballi.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.TS_Imballi.Name = "TS_Imballi"
-        Me.TS_Imballi.Size = New System.Drawing.Size(79, 41)
+        Me.TS_Imballi.Size = New System.Drawing.Size(88, 41)
         Me.TS_Imballi.Text = "IMBALLI"
+        '
+        'TS_Archivio
+        '
+        Me.TS_Archivio.Name = "TS_Archivio"
+        Me.TS_Archivio.Size = New System.Drawing.Size(152, 22)
+        Me.TS_Archivio.Text = "ARCHIVIO"
+        '
+        'TS_Crea
+        '
+        Me.TS_Crea.Name = "TS_Crea"
+        Me.TS_Crea.Size = New System.Drawing.Size(152, 22)
+        Me.TS_Crea.Text = "CREA"
         '
         'TS_Tools
         '
@@ -298,7 +313,6 @@ Partial Class Main
     Friend WithEvents TS_CaricaOrdine As ToolStripMenuItem
     Friend WithEvents TS_OrdiniAperti As ToolStripMenuItem
     Friend WithEvents TS_StoricoOrdini As ToolStripMenuItem
-    Friend WithEvents TS_Imballi As ToolStripButton
     Friend WithEvents TS_Tabelle As ToolStripButton
     Friend WithEvents Ts_Preferenze As ToolStripButton
     Friend WithEvents TS_Memo As ToolStripButton
@@ -306,4 +320,7 @@ Partial Class Main
     Friend WithEvents TS_ControlloOrdine As ToolStripMenuItem
     Friend WithEvents TS_ListaElementi As ToolStripMenuItem
     Friend WithEvents Button2 As Button
+    Friend WithEvents TS_Imballi As ToolStripDropDownButton
+    Friend WithEvents TS_Archivio As ToolStripMenuItem
+    Friend WithEvents TS_Crea As ToolStripMenuItem
 End Class

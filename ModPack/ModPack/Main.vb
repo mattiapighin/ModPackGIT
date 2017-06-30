@@ -54,6 +54,8 @@ Public Class Main
     End Sub
     Private Sub OperazioniPreliminari()
 
+        If Not My.Computer.FileSystem.DirectoryExists(My.Settings.Root & "\Disegni") Then My.Computer.FileSystem.CreateDirectory(My.Settings.Root & "\Disegni")
+
         If Not My.Computer.FileSystem.FileExists(My.Settings.FileLogPath) Then
             IO.File.Create(My.Settings.FileLogPath)
         End If
@@ -175,8 +177,11 @@ Public Class Main
     Private Sub TS_StoricoOrdini_Click(sender As Object, e As EventArgs) Handles TS_StoricoOrdini.Click
         Form_StoricoOrdini.Show()
     End Sub
-    Private Sub TS_Imballi_Click(sender As Object, e As EventArgs) Handles TS_Imballi.Click
+    Private Sub TS_Archivio_Click(sender As Object, e As EventArgs) Handles TS_Archivio.Click
         Form_Imballi.Show()
+    End Sub
+    Private Sub TS_Crea_Click(sender As Object, e As EventArgs) Handles TS_Crea.Click
+        Form_Crea_Manuale.Show()
     End Sub
     Private Sub TS_Tabelle_Click(sender As Object, e As EventArgs) Handles TS_Tabelle.Click
         Form_Tabelle.Show()
@@ -194,11 +199,9 @@ Public Class Main
         Form_ListaElementi.Show()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        SQL.PuliziaOrdini()
-    End Sub
-
     Private Sub Main_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         LOG.CheckSize()
     End Sub
+
+
 End Class

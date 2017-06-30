@@ -61,22 +61,22 @@
     End Sub
 
     Private Sub Bt_StampaImballo_Click(sender As Object, e As EventArgs) Handles Bt_StampaImballo.Click
-        Dim Imballo As String
+        Dim Imballo As String = ""
         Dim L As Integer
         Dim P As Integer
         Dim H As Integer
         Dim Tipo As String
-        Dim Zoccoli As String
+        Dim Zoccoli As String = ""
         Dim Rivestimento As Boolean
-        Dim TipoRivestimento As String
+        Dim TipoRivestimento As String = ""
         Dim HT As Boolean
         Dim DT As Boolean
         Dim BM As Boolean
         Dim Diagonali As Boolean
-        Dim Note As String
-        Dim Rivest_Tot As String
+        Dim Note As String = ""
+        Dim Rivest_Tot As String = ""
         Dim Indice As Integer
-        Dim Codice As String
+        Dim Codice As String = ""
 
         'Carico le variabili in una falsa riga di ordine
         Using TableImballi As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
@@ -102,13 +102,14 @@
                     BM = RigaImballo(0)(11)
                     Diagonali = RigaImballo(0)(12)
 
-                    Dim RigaIndice() As DataRow = DS.Indici.Select("Indice = '" & DgwIndici.CurrentRow.Cells(2).Value & "'")
+                    If Not DgwIndici.RowCount = 0 Then
+                        Dim RigaIndice() As DataRow = DS.Indici.Select("Indice = '" & DgwIndici.CurrentRow.Cells(2).Value & "'")
 
-                    Indice = RigaIndice(0)(2)
-                    Note = RigaIndice(0)(4)
-                    Rivest_Tot = RigaIndice(0)(5)
-                    Codice = RigaIndice(0)(3)
-
+                        Indice = RigaIndice(0)(2)
+                        Note = RigaIndice(0)(4)
+                        Rivest_Tot = RigaIndice(0)(5)
+                        Codice = RigaIndice(0)(3)
+                    End If
 
                 End Using
             End Using

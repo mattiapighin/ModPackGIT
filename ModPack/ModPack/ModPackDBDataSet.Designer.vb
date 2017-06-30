@@ -2288,6 +2288,8 @@ Partial Public Class ModPackDBDataSet
         
         Private columnPrezzoM3HT As Global.System.Data.DataColumn
         
+        Private columnFresataMorali As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -2420,6 +2422,14 @@ Partial Public Class ModPackDBDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FresataMoraliColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFresataMorali
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2456,9 +2466,9 @@ Partial Public Class ModPackDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddTipiRow(ByVal Tipo As String, ByVal Descrizione As String, ByVal InterasseMax As Byte, ByVal SpazioBTL As Byte, ByVal SpazioBTT As Byte, ByVal SpazioCTL As Byte, ByVal SpazioFTL As Byte, ByVal SpazioMT As Byte, ByVal Info As String, ByVal PrezzoM3 As Decimal, ByVal PrezzoM3HT As Decimal) As TipiRow
+        Public Overloads Function AddTipiRow(ByVal Tipo As String, ByVal Descrizione As String, ByVal InterasseMax As Byte, ByVal SpazioBTL As Byte, ByVal SpazioBTT As Byte, ByVal SpazioCTL As Byte, ByVal SpazioFTL As Byte, ByVal SpazioMT As Byte, ByVal Info As String, ByVal PrezzoM3 As Decimal, ByVal PrezzoM3HT As Decimal, ByVal FresataMorali As Boolean) As TipiRow
             Dim rowTipiRow As TipiRow = CType(Me.NewRow,TipiRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, FresataMorali}
             rowTipiRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTipiRow)
             Return rowTipiRow
@@ -2499,6 +2509,7 @@ Partial Public Class ModPackDBDataSet
             Me.columnInfo = MyBase.Columns("Info")
             Me.columnPrezzoM3 = MyBase.Columns("PrezzoM3")
             Me.columnPrezzoM3HT = MyBase.Columns("PrezzoM3HT")
+            Me.columnFresataMorali = MyBase.Columns("FresataMorali")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2528,6 +2539,8 @@ Partial Public Class ModPackDBDataSet
             MyBase.Columns.Add(Me.columnPrezzoM3)
             Me.columnPrezzoM3HT = New Global.System.Data.DataColumn("PrezzoM3HT", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPrezzoM3HT)
+            Me.columnFresataMorali = New Global.System.Data.DataColumn("FresataMorali", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFresataMorali)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnId}, true))
             Me.columnId.AutoIncrement = true
             Me.columnId.AutoIncrementSeed = -1
@@ -2545,6 +2558,7 @@ Partial Public Class ModPackDBDataSet
             Me.columnSpazioFTL.AllowDBNull = false
             Me.columnSpazioMT.AllowDBNull = false
             Me.columnInfo.MaxLength = 50
+            Me.columnFresataMorali.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5660,6 +5674,17 @@ Partial Public Class ModPackDBDataSet
             End Get
             Set
                 Me(Me.tableTipi.PrezzoM3HTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FresataMorali() As Boolean
+            Get
+                Return CType(Me(Me.tableTipi.FresataMoraliColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableTipi.FresataMoraliColumn) = value
             End Set
         End Property
         
@@ -9573,6 +9598,7 @@ Namespace ModPackDBDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Info", "Info")
             tableMapping.ColumnMappings.Add("PrezzoM3", "PrezzoM3")
             tableMapping.ColumnMappings.Add("PrezzoM3HT", "PrezzoM3HT")
+            tableMapping.ColumnMappings.Add("FresataMorali", "FresataMorali")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -9584,7 +9610,8 @@ Namespace ModPackDBDataSetTableAdapters
                 "ioMT] = @Original_SpazioMT) AND ((@IsNull_Info = 1 AND [Info] IS NULL) OR ([Info"& _ 
                 "] = @Original_Info)) AND ((@IsNull_PrezzoM3 = 1 AND [PrezzoM3] IS NULL) OR ([Pre"& _ 
                 "zzoM3] = @Original_PrezzoM3)) AND ((@IsNull_PrezzoM3HT = 1 AND [PrezzoM3HT] IS N"& _ 
-                "ULL) OR ([PrezzoM3HT] = @Original_PrezzoM3HT)))"
+                "ULL) OR ([PrezzoM3HT] = @Original_PrezzoM3HT)) AND ([FresataMorali] = @Original_"& _ 
+                "FresataMorali))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Tipo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tipo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -9602,14 +9629,16 @@ Namespace ModPackDBDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PrezzoM3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_PrezzoM3HT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PrezzoM3HT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PrezzoM3HT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3HT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FresataMorali", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FresataMorali", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Tipi] ([Tipo], [Descrizione], [InterasseMax], [SpazioBTL], [Sp"& _ 
                 "azioBTT], [SpazioCTL], [SpazioFTL], [SpazioMT], [Info], [PrezzoM3], [PrezzoM3HT]"& _ 
-                ") VALUES (@Tipo, @Descrizione, @InterasseMax, @SpazioBTL, @SpazioBTT, @SpazioCTL"& _ 
-                ", @SpazioFTL, @SpazioMT, @Info, @PrezzoM3, @PrezzoM3HT);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Tipo, Descr"& _ 
-                "izione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, SpazioFTL, SpazioMT, Info"& _ 
-                ", PrezzoM3, PrezzoM3HT FROM Tipi WHERE (Id = SCOPE_IDENTITY())"
+                ", [FresataMorali]) VALUES (@Tipo, @Descrizione, @InterasseMax, @SpazioBTL, @Spaz"& _ 
+                "ioBTT, @SpazioCTL, @SpazioFTL, @SpazioMT, @Info, @PrezzoM3, @PrezzoM3HT, @Fresat"& _ 
+                "aMorali);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, Spa"& _ 
+                "zioCTL, SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, FresataMorali FROM Tipi"& _ 
+                " WHERE (Id = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tipo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tipo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Descrizione", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Descrizione", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9622,22 +9651,25 @@ Namespace ModPackDBDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Info", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Info", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PrezzoM3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PrezzoM3HT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3HT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FresataMorali", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FresataMorali", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Tipi] SET [Tipo] = @Tipo, [Descrizione] = @Descrizione, [InterasseM"& _ 
                 "ax] = @InterasseMax, [SpazioBTL] = @SpazioBTL, [SpazioBTT] = @SpazioBTT, [Spazio"& _ 
                 "CTL] = @SpazioCTL, [SpazioFTL] = @SpazioFTL, [SpazioMT] = @SpazioMT, [Info] = @I"& _ 
-                "nfo, [PrezzoM3] = @PrezzoM3, [PrezzoM3HT] = @PrezzoM3HT WHERE (([Id] = @Original"& _ 
-                "_Id) AND ([Tipo] = @Original_Tipo) AND ((@IsNull_Descrizione = 1 AND [Descrizion"& _ 
-                "e] IS NULL) OR ([Descrizione] = @Original_Descrizione)) AND ([InterasseMax] = @O"& _ 
-                "riginal_InterasseMax) AND ([SpazioBTL] = @Original_SpazioBTL) AND ([SpazioBTT] ="& _ 
-                " @Original_SpazioBTT) AND ([SpazioCTL] = @Original_SpazioCTL) AND ([SpazioFTL] ="& _ 
-                " @Original_SpazioFTL) AND ([SpazioMT] = @Original_SpazioMT) AND ((@IsNull_Info ="& _ 
-                " 1 AND [Info] IS NULL) OR ([Info] = @Original_Info)) AND ((@IsNull_PrezzoM3 = 1 "& _ 
-                "AND [PrezzoM3] IS NULL) OR ([PrezzoM3] = @Original_PrezzoM3)) AND ((@IsNull_Prez"& _ 
-                "zoM3HT = 1 AND [PrezzoM3HT] IS NULL) OR ([PrezzoM3HT] = @Original_PrezzoM3HT)));"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, S"& _ 
-                "pazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT FROM Tipi WHERE (Id = @Id)"
+                "nfo, [PrezzoM3] = @PrezzoM3, [PrezzoM3HT] = @PrezzoM3HT, [FresataMorali] = @Fres"& _ 
+                "ataMorali WHERE (([Id] = @Original_Id) AND ([Tipo] = @Original_Tipo) AND ((@IsNu"& _ 
+                "ll_Descrizione = 1 AND [Descrizione] IS NULL) OR ([Descrizione] = @Original_Desc"& _ 
+                "rizione)) AND ([InterasseMax] = @Original_InterasseMax) AND ([SpazioBTL] = @Orig"& _ 
+                "inal_SpazioBTL) AND ([SpazioBTT] = @Original_SpazioBTT) AND ([SpazioCTL] = @Orig"& _ 
+                "inal_SpazioCTL) AND ([SpazioFTL] = @Original_SpazioFTL) AND ([SpazioMT] = @Origi"& _ 
+                "nal_SpazioMT) AND ((@IsNull_Info = 1 AND [Info] IS NULL) OR ([Info] = @Original_"& _ 
+                "Info)) AND ((@IsNull_PrezzoM3 = 1 AND [PrezzoM3] IS NULL) OR ([PrezzoM3] = @Orig"& _ 
+                "inal_PrezzoM3)) AND ((@IsNull_PrezzoM3HT = 1 AND [PrezzoM3HT] IS NULL) OR ([Prez"& _ 
+                "zoM3HT] = @Original_PrezzoM3HT)) AND ([FresataMorali] = @Original_FresataMorali)"& _ 
+                ");"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL,"& _ 
+                " SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, FresataMorali FROM Tipi WHERE "& _ 
+                "(Id = @Id)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tipo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tipo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Descrizione", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Descrizione", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9650,6 +9682,7 @@ Namespace ModPackDBDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Info", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Info", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PrezzoM3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PrezzoM3HT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3HT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FresataMorali", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FresataMorali", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Tipo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tipo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Descrizione", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Descrizione", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -9666,6 +9699,7 @@ Namespace ModPackDBDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PrezzoM3", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_PrezzoM3HT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PrezzoM3HT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PrezzoM3HT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "PrezzoM3HT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FresataMorali", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FresataMorali", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
@@ -9683,7 +9717,7 @@ Namespace ModPackDBDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Id, Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, Spaz"& _ 
-                "ioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT FROM dbo.Tipi"
+                "ioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, FresataMorali FROM dbo.Tipi"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -9743,7 +9777,7 @@ Namespace ModPackDBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_Id As Integer, ByVal Original_Tipo As String, ByVal Original_Descrizione As String, ByVal Original_InterasseMax As Byte, ByVal Original_SpazioBTL As Byte, ByVal Original_SpazioBTT As Byte, ByVal Original_SpazioCTL As Byte, ByVal Original_SpazioFTL As Byte, ByVal Original_SpazioMT As Byte, ByVal Original_Info As String, ByVal Original_PrezzoM3 As Global.System.Nullable(Of Decimal), ByVal Original_PrezzoM3HT As Global.System.Nullable(Of Decimal)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_Id As Integer, ByVal Original_Tipo As String, ByVal Original_Descrizione As String, ByVal Original_InterasseMax As Byte, ByVal Original_SpazioBTL As Byte, ByVal Original_SpazioBTT As Byte, ByVal Original_SpazioCTL As Byte, ByVal Original_SpazioFTL As Byte, ByVal Original_SpazioMT As Byte, ByVal Original_Info As String, ByVal Original_PrezzoM3 As Global.System.Nullable(Of Decimal), ByVal Original_PrezzoM3HT As Global.System.Nullable(Of Decimal), ByVal Original_FresataMorali As Boolean) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_Id,Integer)
             If (Original_Tipo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Tipo")
@@ -9784,6 +9818,7 @@ Namespace ModPackDBDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(14).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
+            Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_FresataMorali,Boolean)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9803,7 +9838,7 @@ Namespace ModPackDBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Tipo As String, ByVal Descrizione As String, ByVal InterasseMax As Byte, ByVal SpazioBTL As Byte, ByVal SpazioBTT As Byte, ByVal SpazioCTL As Byte, ByVal SpazioFTL As Byte, ByVal SpazioMT As Byte, ByVal Info As String, ByVal PrezzoM3 As Global.System.Nullable(Of Decimal), ByVal PrezzoM3HT As Global.System.Nullable(Of Decimal)) As Integer
+        Public Overloads Overridable Function Insert(ByVal Tipo As String, ByVal Descrizione As String, ByVal InterasseMax As Byte, ByVal SpazioBTL As Byte, ByVal SpazioBTT As Byte, ByVal SpazioCTL As Byte, ByVal SpazioFTL As Byte, ByVal SpazioMT As Byte, ByVal Info As String, ByVal PrezzoM3 As Global.System.Nullable(Of Decimal), ByVal PrezzoM3HT As Global.System.Nullable(Of Decimal), ByVal FresataMorali As Boolean) As Integer
             If (Tipo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Tipo")
             Else
@@ -9835,6 +9870,7 @@ Namespace ModPackDBDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
+            Me.Adapter.InsertCommand.Parameters(11).Value = CType(FresataMorali,Boolean)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9866,6 +9902,7 @@ Namespace ModPackDBDataSetTableAdapters
                     ByVal Info As String,  _
                     ByVal PrezzoM3 As Global.System.Nullable(Of Decimal),  _
                     ByVal PrezzoM3HT As Global.System.Nullable(Of Decimal),  _
+                    ByVal FresataMorali As Boolean,  _
                     ByVal Original_Id As Integer,  _
                     ByVal Original_Tipo As String,  _
                     ByVal Original_Descrizione As String,  _
@@ -9878,6 +9915,7 @@ Namespace ModPackDBDataSetTableAdapters
                     ByVal Original_Info As String,  _
                     ByVal Original_PrezzoM3 As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_PrezzoM3HT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_FresataMorali As Boolean,  _
                     ByVal Id As Integer) As Integer
             If (Tipo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Tipo")
@@ -9910,47 +9948,49 @@ Namespace ModPackDBDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Id,Integer)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(FresataMorali,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Id,Integer)
             If (Original_Tipo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Tipo")
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Tipo,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_Tipo,String)
             End If
             If (Original_Descrizione Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_Descrizione,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Descrizione,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_InterasseMax,Byte)
-            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_SpazioBTL,Byte)
-            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_SpazioBTT,Byte)
-            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_SpazioCTL,Byte)
-            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_SpazioFTL,Byte)
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_SpazioMT,Byte)
+            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_InterasseMax,Byte)
+            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_SpazioBTL,Byte)
+            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_SpazioBTT,Byte)
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_SpazioCTL,Byte)
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_SpazioFTL,Byte)
+            Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_SpazioMT,Byte)
             If (Original_Info Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_Info,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Info,String)
             End If
             If (Original_PrezzoM3.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_PrezzoM3.Value,Decimal)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_PrezzoM3.Value,Decimal)
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
             End If
             If (Original_PrezzoM3HT.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_PrezzoM3HT.Value,Decimal)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_PrezzoM3HT.Value,Decimal)
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Id,Integer)
+            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_FresataMorali,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Id,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9982,6 +10022,7 @@ Namespace ModPackDBDataSetTableAdapters
                     ByVal Info As String,  _
                     ByVal PrezzoM3 As Global.System.Nullable(Of Decimal),  _
                     ByVal PrezzoM3HT As Global.System.Nullable(Of Decimal),  _
+                    ByVal FresataMorali As Boolean,  _
                     ByVal Original_Id As Integer,  _
                     ByVal Original_Tipo As String,  _
                     ByVal Original_Descrizione As String,  _
@@ -9993,8 +10034,9 @@ Namespace ModPackDBDataSetTableAdapters
                     ByVal Original_SpazioMT As Byte,  _
                     ByVal Original_Info As String,  _
                     ByVal Original_PrezzoM3 As Global.System.Nullable(Of Decimal),  _
-                    ByVal Original_PrezzoM3HT As Global.System.Nullable(Of Decimal)) As Integer
-            Return Me.Update(Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, Original_Id, Original_Tipo, Original_Descrizione, Original_InterasseMax, Original_SpazioBTL, Original_SpazioBTT, Original_SpazioCTL, Original_SpazioFTL, Original_SpazioMT, Original_Info, Original_PrezzoM3, Original_PrezzoM3HT, Original_Id)
+                    ByVal Original_PrezzoM3HT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_FresataMorali As Boolean) As Integer
+            Return Me.Update(Tipo, Descrizione, InterasseMax, SpazioBTL, SpazioBTT, SpazioCTL, SpazioFTL, SpazioMT, Info, PrezzoM3, PrezzoM3HT, FresataMorali, Original_Id, Original_Tipo, Original_Descrizione, Original_InterasseMax, Original_SpazioBTL, Original_SpazioBTT, Original_SpazioCTL, Original_SpazioFTL, Original_SpazioMT, Original_Info, Original_PrezzoM3, Original_PrezzoM3HT, Original_FresataMorali, Original_Id)
         End Function
     End Class
     

@@ -23,13 +23,13 @@ Partial Class Form_OrdiniAperti
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_OrdiniAperti))
         Me.DGW_OrdiniAperti = New System.Windows.Forms.DataGridView()
         Me.Dgw_Ordine = New System.Windows.Forms.DataGridView()
@@ -42,14 +42,15 @@ Partial Class Form_OrdiniAperti
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.Bt_SeeAll = New System.Windows.Forms.Button()
         Me.Bt_CheckList = New System.Windows.Forms.Button()
-        Me.Bt_ListaMorali = New System.Windows.Forms.Button()
         Me.Bt_ListaRivestimenti = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Bt_QrCodes = New System.Windows.Forms.Button()
         Me.Lbl_Ordine = New System.Windows.Forms.Label()
         Me.Print_CheckList = New System.Drawing.Printing.PrintDocument()
         Me.Print_Distinte = New System.Drawing.Printing.PrintDocument()
         Me.Print_Morali = New System.Drawing.Printing.PrintDocument()
+        Me.Print_QR = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_OrdiniAperti, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Dgw_Ordine, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -62,34 +63,34 @@ Partial Class Form_OrdiniAperti
         Me.DGW_OrdiniAperti.AllowUserToDeleteRows = False
         Me.DGW_OrdiniAperti.AllowUserToResizeColumns = False
         Me.DGW_OrdiniAperti.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        Me.DGW_OrdiniAperti.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black
+        Me.DGW_OrdiniAperti.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle15
         Me.DGW_OrdiniAperti.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DGW_OrdiniAperti.BackgroundColor = System.Drawing.Color.White
         Me.DGW_OrdiniAperti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_OrdiniAperti.ColumnHeadersVisible = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGW_OrdiniAperti.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGW_OrdiniAperti.DefaultCellStyle = DataGridViewCellStyle16
         Me.DGW_OrdiniAperti.GridColor = System.Drawing.SystemColors.ButtonFace
         Me.DGW_OrdiniAperti.Location = New System.Drawing.Point(12, 12)
         Me.DGW_OrdiniAperti.MultiSelect = False
         Me.DGW_OrdiniAperti.Name = "DGW_OrdiniAperti"
         Me.DGW_OrdiniAperti.ReadOnly = True
         Me.DGW_OrdiniAperti.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        Me.DGW_OrdiniAperti.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black
+        Me.DGW_OrdiniAperti.RowsDefaultCellStyle = DataGridViewCellStyle17
         Me.DGW_OrdiniAperti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGW_OrdiniAperti.Size = New System.Drawing.Size(202, 555)
         Me.DGW_OrdiniAperti.TabIndex = 0
@@ -100,42 +101,42 @@ Partial Class Form_OrdiniAperti
         Me.Dgw_Ordine.AllowUserToDeleteRows = False
         Me.Dgw_Ordine.AllowUserToResizeColumns = False
         Me.Dgw_Ordine.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-        Me.Dgw_Ordine.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black
+        Me.Dgw_Ordine.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
         Me.Dgw_Ordine.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Dgw_Ordine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.Dgw_Ordine.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Dgw_Ordine.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Dgw_Ordine.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.Dgw_Ordine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Dgw_Ordine.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Dgw_Ordine.DefaultCellStyle = DataGridViewCellStyle20
         Me.Dgw_Ordine.GridColor = System.Drawing.SystemColors.ButtonFace
         Me.Dgw_Ordine.Location = New System.Drawing.Point(220, 41)
         Me.Dgw_Ordine.Name = "Dgw_Ordine"
         Me.Dgw_Ordine.ReadOnly = True
         Me.Dgw_Ordine.RowHeadersVisible = False
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PeachPuff
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        Me.Dgw_Ordine.RowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.PeachPuff
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black
+        Me.Dgw_Ordine.RowsDefaultCellStyle = DataGridViewCellStyle21
         Me.Dgw_Ordine.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Dgw_Ordine.Size = New System.Drawing.Size(889, 526)
         Me.Dgw_Ordine.TabIndex = 0
@@ -240,21 +241,6 @@ Partial Class Form_OrdiniAperti
         Me.ToolTip.SetToolTip(Me.Bt_CheckList, "Stampa lista di controllo")
         Me.Bt_CheckList.UseVisualStyleBackColor = True
         '
-        'Bt_ListaMorali
-        '
-        Me.Bt_ListaMorali.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Bt_ListaMorali.FlatAppearance.BorderSize = 0
-        Me.Bt_ListaMorali.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bt_ListaMorali.Image = CType(resources.GetObject("Bt_ListaMorali.Image"), System.Drawing.Image)
-        Me.Bt_ListaMorali.Location = New System.Drawing.Point(3, 278)
-        Me.Bt_ListaMorali.Name = "Bt_ListaMorali"
-        Me.Bt_ListaMorali.Size = New System.Drawing.Size(44, 49)
-        Me.Bt_ListaMorali.TabIndex = 10
-        Me.ToolTip.SetToolTip(Me.Bt_ListaMorali, "Stampa lista morali")
-        Me.Bt_ListaMorali.UseVisualStyleBackColor = True
-        '
         'Bt_ListaRivestimenti
         '
         Me.Bt_ListaRivestimenti.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -287,13 +273,13 @@ Partial Class Form_OrdiniAperti
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_ListaRivestimenti, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Bt_ListaMorali, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_Evaso, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_SeeAll, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_ConfermaOrdine, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_Disegni, 0, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_Etichette, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.Bt_CheckList, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.Bt_QrCodes, 0, 5)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -312,6 +298,18 @@ Partial Class Form_OrdiniAperti
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(50, 553)
         Me.TableLayoutPanel1.TabIndex = 10
         '
+        'Bt_QrCodes
+        '
+        Me.Bt_QrCodes.FlatAppearance.BorderSize = 0
+        Me.Bt_QrCodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_QrCodes.Image = CType(resources.GetObject("Bt_QrCodes.Image"), System.Drawing.Image)
+        Me.Bt_QrCodes.Location = New System.Drawing.Point(3, 278)
+        Me.Bt_QrCodes.Name = "Bt_QrCodes"
+        Me.Bt_QrCodes.Size = New System.Drawing.Size(44, 49)
+        Me.Bt_QrCodes.TabIndex = 11
+        Me.ToolTip.SetToolTip(Me.Bt_QrCodes, "Stampa QR Codes")
+        Me.Bt_QrCodes.UseVisualStyleBackColor = True
+        '
         'Lbl_Ordine
         '
         Me.Lbl_Ordine.BackColor = System.Drawing.Color.PeachPuff
@@ -327,6 +325,9 @@ Partial Class Form_OrdiniAperti
         '
         '
         'Print_Distinte
+        '
+        '
+        'Print_QR
         '
         '
         'Form_OrdiniAperti
@@ -367,6 +368,7 @@ Partial Class Form_OrdiniAperti
     Friend WithEvents Print_CheckList As Printing.PrintDocument
     Friend WithEvents Print_Distinte As Printing.PrintDocument
     Friend WithEvents Bt_ListaRivestimenti As Button
-    Friend WithEvents Bt_ListaMorali As Button
     Friend WithEvents Print_Morali As Printing.PrintDocument
+    Friend WithEvents Bt_QrCodes As Button
+    Friend WithEvents Print_QR As Printing.PrintDocument
 End Class

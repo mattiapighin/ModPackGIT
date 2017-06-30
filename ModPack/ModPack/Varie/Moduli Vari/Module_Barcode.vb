@@ -9,6 +9,7 @@ Namespace BarCode
 
                 Dim barcode As New iTextSharp.text.pdf.Barcode128() With {.BarHeight = Height, .AltText = Valore, .ChecksumText = True, .GenerateChecksum = True, .Code = Valore}
 
+
                 Code = barcode.CreateDrawingImage(Color.Black, Color.White)
 
                 If Testo = True Then
@@ -34,6 +35,31 @@ Namespace BarCode
             Catch ex As Exception
                 Return Nothing
             End Try
+        End Function
+
+        Public Function QR(ByVal Valore As String, Optional Height As Integer = 200) As System.Drawing.Image
+
+            Dim IMAGE As Image
+
+            Dim qrCode = New iTextSharp.text.pdf.qrcode.QRCodeWriter()
+            Dim byteIMG = qrCode.Encode(Valore, Height, Height)
+            Dim img = byteIMG.GetArray()
+            Dim bmp = New Bitmap(Height, Height)
+            Dim g = Graphics.FromImage(bmp)
+            g.Clear(Color.White)
+
+            For i = 0 To img.Length - 1
+                For j = 0 To img.Length - 1
+                    If (img(j)(i) = 0) Then
+                        g.FillRectangle(Brushes.Black, i, j, 1, 1)
+                    Else
+                        g.FillRectangle(Brushes.White, i, j, 1, 1)
+                    End If
+                Next
+            Next
+
+            IMAGE = bmp
+            Return IMAGE
         End Function
 
     End Module

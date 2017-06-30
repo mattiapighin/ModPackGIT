@@ -125,6 +125,12 @@
     <Compile Include="Buttons\Preferenze\Form_Preferenze.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Creazione Manuale Imballi\Form_Crea_Manuale.Designer.vb">
+      <DependentUpon>Form_Crea_Manuale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Creazione Manuale Imballi\Form_Crea_Manuale.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Email\Form_Preferenze_Email.Designer.vb">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
     </Compile>
@@ -201,6 +207,7 @@
     <Compile Include="Controlli\Module_Controlli.vb" />
     <Compile Include="Varie\Moduli Vari\Module_IMG.vb" />
     <Compile Include="Varie\Moduli Vari\Module_Log.vb" />
+    <Compile Include="Varie\Moduli Vari\Module_PDF.vb" />
     <Compile Include="Varie\Moduli Vari\Module_SQL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -246,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creazione Manuale Imballi\Form_Crea_Manuale.resx">
+      <DependentUpon>Form_Crea_Manuale.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Email\Form_Preferenze_Email.resx">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
@@ -350,5 +360,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
