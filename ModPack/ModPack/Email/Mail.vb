@@ -27,6 +27,7 @@ Namespace Mail
                         mail = New MailMessage()
                         mail.From = New MailAddress(My.Settings.MAIL_username)
 
+
                         For Each D As DestinatarioMail In ListaDestinatari
                             mail.To.Add(D.Email)
                         Next

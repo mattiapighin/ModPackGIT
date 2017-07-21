@@ -55,13 +55,6 @@ Partial Class Form_Imballi_Filtro
         Me.LST_Zoccoli = New System.Windows.Forms.ListBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.LST_Rivestimento = New System.Windows.Forms.ListBox()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.NU_Indice_A = New System.Windows.Forms.NumericUpDown()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Nu_Indice_DA = New System.Windows.Forms.NumericUpDown()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -78,10 +71,6 @@ Partial Class Form_Imballi_Filtro
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
-        CType(Me.NU_Indice_A, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Nu_Indice_DA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -92,7 +81,7 @@ Partial Class Form_Imballi_Filtro
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(283, 386)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(283, 322)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -166,7 +155,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_H_A.Location = New System.Drawing.Point(306, 73)
         Me.NU_H_A.Name = "NU_H_A"
         Me.NU_H_A.Size = New System.Drawing.Size(89, 20)
-        Me.NU_H_A.TabIndex = 14
+        Me.NU_H_A.TabIndex = 5
         '
         'NU_P_A
         '
@@ -174,7 +163,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_P_A.Location = New System.Drawing.Point(306, 39)
         Me.NU_P_A.Name = "NU_P_A"
         Me.NU_P_A.Size = New System.Drawing.Size(89, 20)
-        Me.NU_P_A.TabIndex = 13
+        Me.NU_P_A.TabIndex = 3
         '
         'NU_L_A
         '
@@ -182,7 +171,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_L_A.Location = New System.Drawing.Point(306, 6)
         Me.NU_L_A.Name = "NU_L_A"
         Me.NU_L_A.Size = New System.Drawing.Size(89, 20)
-        Me.NU_L_A.TabIndex = 12
+        Me.NU_L_A.TabIndex = 1
         '
         'Label4
         '
@@ -280,7 +269,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_L_Da.Location = New System.Drawing.Point(170, 6)
         Me.NU_L_Da.Name = "NU_L_Da"
         Me.NU_L_Da.Size = New System.Drawing.Size(90, 20)
-        Me.NU_L_Da.TabIndex = 9
+        Me.NU_L_Da.TabIndex = 0
         '
         'NU_P_Da
         '
@@ -288,7 +277,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_P_Da.Location = New System.Drawing.Point(170, 39)
         Me.NU_P_Da.Name = "NU_P_Da"
         Me.NU_P_Da.Size = New System.Drawing.Size(90, 20)
-        Me.NU_P_Da.TabIndex = 10
+        Me.NU_P_Da.TabIndex = 2
         '
         'NU_H_Da
         '
@@ -296,7 +285,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_H_Da.Location = New System.Drawing.Point(170, 73)
         Me.NU_H_Da.Name = "NU_H_Da"
         Me.NU_H_Da.Size = New System.Drawing.Size(90, 20)
-        Me.NU_H_Da.TabIndex = 11
+        Me.NU_H_Da.TabIndex = 4
         '
         'GroupBox2
         '
@@ -334,7 +323,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_Prezzo_A.Location = New System.Drawing.Point(306, 7)
         Me.NU_Prezzo_A.Name = "NU_Prezzo_A"
         Me.NU_Prezzo_A.Size = New System.Drawing.Size(89, 20)
-        Me.NU_Prezzo_A.TabIndex = 12
+        Me.NU_Prezzo_A.TabIndex = 7
         '
         'Label10
         '
@@ -372,7 +361,7 @@ Partial Class Form_Imballi_Filtro
         Me.NU_Prezzo_DA.Location = New System.Drawing.Point(171, 7)
         Me.NU_Prezzo_DA.Name = "NU_Prezzo_DA"
         Me.NU_Prezzo_DA.Size = New System.Drawing.Size(89, 20)
-        Me.NU_Prezzo_DA.TabIndex = 9
+        Me.NU_Prezzo_DA.TabIndex = 6
         '
         'GroupBox3
         '
@@ -390,7 +379,7 @@ Partial Class Form_Imballi_Filtro
         Me.LST_Tipi.Location = New System.Drawing.Point(7, 19)
         Me.LST_Tipi.Name = "LST_Tipi"
         Me.LST_Tipi.Size = New System.Drawing.Size(120, 69)
-        Me.LST_Tipi.TabIndex = 0
+        Me.LST_Tipi.TabIndex = 8
         '
         'GroupBox4
         '
@@ -408,7 +397,7 @@ Partial Class Form_Imballi_Filtro
         Me.LST_Zoccoli.Location = New System.Drawing.Point(6, 19)
         Me.LST_Zoccoli.Name = "LST_Zoccoli"
         Me.LST_Zoccoli.Size = New System.Drawing.Size(110, 69)
-        Me.LST_Zoccoli.TabIndex = 1
+        Me.LST_Zoccoli.TabIndex = 9
         '
         'GroupBox5
         '
@@ -426,83 +415,7 @@ Partial Class Form_Imballi_Filtro
         Me.LST_Rivestimento.Location = New System.Drawing.Point(6, 19)
         Me.LST_Rivestimento.Name = "LST_Rivestimento"
         Me.LST_Rivestimento.Size = New System.Drawing.Size(132, 69)
-        Me.LST_Rivestimento.TabIndex = 2
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.TableLayoutPanel4)
-        Me.GroupBox6.Location = New System.Drawing.Point(11, 317)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(415, 62)
-        Me.GroupBox6.TabIndex = 6
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Indice"
-        '
-        'TableLayoutPanel4
-        '
-        Me.TableLayoutPanel4.ColumnCount = 5
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.77311!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.40336!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.21008!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.40336!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.21008!))
-        Me.TableLayoutPanel4.Controls.Add(Me.NU_Indice_A, 4, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label11, 1, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label12, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label14, 3, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Nu_Indice_DA, 2, 0)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(6, 19)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 1
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(403, 35)
-        Me.TableLayoutPanel4.TabIndex = 0
-        '
-        'NU_Indice_A
-        '
-        Me.NU_Indice_A.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.NU_Indice_A.Location = New System.Drawing.Point(306, 7)
-        Me.NU_Indice_A.Name = "NU_Indice_A"
-        Me.NU_Indice_A.Size = New System.Drawing.Size(89, 20)
-        Me.NU_Indice_A.TabIndex = 12
-        '
-        'Label11
-        '
-        Me.Label11.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(137, 11)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(22, 13)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "DA"
-        '
-        'Label12
-        '
-        Me.Label12.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(44, 11)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(43, 13)
-        Me.Label12.TabIndex = 1
-        Me.Label12.Text = "INDICE"
-        '
-        'Label14
-        '
-        Me.Label14.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(275, 11)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(14, 13)
-        Me.Label14.TabIndex = 6
-        Me.Label14.Text = "A"
-        '
-        'Nu_Indice_DA
-        '
-        Me.Nu_Indice_DA.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Nu_Indice_DA.Location = New System.Drawing.Point(171, 7)
-        Me.Nu_Indice_DA.Name = "Nu_Indice_DA"
-        Me.Nu_Indice_DA.Size = New System.Drawing.Size(89, 20)
-        Me.Nu_Indice_DA.TabIndex = 9
+        Me.LST_Rivestimento.TabIndex = 10
         '
         'Form_Imballi_Filtro
         '
@@ -510,8 +423,7 @@ Partial Class Form_Imballi_Filtro
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(441, 427)
-        Me.Controls.Add(Me.GroupBox6)
+        Me.ClientSize = New System.Drawing.Size(441, 363)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -543,11 +455,6 @@ Partial Class Form_Imballi_Filtro
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.TableLayoutPanel4.ResumeLayout(False)
-        Me.TableLayoutPanel4.PerformLayout()
-        CType(Me.NU_Indice_A, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Nu_Indice_DA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -584,11 +491,4 @@ Partial Class Form_Imballi_Filtro
     Friend WithEvents LST_Zoccoli As ListBox
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents LST_Rivestimento As ListBox
-    Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-    Friend WithEvents NU_Indice_A As NumericUpDown
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Nu_Indice_DA As NumericUpDown
 End Class

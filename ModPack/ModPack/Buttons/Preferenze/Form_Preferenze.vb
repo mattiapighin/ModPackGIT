@@ -53,6 +53,7 @@
 
     Private Sub CaricaSettingsDistinta()
         Ck_Barcode.Checked = My.Settings.StampaBarcodeDistinte
+        CkCodiceQT.Checked = Not My.Settings.StampaBarcodeSoloCodice
         CkBarcodeSoloCodice.Checked = My.Settings.StampaBarcodeSoloCodice
         Nu_FontDistinta.Value = My.Settings.DimensioneFontDistinta
         Nu_RigheDistinta.Value = My.Settings.NumeroRigheDistinta
@@ -65,6 +66,7 @@
     End Sub
 
     Private Sub CaricaRiferimenti()
+        Txt_utente.Text = My.Settings.Utente
         Txt_LimiteStorico.Text = My.Settings.OrdiniNRecords
         RBexcel_nuovi.Checked = My.Settings.ListaNuoviExcel
         RBtext_nuovi.Checked = Not My.Settings.ListaNuoviExcel
@@ -72,10 +74,11 @@
         CkDeveloper.Checked = My.Settings.Developer
     End Sub
     Private Sub SalvaRiferimenti()
-        My.Settings.OrdiniNRecords = Txt_LimiteStorico.Text
+        If Not String.IsNullOrEmpty(Txt_utente.Text) Then My.Settings.Utente = Txt_utente.Text
+        If Not String.IsNullOrEmpty(Txt_LimiteStorico.Text) Then My.Settings.OrdiniNRecords = Txt_LimiteStorico.Text
         My.Settings.ListaNuoviExcel = RBexcel_nuovi.Checked
         My.Settings.ListaNuoviExcel = Not RBtext_nuovi.Checked
-        My.Settings.ExcelPath = TxtScegliExcel.Text
+        If Not String.IsNullOrEmpty(TxtScegliExcel.Text) Then My.Settings.ExcelPath = TxtScegliExcel.Text
         My.Settings.Developer = CkDeveloper.Checked
     End Sub
 
@@ -132,5 +135,105 @@
         End If
     End Sub
 
+    Private Sub Bt_EliminaOrdine_Click(sender As Object, e As EventArgs) Handles Bt_EliminaOrdine.Click
+        Dim Ordine As String = ""
+        Dim OrdineControllo As String = ""
 
+        If MsgBox("Attenzione: L'ordine selezionato verrà eliminato definitivamente dal database" & vbCrLf & "Sei sicuro di voler continuare?", vbYesNo, "Elimina Ordine") = MsgBoxResult.Yes Then
+
+            Ordine = InputBox("Inserisci ordine da eliminare", "Elimina Ordine", "")
+            OrdineControllo = InputBox("Inserisci nuovamente ordine da eliminare", "Elimina Ordine", "")
+
+            If Not Ordine = OrdineControllo Then
+                MsgBox("I due numeri di ordine inseriti non corrispondono", MsgBoxStyle.Critical, "Elimina Ordine")
+                Exit Sub
+            End If
+
+            If MsgBox("Vuoi eliminare anche gli indici degli imballi contenuti nell'ordine?", vbYesNo, "Elimina Ordine") = MsgBoxResult.No Then
+                SQL.Query("DELETE FROM Ordini WHERE Ordine = '" & Ordine & "'")
+                LOG.Write("Eliminato ordine " & Ordine)
+                MsgBox("Eliminazione completata!", vbInformation, "Elimina Ordine")
+            Else
+
+                Dim ListaIndici As New List(Of Integer)
+
+                Using Table As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+                    Using DS As New ModPackDBDataSet.OrdiniDataTable
+                        Table.Fill(DS)
+
+                        Dim Rows() As DataRow = DS.Select("Ordine = '" & Ordine & "'")
+
+                        For Each R As DataRow In Rows
+                            ListaIndici.Add(R(4))
+                        Next
+
+                    End Using
+                End Using
+
+                '-------
+
+                For Each Indice As Integer In ListaIndici
+                    SQL.Query("DELETE FROM Indici WHERE Indice = '" & Indice & "'")
+                    LOG.Write("Eliminato indice " & Indice)
+                Next
+
+                SQL.Query("DELETE FROM Ordini WHERE Ordine = '" & Ordine & "'")
+                LOG.Write("Eliminato ordine " & Ordine)
+
+                MsgBox("Eliminazione completata!", vbInformation, "Elimina Ordine")
+
+            End If
+        End If
+    End Sub
+
+    Private Sub Bt_PulisciImballi_Click(sender As Object, e As EventArgs) Handles Bt_PulisciImballi.Click
+
+        If MsgBox("Questa funzione permette di eliminare dal database le righe imballi senza alcun indice associato." & vbCrLf & "Sei sicuro di voler continuare?", vbYesNo, "Pulizia imballi") = MsgBoxResult.Yes Then
+
+            Dim ListaImballi As New List(Of String)
+            Dim ListaEliminare As New List(Of String)
+
+            Using Indici As New ModPackDBDataSetTableAdapters.IndiciTableAdapter
+                Using DS As New ModPackDBDataSet.IndiciDataTable
+                    Indici.Fill(DS)
+
+                    For Each Row As ModPackDBDataSet.IndiciRow In DS
+                        If Not ListaImballi.Contains(Row.Imballo) Then ListaImballi.Add(Row.Imballo)
+                    Next
+
+                End Using
+            End Using
+            Using Imballi As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+                Using DS As New ModPackDBDataSet.ImballiDataTable
+                    Imballi.Fill(DS)
+
+                    For Each Row As ModPackDBDataSet.ImballiRow In DS
+                        If Not ListaImballi.Contains(Row.Imballo) Then
+                            ListaEliminare.Add(Row.Imballo)
+                        End If
+                    Next
+
+                End Using
+            End Using
+
+            For Each Imballo As String In ListaEliminare
+                If MsgBox("Eliminare " & Imballo & "?", vbYesNo, "Pulizia imballi") = MsgBoxResult.Yes Then
+                    SQL.Query("DELETE FROM Imballi WHERE Imballo = '" & Imballo & "'")
+                    LOG.Write("Eliminato imballo " & Imballo)
+                End If
+            Next
+
+            If ListaEliminare.Count = 0 Then MsgBox("Non ci sono imballi da eliminare!", vbInformation, "Pulizia imballi")
+
+        End If
+
+    End Sub
+
+    Private Sub Bt_GestioneTipi_Click(sender As Object, e As EventArgs) Handles Bt_GestioneTipi.Click
+        Form_GestioneTipi.Show()
+    End Sub
+
+    Private Sub Bt_Log_Click(sender As Object, e As EventArgs) Handles Bt_Log.Click
+        Process.Start(My.Settings.FileLogPath)
+    End Sub
 End Class

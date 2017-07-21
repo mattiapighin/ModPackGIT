@@ -3,7 +3,27 @@
 Namespace SQL
     Module Module_SQL
 
+        Public Function GetID_RigaOrdine(ByVal Riga As RigaOrdine) As Integer
+            Dim ID As Integer
 
+            Using Table As New ModPackDBDataSetTableAdapters.OrdiniTableAdapter
+                Using DS As New ModPackDBDataSet.OrdiniDataTable
+                    Table.FillByNonEvaso(DS)
+
+                    For Each Row As ModPackDBDataSet.OrdiniRow In DS
+
+                        If Riga.Imballo = Row.Imballo And Riga.Codice = Row.Codice And Riga.Commessa = Row.Commessa And Riga.Qt = Row.Qt And Riga.L = Row.L And Riga.P = Row.P And Riga.H = Row.H And Riga.NumeroOrdine = Row.Ordine And Riga.DataConsegna = Row.Data_Consegna Then
+                            ID = Row.Id
+                        End If
+
+                    Next
+
+                End Using
+
+            End Using
+
+            Return ID
+        End Function
 
         Public Sub InsertRigaOrdini(ByVal ROW As RigaOrdine)
 
@@ -101,7 +121,7 @@ Namespace SQL
                         If Count > 0 Then Exist = True
 
                     Catch ex As System.Exception
-                        MsgBox(ex.Message & vbCrLf & "OrdineEXIST")
+                        MsgBox(ex.Message & vbCrLf & "imballoOrdine")
                     End Try
 
                 End Using
@@ -387,12 +407,11 @@ Namespace SQL
             Try
                 Dim xml = XDocument.Load(My.Settings.XMLpath)
 
-                Dim Pulizia As String = xml.<Data>.<Pulizia_Ordini>.Value
+                Dim Pulizia As String = xml.<Data>.<Pulizia_Ordine>.Value
 
                 If Pulizia = "True" Then
 
                     Dim Giorni As Integer = xml.<Data>.<Giorni_Memoria_Ordine>.Value
-
                     LOG.Write("Pulizia periodica ordini [START] Ultima data valida: " & Date.Today.Date.AddDays(-Giorni))
 
                     Dim ListaIndici As New List(Of Integer)
@@ -404,7 +423,7 @@ Namespace SQL
                             Table.Fill(DS)
 
                             For Each Row As ModPackDBDataSet.OrdiniRow In DS
-                                If Row.Data_Ordine <= Date.Today.Date.AddDays(-Giorni) Then
+                                If Row.Data_Ordine <= Date.Today.Date.AddDays(-Giorni) And Row.Evaso = True Then
                                     ListaIndici.Add(Row.Id)
                                 End If
                             Next
@@ -417,6 +436,8 @@ Namespace SQL
                         'Elimina tutte le righe di ordine con data inferiore a quella scelta e evasi
                         SQL.Query("DELETE FROM Ordini WHERE Id <= '" & UltimoId & "' AND Evaso = 'True'")
                         LOG.Write("Pulizia periodica ordini [STOP] Eliminate " & ListaIndici.Count & " righe con data ordine inferiore a " & Date.Today.Date.AddDays(-Giorni))
+                    Else
+                        LOG.Write("Pulizia periodica ordini [STOP] Non ci sono ordini da eliminare")
                     End If
 
                 End If

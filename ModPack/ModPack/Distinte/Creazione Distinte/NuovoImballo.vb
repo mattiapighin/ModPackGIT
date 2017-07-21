@@ -66,70 +66,82 @@
     Private R_SopraMT As Decimal
 
     Private Sub CaricaVariabiliDaOrdine()
-        R_Riga = _RigaOrdine.Riga
-        R_Indice = _RigaOrdine.Indice
-        R_Qt = _RigaOrdine.Qt
-        R_Cliente = _RigaOrdine.Cliente
-        R_Codice = _RigaOrdine.Codice
-        R_Commessa = _RigaOrdine.Commessa
-        R_Lunghezza = _RigaOrdine.L
-        R_Profondità = _RigaOrdine.P
-        R_Altezza = _RigaOrdine.H
-        R_Type = _RigaOrdine.Tipo
-        R_Zoccoli = _RigaOrdine.Zoccoli
-        R_Rivestimento = _RigaOrdine.Rivestimento
-        R_TipoRivestimento = _RigaOrdine.TipoRivestimento
-        R_Note = _RigaOrdine.Note
-        R_DataConsegna = _RigaOrdine.DataConsegna
-        R_HT = _RigaOrdine.HT
-        R_DT = _RigaOrdine.DT
-        R_BM = _RigaOrdine.BM
-        R_Rivest_Tot = _RigaOrdine.Rivest_Tot
-        R_Diagonali = _RigaOrdine.Diagonali
+        Try
+            R_Riga = _RigaOrdine.Riga
+            R_Indice = _RigaOrdine.Indice
+            R_Qt = _RigaOrdine.Qt
+            R_Cliente = _RigaOrdine.Cliente
+            R_Codice = _RigaOrdine.Codice
+            R_Commessa = _RigaOrdine.Commessa
+            R_Lunghezza = _RigaOrdine.L
+            R_Profondità = _RigaOrdine.P
+            R_Altezza = _RigaOrdine.H
+            R_Type = _RigaOrdine.Tipo
+            R_Zoccoli = _RigaOrdine.Zoccoli
+            R_Rivestimento = _RigaOrdine.Rivestimento
+            R_TipoRivestimento = _RigaOrdine.TipoRivestimento
+            R_Note = _RigaOrdine.Note
+            R_DataConsegna = _RigaOrdine.DataConsegna
+            R_HT = _RigaOrdine.HT
+            R_DT = _RigaOrdine.DT
+            R_BM = _RigaOrdine.BM
+            R_Rivest_Tot = _RigaOrdine.Rivest_Tot
+            R_Diagonali = _RigaOrdine.Diagonali
+        Catch ex As Exception
+            Errore.Show("CaricaVariabiliDaOrdine \ NuovoImballo", ex.Message)
+        End Try
+
     End Sub
 
     Public Sub CreaDaOrdine(ByVal RigaOrdine As RigaOrdineINPUT, Optional _InsertDistinta As Boolean = True, Optional _InsertImballo As Boolean = True, Optional _InsertIndice As Boolean = True)
-        CaricaVariabiliDaOrdine()
+        Try
 
-        Debug.WriteLine("(## Creazione nuovo imballo " & R_NomeImballo & " Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##)")
+            CaricaVariabiliDaOrdine()
 
-        Select Case R_Type
-            Case "GDA"
-                Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "G"
-                Distinta = Crea_G(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "P"
-                Distinta = Crea_P_T(R_Lunghezza, R_Profondità, 0, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "T"
-                Distinta = Crea_P_T(R_Lunghezza, R_Profondità, 0, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "GST"
-                Distinta = Crea_GST(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "C"
-                Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "CL"
-                Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case "GRO"
-                Distinta = Crea_GRO(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
-            Case Else
-                MsgBox("Tipo non riconosciuto (" & R_Type & ")")
-                Exit Sub
-        End Select
+            Debug.WriteLine("(## Creazione nuovo imballo " & R_NomeImballo & " Tipo: " & R_Type & " Dimensioni " & R_Lunghezza & " x " & R_Profondità & " x " & R_Altezza & " ##)")
+
+            Select Case R_Type
+                Case "GDA"
+                    Distinta = Crea_GDA(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "G"
+                    Distinta = Crea_G(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "P"
+                    Distinta = Crea_P_T(R_Lunghezza, R_Profondità, 0, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "T"
+                    Distinta = Crea_P_T(R_Lunghezza, R_Profondità, 0, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "GST"
+                    Distinta = Crea_GST(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "C"
+                    Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "CL"
+                    Distinta = Crea_C(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case "GRO"
+                    Distinta = Crea_GRO(R_Lunghezza, R_Profondità, R_Altezza, R_Type, R_Zoccoli, R_DT, R_BM, R_Diagonali, R_HT)
+                Case Else
+                    MsgBox("Tipo non riconosciuto (" & R_Type & ")")
+                    Exit Sub
+            End Select
 
 
-        If _InsertDistinta = True Then
-            InsertDistinta()
-            LOG.Write("Creata nuova distinta: " & R_NomeImballo)
-        End If
+            If _InsertDistinta = True Then
+                InsertDistinta()
+                LOG.Write("Creata nuova distinta: " & R_NomeImballo)
+            End If
 
-        If _InsertImballo = True Then
-            InsertImballo()
-            LOG.Write("Creata nuova riga imballo: " & R_NomeImballo)
-        End If
+            If _InsertImballo = True Then
+                InsertImballo()
+                LOG.Write("Creata nuova riga imballo: " & R_NomeImballo)
+            End If
 
-        If _InsertIndice = True Then
-            InsertIndice()
-            LOG.Write("Assegnato imballo " & R_NomeImballo & " a indice " & R_Indice)
-        End If
+            If _InsertIndice = True Then
+                InsertIndice()
+                LOG.Write("Assegnato imballo " & R_NomeImballo & " a indice " & R_Indice)
+            End If
+
+        Catch ex As Exception
+            Errore.Show("CreaDaOrdine \ NuovoImballo", ex.Message)
+        End Try
+
     End Sub
 
     Private Sub InsertDistinta()
@@ -147,7 +159,7 @@
 
             End Using
         Catch ex As Exception
-            MsgBox("Errore in INSERT DISTINTA" & R_NomeImballo & vbCrLf & ex.Message)
+            Errore.Show("Inserimento distinta " & R_NomeImballo & " riga (" & R_Riga & ")", ex.Message)
         End Try
 
     End Sub
@@ -174,7 +186,7 @@
             End Using
 
         Catch ex As Exception
-            MsgBox("Errore in INSERT IMBALLO" & R_NomeImballo & vbCrLf & ex.Message)
+            Errore.Show("Inserimento imballo " & R_NomeImballo & " riga (" & R_Riga & ")", ex.Message)
         End Try
     End Sub
     Private Sub InsertIndice()
@@ -185,7 +197,7 @@
             End Using
 
         Catch ex As Exception
-            MsgBox("Errore in INSERT INDICE" & R_NomeImballo & vbCrLf & ex.Message)
+            Errore.Show("Inserimento indice " & R_NomeImballo & " riga (" & R_Riga & ")", ex.Message)
         End Try
 
     End Sub
@@ -203,7 +215,7 @@
             M3 = Math.Round(M3 * 10 ^ (-6), 3)
 
         Catch ex As Exception
-            MsgBox("Errore nel calcolo M3 - " & R_NomeImballo & vbCrLf & ex.Message)
+            Errore.Show("Calcolo M3 " & R_NomeImballo, ex.Message)
         End Try
 
 
@@ -219,7 +231,7 @@
             M2 = Math.Round(M2 * 10 ^ (-4), 2)
 
         Catch EX As Exception
-            MsgBox("Errore nel calcolo M2 - " & R_NomeImballo & vbCrLf & EX.Message)
+            Errore.Show("Calcolo M2 " & R_NomeImballo, EX.Message)
         End Try
 
 
@@ -229,203 +241,222 @@
 
     '############################# CREAZIONE DISTINTE #############################
     Private Function Crea_G(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
-        Dim D As New List(Of Riga_Distinta)
 
+
+        Dim D As New List(Of Riga_Distinta)
         D.Clear()
 
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
+        Try
 
-        Dim Ltav As Integer = 10
-        If L <= My.Settings.LimiteTavole8 Then Ltav = 8
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
-        Dim MontanteSottoF As Integer = 11
-        Dim MontanteSottoT As Integer = 4
+            Dim Ltav As Integer = 10
+            If L <= My.Settings.LimiteTavole8 Then Ltav = 8
 
-        '############ BANCALE ############
+            Dim MontanteSottoF As Decimal = -3.6
+            Dim MontanteSottoT As Decimal = -3.6
 
-        Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
-        Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
-        Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
+            '############ BANCALE ############
 
-        Select Case Zoccoli
-            Case "2V"
-                Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
-                D.Add(Mor)
+            Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
+            Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
+            Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
 
-            Case "EUR"
-                Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
-                Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
-                Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
-                D.AddRange({TTB, ZOC, TTT})
-        End Select
+            Select Case Zoccoli
+                Case "2V"
+                    Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
+                    D.Add(Mor)
 
-        Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
+                Case "EUR"
+                    Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
+                    Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
+                    Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
+                    D.AddRange({TTB, ZOC, TTT})
+            End Select
 
-        If DT = True Then
-            BTL.N *= 2
-            MontanteSottoF += 1
-            MontanteSottoT += 1
-        End If
+            Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
 
-        If BM = True Then
-            BTL.Y = 5
-            MontanteSottoF += 2
-            MontanteSottoT += 2
-        End If
+            If DT = True Then
+                BTL.N *= 2
+                MontanteSottoF = 5
+                MontanteSottoT = 5
+            End If
 
-        D.Add(BTL)
+            If BM = True Then
+                BTL.Y = 5
+                MontanteSottoF = 5
+                MontanteSottoT = 5
+            End If
 
-        Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
+            D.Add(BTL)
 
-        Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
-        Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
+            Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
 
-
-        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
-        D.Add(BTT)
+            Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
+            Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
 
 
-        '############ COPERCHIO ############
-
-        Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
-        Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = NMorali, .Tag = "CTT", .Part = "C"}
-
-        D.AddRange({CTL, CTT})
-
-        Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
-        Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
-
-        Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
-        Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
-        Dim NdiagF As Integer = (NMorali - 1) * 2
-
-        Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
-        Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
-        Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
-
-        If GRADIdiagF < 0 Then GRADIdiagF = 0
-        If GRADIdiagT < 0 Then GRADIdiagT = 0
-
-        If Diagonali = False Then
-            GRADIdiagT = 0
-            GRADIdiagF = 0
-        End If
+            Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
+            D.Add(BTT)
 
 
-        '############ FIANCATE ############
+            '############ COPERCHIO ############
 
-        Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
-        Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF + 4), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
+            Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(P + 8, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
+            Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 8, .N = NMorali, .Tag = "CTT", .Part = "C"}
 
-        D.AddRange({FTL, FM})
+            D.AddRange({CTL, CTT})
 
-        If Diagonali = True Then
-            Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
-            D.Add(FD)
-        End If
+            Dim SpazioFraMontantiF As Integer = (((L + 4) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
+            Dim SpazioFraMontantiT As Integer = (P + 4 - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)) \ (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) - 1)
 
-        '############ TESTE ############
+            Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
+            Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
 
-        Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N, .Tag = "TTL", .Part = "T"}
-        Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT + 2, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
+            Dim NdiagF As Integer = Imballo.CalcoloDiagonaliF(NMorali)
 
-        D.AddRange({TTL, TM})
+            Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
+            Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
+            Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
 
-        If Diagonali = True Then
-            Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
-            D.Add(TD)
-        End If
+            If Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) Mod 2 <> 0 Then
+                NdiagT = 0
+            End If
 
-        '############ INFO ############
+            If GRADIdiagF < 0 Then GRADIdiagF = 0
+            If GRADIdiagT < 0 Then GRADIdiagT = 0
 
-        R_GradiF = GRADIdiagF
-        R_GradiT = GRADIdiagT
-        R_PrimoMOR = Primomorale
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = CalcoloM3(D)
-        R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
-        R_SottoMF = MontanteSottoF
-        R_SottoMT = MontanteSottoT
-        R_SopraMF = 4
-        R_SopraMT = 2
+            If Diagonali = False Then
+                GRADIdiagT = 0
+                GRADIdiagF = 0
+            End If
+
+
+            '############ FIANCATE ############
+
+            Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
+            Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H, .N = NMorali * 2, .Tag = "FM", .Part = "F"}
+
+            D.AddRange({FTL, FM})
+
+            If Diagonali = True Then
+                Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
+                D.Add(FD)
+            End If
+
+            '############ TESTE ############
+
+            Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = FTL.N, .Tag = "TTL", .Part = "T"}
+            Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
+
+            D.AddRange({TTL, TM})
+
+            If Diagonali = True And NdiagT > 0 Then
+                Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
+                D.Add(TD)
+            End If
+
+            '############ INFO ############
+
+            R_GradiF = GRADIdiagF
+            R_GradiT = GRADIdiagT
+            R_PrimoMOR = Primomorale
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = CalcoloM3(D)
+            R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
+            R_SottoMF = MontanteSottoF
+            R_SottoMT = MontanteSottoT
+            R_SopraMF = 0
+            R_SopraMT = 0
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
+
         Return D
-
     End Function
     Private Function Crea_P_T(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
         Dim D As New List(Of Riga_Distinta)
 
         D.Clear()
 
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
+        Try
 
-        Dim Ltav As Integer = 10
-        If L <= My.Settings.LimiteTavole8 Then Ltav = 8
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
-        Dim MontanteSottoF As Integer = 0
-        Dim MontanteSottoT As Integer = 0
+            Dim Ltav As Integer = 10
+            If L <= My.Settings.LimiteTavole8 Then Ltav = 8
 
-        '############ BANCALE ############
+            Dim MontanteSottoF As Integer = 0
+            Dim MontanteSottoT As Integer = 0
 
-        Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
-        Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
-        Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
+            '############ BANCALE ############
 
-        Select Case Zoccoli
-            Case "2V"
-                Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
-                D.Add(Mor)
+            Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
+            Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
+            Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
 
-            Case "EUR"
-                Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
-                Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
-                Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
-                D.AddRange({TTB, ZOC, TTT})
-        End Select
+            Select Case Zoccoli
+                Case "2V"
+                    Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P), .N = NMorali, .Tag = "Mor", .Part = "B"}
+                    D.Add(Mor)
 
-        Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
+                Case "EUR"
+                    Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P), .N = NMorali, .Tag = "TTB", .Part = "B"}
+                    Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
+                    Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P), .N = NMorali, .Tag = "TTT", .Part = "B"}
+                    D.AddRange({TTB, ZOC, TTT})
+            End Select
 
-        If DT = True Then
-            BTL.N *= 2
-        End If
+            Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L), .N = NBTL, .Tag = "BTL", .Part = "B"}
 
-        If BM = True Then
-            BTL.Y = 5
-        End If
+            If DT = True Then
+                BTL.N *= 2
+            End If
 
-        D.Add(BTL)
+            If BM = True Then
+                BTL.Y = 5
+            End If
 
-        Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
+            D.Add(BTL)
 
-        Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
-        Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
+            Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
 
-
-        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
-        D.Add(BTT)
+            Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
+            Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
 
 
-        '############ COPERCHIO ############
-
-        Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
-        Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = NMorali, .Tag = "CTT", .Part = "C"}
-
-        D.AddRange({CTL, CTT})
+            Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
+            D.Add(BTT)
 
 
+            '############ COPERCHIO ############
 
-        '############ INFO ############
+            Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
+            Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = NMorali, .Tag = "CTT", .Part = "C"}
+
+            D.AddRange({CTL, CTT})
 
 
-        R_GradiF = 0
-        R_GradiT = 0
-        R_PrimoMOR = Primomorale
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = CalcoloM3(D)
-        R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
-        R_SottoMF = 0
-        R_SottoMT = 0
-        R_SopraMF = 0
-        R_SopraMT = 0
+
+            '############ INFO ############
+
+
+            R_GradiF = 0
+            R_GradiT = 0
+            R_PrimoMOR = Primomorale
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = CalcoloM3(D)
+            R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
+            R_SottoMF = 0
+            R_SottoMT = 0
+            R_SopraMF = 0
+            R_SopraMT = 0
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
+
         Return D
 
     End Function
@@ -437,298 +468,195 @@
 
         D.Clear()
 
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
+        Try
 
-        '############ BANCALE ############
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
-        Dim Primomorale As Integer = 6
-        Dim NMorali As Integer = Imballo.NumeroMorali(L, Primomorale, TIPO.InterasseMax)
+            '############ BANCALE ############
 
-        Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 2), .N = NMorali, .Tag = "Mor", .Part = "B"}
-        Dim BAS As New Riga_Distinta With {.X = L, .Y = 1.2, .Z = P, .N = 1, .Tag = "BAS", .Part = "B"}
-        D.AddRange({Mor, BAS})
+            Dim Primomorale As Integer = 6
+            Dim NMorali As Integer = Imballo.NumeroMorali(L, Primomorale, TIPO.InterasseMax)
 
-        M3MOR = (10 * 5 * (P + 2) * NMorali) * (10 ^ -6)
+            Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 2), .N = NMorali, .Tag = "Mor", .Part = "B"}
+            Dim BAS As New Riga_Distinta With {.X = L, .Y = 1.2, .Z = P, .N = 1, .Tag = "BAS", .Part = "B"}
+            D.AddRange({Mor, BAS})
 
-
-        '############ COPERCHIO ############
-
-        Dim COP As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = P + 2, .N = 1, .Tag = "COP", .Part = "C"}
-        D.Add(COP)
+            M3MOR = (10 * 5 * (P + 2) * NMorali) * (10 ^ -6)
 
 
+            '############ COPERCHIO ############
 
-        '############ FIANCATE ############
-
-
-        Dim FIA As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = H + 1.5, .N = 2, .Tag = "FIA", .Part = "F"}
-        D.Add(FIA)
+            Dim COP As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = P + 2, .N = 1, .Tag = "COP", .Part = "C"}
+            D.Add(COP)
 
 
 
-        '############ TESTE ############
-
-        Dim TES As New Riga_Distinta With {.X = P, .Y = 1.2, .Z = H + 1.5, .N = 2, .Tag = "TES", .Part = "T"}
-        D.Add(TES)
+            '############ FIANCATE ############
 
 
-
-        '############ INFO ############
-
-        R_GradiF = 0
-        R_GradiT = 0
-        R_PrimoMOR = Primomorale
-
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = M3MOR
-
-        R_SottoMF = 0
-        R_SottoMT = 0
-        R_SopraMF = 0
-        R_SopraMT = 0
+            Dim FIA As New Riga_Distinta With {.X = L + 2.5, .Y = 0.9, .Z = H + 1.5, .N = 2, .Tag = "FIA", .Part = "F"}
+            D.Add(FIA)
 
 
-        R_Prezzo = Prezzi.C(M3MOR, L, P, H, "C")
+
+            '############ TESTE ############
+
+            Dim TES As New Riga_Distinta With {.X = P, .Y = 1.2, .Z = H + 1.5, .N = 2, .Tag = "TES", .Part = "T"}
+            D.Add(TES)
+
+
+
+            '############ INFO ############
+
+            R_GradiF = 0
+            R_GradiT = 0
+            R_PrimoMOR = Primomorale
+
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = M3MOR
+
+            R_SottoMF = 0
+            R_SottoMT = 0
+            R_SopraMF = 0
+            R_SopraMT = 0
+
+
+            R_Prezzo = Prezzi.C(M3MOR, L, P, H, "C")
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
+
         Return D
     End Function
-    Private Function Crea_GRO(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
-        Dim D As New List(Of Riga_Distinta)
-
-        D.Clear()
-
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
-
-        Dim Ltav As Integer = 10
-        If L <= My.Settings.LimiteTavole8 Then Ltav = 8
-
-        Dim MontanteSottoF As Integer = 11
-        Dim MontanteSottoT As Integer = 4
-
-        '############ BANCALE ############
-
-        Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
-        Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
-        Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
-
-        Select Case Zoccoli
-            Case "2V"
-                Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
-                D.Add(Mor)
-
-            Case "EUR"
-                Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
-                Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
-                Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
-                D.AddRange({TTB, ZOC, TTT})
-        End Select
-
-        Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
-
-        If DT = True Then
-            BTL.N *= 2
-            MontanteSottoF += 1
-            MontanteSottoT += 1
-        End If
-
-        If BM = True Then
-            BTL.Y = 5
-            MontanteSottoF += 2
-            MontanteSottoT += 2
-        End If
-
-        D.Add(BTL)
-
-        Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
-
-        Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
-        Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
-
-
-        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
-        D.Add(BTT)
-
-
-        '############ COPERCHIO ############
-
-        Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(P + 8, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
-        Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 8, .N = NMorali, .Tag = "CTT", .Part = "C"}
-
-        D.AddRange({CTL, CTT})
-
-        Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
-        Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
-
-        Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
-        Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
-        Dim NdiagF As Integer = (NMorali - 1) * 2
-
-        Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
-        Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
-        Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
-
-        If GRADIdiagF < 0 Then GRADIdiagF = 0
-        If GRADIdiagT < 0 Then GRADIdiagT = 0
-
-        If Diagonali = False Then
-            GRADIdiagT = 0
-            GRADIdiagF = 0
-        End If
-
-
-        '############ FIANCATE ############
-
-        Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
-        Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H, .N = NMorali * 2, .Tag = "FM", .Part = "F"}
-
-        D.AddRange({FTL, FM})
-
-        If Diagonali = True Then
-            Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
-            D.Add(FD)
-        End If
-
-        '############ TESTE ############
-
-        Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = FTL.N, .Tag = "TTL", .Part = "T"}
-        Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
-
-        D.AddRange({TTL, TM})
-
-        If Diagonali = True Then
-            Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
-            D.Add(TD)
-        End If
-
-        '############ INFO ############
-
-        R_GradiF = GRADIdiagF
-        R_GradiT = GRADIdiagT
-        R_PrimoMOR = Primomorale
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = CalcoloM3(D)
-        R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
-        R_SottoMF = (-3.6)
-        R_SottoMT = (-3.6)
-        R_SopraMF = 0
-        R_SopraMT = 0
-        Return D
-
-    End Function
-
     Private Function Crea_GDA(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
         Dim D As New List(Of Riga_Distinta)
 
         D.Clear()
 
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
-        Dim Ltav As Integer = 10
-        If L <= My.Settings.LimiteTavole8 Then Ltav = 8
-
-        Dim MontanteSottoF As Integer = 11
-        Dim MontanteSottoT As Integer = 4
-
-        '############ BANCALE ############
-
-        Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
-        Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
-        Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
-
-        Select Case Zoccoli
-            Case "2V"
-                Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
-                D.Add(Mor)
-
-            Case "EUR"
-                Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
-                Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
-                Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
-                D.AddRange({TTB, ZOC, TTT})
-        End Select
-
-        Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
-
-        If DT = True Then
-            BTL.N *= 2
-            MontanteSottoF += 1
-            MontanteSottoT += 1
-        End If
-
-        If BM = True Then
-            BTL.Y = 5
-            MontanteSottoF += 2
-            MontanteSottoT += 2
-        End If
-
-        D.Add(BTL)
-
-        Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
-
-        Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
-        Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
+        Try
 
 
-        Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2 + 2, .Tag = "BTT", .Part = "B"}
-        D.Add(BTT)
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
+
+            Dim Ltav As Integer = 10
+            If L <= My.Settings.LimiteTavole8 Then Ltav = 8
+
+            Dim MontanteSottoF As Integer = 11
+            Dim MontanteSottoT As Integer = 4
+
+            '############ BANCALE ############
+
+            Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
+            Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
+            Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
+
+            Select Case Zoccoli
+                Case "2V"
+                    Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
+                    D.Add(Mor)
+
+                Case "EUR"
+                    Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
+                    Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
+                    Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
+                    D.AddRange({TTB, ZOC, TTT})
+            End Select
+
+            Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
+
+            If DT = True Then
+                BTL.N *= 2
+                MontanteSottoF += 1
+                MontanteSottoT += 1
+            End If
+
+            If BM = True Then
+                BTL.Y = 5
+                MontanteSottoF += 2
+                MontanteSottoT += 2
+            End If
+
+            D.Add(BTL)
+
+            Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
+
+            Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
+            Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
 
 
-        '############ COPERCHIO ############
+            Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2 + 2, .Tag = "BTT", .Part = "B"}
+            D.Add(BTT)
 
-        Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
-        Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = NMorali, .Tag = "CTT", .Part = "C"}
 
-        D.AddRange({CTL, CTT})
+            '############ COPERCHIO ############
 
-        'Calcoli per Diagonali
+            Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
+            Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = NMorali, .Tag = "CTT", .Part = "C"}
 
-        Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
-        Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
+            D.AddRange({CTL, CTT})
 
-        Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
-        Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
-        Dim NdiagF As Integer = (NMorali - 1) * 2
+            'Calcoli per Diagonali
 
-        Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
-        Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
-        Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
+            Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
+            Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
 
-        If Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) Mod 2 <> 0 Then
-            NdiagT = 0
-        End If
+            Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
+            Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
+            Dim NdiagF As Integer = Imballo.CalcoloDiagonaliF(NMorali)
 
-        If GRADIdiagF < 0 Then GRADIdiagF = 0
-        If GRADIdiagT < 0 Then GRADIdiagT = 0
+            Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
+            Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
+            Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
 
-        '############ FIANCATE ############
+            If Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) Mod 2 <> 0 Then
+                NdiagT = 0
+            End If
 
-        '-- TODO -- Diagonali e gradi diagonali
+            If GRADIdiagF < 0 Then GRADIdiagF = 0
+            If GRADIdiagT < 0 Then GRADIdiagT = 0
 
-        Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
-        Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF + 4), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
-        Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
-        D.AddRange({FTL, FM, FD})
+            '############ FIANCATE ############
 
-        '############ TESTE ############
+            '-- TODO -- Diagonali e gradi diagonali
 
-        '-- TODO -- Diagonali e gradi diagonali
+            Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = (Imballo.NumeroTavole(H - 20, TIPO.SpazioFTL, Ltav) * 2) + 4, .Tag = "FTL", .Part = "F"}
+            Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF + 4), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
+            Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
+            D.AddRange({FTL, FM, FD})
 
-        Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N - 2, .Tag = "TTL", .Part = "T"}
-        Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT + 2, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
-        Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
-        D.AddRange({TTL, TM, TD})
+            '############ TESTE ############
 
-        '############ INFO ############
+            '-- TODO -- Diagonali e gradi diagonali
 
-        R_GradiF = GRADIdiagF
-        R_GradiT = GRADIdiagT
-        R_PrimoMOR = Primomorale
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = CalcoloM3(D)
-        R_Prezzo = Prezzi.Base("GDA", R_M3, R_M2, R_TipoRivestimento, R_HT)
-        R_SottoMF = MontanteSottoF
-        R_SottoMT = MontanteSottoT
-        R_SopraMF = 4
-        R_SopraMT = 2
+            Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N - 2, .Tag = "TTL", .Part = "T"}
+            Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT + 2, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
+
+            D.AddRange({TTL, TM})
+
+            If NdiagT > 0 Then
+                Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
+                D.Add(TD)
+            End If
+
+            '############ INFO ############
+
+            R_GradiF = GRADIdiagF
+            R_GradiT = GRADIdiagT
+            R_PrimoMOR = Primomorale
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = CalcoloM3(D)
+            R_Prezzo = Prezzi.Base("GDA", R_M3, R_M2, R_TipoRivestimento, R_HT)
+            R_SottoMF = MontanteSottoF
+            R_SottoMT = MontanteSottoT
+            R_SopraMF = 4
+            R_SopraMT = 2
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
+
         Return D
 
     End Function
@@ -737,113 +665,243 @@
 
         D.Clear()
 
-        Dim TIPO As Tipo = Imballo.GetTipo(Type)
+        Try
 
-        Dim Ltav As Integer = 10
-        'If L <= My.Settings.LimiteTavole8 Then Ltav = 8
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
 
-        Dim MontanteSottoF As Integer = 1.8
-        Dim MontanteSottoT As Integer = 1.8
+            Dim Ltav As Integer = 10
+            'If L <= My.Settings.LimiteTavole8 Then Ltav = 8
 
-        '############ BANCALE ############
+            Dim MontanteSottoF As Integer = 1.8
+            Dim MontanteSottoT As Integer = 1.8
 
-        Dim Primomorale As Integer = 0
-        Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
-        Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
+            '############ BANCALE ############
 
-        Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 8), .N = Math.Round((P + 8) / 58, 0) + 1, .Tag = "SCV", .Part = "B"}
-        Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 8), .N = NMorali, .Tag = "TEL", .Part = "B"}
-        Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = TTT.N * TTB.N, .Tag = "ZOC", .Part = "B"}
+            Dim Primomorale As Integer = 0
+            Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
+            Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
 
-        Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
+            Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 8), .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav), .Tag = "SCV", .Part = "B"}
+            Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 8), .N = NMorali, .Tag = "TEL", .Part = "B"}
+            Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = TTT.N * TTB.N, .Tag = "ZOC", .Part = "B"}
 
-        If DT = True Then
-            BTL.N *= 2
-            MontanteSottoF += 1.8
-            MontanteSottoT += 1.8
-        End If
+            Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
 
-        If BM = True Then
-            BTL.Y = 5
-            MontanteSottoF += 4.5
-            MontanteSottoT += 4.5
-        End If
+            If DT = True Then
+                BTL.N *= 2
+                MontanteSottoF += 1.8
+                MontanteSottoT += 1.8
+            End If
 
-        D.AddRange({TTT, ZOC, TTB, BTL})
+            If BM = True Then
+                BTL.Y = 5
+                MontanteSottoF += 4.5
+                MontanteSottoT += 4.5
+            End If
 
-
-        '############ COPERCHIO ############
-
-        Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = TTB.Z, .N = TTB.N, .Tag = "CTL", .Part = "C"}
-        Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = TTT.Z, .N = TTT.N, .Tag = "CTT", .Part = "C"}
-
-        D.AddRange({CTL, CTT})
-
-        'Calcoli per Diagonali
-
-        Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
-        Dim SpazioFraMontantiT As Integer = (P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)) \ (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) - 1)
-
-        Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
-        Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
-        Dim NdiagF As Integer = (NMorali - 1) * 2
-
-        Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
-        Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
-        Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
-
-        If GRADIdiagF < 0 Then GRADIdiagF = 0
-        If GRADIdiagT < 0 Then GRADIdiagT = 0
+            D.AddRange({TTT, ZOC, TTB, BTL})
 
 
-        '############ FIANCATE ############
+            '############ COPERCHIO ############
 
-        '-- TODO -- Diagonali e gradi diagonali
+            Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = TTB.Z, .N = TTB.N, .Tag = "CTL", .Part = "C"}
+            Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = TTT.Z, .N = TTT.N, .Tag = "CTT", .Part = "C"}
 
-        Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
-        Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
-        Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
-        D.AddRange({FTL, FM, FD})
+            D.AddRange({CTL, CTT})
 
-        '############ TESTE ############
+            'Calcoli per Diagonali
 
-        '-- TODO -- Diagonali e gradi diagonali
+            Dim SpazioFraMontantiF As Integer = ((L + 8) - (TTT.N * Ltav)) / (TTT.N - 1)
+            Dim SpazioFraMontantiT As Integer = ((P + 4) - (TTB.N * Ltav)) / (TTB.N - 1)
 
-        Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N, .Tag = "TTL", .Part = "T"}
-        Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
-        Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
+            Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
+            Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
+            Dim NdiagF As Integer = (NMorali - 1) * 2
 
-        D.AddRange({TTL, TM, TD})
+            Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
+            Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
+            Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
 
-
-        '############ INFO ############
-
-        Dim Prezzo_Materiale As Single = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
-        Dim Prezzo_Rivestimento As Single = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
-        Dim Prezzo_Faesite As Single = SQL.GetSQLValue("SELECT Prezzo FROM Materiali WHERE Materiale = 'FAES'")
-
-        R_Zoccoli = "EUR"
-        R_GradiF = GRADIdiagF
-        R_GradiT = GRADIdiagT
-        R_PrimoMOR = Primomorale
-        R_M2 = CalcoloM2(L, P, H)
-        R_M3 = CalcoloM3(D)
-        ' R_Prezzo = CalcoloPrezzo(R_M3, R_M2, Prezzo_Materiale, Prezzo_Rivestimento, R_Rivestimento, R_HT)
-        R_SottoMF = MontanteSottoF
-        R_SottoMT = MontanteSottoT
-        R_SopraMF = 0
-        R_SopraMT = 0
+            If GRADIdiagF < 0 Then GRADIdiagF = 0
+            If GRADIdiagT < 0 Then GRADIdiagT = 0
 
 
+            '############ FIANCATE ############
+
+            '-- TODO -- Diagonali e gradi diagonali
+
+            Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
+            Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
+            Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
+            D.AddRange({FTL, FM, FD})
+
+            '############ TESTE ############
+
+            '-- TODO -- Diagonali e gradi diagonali
+
+            Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N, .Tag = "TTL", .Part = "T"}
+            Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
+            Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
+
+            D.AddRange({TTL, TM, TD})
 
 
-        R_Prezzo = Prezzi.GST(R_M3, R_Lunghezza, R_Profondità, R_Altezza, R_TipoRivestimento, R_HT)
+            '############ INFO ############
 
-        'MsgBox("Prezzo totale gabbia:" & vbCrLf & "Legno: " & Prezzo_Materiale & " x " & R_M3 & vbCrLf & "Cartonplast: " & Prezzo_Rivestimento & " x " & M2_CartonPlast & vbCrLf & "Faesite su base: " & Prezzo_Faesite & " x " & M2_Faesite & vbCrLf & "TOTALE: €" & R_Prezzo)
+            Dim Prezzo_Materiale As Single = SQL.GetSQLValue("SELECT PrezzoM3HT FROM Tipi WHERE Tipo = '" & Type & "'")
+            Dim Prezzo_Rivestimento As Single = SQL.GetSQLValue("SELECT Prezzo_m2 FROM Rivestimenti WHERE Tipo_Rivestimento = '" & R_TipoRivestimento & "'")
+            Dim Prezzo_Faesite As Single = SQL.GetSQLValue("SELECT Prezzo FROM Materiali WHERE Materiale = 'FAES'")
+
+            R_Zoccoli = "EUR"
+            R_GradiF = GRADIdiagF
+            R_GradiT = GRADIdiagT
+            R_PrimoMOR = Primomorale
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = CalcoloM3(D)
+            R_SottoMF = MontanteSottoF
+            R_SottoMT = MontanteSottoT
+            R_SopraMF = 0
+            R_SopraMT = 0
+
+            R_Prezzo = Prezzi.GST(R_M3, R_Lunghezza, R_Profondità, R_Altezza, R_TipoRivestimento, R_HT)
+
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
 
         Return D
     End Function
+    Private Function Crea_GRO(L, P, H, Type, Zoccoli, DT, BM, Diagonali, HT) As List(Of Riga_Distinta)
+        'La vecchia G ora non usata
+        Dim D As New List(Of Riga_Distinta)
+
+        D.Clear()
+
+        Try
+
+            Dim TIPO As Tipo = Imballo.GetTipo(Type)
+
+            Dim Ltav As Integer = 10
+            If L <= My.Settings.LimiteTavole8 Then Ltav = 8
+
+            Dim MontanteSottoF As Integer = 11
+            Dim MontanteSottoT As Integer = 4
+
+            '############ BANCALE ############
+
+            Dim Primomorale As Integer = Imballo.CalcoloPrimoMorale(L + 4)
+            Dim NMorali As Integer = Imballo.NumeroMorali(L + 4, Primomorale, TIPO.InterasseMax)
+            Dim NBTL As Integer = Imballo.NumeroTavole(P + 4, TIPO.SpazioBTL, Ltav)
+
+            Select Case Zoccoli
+                Case "2V"
+                    Dim Mor As New Riga_Distinta With {.X = 5, .Y = 10, .Z = (P + 4), .N = NMorali, .Tag = "Mor", .Part = "B"}
+                    D.Add(Mor)
+
+                Case "EUR"
+                    Dim TTB As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTB", .Part = "B"}
+                    Dim ZOC As New Riga_Distinta With {.X = 10, .Y = 8, .Z = 10, .N = NMorali * 3, .Tag = "ZOC", .Part = "B"}
+                    Dim TTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali, .Tag = "TTT", .Part = "B"}
+                    D.AddRange({TTB, ZOC, TTT})
+            End Select
+
+            Dim BTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (L + 4), .N = NBTL, .Tag = "BTL", .Part = "B"}
+
+            If DT = True Then
+                BTL.N *= 2
+                MontanteSottoF += 1
+                MontanteSottoT += 1
+            End If
+
+            If BM = True Then
+                BTL.Y = 5
+                MontanteSottoF += 2
+                MontanteSottoT += 2
+            End If
+
+            D.Add(BTL)
+
+            Dim InterasseMaxTavoleTraIMorali As Integer = TIPO.SpazioBTT
+
+            Dim InterasseMorali As Single = (BTL.Z - (Primomorale * 2)) / (NMorali - 1)
+            Dim TavoleTraIMorali As Integer = (Imballo.NumeroTavoleSopra(InterasseMorali, InterasseMaxTavoleTraIMorali)) * (NMorali - 1)
 
 
+            Dim BTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (P + 4), .N = NMorali + TavoleTraIMorali + 2, .Tag = "BTT", .Part = "B"}
+            D.Add(BTT)
+
+
+            '############ COPERCHIO ############
+
+            Dim CTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 4, .N = Imballo.NumeroTavole(P + 4, TIPO.SpazioCTL, Ltav), .Tag = "CTL", .Part = "C"}
+            Dim CTT As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P + 4, .N = NMorali, .Tag = "CTT", .Part = "C"}
+
+            D.AddRange({CTL, CTT})
+
+            Dim SpazioFraMontantiF As Integer = (((L) - (Primomorale * 2)) / (NMorali - 1)) - Ltav
+            Dim SpazioFraMontantiT As Integer = P - (Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * Ltav)
+
+            Dim LdiagF As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiF, H, Ltav)
+            Dim GRADIdiagF As Single = Imballo.Diagonali_gradi(SpazioFraMontantiF, H, Ltav)
+            Dim NdiagF As Integer = (NMorali - 1) * 2
+
+            Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
+            Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
+            Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
+
+            If GRADIdiagF < 0 Then GRADIdiagF = 0
+            If GRADIdiagT < 0 Then GRADIdiagT = 0
+
+            If Diagonali = False Then
+                GRADIdiagT = 0
+                GRADIdiagF = 0
+            End If
+
+
+            '############ FIANCATE ############
+
+            Dim FTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = L + 8, .N = Imballo.NumeroTavole(H, TIPO.SpazioFTL, Ltav) * 2, .Tag = "FTL", .Part = "F"}
+            Dim FM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = (H + MontanteSottoF + 4), .N = NMorali * 2, .Tag = "FM", .Part = "F"}
+
+            D.AddRange({FTL, FM})
+
+            If Diagonali = True Then
+                Dim FD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagF, .N = NdiagF, .Tag = "FD", .Part = "F"}
+                D.Add(FD)
+            End If
+
+            '############ TESTE ############
+
+            Dim TTL As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = P, .N = FTL.N, .Tag = "TTL", .Part = "T"}
+            Dim TM As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = H + MontanteSottoT + 2, .N = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) * 2, .Tag = "TM", .Part = "T"}
+
+            D.AddRange({TTL, TM})
+
+            If Diagonali = True Then
+                Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
+                D.Add(TD)
+            End If
+
+            '############ INFO ############
+
+            R_GradiF = GRADIdiagF
+            R_GradiT = GRADIdiagT
+            R_PrimoMOR = Primomorale
+            R_M2 = CalcoloM2(L, P, H)
+            R_M3 = CalcoloM3(D)
+            R_Prezzo = Prezzi.Base(R_Type, R_M3, R_M2, R_TipoRivestimento, R_HT)
+            R_SottoMF = MontanteSottoF
+            R_SottoMT = MontanteSottoT
+            R_SopraMF = 4
+            R_SopraMT = 2
+
+        Catch ex As Exception
+            Errore.Show("Creazione distinta " & R_NomeImballo, ex.Message)
+        End Try
+
+        Return D
+
+    End Function
 
 End Class

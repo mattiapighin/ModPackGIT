@@ -106,62 +106,71 @@
             End If
 
         Catch ex As Exception
-            MsgBox("Si è verificato un errore" & vbCrLf & "'" & Progress & "'" & vbCrLf & ex.Message)
+            Errore.Show("Salva \ Crea imballo manuale", ex.Message)
         End Try
 
     End Sub
 
     Private Sub CaricaTipi()
+        Try
+            Cb_Tipo.Items.Clear()
 
-        Cb_Tipo.Items.Clear()
+            Using Table As New ModPackDBDataSetTableAdapters.TipiTableAdapter
+                Using DS As New ModPackDBDataSet.TipiDataTable
+                    Table.Fill(DS)
 
-        Using Table As New ModPackDBDataSetTableAdapters.TipiTableAdapter
-            Using DS As New ModPackDBDataSet.TipiDataTable
-                Table.Fill(DS)
+                    For Each Row As ModPackDBDataSet.TipiRow In DS.Rows
+                        Cb_Tipo.Items.Add(Row.Tipo)
+                        If Not Row.IsDescrizioneNull Then ArrayTipi.Add(Row.Descrizione) Else ArrayTipi.Add("")
+                    Next
 
-                For Each Row As ModPackDBDataSet.TipiRow In DS.Rows
-                    Cb_Tipo.Items.Add(Row.Tipo)
-                    If Not Row.IsDescrizioneNull Then ArrayTipi.Add(Row.Descrizione) Else ArrayTipi.Add("")
-                Next
-
+                End Using
             End Using
-        End Using
 
-        Cb_Tipo.SelectedIndex = 0
+            Cb_Tipo.SelectedIndex = 0
 
+        Catch ex As Exception
+            Errore.Show("CaricaTipi() \ Creazione imballo manuale", ex.Message)
+        End Try
     End Sub
     Private Sub CaricaRiv()
+        Try
+            Cb_Rivestimento.Items.Clear()
 
-        Cb_Rivestimento.Items.Clear()
+            Using Table As New ModPackDBDataSetTableAdapters.RivestimentiTableAdapter
+                Using DS As New ModPackDBDataSet.RivestimentiDataTable
+                    Table.Fill(DS)
 
-        Using Table As New ModPackDBDataSetTableAdapters.RivestimentiTableAdapter
-            Using DS As New ModPackDBDataSet.RivestimentiDataTable
-                Table.Fill(DS)
+                    For Each Row As ModPackDBDataSet.RivestimentiRow In DS.Rows
+                        Cb_Rivestimento.Items.Add(Row.Tipo_Rivestimento)
+                        If Not Row.IsDescrizioneNull Then ArrayRivestimenti.Add(Row.Descrizione) Else ArrayRivestimenti.Add("")
+                    Next
 
-                For Each Row As ModPackDBDataSet.RivestimentiRow In DS.Rows
-                    Cb_Rivestimento.Items.Add(Row.Tipo_Rivestimento)
-                    If Not Row.IsDescrizioneNull Then ArrayRivestimenti.Add(Row.Descrizione) Else ArrayRivestimenti.Add("")
-                Next
-
+                End Using
             End Using
-        End Using
 
-        Cb_Rivestimento.SelectedIndex = 0
-
+            Cb_Rivestimento.SelectedIndex = 0
+        Catch ex As Exception
+            Errore.Show("CaricaRiv() \ Creazione imballo manuale", ex.Message)
+        End Try
     End Sub
     Private Function CheckCodice() As Boolean
 
         Dim Esiste As Boolean = False
+        Try
+            Using Table As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
+                Using DS As New ModPackDBDataSet.ImballiDataTable
 
-        Using Table As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
-            Using DS As New ModPackDBDataSet.ImballiDataTable
+                    Table.Fill(DS)
 
-                Table.Fill(DS)
-
-                Dim Row() As DataRow = DS.Select("Imballo = '" & Tx_CodiceImballo.Text & "'")
-                If Row.Length > 0 Then Esiste = True
+                    Dim Row() As DataRow = DS.Select("Imballo = '" & Tx_CodiceImballo.Text & "'")
+                    If Row.Length > 0 Then Esiste = True
+                End Using
             End Using
-        End Using
+
+        Catch ex As Exception
+            Errore.Show("CheckCodice() \ Creazione imballo manuale", ex.Message)
+        End Try
 
         Return Esiste
     End Function
@@ -181,44 +190,57 @@
     Private Function CalcoloM2() As Single
 
         Dim M2 As Single = 0
+        Try
+            Dim L As Integer = Tx_L.Text
+            Dim P As Integer = Tx_P.Text
+            Dim H As Integer = Tx_H.Text
 
-        Dim L As Integer = Tx_L.Text
-        Dim P As Integer = Tx_P.Text
-        Dim H As Integer = Tx_H.Text
+            M2 = ((L * P * 2) + (L * H * 2) + (P * H * 2)) * (10 ^ -4)
 
-        M2 = ((L * P * 2) + (L * H * 2) + (P * H * 2)) * (10 ^ -4)
+
+        Catch ex As Exception
+            Errore.Show("CalcoloM2() \ Creazione imballo manuale", ex.Message)
+        End Try
         Return Math.Round(M2, 3)
-
     End Function
     Private Function CalcoloM3() As Single
 
         Dim M3 As Single = 0
+        Try
+            For Each Row As DataGridViewRow In DGW_Distinta.Rows
+                M3 += (Row.Cells(1).Value * Row.Cells(2).Value * Row.Cells(3).Value * Row.Cells(4).Value)
+            Next
 
-        For Each Row As DataGridViewRow In DGW_Distinta.Rows
-            M3 += (Row.Cells(1).Value * Row.Cells(2).Value * Row.Cells(3).Value * Row.Cells(4).Value)
-        Next
+            M3 = M3 * 10 ^ -6
 
-        M3 = M3 * 10 ^ -6
+        Catch ex As Exception
+            Errore.Show("CalcoloM2() \ Creazione imballo manuale", ex.Message)
+        End Try
 
         Return Math.Round(M3, 3)
 
     End Function
 
     Private Sub Bt_CaricaIMG_Click(sender As Object, e As EventArgs) Handles Bt_CaricaIMG.Click
-        Dim LoadImage As New OpenFileDialog With {.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|Bitmap (*.bmp)|*.bmp"}
-        If LoadImage.ShowDialog = DialogResult.OK Then
+        Try
+            Dim LoadImage As New OpenFileDialog With {.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|Bitmap (*.bmp)|*.bmp"}
+            If LoadImage.ShowDialog = DialogResult.OK Then
 
-            Dim infoReader As System.IO.FileInfo
-            infoReader = My.Computer.FileSystem.GetFileInfo(LoadImage.FileName)
-            If infoReader.Length <= 512000 Then
-                PB_Img.BackgroundImage = Image.FromFile(LoadImage.FileName)
+                Dim infoReader As System.IO.FileInfo
+                infoReader = My.Computer.FileSystem.GetFileInfo(LoadImage.FileName)
+                If infoReader.Length <= 512000 Then
+                    PB_Img.BackgroundImage = Image.FromFile(LoadImage.FileName)
+                Else
+                    MsgBox("Selezionare un'immagine di dimensioni inferiori a 500kb")
+                End If
+
             Else
-                MsgBox("Selezionare un'immagine di dimensioni inferiori a 500kb")
+                PB_Img.BackgroundImage = Nothing
             End If
+        Catch ex As Exception
+            Errore.Show("CaricaIMG() \ Creazione imballo manuale", ex.Message)
+        End Try
 
-        Else
-            PB_Img.BackgroundImage = Nothing
-        End If
     End Sub
 
     Private Sub Tx_H_TextChanged(sender As Object, e As EventArgs) Handles Tx_H.TextChanged
@@ -243,7 +265,12 @@
     'Buttons
     Private Sub Bt_CheckCodice_Click(sender As Object, e As EventArgs) Handles Bt_CheckCodice.Click
         If CheckCodice() = False Then
-            Sblocca()
+            If Not Tx_CodiceImballo.Text.StartsWith("M") Then
+                Sblocca()
+            Else
+                MsgBox("I codici che iniziano con M sono riservati al conteggio progressivo")
+            End If
+
         Else
             MsgBox("Il codice che stai cercando di creare esiste già", vbInformation, "Attenzione")
         End If

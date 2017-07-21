@@ -25,6 +25,13 @@
         Dim Xmor As Single
         Dim Ymor As Single
 
+        Dim Stringa1Riv As String
+        Dim Stringa2Riv As String
+        Dim Stringa3Riv As String
+        Dim QT1Riv As Integer = 0
+        Dim QT2Riv As Integer = 0
+        Dim QT3Riv As Integer = 0
+
         Private Sub CaricaDati(Riga As RigaOrdine)
             PrimoMorale = 0
             L = 0
@@ -207,8 +214,8 @@
             Dim RsH As New Rectangle(RsP.Right, Riga1.Top, Q, Riga1.Height)
             Dim RsZocc As New Rectangle(RsH.Right, Riga1.Top, Q, Riga1.Height)
             Dim RsDTBM As New Rectangle(RsZocc.Right, Riga1.Top, Q, Riga1.Height)
-            Dim RsVuoto1 As New Rectangle(RsDTBM.Right, Riga1.Top, Q, Riga1.Height)
-            Dim RsDiagF As New Rectangle(RsVuoto1.Right, Riga1.Top, Q, Riga1.Height)
+            Dim RsDiag As New Rectangle(RsDTBM.Right, Riga1.Top, Q, Riga1.Height)
+            Dim RsDiagF As New Rectangle(RsDiag.Right, Riga1.Top, Q, Riga1.Height)
             Dim RsDiagT As New Rectangle(RsDiagF.Right, Riga1.Top, Q, Riga1.Height)
             Dim RsVuoto2 As New Rectangle(RsDiagT.Right, Riga1.Top, Q * 2, Riga1.Height)
             Dim Rsm2 As New Rectangle(RsVuoto2.Right, Riga1.Top, Q, Riga1.Height)
@@ -219,21 +226,21 @@
             Dim RbH As New Rectangle(RbP.Right, Riga2.Top, Q, Riga2.Height)
             Dim RbZocc As New Rectangle(RbH.Right, Riga2.Top, Q, Riga2.Height)
             Dim RbDTBM As New Rectangle(RbZocc.Right, Riga2.Top, Q, Riga2.Height)
-            Dim RbVuoto1 As New Rectangle(RbDTBM.Right, Riga2.Top, Q, Riga2.Height)
-            Dim RbDiagF As New Rectangle(RbVuoto1.Right, Riga2.Top, Q, Riga2.Height)
+            Dim rbdiag As New Rectangle(RbDTBM.Right, Riga2.Top, Q, Riga2.Height)
+            Dim RbDiagF As New Rectangle(rbdiag.Right, Riga2.Top, Q, Riga2.Height)
             Dim RbDiagT As New Rectangle(RbDiagF.Right, Riga2.Top, Q, Riga2.Height)
             Dim RbVuoto2 As New Rectangle(RbDiagT.Right, Riga2.Top, Q * 2, Riga2.Height)
             Dim Rbm2 As New Rectangle(RbVuoto2.Right, Riga2.Top, Q, Riga2.Height)
             Dim Rbm3 As New Rectangle(Rbm2.Right, Riga2.Top, Q, Riga2.Height)
 
-            e.Graphics.DrawRectangles(Pens.LightGray, {RbL, RbP, RbH, RbZocc, RbDTBM, RbVuoto1, RbDiagF, RbDiagT, RbVuoto2, Rbm2})
+            e.Graphics.DrawRectangles(Pens.LightGray, {RbL, RbP, RbH, RbZocc, RbDTBM, RsDiag, RbDiagF, RbDiagT, RbVuoto2, Rbm2})
 
             e.Graphics.DrawString("L", FONT, Brushes.Black, RsL, FMT)
             e.Graphics.DrawString("P", FONT, Brushes.Black, RsP, FMT)
             e.Graphics.DrawString("H", FONT, Brushes.Black, RsH, FMT)
             e.Graphics.DrawString("Zocc", FONT, Brushes.Black, RsZocc, FMT)
             e.Graphics.DrawString("DT\BM", FONT, Brushes.Black, RsDTBM, FMT)
-
+            e.Graphics.DrawString("Diagonali", FONT, Brushes.Black, RsDiag, FMT)
             e.Graphics.DrawString("Gradi F", FONT, Brushes.Black, RsDiagF, FMT)
             e.Graphics.DrawString("Gradi T", FONT, Brushes.Black, RsDiagT, FMT)
 
@@ -248,6 +255,8 @@
             e.Graphics.DrawString(P, FONT, Brushes.Black, RbP, FMT)
             e.Graphics.DrawString(H, FONT, Brushes.Black, RbH, FMT)
             e.Graphics.DrawString(Zocc, FONT, Brushes.Black, RbZocc, FMT)
+
+            If riga.Diagonali = True Then e.Graphics.DrawString("X", FONT, Brushes.Black, rbdiag, FMT)
 
             If DT = True Then e.Graphics.DrawString("DT", FONT, Brushes.Black, RbDTBM, FMT)
             If BM = True Then e.Graphics.DrawString("BM", FONT, Brushes.Black, RbDTBM, FMT)
@@ -264,7 +273,7 @@
 
         Private Sub Distinta(sender As Object, e As Printing.PrintPageEventArgs, riga As RigaOrdine)
 
-            ' QR_Code(sender, e, riga, 400, 400, 150)
+            'QR_Code(sender, e, riga, e.MarginBounds.Right - 240, e.MarginBounds.Bottom - 215, 150)
 
             Dim DS As New DataSet
             Dim LST As New List(Of RowDistinta)
@@ -285,6 +294,7 @@
                     Dim R As New RowDistinta With {.R = myreader.GetValue(2), .Part = myreader.GetValue(3), .X = myreader.GetValue(4), .Y = myreader.GetValue(5), .Z = myreader.GetValue(6), .N = myreader.GetValue(7), .Tag = myreader.GetValue(8)}
                     LST.Add(R)
                     If R.Tag = "BTL" Then LunBTL = R.Z 'se la riga è quella BTL salva la misura della tavola
+                    If R.Tag = "BAS" Then LunBTL = R.X 'se la riga è quella BAS (nelle casse in compensato) salva la lunghezza 
                     If R.R = 1 Then NMOR = R.N ' se è la prima riga salva il numero di morali o telarini
                 Loop
                 myreader.Close()
@@ -477,9 +487,11 @@
                 Dim Codice As Image
 
                 If My.Settings.StampaBarcodeSoloCodice = True Then
-                    Codice = BarCode.Genera(riga.Imballo, False, 50)
+                    'Stampa l'indice della tabella ordini riferito all'imballo
+                    Codice = BarCode.Genera(SQL.GetID_RigaOrdine(riga), True, 50, 7)
                 Else
-                    Codice = BarCode.Genera(riga.Imballo & "|" & riga.Qt, False, 50)
+                    'Stampa il nome dell'imballo | quantità
+                    Codice = BarCode.Genera(riga.Imballo & "|" & riga.Qt, True, 50, 7)
                 End If
 
                 Dim P As New Point With {.X = RectBarcode.Right - (Codice.Width) - 20, .Y = RectBarcode.Y}
@@ -523,19 +535,20 @@
                 e.Graphics.DrawString("F", fnt, Brushes.Black, RectFRiv, FMT)
                 e.Graphics.DrawString("T", fnt, Brushes.Black, RectTRiv, FMT)
 
-                e.Graphics.DrawString(riga.L - 5 & " x " & riga.P - 5, fnt, Brushes.Black, RectBCRivValore, FMT)
-                e.Graphics.DrawString(riga.L - 5 & " x " & riga.H - 10, fnt, Brushes.Black, RectFRivValore, FMT)
-                e.Graphics.DrawString(riga.P - 5 & " x " & riga.H - 10, fnt, Brushes.Black, RectTRivValore, FMT)
+                ScriviRivestimento(riga)
 
+                e.Graphics.DrawString(Stringa1Riv, fnt, Brushes.Black, RectBCRivValore, FMT)
+                e.Graphics.DrawString(Stringa2Riv, fnt, Brushes.Black, RectFRivValore, FMT)
+                e.Graphics.DrawString(Stringa3Riv, fnt, Brushes.Black, RectTRivValore, FMT)
 
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectBCRivQt, FMT)
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectFRivQt, FMT)
-                e.Graphics.DrawString("2", fnt, Brushes.Black, RectTRivQt, FMT)
+                e.Graphics.DrawString(QT1Riv, fnt, Brushes.Black, RectBCRivQt, FMT)
+                e.Graphics.DrawString(QT2Riv, fnt, Brushes.Black, RectFRivQt, FMT)
+                e.Graphics.DrawString(QT3Riv, fnt, Brushes.Black, RectTRivQt, FMT)
 
                 If riga.Qt > 1 Then
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * 2 & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT1Riv & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT2Riv & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT3Riv & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
                 End If
 
 
@@ -563,11 +576,14 @@
             Dim Format As StringFormat = New StringFormat(StringFormatFlags.LineLimit) With {.LineAlignment = StringAlignment.Center, .Alignment = StringAlignment.Center, .Trimming = StringTrimming.EllipsisCharacter}
 
             Dim FNT As New Font("Calibri", My.Settings.DimensioneFontDistinta)
+            Dim FNTbold As New Font("Calibri", My.Settings.DimensioneFontDistinta, FontStyle.Bold)
             Dim FNT1 As New Font("Calibri", My.Settings.DimensioneFontDistinta - 2)
             Dim FNT_Tag As New Font("Calibri", 8, FontStyle.Italic)
             Dim FNT_TagBold As New Font("Calibri", 10, FontStyle.Underline Xor FontStyle.Bold)
 
             Dim Unit As Double = Riga.Width / 21
+
+            If Y >= 4 Then FNT = FNTbold
 
             Dim R_CM As New Rectangle(Riga.Left, Riga.Top, Unit * 2, Riga.Height)
             Dim R_mX As New Rectangle(R_CM.Right, Riga.Top, Unit * 3, Riga.Height)
@@ -603,7 +619,7 @@
                 e.Graphics.DrawString(N, FNT, Brushes.Black, R_N, Format)
             End If
 
-            If Not QT <= 1 Then e.Graphics.DrawString("[" & N * QT & "]", FNT1, Brushes.Gray, R_Ntot, Format)
+            If QT > 1 Then e.Graphics.DrawString("[" & N * QT & "]", FNT1, Brushes.Gray, R_Ntot, Format)
 
             If Tag = "FD" Or Tag = "TD" Then FNT_Tag = FNT_TagBold
             e.Graphics.DrawString(Tag, FNT_Tag, Brushes.Gray, R_Tag, Format)
@@ -661,6 +677,44 @@
                 MsgBox("Errore durante la stampa della seguente riga:" & vbCrLf & "Ordine: " & Riga.NumeroOrdine & " Riga: " & Riga.Riga &
                        vbCrLf & "Imballo: " & Riga.Imballo & " Pz. " & Riga.Qt & vbCrLf & ex.Message)
             End Try
+
+        End Sub
+
+        Private Sub ScriviRivestimento(riga As RigaOrdine)
+
+            Stringa1Riv = ""
+            Stringa2Riv = ""
+            Stringa3Riv = ""
+            QT1Riv = 0
+            QT2Riv = 0
+            QT3Riv = 0
+
+
+
+            Select Case riga.Tipo
+                Case "GST"
+
+                    Stringa1Riv = riga.L + 3 & " x " & riga.P + 3
+                    QT1Riv = 1
+
+                    Stringa2Riv = riga.L - 1 & " x " & riga.H - 2
+                    QT2Riv = 2
+
+                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 2
+                    QT3Riv = 2
+
+
+                Case Else
+                    'Tutti gli altri tipi di gabbie
+                    Stringa1Riv = riga.L - 5 & " x " & riga.P - 5
+                    QT1Riv = 2
+
+                    Stringa2Riv = riga.L - 5 & " x " & riga.H - 10
+                    QT2Riv = 2
+
+                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 10
+                    QT3Riv = 2
+            End Select
 
         End Sub
 

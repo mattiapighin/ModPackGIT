@@ -26,13 +26,6 @@ Partial Class Form_StoricoOrdini
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_StoricoOrdini))
         Me.DGW_Ordini = New System.Windows.Forms.DataGridView()
         Me.DGW_Righe = New System.Windows.Forms.DataGridView()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.TxtCerca = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.Cb_Colonna = New System.Windows.Forms.ToolStripComboBox()
-        Me.Bt_Cerca = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_CancellaFiltro = New System.Windows.Forms.ToolStripButton()
         Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdineDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RigaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,12 +56,22 @@ Partial Class Form_StoricoOrdini
         Me.DataOrdineDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdiniBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ModPackDBDataSet = New ModPack.ModPackDBDataSet()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.TxtCerca = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Cb_Colonna = New System.Windows.Forms.ToolStripComboBox()
+        Me.Bt_Cerca = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_CancellaFiltro = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_FiltraPerData = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
         Me.OrdiniTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.OrdiniTableAdapter()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_Ordini, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGW_Righe, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip1.SuspendLayout()
         CType(Me.OrdiniBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DGW_Ordini
@@ -109,54 +112,6 @@ Partial Class Form_StoricoOrdini
         Me.DGW_Righe.ReadOnly = True
         Me.DGW_Righe.Size = New System.Drawing.Size(862, 686)
         Me.DGW_Righe.TabIndex = 1
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TxtCerca, Me.ToolStripLabel1, Me.ToolStripSeparator1, Me.Cb_Colonna, Me.Bt_Cerca, Me.Bt_CancellaFiltro})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1186, 25)
-        Me.ToolStrip1.TabIndex = 2
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'TxtCerca
-        '
-        Me.TxtCerca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtCerca.Name = "TxtCerca"
-        Me.TxtCerca.Size = New System.Drawing.Size(100, 25)
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(0, 22)
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'Cb_Colonna
-        '
-        Me.Cb_Colonna.Name = "Cb_Colonna"
-        Me.Cb_Colonna.Size = New System.Drawing.Size(121, 25)
-        '
-        'Bt_Cerca
-        '
-        Me.Bt_Cerca.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_Cerca.Image = CType(resources.GetObject("Bt_Cerca.Image"), System.Drawing.Image)
-        Me.Bt_Cerca.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Cerca.Name = "Bt_Cerca"
-        Me.Bt_Cerca.Size = New System.Drawing.Size(23, 22)
-        Me.Bt_Cerca.Text = "ToolStripButton1"
-        '
-        'Bt_CancellaFiltro
-        '
-        Me.Bt_CancellaFiltro.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_CancellaFiltro.Image = CType(resources.GetObject("Bt_CancellaFiltro.Image"), System.Drawing.Image)
-        Me.Bt_CancellaFiltro.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_CancellaFiltro.Name = "Bt_CancellaFiltro"
-        Me.Bt_CancellaFiltro.Size = New System.Drawing.Size(23, 22)
-        Me.Bt_CancellaFiltro.Text = "ToolStripButton1"
         '
         'IdDataGridViewTextBoxColumn
         '
@@ -397,9 +352,79 @@ Partial Class Form_StoricoOrdini
         Me.ModPackDBDataSet.DataSetName = "ModPackDBDataSet"
         Me.ModPackDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TxtCerca, Me.ToolStripLabel1, Me.ToolStripSeparator1, Me.Cb_Colonna, Me.Bt_Cerca, Me.Bt_CancellaFiltro, Me.Bt_FiltraPerData, Me.Bt_Refresh})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(1186, 25)
+        Me.ToolStrip1.TabIndex = 2
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'TxtCerca
+        '
+        Me.TxtCerca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtCerca.Name = "TxtCerca"
+        Me.TxtCerca.Size = New System.Drawing.Size(100, 25)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(0, 22)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'Cb_Colonna
+        '
+        Me.Cb_Colonna.Name = "Cb_Colonna"
+        Me.Cb_Colonna.Size = New System.Drawing.Size(121, 25)
+        '
+        'Bt_Cerca
+        '
+        Me.Bt_Cerca.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Cerca.Image = CType(resources.GetObject("Bt_Cerca.Image"), System.Drawing.Image)
+        Me.Bt_Cerca.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Cerca.Name = "Bt_Cerca"
+        Me.Bt_Cerca.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_Cerca.Text = "ToolStripButton1"
+        Me.Bt_Cerca.ToolTipText = "Filtra"
+        '
+        'Bt_CancellaFiltro
+        '
+        Me.Bt_CancellaFiltro.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_CancellaFiltro.Image = CType(resources.GetObject("Bt_CancellaFiltro.Image"), System.Drawing.Image)
+        Me.Bt_CancellaFiltro.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_CancellaFiltro.Name = "Bt_CancellaFiltro"
+        Me.Bt_CancellaFiltro.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_CancellaFiltro.ToolTipText = "Cancella Filtri"
+        '
+        'Bt_FiltraPerData
+        '
+        Me.Bt_FiltraPerData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_FiltraPerData.Image = CType(resources.GetObject("Bt_FiltraPerData.Image"), System.Drawing.Image)
+        Me.Bt_FiltraPerData.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_FiltraPerData.Name = "Bt_FiltraPerData"
+        Me.Bt_FiltraPerData.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_FiltraPerData.ToolTipText = "Filtra Per Data"
+        '
+        'Bt_Refresh
+        '
+        Me.Bt_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Refresh.Image = CType(resources.GetObject("Bt_Refresh.Image"), System.Drawing.Image)
+        Me.Bt_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Refresh.Name = "Bt_Refresh"
+        Me.Bt_Refresh.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_Refresh.Text = "Refresh"
+        '
         'OrdiniTableAdapter
         '
         Me.OrdiniTableAdapter.ClearBeforeFill = True
+        '
+        'PrintDocument1
+        '
         '
         'Form_StoricoOrdini
         '
@@ -415,10 +440,10 @@ Partial Class Form_StoricoOrdini
         Me.Text = "Storico Ordini"
         CType(Me.DGW_Ordini, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGW_Righe, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         CType(Me.OrdiniBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -464,4 +489,7 @@ Partial Class Form_StoricoOrdini
     Friend WithEvents ProduzioneDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     Friend WithEvents EvasoDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     Friend WithEvents DataOrdineDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Bt_FiltraPerData As ToolStripButton
+    Friend WithEvents Bt_Refresh As ToolStripButton
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

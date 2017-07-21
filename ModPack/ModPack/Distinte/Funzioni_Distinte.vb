@@ -272,5 +272,44 @@
             Return Math.Round(prezzo, 1)
         End Function
 
+        Function CalcoloDiagonaliF(Nmorali As Integer) As Integer
+            Dim Ndiag As Integer
+
+            If Nmorali Mod 2 = 0 Then
+                Ndiag = Nmorali
+            Else
+
+                Select Case Nmorali
+                    Case < 6
+                        Ndiag = 4
+                    Case > 6 And Nmorali < 10
+                        Ndiag = 8
+                    Case > 10
+                        Ndiag = (Nmorali - 1) * 2
+                End Select
+
+            End If
+
+            Return Ndiag
+        End Function
+
+        Function CalcoloZoccoli(ByVal LunghezzaTelarino As Integer) As Integer
+            Dim N As Integer
+
+            Dim QT As Integer = 1
+
+            Dim xml = XDocument.Load(My.Settings.XMLpath)
+            Dim SpazioMax As Integer = xml.<Data>.<Dist_Zoccoli>.Value
+            Dim SpazioAtt As Integer = SpazioMax + 10
+
+            Do Until SpazioAtt <= SpazioMax
+                QT += 1
+                SpazioAtt = (LunghezzaTelarino - (QT * 10)) / (QT - 1)
+            Loop
+
+            N = QT
+
+            Return N
+        End Function
     End Module
 End Namespace

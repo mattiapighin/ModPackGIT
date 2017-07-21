@@ -23,17 +23,19 @@ Partial Class Form_ListaElementi
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_ListaElementi))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_ListaElementi))
         Me.Bt_ListaMorali = New System.Windows.Forms.Button()
         Me.DGW_Ordini = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Bt_Stampa = New System.Windows.Forms.Button()
+        Me.Bt_Esporta = New System.Windows.Forms.Button()
         Me.Bt_DiagonaliTutte = New System.Windows.Forms.Button()
         Me.Bt_DiagonaliT = New System.Windows.Forms.Button()
         Me.Bt_DiagonaliF = New System.Windows.Forms.Button()
         Me.DGW_Result = New System.Windows.Forms.DataGridView()
-        Me.Bt_Esporta = New System.Windows.Forms.Button()
+        Me.PrintTabella = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_Ordini, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGW_Result, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,6 +70,7 @@ Partial Class Form_ListaElementi
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Bt_Stampa)
         Me.GroupBox1.Controls.Add(Me.Bt_Esporta)
         Me.GroupBox1.Controls.Add(Me.Bt_DiagonaliTutte)
         Me.GroupBox1.Controls.Add(Me.Bt_DiagonaliT)
@@ -79,6 +82,30 @@ Partial Class Form_ListaElementi
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Elemento"
+        '
+        'Bt_Stampa
+        '
+        Me.Bt_Stampa.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Stampa.FlatAppearance.BorderSize = 0
+        Me.Bt_Stampa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Stampa.Image = CType(resources.GetObject("Bt_Stampa.Image"), System.Drawing.Image)
+        Me.Bt_Stampa.Location = New System.Drawing.Point(123, 261)
+        Me.Bt_Stampa.Name = "Bt_Stampa"
+        Me.Bt_Stampa.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Stampa.TabIndex = 9
+        Me.Bt_Stampa.UseVisualStyleBackColor = True
+        '
+        'Bt_Esporta
+        '
+        Me.Bt_Esporta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Bt_Esporta.FlatAppearance.BorderSize = 0
+        Me.Bt_Esporta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Bt_Esporta.Image = CType(resources.GetObject("Bt_Esporta.Image"), System.Drawing.Image)
+        Me.Bt_Esporta.Location = New System.Drawing.Point(169, 261)
+        Me.Bt_Esporta.Name = "Bt_Esporta"
+        Me.Bt_Esporta.Size = New System.Drawing.Size(40, 40)
+        Me.Bt_Esporta.TabIndex = 8
+        Me.Bt_Esporta.UseVisualStyleBackColor = True
         '
         'Bt_DiagonaliTutte
         '
@@ -141,17 +168,8 @@ Partial Class Form_ListaElementi
         Me.DGW_Result.Size = New System.Drawing.Size(612, 580)
         Me.DGW_Result.TabIndex = 3
         '
-        'Bt_Esporta
+        'PrintTabella
         '
-        Me.Bt_Esporta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Bt_Esporta.FlatAppearance.BorderSize = 0
-        Me.Bt_Esporta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Bt_Esporta.Image = CType(resources.GetObject("Bt_Esporta.Image"), System.Drawing.Image)
-        Me.Bt_Esporta.Location = New System.Drawing.Point(169, 261)
-        Me.Bt_Esporta.Name = "Bt_Esporta"
-        Me.Bt_Esporta.Size = New System.Drawing.Size(40, 40)
-        Me.Bt_Esporta.TabIndex = 8
-        Me.Bt_Esporta.UseVisualStyleBackColor = True
         '
         'Form_ListaElementi
         '
@@ -179,4 +197,6 @@ Partial Class Form_ListaElementi
     Friend WithEvents Bt_DiagonaliT As Button
     Friend WithEvents Bt_DiagonaliTutte As Button
     Friend WithEvents Bt_Esporta As Button
+    Friend WithEvents Bt_Stampa As Button
+    Friend WithEvents PrintTabella As Printing.PrintDocument
 End Class

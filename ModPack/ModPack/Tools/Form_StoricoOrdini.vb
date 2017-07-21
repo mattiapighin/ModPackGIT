@@ -39,7 +39,10 @@ Public Class Form_StoricoOrdini
 
         Cb_Colonna.Items.Clear()
         For Each Column As DataColumn In ModPackDBDataSet.Ordini.Columns
-            Cb_Colonna.Items.Add(Column.ColumnName)
+            If Not Column.ColumnName.Contains("Data") Then
+                Cb_Colonna.Items.Add(Column.ColumnName)
+            End If
+
         Next
 
         CaricaOrdini()
@@ -63,4 +66,46 @@ Public Class Form_StoricoOrdini
         OrdiniBindingSource.Filter = Nothing
         DGW_Righe.Columns(1).Visible = False
     End Sub
+
+    Private Sub Bt_FiltraPerData_Click(sender As Object, e As EventArgs) Handles Bt_FiltraPerData.Click
+
+        If Dialog_FiltraData.ShowDialog = DialogResult.OK Then
+
+            Using DS As New DataSet
+
+                Dim DA As String = Format(Dialog_FiltraData.DataInizio.Date, "MM/dd/yyyy")
+                Dim A As String = Format(Dialog_FiltraData.DataFine.Date, "MM/dd/yyyy")
+
+                Dim Query As String
+
+                If My.Settings.OrdiniNRecords > 0 Then
+                    Query = "SELECT DISTINCT TOP(" & My.Settings.OrdiniNRecords & ") Ordine, Data_Ordine FROM Ordini WHERE Data_Ordine BETWEEN '" & DA & "' AND '" & A & "' ORDER BY Data_Ordine DESC"
+                Else
+                    Query = "SELECT DISTINCT Ordine, Data_Ordine FROM Ordini WHERE Data_Ordine BETWEEN '" & Dialog_FiltraData.DataInizio.Date & "' AND '" & Dialog_FiltraData.DataFine.Date & "' ORDER BY Data_Ordine DESC"
+                End If
+
+                Using Con As New SqlConnection(My.Settings.ModPackDBConnectionString)
+
+                    Try
+                        Con.Open()
+                        Dim adapter As New SqlDataAdapter(Query, Con)
+                        adapter.Fill(DS)    '
+                    Catch ex As Exception
+                        MsgBox(ex.ToString)
+                    End Try
+                End Using
+
+                DGW_Ordini.DataSource = DS.Tables(0)
+
+            End Using
+            OrdiniBindingSource.Filter = "Ordine = 'XXXX'"
+        End If
+
+    End Sub
+
+    Private Sub Bt_Refresh_Click(sender As Object, e As EventArgs) Handles Bt_Refresh.Click
+        CaricaOrdini()
+    End Sub
+
+
 End Class

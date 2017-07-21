@@ -11,8 +11,8 @@
         Dim IdImballo As Integer = R.Id
         Dim NomeImballo As String = R.Imballo
 
-        If MsgBox("Eliminare tutti i dati relativi all'imballo [" & IdImballo & "] " & NomeImballo & "?", vbYesNo, "Elimina") Then
-            If MsgBox("Sicuro?", vbYesNo, "Elimina") Then
+        If MsgBox("Eliminare tutti i dati relativi all'imballo [" & IdImballo & "] " & NomeImballo & "?", vbYesNo, "Elimina") = MsgBoxResult.Yes Then
+            If MsgBox("Sicuro?", vbYesNo, "Elimina") = MsgBoxResult.Yes Then
                 SQL.Query("DELETE FROM Imballi WHERE Id = '" & IdImballo & "'")
                 SQL.Query("DELETE FROM Indici WHERE Imballo = '" & NomeImballo & "'")
                 SQL.Query("DELETE FROM Distinta WHERE Imballo = '" & NomeImballo & "'")
@@ -208,42 +208,42 @@
                     Case "GDA"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "G"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "P"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "T"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.Tipo, IR.M3, IR.M2, IR.Tipo_Rivestimento, IR.HT)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "GST"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.GST(IR.M3, IR.L, IR.P, IR.H, IR.Tipo_Rivestimento, IR.HT)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.GST(IR.M3, IR.L, IR.P, IR.H, IR.Tipo_Rivestimento, IR.HT)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "C"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3_Morali(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.C(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.C(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "CL"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3_Morali(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.C(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.C(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case "GRO"
                         If MsgBox("Ricalcolare automaticamente m² ?", vbYesNo, "Ricalcolo m²") = MsgBoxResult.Yes Then IR.M2 = Imballo.Ricalcolo_M2(IR.Imballo)
                         If MsgBox("Ricalcolare automaticamente m³ ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.M3 = Imballo.Ricalcolo_M3_Morali(IR.Imballo)
-                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo m³") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
+                        If MsgBox("Ricalcolare automaticamente prezzo ?", vbYesNo, "Ricalcolo Prezzo") = MsgBoxResult.Yes Then IR.Prezzo = Prezzi.Base(IR.M3, IR.L, IR.P, IR.H, IR.Tipo)
                         LOG.Write("Ricalcolato prezzo " & IR.Imballo & " - Vecchio: €" & PrezzoVecchio & " Nuovo: €" & IR.Prezzo)
                     Case Else
                         MsgBox("Tipo non riconosciuto")
@@ -252,14 +252,20 @@
                 ImballiTableAdapter.Update(IR)
                 MsgBox("Modifiche salvate!", vbInformation, "Salva")
 
+                Dim Imba As String = IR.Imballo
+
+                PulisciTutto()
+                CbImballo.Text = Imba
+                CaricaCodiceNoEdit()
+
             Catch ex As Exception
+
+
                 MsgBox(ex)
             End Try
 
         End If
 
-
-        CaricaCodice()
 
     End Sub
 
@@ -318,15 +324,65 @@
     End Sub
 
     Private Sub Bt_SpostaIndice_Click(sender As Object, e As EventArgs) Handles Bt_SpostaIndice.Click
-        If MsgBox("Vuoi assegnare l'indice selezionato ad un altro imballo?", vbYesNo, "Assegna indice") = MsgBoxResult.Yes Then
-            Dim Imballo As String = InputBox("Imballo a cui assegnare l'indice:", "", "")
+        If Not DgwIndici.SelectedCells.Count = 0 Then
+            If MsgBox("Vuoi assegnare l'indice selezionato ad un altro imballo?", vbYesNo, "Assegna indice") = MsgBoxResult.Yes Then
+                Dim Imballo As String = InputBox("Imballo a cui assegnare l'indice:", "", "")
 
-            If Not String.IsNullOrEmpty(Imballo) Then
-                SQL.SendIndex(Imballo, DgwIndici.CurrentRow.Cells(2).Value, DgwIndici.CurrentRow.Cells(3).Value, DgwIndici.CurrentRow.Cells(4).Value, DgwIndici.CurrentRow.Cells(5).Value)
-            End If
+                If Not String.IsNullOrEmpty(Imballo) Then
+                    If Ordine.ImballoNomeEXIST(Imballo) Then
+                        SQL.SendIndex(Imballo, DgwIndici.CurrentRow.Cells(2).Value, DgwIndici.CurrentRow.Cells(3).Value, DgwIndici.CurrentRow.Cells(4).Value, DgwIndici.CurrentRow.Cells(5).Value)
+                        MsgBox("Indice assegnato all'imballo " & Imballo & "!", vbInformation, "Sposta indice")
+                        CaricaCodice()
+                    Else
+                        MsgBox("L'imballo " & Imballo & "non esiste in memoria", vbInformation, "Sposta indice")
+                    End If
 
+                End If
+
+                End If
         End If
     End Sub
 
+    Private Sub Bt_AddIndice_Click(sender As Object, e As EventArgs) Handles Bt_AddIndice.Click
+        Dim Indice As String = InputBox("Indice:", "Inserisci indice", "")
+
+        If Not String.IsNullOrEmpty(Indice) Then
+
+            If Not Ordine.IndiceEXIST(Indice) Then
+                SQL.SendIndex(CbImballo.Text, Indice, "", "", "")
+                CaricaCodice()
+            Else
+
+                Dim VecchioImballo As String = Ordine.ConvertIndiceToImballo(Indice)
+
+                If MsgBox("L'indice è già associato ad un altro imballo! (" & VecchioImballo & ")" & vbCrLf & "Vuoi spostarlo dall'imballo vecchio a questo?" & vbCrLf &
+                          "(In questo modo andranno persi il codice e tutte le note. Per spostare l'indice correttamente" & vbCrLf & "recarsi su modifica imballo " & VecchioImballo & " e usare la funzione 'Sposta indice'", vbYesNo, "Inserisci indice") = MsgBoxResult.Yes Then
+                    SQL.SendIndex(CbImballo.Text, Indice, "", "", "")
+                    CaricaCodice()
+                End If
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub Bt_EliminaIndice_Click(sender As Object, e As EventArgs) Handles Bt_EliminaIndice.Click
+        If Not DgwIndici.SelectedCells.Count = 0 Then
+            Dim Indice As String = InputBox("Indice:", "Inserisci indice", DgwIndici.CurrentRow.Cells("IndiceDataGridViewTextBoxColumn").Value)
+            Dim IndiceConferma As String = InputBox("Conferma eliminazione indice:", "Inserisci indice", "")
+
+            If Not String.IsNullOrEmpty(Indice) And Not String.IsNullOrEmpty(IndiceConferma) And Indice = IndiceConferma Then
+
+                If MsgBox("Eliminare definitivamente l'indice " & Indice & "?", vbYesNo, "Elimina indice") = MsgBoxResult.Yes Then
+                    SQL.Query("DELETE FROM Indici WHERE Indice = '" & Indice & "'")
+                    CaricaCodice()
+                    MsgBox("Indice " & Indice & " eliminato!", vbInformation, "Elimina indice")
+                End If
+
+            End If
+
+        End If
+
+    End Sub
 End Class
 

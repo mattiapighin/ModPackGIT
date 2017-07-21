@@ -1,8 +1,6 @@
 ﻿Namespace Stampe
     Module Modulo_Stampe
 
-
-
         Public Sub ImmagineInRettangolo(Immagine As Image, Rettangolo As Rectangle, e As Printing.PrintPageEventArgs)
 
             Dim xml = XDocument.Load(My.Settings.XMLpath)
@@ -504,18 +502,38 @@
             LOG.Write("Stampa etichetta " & Imballo & " - " & Quantita)
         End Sub
         Public Sub EtichettaQR(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine)
+            Dim Bordo As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height)
+
             Dim STRINGA As String =
                            Riga.Imballo & " PZ. " & Riga.Qt & vbCrLf &
                            "ORD. " & Riga.NumeroOrdine & " DEL " & Riga.Data_Ordine & vbCrLf &
                             Riga.Cliente & vbCrLf &
                             Riga.Codice & vbCrLf &
                             Riga.Commessa & vbCrLf &
-                           "MAGAZZINO " & Riga.Magazzino & vbCrLf &
-                           "DATA CONSEGNA " & Riga.DataConsegna & vbCrLf &
-                           "INDICE " & Riga.Indice
+                           "MAG. " & Riga.Magazzino & vbCrLf &
+                           "CONSEGNA " & Riga.DataConsegna & vbCrLf &
+                           "ID " & Riga.Indice
 
-            Dim Point As New PointF((e.MarginBounds.Width / 2) - (e.MarginBounds.Height / 2), e.MarginBounds.Top)
-            e.Graphics.DrawImage(BarCode.QR(STRINGA, e.MarginBounds.Height), Point)
+            e.Graphics.DrawImage(BarCode.QR(STRINGA, Bordo.Height - 40), Bordo.Left, Bordo.Top + 20)
+            e.Graphics.DrawRectangle(Pens.Black, Bordo.Left, Bordo.Top + 20, Bordo.Height - 40, Bordo.Height - 40)
+
+            Dim Font1 As New Font("Calibri", 20, FontStyle.Bold)
+            Dim Font2 As New Font("Calibri", 12, FontStyle.Bold)
+
+            Dim Unit As Single = Bordo.Height / 4
+            Dim Riga1 As New Rectangle(e.MarginBounds.Left + (Bordo.Width / 2), e.MarginBounds.Top, (Bordo.Width / 2), Unit)
+            Dim Riga2 As New Rectangle(e.MarginBounds.Left + (Bordo.Width / 2), Riga1.Bottom, (Bordo.Width / 2), Unit)
+            Dim Riga3 As New Rectangle(e.MarginBounds.Left + (Bordo.Width / 2), Riga2.Bottom, (Bordo.Width / 2), Unit)
+            Dim Riga4 As New Rectangle(e.MarginBounds.Left + (Bordo.Width / 2), Riga3.Bottom, (Bordo.Width / 2), Unit)
+
+            e.Graphics.DrawRectangles(Pens.Black, {Riga1, Riga2, Riga3, Riga4})
+
+            e.Graphics.DrawString(Riga.Imballo & " - PZ. " & Riga.Qt, Font1, Brushes.Black, Riga1, FMT)
+            e.Graphics.DrawString(Riga.NumeroOrdine, Font2, Brushes.Black, Riga2, FMT)
+            e.Graphics.DrawString(Riga.DataConsegna, Font1, Brushes.Black, Riga3, FMT)
+            e.Graphics.DrawString("MAG. " & Riga.Magazzino, Font2, Brushes.Black, Riga4, FMT)
+
+
 
         End Sub
 

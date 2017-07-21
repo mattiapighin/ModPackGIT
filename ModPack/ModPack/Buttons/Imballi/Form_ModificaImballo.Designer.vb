@@ -105,6 +105,8 @@ Partial Class Form_ModificaImballo
         Me.Bt_EliminaCodice = New System.Windows.Forms.Button()
         Me.Bt_Duplica = New System.Windows.Forms.Button()
         Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Bt_AddIndice = New System.Windows.Forms.Button()
+        Me.Bt_EliminaIndice = New System.Windows.Forms.Button()
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelCodice.SuspendLayout()
@@ -648,6 +650,8 @@ Partial Class Form_ModificaImballo
         '
         'PanelModifica
         '
+        Me.PanelModifica.Controls.Add(Me.Bt_EliminaIndice)
+        Me.PanelModifica.Controls.Add(Me.Bt_AddIndice)
         Me.PanelModifica.Controls.Add(Me.Bt_SpostaIndice)
         Me.PanelModifica.Controls.Add(Me.TableLayoutPanel2)
         Me.PanelModifica.Controls.Add(Me.DgwIndici)
@@ -910,6 +914,24 @@ Partial Class Form_ModificaImballo
         Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
         Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
         '
+        'Bt_AddIndice
+        '
+        Me.Bt_AddIndice.Image = CType(resources.GetObject("Bt_AddIndice.Image"), System.Drawing.Image)
+        Me.Bt_AddIndice.Location = New System.Drawing.Point(823, 462)
+        Me.Bt_AddIndice.Name = "Bt_AddIndice"
+        Me.Bt_AddIndice.Size = New System.Drawing.Size(36, 36)
+        Me.Bt_AddIndice.TabIndex = 34
+        Me.Bt_AddIndice.UseVisualStyleBackColor = True
+        '
+        'Bt_EliminaIndice
+        '
+        Me.Bt_EliminaIndice.Image = CType(resources.GetObject("Bt_EliminaIndice.Image"), System.Drawing.Image)
+        Me.Bt_EliminaIndice.Location = New System.Drawing.Point(823, 422)
+        Me.Bt_EliminaIndice.Name = "Bt_EliminaIndice"
+        Me.Bt_EliminaIndice.Size = New System.Drawing.Size(36, 36)
+        Me.Bt_EliminaIndice.TabIndex = 35
+        Me.Bt_EliminaIndice.UseVisualStyleBackColor = True
+        '
         'Form_ModificaImballo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1027,4 +1049,6 @@ Partial Class Form_ModificaImballo
     Friend WithEvents NoteBICDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ImballiIndiciBindingSource2 As BindingSource
     Friend WithEvents ImballiIndiciBindingSource1 As BindingSource
+    Friend WithEvents Bt_AddIndice As Button
+    Friend WithEvents Bt_EliminaIndice As Button
 End Class

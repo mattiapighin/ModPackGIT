@@ -58,7 +58,7 @@
     <Setting Name="StampaBarcodeDistinte" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="StampaBarcodeSoloCodice" Type="System.String" Scope="User">
+    <Setting Name="StampaBarcodeSoloCodice" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DimensioneFontDistinta" Type="System.Int32" Scope="User">
@@ -117,6 +117,9 @@
     </Setting>
     <Setting Name="OrdiniNRecords" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Utente" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Nuovo Utente</Value>
     </Setting>
   </Settings>
 </SettingsFile>

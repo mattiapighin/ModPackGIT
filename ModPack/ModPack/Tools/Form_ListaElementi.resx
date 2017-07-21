@@ -118,6 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Bt_Stampa.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        3wAAAN8BD61hjgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALvSURBVFhHzZdL
+        a1NREMez04+gH8Kta3eSZCkVTBQVYxe14KKL2qUPFEEpSNUqaBcJSdNmVTHiokKF0vgGH1Uaa6MpVGia
+        NLmGNM9xZm7Ofd9rL0kaD/zK7cmcmf89jzlzPQCwK7ze5D5vcNrrD05P+gPRBX8gtoJIbfAZ+/A3siFb
+        Kx9WWHZqOXoyfNAXiN3HACUMBLsjWqIxNNbKpxbLTuLIman9/mD0GjosJ54sw9LbdVfcvrdEYsrkg3xZ
+        xSAsO30DMwf8wVhKvNG3dA673bXZuWV1RtAX+cRuUyxThy8YOYSDssrgbgiQyZJv/EkXT/cPv7khONEl
+        AUTWOBPKg7zm6rQTx87GYfzuU9j4XUATd+3N++88duBcXCuAl0O7JxQB7Q2nMz4xOAPz8y+gWCyiibuW
+        yfzksaeGZnU+GYyFJqoAOi74Q9lo2DMBGEscURYgn3OTUS8FAMVEMw9nOEocx0MJeJnKQC7/B3KFssLm
+        ltQRWl/km2JQLIpJsT2cXlHR+IMUFKXKnjDx6DXPAsXGzUe5PQaPYx9Uo/y2+lwqqM9dIpL4KC8Fxvbw
+        JWIQsH05BMXVNAaXoLpyGPdATuegUxQBGBsF8K3WnxnA2CSArlO9gB6jESD9FwLMS9BjDEtg3oSCXF6C
+        V+8+dcTmVsnkV78JrY5hm7VfGxC6MNYR6R9Zk19FAB1DkYjsBJweHIGr12/B5MMpVwxfHOWxTgI4EYlU
+        bCvg/Ah8/vJVTvAuWjgS57H2AtqpGG35MhoaTcLNiUUdN+4swKUrYVhdW2en1WodKjs1R2r1Btsmny/y
+        WPJh9Ds89ky9jOiP3XUsEBVRq0W0HBHNpiIS6K9jwqogEQgBzWYLGo2mI822CEcBxoKEsCrJBEIATe8O
+        LoMTdRRBzVaAXUlG9LUoFTiV5RV8w3Kl6kitJm9CCwH/LssFPBOa5eh4BtCX8c0Fpg6BvCf69GmmhY6L
+        XLTu8cepEcpanLb57uALrAuf5+D5C7qQjZoXlVGrAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="Bt_Esporta.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -140,6 +159,9 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="PrintTabella.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

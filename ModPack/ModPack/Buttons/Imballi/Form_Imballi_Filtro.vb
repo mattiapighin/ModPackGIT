@@ -13,6 +13,7 @@ Public Class Form_Imballi_Filtro
     End Property
 
     Private Sub CaricaDati()
+
         Using TABLE As New ModPackDBDataSetTableAdapters.ImballiTableAdapter
             Using DS As New ModPackDBDataSet.ImballiDataTable
                 TABLE.Fill(DS)
@@ -42,12 +43,6 @@ Public Class Form_Imballi_Filtro
                     NU_Prezzo_DA.Value = 0
                     NU_Prezzo_A.Maximum = PrezzoMAX
                     NU_Prezzo_A.Value = PrezzoMAX
-
-                    Dim IndiceMax As Integer = DS.Compute("MAX(Id)", "")
-                    Nu_Indice_DA.Maximum = IndiceMax
-                    Nu_Indice_DA.Value = 0
-                    NU_Indice_A.Maximum = IndiceMax
-                    NU_Indice_A.Value = IndiceMax
 
                     Dim Tipi As DataTable = DS.DefaultView.ToTable(True, "Tipo")
                     LST_Tipi.Items.Clear()
@@ -95,8 +90,6 @@ Public Class Form_Imballi_Filtro
         End If
 
         _Filtro += " AND Prezzo >= " & PrezzoDA & " AND Prezzo <= " & PrezzoA
-        _Filtro += " AND Id >= " & Nu_Indice_DA.Value & " AND Id <= " & NU_Indice_A.Value
-
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
@@ -110,4 +103,6 @@ Public Class Form_Imballi_Filtro
     Private Sub Form_Imballi_Filtro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CaricaDati()
     End Sub
+
+
 End Class

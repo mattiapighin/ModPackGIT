@@ -52,6 +52,7 @@ Partial Class Form_Tabelle
         Me.DGW_Result.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGW_Result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DGW_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_Result.Location = New System.Drawing.Point(303, 80)
         Me.DGW_Result.Name = "DGW_Result"
@@ -177,6 +178,7 @@ Partial Class Form_Tabelle
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.GhostWhite
         Me.SplitContainer1.Panel1.Controls.Add(Me.Bt_Invia)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Bt_Info)
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox1)

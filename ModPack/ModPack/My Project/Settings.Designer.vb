@@ -259,9 +259,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property StampaBarcodeSoloCodice() As String
+        Public Property StampaBarcodeSoloCodice() As Boolean
             Get
-                Return CType(Me("StampaBarcodeSoloCodice"),String)
+                Return CType(Me("StampaBarcodeSoloCodice"),Boolean)
             End Get
             Set
                 Me("StampaBarcodeSoloCodice") = value
@@ -493,6 +493,18 @@ Namespace My
             End Get
             Set
                 Me("OrdiniNRecords") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Nuovo Utente")>  _
+        Public Property Utente() As String
+            Get
+                Return CType(Me("Utente"),String)
+            End Get
+            Set
+                Me("Utente") = value
             End Set
         End Property
     End Class

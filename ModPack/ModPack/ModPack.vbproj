@@ -131,6 +131,18 @@
     <Compile Include="Creazione Manuale Imballi\Form_Crea_Manuale.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\ErrorBox.Designer.vb">
+      <DependentUpon>ErrorBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ErrorBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DLG_ConfrontaIndici.Designer.vb">
+      <DependentUpon>DLG_ConfrontaIndici.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DLG_ConfrontaIndici.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Email\Form_Preferenze_Email.Designer.vb">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
     </Compile>
@@ -163,6 +175,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Email\Mail.vb" />
+    <Compile Include="Listino\Form_Listino.Designer.vb">
+      <DependentUpon>Form_Listino.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listino\Form_Listino.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModPackDBDataSet.vb">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
@@ -174,6 +192,18 @@
     </Compile>
     <Compile Include="Stampe\Modulo_Stampe.vb" />
     <Compile Include="Stampe\Stampe_Distinta.vb" />
+    <Compile Include="Tools\Dialog_FiltraData.Designer.vb">
+      <DependentUpon>Dialog_FiltraData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Dialog_FiltraData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Form_GestioneTipi.Designer.vb">
+      <DependentUpon>Form_GestioneTipi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Form_GestioneTipi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\Form_ListaElementi.Designer.vb">
       <DependentUpon>Form_ListaElementi.vb</DependentUpon>
     </Compile>
@@ -186,6 +216,7 @@
     <Compile Include="Tools\Form_StoricoOrdini.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\Invio_Rivestimenti.vb" />
     <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
     <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
     <Compile Include="Distinte\Creazione Distinte\NuovoImballo.vb" />
@@ -203,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Varie\Moduli Vari\Errore.vb" />
     <Compile Include="Varie\Moduli Vari\Module_Barcode.vb" />
     <Compile Include="Controlli\Module_Controlli.vb" />
     <Compile Include="Varie\Moduli Vari\Module_IMG.vb" />
@@ -257,6 +289,12 @@
     <EmbeddedResource Include="Creazione Manuale Imballi\Form_Crea_Manuale.resx">
       <DependentUpon>Form_Crea_Manuale.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ErrorBox.resx">
+      <DependentUpon>ErrorBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DLG_ConfrontaIndici.resx">
+      <DependentUpon>DLG_ConfrontaIndici.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Email\Form_Preferenze_Email.resx">
       <DependentUpon>Form_Preferenze_Email.vb</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +310,9 @@
     <EmbeddedResource Include="Email\Mail_ScegliDestinatari.resx">
       <DependentUpon>Mail_ScegliDestinatari.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listino\Form_Listino.resx">
+      <DependentUpon>Form_Listino.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +324,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Buttons\Ordini Aperti\Form_OrdiniAperti.resx">
       <DependentUpon>Form_OrdiniAperti.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Dialog_FiltraData.resx">
+      <DependentUpon>Dialog_FiltraData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Form_GestioneTipi.resx">
+      <DependentUpon>Form_GestioneTipi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\Form_ListaElementi.resx">
       <DependentUpon>Form_ListaElementi.vb</DependentUpon>

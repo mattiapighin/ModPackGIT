@@ -47,6 +47,10 @@
                     .WriteValue("0")
                     .WriteEndElement()
 
+                    .WriteStartElement("Dist_Zoccoli")
+                    .WriteValue("45")
+                    .WriteEndElement()
+
                     .WriteStartElement("Pulizia_Ordine")
                     .WriteValue("True")
                     .WriteEndElement()

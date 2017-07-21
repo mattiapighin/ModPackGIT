@@ -67,3 +67,8 @@ C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Mail
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_StoricoOrdini.resources
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_ListaElementi.resources
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Crea_Manuale.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_Listino.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Dialog_FiltraData.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.DLG_ConfrontaIndici.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_GestioneTipi.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.ErrorBox.resources

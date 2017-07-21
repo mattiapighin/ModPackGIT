@@ -53,26 +53,30 @@ Public Class Main
     End Sub
 
     Private Sub Bt_Mostra_Click(sender As Object, e As EventArgs) Handles Bt_Mostra.Click
-        If ListaFiles.SelectedItems.Count > 0 Then
-            DGW_Lista.Rows.Clear()
+        If My.Computer.FileSystem.FileExists(My.Settings.Folder & "\" & ListaFiles.SelectedItem & ".txt") Then
 
-            Dim Lista() As String = IO.File.ReadAllLines(My.Settings.Folder & "\" & ListaFiles.SelectedItem & ".txt")
+            If ListaFiles.SelectedItems.Count > 0 Then
+                DGW_Lista.Rows.Clear()
 
-            For Each Riga As String In Lista
-                Dim Cella() As String = Split(Riga, "|")
+                Dim Lista() As String = IO.File.ReadAllLines(My.Settings.Folder & "\" & ListaFiles.SelectedItem & ".txt")
 
-                Dim Stringa(2) As String
+                For Each Riga As String In Lista
+                    Dim Cella() As String = Split(Riga, "|")
 
-                Stringa(0) = Cella(0) & " [pz. " & Cella(1) & "]" & vbCrLf & Cella(2) & vbCrLf & Cella(3) & vbCrLf & Cella(4) & vbCrLf & Cella(5)
-                ' Stringa(1) = Cella(6) 'Note1
-                ' Stringa(2) = Cella(7) 'Note2
-                DGW_Lista.Rows.Add(Stringa)
-            Next
+                    Dim Stringa(2) As String
 
-            Dim Font As New Font("Calibri", My.Settings.FontSize)
-            DGW_Lista.DefaultCellStyle.Font = Font
-            DGW_Lista.DefaultCellStyle.SelectionBackColor = My.Settings.ColoreSelezione
-            DGW_Lista.DefaultCellStyle.SelectionForeColor = My.Settings.TestoSelezione
+                    Stringa(0) = Cella(0) & " [pz. " & Cella(1) & "]" & vbCrLf & Cella(2) & vbCrLf & Cella(3) & vbCrLf & Cella(4) & vbCrLf & Cella(5)
+                    If Not String.IsNullOrEmpty(Cella(6)) Then Stringa(0) += vbCrLf & Cella(6)
+                    If Not String.IsNullOrEmpty(Cella(7)) Then Stringa(0) += vbCrLf & Cella(7)
+
+                    DGW_Lista.Rows.Add(Stringa)
+                Next
+
+                Dim Font As New Font("Calibri", My.Settings.FontSize)
+                DGW_Lista.DefaultCellStyle.Font = Font
+                DGW_Lista.DefaultCellStyle.SelectionBackColor = My.Settings.ColoreSelezione
+                DGW_Lista.DefaultCellStyle.SelectionForeColor = My.Settings.TestoSelezione
+            End If
         End If
     End Sub
 

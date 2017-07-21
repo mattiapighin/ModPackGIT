@@ -22,6 +22,7 @@ Partial Class Form_Preferenze
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Preferenze))
         Me.Bt_FormatoStampa = New System.Windows.Forms.Button()
         Me.GB_etichette = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -48,11 +49,12 @@ Partial Class Form_Preferenze
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Ck_ColoraEvasi = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CkCodiceQT = New System.Windows.Forms.RadioButton()
+        Me.CkBarcodeSoloCodice = New System.Windows.Forms.RadioButton()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Nu_RigheDistinta = New System.Windows.Forms.NumericUpDown()
         Me.Nu_FontDistinta = New System.Windows.Forms.NumericUpDown()
-        Me.CkBarcodeSoloCodice = New System.Windows.Forms.CheckBox()
         Me.Ck_Barcode = New System.Windows.Forms.CheckBox()
         Me.Ck_BiancoNero = New System.Windows.Forms.CheckBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -66,6 +68,15 @@ Partial Class Form_Preferenze
         Me.Bt_SettingsEmail = New System.Windows.Forms.Button()
         Me.Bt_TestConnessioni = New System.Windows.Forms.Button()
         Me.CkDeveloper = New System.Windows.Forms.CheckBox()
+        Me.Bt_EliminaOrdine = New System.Windows.Forms.Button()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Bt_Log = New System.Windows.Forms.Button()
+        Me.Bt_GestioneTipi = New System.Windows.Forms.Button()
+        Me.Bt_PulisciImballi = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Txt_utente = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.GB_etichette.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -75,6 +86,9 @@ Partial Class Form_Preferenze
         CType(Me.Nu_FontDistinta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Bt_FormatoStampa
@@ -260,7 +274,7 @@ Partial Class Form_Preferenze
         'Bt_Salva
         '
         Me.Bt_Salva.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Bt_Salva.Location = New System.Drawing.Point(538, 411)
+        Me.Bt_Salva.Location = New System.Drawing.Point(533, 461)
         Me.Bt_Salva.Name = "Bt_Salva"
         Me.Bt_Salva.Size = New System.Drawing.Size(90, 38)
         Me.Bt_Salva.TabIndex = 12
@@ -345,11 +359,12 @@ Partial Class Form_Preferenze
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.CkCodiceQT)
+        Me.GroupBox2.Controls.Add(Me.CkBarcodeSoloCodice)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Nu_RigheDistinta)
         Me.GroupBox2.Controls.Add(Me.Nu_FontDistinta)
-        Me.GroupBox2.Controls.Add(Me.CkBarcodeSoloCodice)
         Me.GroupBox2.Controls.Add(Me.Ck_Barcode)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 284)
         Me.GroupBox2.Name = "GroupBox2"
@@ -357,6 +372,29 @@ Partial Class Form_Preferenze
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Distinte"
+        '
+        'CkCodiceQT
+        '
+        Me.CkCodiceQT.AutoSize = True
+        Me.CkCodiceQT.Location = New System.Drawing.Point(75, 43)
+        Me.CkCodiceQT.Name = "CkCodiceQT"
+        Me.CkCodiceQT.Size = New System.Drawing.Size(77, 17)
+        Me.CkCodiceQT.TabIndex = 7
+        Me.CkCodiceQT.TabStop = True
+        Me.CkCodiceQT.Text = "Codice | Qt"
+        Me.CkCodiceQT.UseVisualStyleBackColor = True
+        '
+        'CkBarcodeSoloCodice
+        '
+        Me.CkBarcodeSoloCodice.AutoSize = True
+        Me.CkBarcodeSoloCodice.Checked = True
+        Me.CkBarcodeSoloCodice.Location = New System.Drawing.Point(15, 43)
+        Me.CkBarcodeSoloCodice.Name = "CkBarcodeSoloCodice"
+        Me.CkBarcodeSoloCodice.Size = New System.Drawing.Size(54, 17)
+        Me.CkBarcodeSoloCodice.TabIndex = 6
+        Me.CkBarcodeSoloCodice.TabStop = True
+        Me.CkBarcodeSoloCodice.Text = "Indice"
+        Me.CkBarcodeSoloCodice.UseVisualStyleBackColor = True
         '
         'Label8
         '
@@ -389,16 +427,6 @@ Partial Class Form_Preferenze
         Me.Nu_FontDistinta.Name = "Nu_FontDistinta"
         Me.Nu_FontDistinta.Size = New System.Drawing.Size(65, 20)
         Me.Nu_FontDistinta.TabIndex = 2
-        '
-        'CkBarcodeSoloCodice
-        '
-        Me.CkBarcodeSoloCodice.AutoSize = True
-        Me.CkBarcodeSoloCodice.Location = New System.Drawing.Point(15, 42)
-        Me.CkBarcodeSoloCodice.Name = "CkBarcodeSoloCodice"
-        Me.CkBarcodeSoloCodice.Size = New System.Drawing.Size(120, 17)
-        Me.CkBarcodeSoloCodice.TabIndex = 1
-        Me.CkBarcodeSoloCodice.Text = "Stampa solo Codice"
-        Me.CkBarcodeSoloCodice.UseVisualStyleBackColor = True
         '
         'Ck_Barcode
         '
@@ -450,7 +478,7 @@ Partial Class Form_Preferenze
         'RBtext_nuovi
         '
         Me.RBtext_nuovi.AutoSize = True
-        Me.RBtext_nuovi.Location = New System.Drawing.Point(262, 14)
+        Me.RBtext_nuovi.Location = New System.Drawing.Point(262, 16)
         Me.RBtext_nuovi.Name = "RBtext_nuovi"
         Me.RBtext_nuovi.Size = New System.Drawing.Size(46, 17)
         Me.RBtext_nuovi.TabIndex = 24
@@ -507,42 +535,146 @@ Partial Class Form_Preferenze
         '
         'Bt_SettingsEmail
         '
-        Me.Bt_SettingsEmail.Location = New System.Drawing.Point(396, 77)
+        Me.Bt_SettingsEmail.Location = New System.Drawing.Point(6, 19)
         Me.Bt_SettingsEmail.Name = "Bt_SettingsEmail"
-        Me.Bt_SettingsEmail.Size = New System.Drawing.Size(229, 23)
+        Me.Bt_SettingsEmail.Size = New System.Drawing.Size(217, 23)
         Me.Bt_SettingsEmail.TabIndex = 19
         Me.Bt_SettingsEmail.Text = "Opzioni Email"
         Me.Bt_SettingsEmail.UseVisualStyleBackColor = True
         '
         'Bt_TestConnessioni
         '
-        Me.Bt_TestConnessioni.Location = New System.Drawing.Point(396, 106)
+        Me.Bt_TestConnessioni.Image = CType(resources.GetObject("Bt_TestConnessioni.Image"), System.Drawing.Image)
+        Me.Bt_TestConnessioni.Location = New System.Drawing.Point(6, 19)
         Me.Bt_TestConnessioni.Name = "Bt_TestConnessioni"
-        Me.Bt_TestConnessioni.Size = New System.Drawing.Size(229, 23)
+        Me.Bt_TestConnessioni.Size = New System.Drawing.Size(217, 40)
         Me.Bt_TestConnessioni.TabIndex = 20
-        Me.Bt_TestConnessioni.Text = "Test Connessioni"
+        Me.Bt_TestConnessioni.Text = "   Test Connessioni"
+        Me.Bt_TestConnessioni.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_TestConnessioni.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Bt_TestConnessioni.UseVisualStyleBackColor = True
         '
         'CkDeveloper
         '
+        Me.CkDeveloper.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CkDeveloper.AutoSize = True
         Me.CkDeveloper.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.CkDeveloper.Location = New System.Drawing.Point(457, 432)
+        Me.CkDeveloper.Location = New System.Drawing.Point(452, 482)
         Me.CkDeveloper.Name = "CkDeveloper"
         Me.CkDeveloper.Size = New System.Drawing.Size(75, 17)
         Me.CkDeveloper.TabIndex = 26
         Me.CkDeveloper.Text = "Developer"
         Me.CkDeveloper.UseVisualStyleBackColor = True
         '
+        'Bt_EliminaOrdine
+        '
+        Me.Bt_EliminaOrdine.Image = CType(resources.GetObject("Bt_EliminaOrdine.Image"), System.Drawing.Image)
+        Me.Bt_EliminaOrdine.Location = New System.Drawing.Point(6, 66)
+        Me.Bt_EliminaOrdine.Name = "Bt_EliminaOrdine"
+        Me.Bt_EliminaOrdine.Size = New System.Drawing.Size(217, 40)
+        Me.Bt_EliminaOrdine.TabIndex = 27
+        Me.Bt_EliminaOrdine.Text = "   Elimina Ordine"
+        Me.Bt_EliminaOrdine.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_EliminaOrdine.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Bt_EliminaOrdine.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Bt_Log)
+        Me.GroupBox5.Controls.Add(Me.Bt_GestioneTipi)
+        Me.GroupBox5.Controls.Add(Me.Bt_PulisciImballi)
+        Me.GroupBox5.Controls.Add(Me.Bt_EliminaOrdine)
+        Me.GroupBox5.Controls.Add(Me.Bt_TestConnessioni)
+        Me.GroupBox5.Location = New System.Drawing.Point(396, 127)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(229, 251)
+        Me.GroupBox5.TabIndex = 28
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Funzioni"
+        '
+        'Bt_Log
+        '
+        Me.Bt_Log.Image = CType(resources.GetObject("Bt_Log.Image"), System.Drawing.Image)
+        Me.Bt_Log.Location = New System.Drawing.Point(6, 204)
+        Me.Bt_Log.Name = "Bt_Log"
+        Me.Bt_Log.Size = New System.Drawing.Size(217, 40)
+        Me.Bt_Log.TabIndex = 30
+        Me.Bt_Log.Text = "   Apri file di LOG"
+        Me.Bt_Log.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_Log.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Bt_Log.UseVisualStyleBackColor = True
+        '
+        'Bt_GestioneTipi
+        '
+        Me.Bt_GestioneTipi.Image = CType(resources.GetObject("Bt_GestioneTipi.Image"), System.Drawing.Image)
+        Me.Bt_GestioneTipi.Location = New System.Drawing.Point(6, 158)
+        Me.Bt_GestioneTipi.Name = "Bt_GestioneTipi"
+        Me.Bt_GestioneTipi.Size = New System.Drawing.Size(217, 40)
+        Me.Bt_GestioneTipi.TabIndex = 29
+        Me.Bt_GestioneTipi.Text = "   Gestione Tipi"
+        Me.Bt_GestioneTipi.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_GestioneTipi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Bt_GestioneTipi.UseVisualStyleBackColor = True
+        '
+        'Bt_PulisciImballi
+        '
+        Me.Bt_PulisciImballi.Image = CType(resources.GetObject("Bt_PulisciImballi.Image"), System.Drawing.Image)
+        Me.Bt_PulisciImballi.Location = New System.Drawing.Point(6, 112)
+        Me.Bt_PulisciImballi.Name = "Bt_PulisciImballi"
+        Me.Bt_PulisciImballi.Size = New System.Drawing.Size(217, 40)
+        Me.Bt_PulisciImballi.TabIndex = 28
+        Me.Bt_PulisciImballi.Text = "   Pulizia imballi"
+        Me.Bt_PulisciImballi.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Bt_PulisciImballi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Bt_PulisciImballi.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.Bt_SettingsEmail)
+        Me.GroupBox6.Location = New System.Drawing.Point(396, 69)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(229, 52)
+        Me.GroupBox6.TabIndex = 29
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Email"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.Label12)
+        Me.GroupBox7.Controls.Add(Me.Txt_utente)
+        Me.GroupBox7.Location = New System.Drawing.Point(396, 384)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(229, 65)
+        Me.GroupBox7.TabIndex = 30
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Utente"
+        '
+        'Txt_utente
+        '
+        Me.Txt_utente.Location = New System.Drawing.Point(6, 36)
+        Me.Txt_utente.Name = "Txt_utente"
+        Me.Txt_utente.Size = New System.Drawing.Size(217, 20)
+        Me.Txt_utente.TabIndex = 0
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(4, 20)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(220, 13)
+        Me.Label12.TabIndex = 1
+        Me.Label12.Text = "Nome che verrà visualizzato nelle mail inviate"
+        '
         'Form_Preferenze
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(637, 461)
+        Me.ClientSize = New System.Drawing.Size(632, 511)
+        Me.Controls.Add(Me.GroupBox7)
+        Me.Controls.Add(Me.GroupBox6)
+        Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.CkDeveloper)
-        Me.Controls.Add(Me.Bt_TestConnessioni)
-        Me.Controls.Add(Me.Bt_SettingsEmail)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
@@ -568,6 +700,10 @@ Partial Class Form_Preferenze
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -597,7 +733,6 @@ Partial Class Form_Preferenze
     Friend WithEvents Ck_ColoraEvasi As CheckBox
     Friend WithEvents Ck_CheckCaricamento As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents CkBarcodeSoloCodice As CheckBox
     Friend WithEvents Ck_Barcode As CheckBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label5 As Label
@@ -617,4 +752,15 @@ Partial Class Form_Preferenze
     Friend WithEvents CkDeveloper As CheckBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Txt_LimiteStorico As TextBox
+    Friend WithEvents CkCodiceQT As RadioButton
+    Friend WithEvents CkBarcodeSoloCodice As RadioButton
+    Friend WithEvents Bt_EliminaOrdine As Button
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents Bt_PulisciImballi As Button
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents Bt_GestioneTipi As Button
+    Friend WithEvents Bt_Log As Button
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents Txt_utente As TextBox
+    Friend WithEvents Label12 As Label
 End Class

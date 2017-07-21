@@ -30,29 +30,35 @@ Public Class Form_Tabelle
                     LOG.Write("QUERY: " & Query)
 
                 Catch ex As Exception
-                    MsgBox(ex.ToString)
+                    '  MsgBox(ex.ToString)
+                    Errore.Show("FillDGW / Tabelle", ex.Message)
                 End Try
             End Using
 
         Else
             MsgBox("Non è possibile utilizzare i comandi DELETE e TRUNCATE da questa finestra")
+
         End If
 
 
     End Sub
 
     Private Sub CaricaTreeView()
-        Dim DS As New ModPackDBDataSet
+        Try
+            Dim DS As New ModPackDBDataSet
 
-        Dim I As Integer = 0
+            Dim I As Integer = 0
 
-        For Each Table As DataTable In DS.Tables
-            Tree.Nodes.Add(Table.TableName)
-            For Each Column As DataColumn In Table.Columns
-                Tree.Nodes(I).Nodes.Add(Column.ColumnName)
+            For Each Table As DataTable In DS.Tables
+                Tree.Nodes.Add(Table.TableName)
+                For Each Column As DataColumn In Table.Columns
+                    Tree.Nodes(I).Nodes.Add(Column.ColumnName)
+                Next
+                I += 1
             Next
-            I += 1
-        Next
+        Catch ex As Exception
+            Errore.Show("CaricaTreeView \ Tabelle", ex.Message)
+        End Try
 
     End Sub
 
@@ -67,63 +73,73 @@ Public Class Form_Tabelle
     End Sub
 
     Private Sub Bt_Salva_Click(sender As Object, e As EventArgs) Handles Bt_Salva.Click
-        If Not TxtQuery.Text.Contains("DELETE") Or TxtQuery.Text.Contains("TRUNCATE") Then
-            Dim Nome As String = InputBox("Nome della Query", "Query", TxtQuery.Text)
+        Try
+            If Not TxtQuery.Text.Contains("DELETE") Or TxtQuery.Text.Contains("TRUNCATE") Then
+                Dim Nome As String = InputBox("Nome della Query", "Query", TxtQuery.Text)
 
-            If Not String.IsNullOrEmpty(Nome) Then
-                If Not Nome.Length > 50 Then
+                If Not String.IsNullOrEmpty(Nome) Then
+                    If Not Nome.Length > 50 Then
 
 
-                    Using Table As New ModPackDBDataSetTableAdapters.QueriesTableAdapter
-                        Using DS As New ModPackDBDataSet.QueriesDataTable
-                            Table.Insert(Nome, TxtQuery.Text)
-                            Table.Update(DS)
+                        Using Table As New ModPackDBDataSetTableAdapters.QueriesTableAdapter
+                            Using DS As New ModPackDBDataSet.QueriesDataTable
+                                Table.Insert(Nome, TxtQuery.Text)
+                                Table.Update(DS)
+                            End Using
                         End Using
-                    End Using
-                    MsgBox("Query Salvata!", vbInformation, "Salva")
-                    SQL.FillDGW_SQL("SELECT Nome FROM Queries", DGW_queries)
-                Else
-                    MsgBox("Il nome della query non può superare i 50 Caratteri", vbCritical, "Query")
+                        MsgBox("Query Salvata!", vbInformation, "Salva")
+                        SQL.FillDGW_SQL("SELECT Nome FROM Queries", DGW_queries)
+                    Else
+                        MsgBox("Il nome della query non può superare i 50 Caratteri", vbCritical, "Query")
+                    End If
+
+
+
                 End If
 
-
-
-            End If
-
             Else
-            MsgBox("Non è possibile utilizzare i comandi DELETE e TRUNCATE da questa finestra", vbCritical, "Query")
-        End If
+                MsgBox("Non è possibile utilizzare i comandi DELETE e TRUNCATE da questa finestra", vbCritical, "Query")
+            End If
+        Catch EX As Exception
+            Errore.Show("Salva Query / Tabelle", EX.Message)
+        End Try
+
     End Sub
 
     Private Sub Bt_Esegui_Click(sender As Object, e As EventArgs) Handles Bt_Esegui.Click
+        Try
+            TxtQuery.Text = ""
 
-        TxtQuery.Text = ""
+            Using Table As New ModPackDBDataSetTableAdapters.QueriesTableAdapter
+                Using DS As New ModPackDBDataSet.QueriesDataTable
+                    Table.Fill(DS)
 
-        Using Table As New ModPackDBDataSetTableAdapters.QueriesTableAdapter
-            Using DS As New ModPackDBDataSet.QueriesDataTable
-                Table.Fill(DS)
+                    For Each Row As ModPackDBDataSet.QueriesRow In DS.Rows
+                        If Row.Nome = DGW_queries.CurrentCell.Value Then
+                            FillDGW(Row.Query, DGW_Result)
+                            TxtQuery.Text = Row.Query
+                        End If
+                    Next
 
-                For Each Row As ModPackDBDataSet.QueriesRow In DS.Rows
-                    If Row.Nome = DGW_queries.CurrentCell.Value Then
-                        FillDGW(Row.Query, DGW_Result)
-                        TxtQuery.Text = Row.Nome
-                    End If
-                Next
-
+                End Using
             End Using
-        End Using
-
+        Catch ex As Exception
+            Errore.Show("Esegui \ Tabelle", ex.Message)
+        End Try
     End Sub
 
     Private Sub Bt_Elimina_Click(sender As Object, e As EventArgs) Handles Bt_Elimina.Click
-
-        If Not DGW_queries.SelectedCells.Count = 0 Then
-            Dim Nome As String = DGW_queries.CurrentCell.Value
-            If MsgBox("Eliminare la query '" & Nome & "'?", vbYesNo, "Elimina") Then
-                SQL.Query("DELETE FROM Queries WHERE Nome ='" & Nome & "'")
-                SQL.FillDGW_SQL("SELECT Nome FROM Queries", DGW_queries)
+        Try
+            If Not DGW_queries.SelectedCells.Count = 0 Then
+                Dim Nome As String = DGW_queries.CurrentCell.Value
+                If MsgBox("Eliminare la query '" & Nome & "'?", vbYesNo, "Elimina") Then
+                    SQL.Query("DELETE FROM Queries WHERE Nome ='" & Nome & "'")
+                    SQL.FillDGW_SQL("SELECT Nome FROM Queries", DGW_queries)
+                End If
             End If
-        End If
+        Catch ex As Exception
+            Errore.Show("Elimina \ Tabelle", ex.Message)
+        End Try
     End Sub
 
     Private Sub Bt_Esporta_Click(sender As Object, e As EventArgs) Handles Bt_Esporta.Click
@@ -163,7 +179,7 @@ Public Class Form_Tabelle
                 Shell(Chr(34) & EXL & Chr(34) & " " & Chr(34) & FLE & Chr(34), vbNormalFocus) ' OPEN XML WITH EXCEL
 
             Catch ex As Exception
-                MsgBox(ex.ToString)
+                Errore.Show("Esporta \ Tabelle", ex.Message)
             End Try
         End If
     End Sub
@@ -212,19 +228,24 @@ Public Class Form_Tabelle
 
                 DTB.AcceptChanges()
 
+                Dim NomeFile As String = InputBox("Nome file:", "Invia", "Output")
+                If String.IsNullOrEmpty(NomeFile) Then NomeFile = "Output"
+
+
                 Dim DST As New DataSet
                 DST.Tables.Add(DTB)
-                Dim FLE As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\Output.xml" ' PATH AND FILE NAME WHERE THE XML WIL BE CREATED (EXEMPLE: C:\REPS\XML.xml)
+                Dim FLE As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\" & NomeFile & ".xml" ' PATH AND FILE NAME WHERE THE XML WIL BE CREATED (EXEMPLE: C:\REPS\XML.xml)
                 DTB.WriteXml(FLE)
                 'Dim EXL As String = My.Settings.ExcelPath ' PATH OF/ EXCEL.EXE IN YOUR MICROSOFT OFFICE
                 'Shell(Chr(34) & EXL & Chr(34) & " " & Chr(34) & FLE & Chr(34), vbNormalFocus) ' OPEN XML WITH EXCEL
 
                 Dim Allegati As New List(Of String)
                 Allegati.Add(FLE)
-                Mail.Invia("Invio file - " & TxtQuery.Text, "", Allegati)
+
+                Mail.Invia("(" & My.Settings.Utente & ") Invio file: " & NomeFile, "Questa mail viene generata automaticamente, si prega di non rispondere." & vbCrLf & "This is an automatically generated email, please do not reply.", Allegati)
 
             Catch ex As Exception
-                MsgBox(ex.ToString)
+                Errore.Show("Invia \ Tabelle", ex.Message)
             End Try
         End If
     End Sub
