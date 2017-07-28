@@ -470,12 +470,14 @@
 
             '############ NOTE ###############
 
+            Dim FormatNote As New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center, .HotkeyPrefix = Drawing.Text.HotkeyPrefix.Show, .Trimming = StringTrimming.EllipsisCharacter}
+
             Dim RectNote1 As New Rectangle(e.MarginBounds.Left + 5, RectUP.Top, R_Misure.Width, 120)
             Dim RectNote2 As New Rectangle(RectNote1.Left, RectNote1.Bottom + 5, RectNote1.Width, 120)
             e.Graphics.DrawString("NOTE 1", New Font("Calibri", 8), Brushes.LightGray, RectNote1)
             e.Graphics.DrawString("NOTE 2", New Font("Calibri", 8), Brushes.LightGray, RectNote2)
-            e.Graphics.DrawString(riga.Note & vbCrLf & riga.Rivest_Tot, fnt, Brushes.Black, RectNote1, FMT)
-            e.Graphics.DrawString(SQL.Get_NoteBic(riga.Indice), fnt, Brushes.Black, RectNote2, FMT)
+            e.Graphics.DrawString(riga.Note & vbCrLf & riga.Rivest_Tot, fnt, Brushes.Black, RectNote1, FormatNote)
+            e.Graphics.DrawString(SQL.Get_NoteIMBALLO(riga.Imballo) & SQL.Get_NoteBic(riga.Indice), fnt, Brushes.Black, RectNote2, FormatNote)
             e.Graphics.DrawRectangles(Pens.LightGray, {RectNote1, RectNote2})
 
             '######### BARCODE ############
@@ -650,6 +652,11 @@
                 RettangoloSX.X = sX
                 RettangoloDX.X = dX
 
+                e.Graphics.FillRectangle(Brushes.LightGray, sX, Rect.Y + 2, RettangoloSX.Width, 5)
+                e.Graphics.FillRectangle(Brushes.LightGray, dX, Rect.Y + 2, RettangoloDX.Width, 5)
+                e.Graphics.FillRectangle(Brushes.LightGray, sX + (Rwidth / 2) - 5, Rect.Y + 7, 10, 15)
+                e.Graphics.FillRectangle(Brushes.LightGray, dX + (Rwidth / 2) - 5, Rect.Y + 7, 10, 15)
+
                 e.Graphics.DrawString(Quota, FONT, Brushes.Black, RettangoloSX, FMT)
                 e.Graphics.DrawString(Quota, FONT, Brushes.Black, RettangoloDX, FMT)
 
@@ -660,6 +667,11 @@
             Next
 
             If Nmorali Mod 2 > 0 Then
+
+                Dim Centro As Single = Rect.X + (Rect.Width / 2)
+                e.Graphics.FillRectangle(Brushes.LightGray, sX, Rect.Y + 2, RettangoloSX.Width, 5)
+                e.Graphics.FillRectangle(Brushes.LightGray, Centro - 5, Rect.Y + 7, 10, 15)
+
                 e.Graphics.DrawString(LunghezzaTavola / 2, FONT, Brushes.Black, Rect, FMT)
             End If
 
@@ -706,13 +718,13 @@
 
                 Case Else
                     'Tutti gli altri tipi di gabbie
-                    Stringa1Riv = riga.L - 5 & " x " & riga.P - 5
+                    Stringa1Riv = riga.L & " x " & riga.P
                     QT1Riv = 2
 
-                    Stringa2Riv = riga.L - 5 & " x " & riga.H - 10
+                    Stringa2Riv = riga.L - 5 & " x " & riga.H - 5
                     QT2Riv = 2
 
-                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 10
+                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 5
                     QT3Riv = 2
             End Select
 

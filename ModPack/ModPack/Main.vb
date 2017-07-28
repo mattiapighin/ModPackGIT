@@ -109,6 +109,8 @@ Public Class Main
         SQL.Query("TRUNCATE TABLE Imballi")
         SQL.Query("TRUNCATE TABLE Indici")
         SQL.Query("TRUNCATE TABLE Ordini")
+        SQL.Query("TRUNCATE TABLE NoteImballi")
+        SQL.Query("TRUNCATE TABLE Memo")
         IO.File.Delete(My.Settings.XMLpath)
         Debug.WriteLine("Truncato tutto")
         XML.CreaXML()

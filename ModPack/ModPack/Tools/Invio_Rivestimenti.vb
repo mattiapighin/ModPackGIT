@@ -112,9 +112,9 @@
                     T = (Row.P - 5) & " x " & (Row.H - 2) & " = " & (Row.Qt * 2)
 
                 Case Else
-                    BC = (Row.L - 5) & " x " & (Row.P - 5) & " = " & (Row.Qt * 2)
-                    F = (Row.L - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
-                    T = (Row.P - 5) & " x " & (Row.H - 10) & " = " & (Row.Qt * 2)
+                    BC = (Row.L) & " x " & (Row.P) & " = " & (Row.Qt * 2)
+                    F = (Row.L - 5) & " x " & (Row.H - 5) & " = " & (Row.Qt * 2)
+                    T = (Row.P - 5) & " x " & (Row.H - 5) & " = " & (Row.Qt * 2)
 
             End Select
 

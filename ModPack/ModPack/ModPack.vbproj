@@ -216,6 +216,12 @@
     <Compile Include="Tools\Form_StoricoOrdini.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\Frm_NoteImballo.Designer.vb">
+      <DependentUpon>Frm_NoteImballo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Frm_NoteImballo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\Invio_Rivestimenti.vb" />
     <Compile Include="Varie\Classi Varie\NomeImballo.vb" />
     <Compile Include="Varie\Classi Varie\Oggetti_Vari.vb" />
@@ -336,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\Form_StoricoOrdini.resx">
       <DependentUpon>Form_StoricoOrdini.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Frm_NoteImballo.resx">
+      <DependentUpon>Frm_NoteImballo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Varie\MsgBox\MsgMoraliFrescoHT.resx">
       <DependentUpon>MsgMoraliFrescoHT.vb</DependentUpon>

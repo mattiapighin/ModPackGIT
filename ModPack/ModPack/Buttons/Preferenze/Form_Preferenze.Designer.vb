@@ -75,8 +75,8 @@ Partial Class Form_Preferenze
         Me.Bt_PulisciImballi = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.Txt_utente = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Txt_utente = New System.Windows.Forms.TextBox()
         Me.GB_etichette.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -649,13 +649,6 @@ Partial Class Form_Preferenze
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Utente"
         '
-        'Txt_utente
-        '
-        Me.Txt_utente.Location = New System.Drawing.Point(6, 36)
-        Me.Txt_utente.Name = "Txt_utente"
-        Me.Txt_utente.Size = New System.Drawing.Size(217, 20)
-        Me.Txt_utente.TabIndex = 0
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -664,6 +657,13 @@ Partial Class Form_Preferenze
         Me.Label12.Size = New System.Drawing.Size(220, 13)
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "Nome che verrà visualizzato nelle mail inviate"
+        '
+        'Txt_utente
+        '
+        Me.Txt_utente.Location = New System.Drawing.Point(6, 36)
+        Me.Txt_utente.Name = "Txt_utente"
+        Me.Txt_utente.Size = New System.Drawing.Size(217, 20)
+        Me.Txt_utente.TabIndex = 0
         '
         'Form_Preferenze
         '

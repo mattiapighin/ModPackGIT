@@ -1,6 +1,10 @@
-﻿Public Class Form_Imballi
+﻿Imports System.ComponentModel
+
+Public Class Form_Imballi
 
     Dim Row As New RigaOrdine
+    Dim DSNote As New ModPackDBDataSet.NoteImballiDataTable
+
 
     Private Sub Rinfresh()
         Bt_MostraNuovi.Text = "Imballi Nuovi (" & Ordine.ListaNuovi.Count & ")"
@@ -8,6 +12,7 @@
         Me.IndiciTableAdapter.Fill(Me.ModPackDBDataSet.Indici)
         Me.DistintaTableAdapter.Fill(Me.ModPackDBDataSet.Distinta)
         Me.ImballiTableAdapter.Fill(Me.ModPackDBDataSet.Imballi)
+        Me.NoteImballiTableAdapter.Fill(Me.ModPackDBDataSet.NoteImballi)
 
         'Carica solo le ultime N righe da imballi
         If Not ModPackDBDataSet.Imballi.Count = 0 Then
@@ -24,6 +29,7 @@
     End Sub
 
     Private Sub Form_Imballi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Rinfresh()
     End Sub
 
@@ -215,7 +221,34 @@
     End Sub
 
     Private Sub ImballiBindingSource_CurrentChanged(sender As Object, e As EventArgs) Handles ImballiBindingSource.CurrentChanged
-        Lbl_Conteggio.Text = "Record mostrati: " & ImballiBindingSource.Count.ToString
+        Lbl_Conteggio.Text = ImballiBindingSource.Count.ToString
+    End Sub
+
+    Private Sub Bt_Note_Click(sender As Object, e As EventArgs) Handles Bt_Note.Click
+        If DgwImballi.SelectedRows.Count > 0 Then
+            Frm_NoteImballo.Tx_Imballo.Text = DgwImballi.CurrentRow.Cells("ImballoDataGridViewTextBoxColumn").Value
+            If Frm_NoteImballo.ShowDialog = DialogResult.OK Then
+                Me.NoteImballiTableAdapter.Fill(Me.ModPackDBDataSet.NoteImballi)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Bt_MostraDistinta_Click(sender As Object, e As EventArgs) Handles Bt_MostraDistinta.Click
+        SplitSopra.Panel2Collapsed = Not SplitSopra.Panel2Collapsed
+    End Sub
+    Private Sub Bt_MostraInfo_Click(sender As Object, e As EventArgs) Handles Bt_MostraInfo.Click
+        SplitIntero.Panel2Collapsed = Not SplitIntero.Panel2Collapsed
+        SplitSotto.SplitterDistance = SplitSotto.Width / 2
+    End Sub
+
+
+    Private Sub DGW_Note_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGW_Note.CellEndEdit
+        Try
+            Me.NoteImballiTableAdapter.Update(Me.ModPackDBDataSet.NoteImballi)
+        Catch ex As Exception
+            Errore.Show("Modifica nota imballo", ex.Message)
+        End Try
     End Sub
 End Class
 

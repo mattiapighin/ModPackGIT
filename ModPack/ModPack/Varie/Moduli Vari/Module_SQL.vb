@@ -282,6 +282,26 @@ Namespace SQL
 
             Return Nota
         End Function
+        Public Function Get_NoteIMBALLO(ByVal Imballo As String) As String
+            Dim Nota As String = ""
+
+            Using DS As New ModPackDBDataSet.NoteImballiDataTable
+                Using Table As New ModPackDBDataSetTableAdapters.NoteImballiTableAdapter
+                    Table.Fill(DS)
+
+                    Dim Row() As DataRow = DS.Select("Imballo = '" & Imballo & "'")
+
+                    If Row.Length > 0 Then
+                        For K = 0 To Row.Length - 1
+                            Nota += Row(K)(2) & vbCrLf
+                        Next
+                    End If
+
+                End Using
+            End Using
+
+            Return Nota
+        End Function
 
         Public Sub ListaMorali(Ordini As List(Of String), Datagridview As DataGridView)
             Datagridview.DataSource = Nothing
