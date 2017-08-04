@@ -176,7 +176,7 @@ Public Class Main
                                 If row(K)(26) = False Then
                                     OrdiniTree.Nodes(I).Nodes.Add(row(K)(3) & "  (" & row(K)(5) & ")" & "  (" & row(K)(7) & ")  (" & row(K)(8) & ")")
                                     Try
-                                        If row(K)(17) < Date.Today.Date Then OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Red Else OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
+                                        'If row(K)(17) < Date.Today.Date Then OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Red Else OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
                                     Catch ex As Exception
                                         Errore.Show("Evidenziare scaduti \ Treeview", ex.Message)
                                     End Try
@@ -258,4 +258,7 @@ Public Class Main
         Form_Listino.Show()
     End Sub
 
+    Private Sub TS_Ordini_Click(sender As Object, e As EventArgs) Handles TS_Ordini.Click
+
+    End Sub
 End Class

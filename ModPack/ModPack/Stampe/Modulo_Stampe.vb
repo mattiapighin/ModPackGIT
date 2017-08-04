@@ -227,13 +227,13 @@
             Dim U As Single = RectTitoli.Width / 20
 
             Dim RectTitoloRiga As New Rectangle(RectTitoli.X, RectTitoli.Y, U, RectTitoli.Height)
-            Dim RectTitoloImballo As New Rectangle(RectTitoloRiga.Right, RectTitoli.Y, U * 3, RectTitoli.Height)
-            Dim RectTitoloQt As New Rectangle(RectTitoloImballo.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
+            Dim RectTitoloImballo As New Rectangle(RectTitoloRiga.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
+            Dim RectTitoloQt As New Rectangle(RectTitoloImballo.Right, RectTitoli.Y, U, RectTitoli.Height)
             Dim RectTitoloDescrizione As New Rectangle(RectTitoloQt.Right, RectTitoli.Y, U * 5, RectTitoli.Height)
             Dim RectTitoloIndice As New Rectangle(RectTitoloDescrizione.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
             Dim RectTitoloM3 As New Rectangle(RectTitoloIndice.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
-            Dim RectTitoloRivestimento As New Rectangle(RectTitoloM3.Right, RectTitoli.Y, U, RectTitoli.Height)
-            Dim RectTitoloPrezzo As New Rectangle(RectTitoloRivestimento.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
+            Dim RectTitoloConsegna As New Rectangle(RectTitoloM3.Right, RectTitoli.Y, U * 3, RectTitoli.Height)
+            Dim RectTitoloPrezzo As New Rectangle(RectTitoloConsegna.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
             Dim RectTitoloPrezzoTot As New Rectangle(RectTitoloPrezzo.Right, RectTitoli.Y, U * 2, RectTitoli.Height)
 
             'e.Graphics.DrawRectangles(Pens.Black, {RectTitoloRiga, RectTitoloImballo, RectTitoloQt, RectTitoloDescrizione, RectTitoloIndice, RectTitoloM3, RectTitoloRivestimento, RectTitoloPrezzo, RectTitoloPrezzoTot})
@@ -244,7 +244,7 @@
             e.Graphics.DrawString("Descrizione", FontRighe, Brushes.Black, RectTitoloDescrizione, FMT)
             e.Graphics.DrawString("Indice", FontRighe, Brushes.Black, RectTitoloIndice, FMT)
             e.Graphics.DrawString("M³", FontRighe, Brushes.Black, RectTitoloM3, FMT)
-            e.Graphics.DrawString("Riv.", FontRighe, Brushes.Black, RectTitoloRivestimento, FMT)
+            e.Graphics.DrawString("Data Consegna", FontRighe, Brushes.Black, RectTitoloConsegna, FMT)
             e.Graphics.DrawString("Prezzo", FontRighe, Brushes.Black, RectTitoloPrezzo, FMT)
             e.Graphics.DrawString("Totale", FontRighe, Brushes.Black, RectTitoloPrezzoTot, FMT)
 
@@ -257,7 +257,7 @@
 
             Dim PosX = RectTabella.Left
             Dim PosY = RectTabella.Top
-            Dim Hriga = 25
+            Dim Hriga = 35
 
             'Numero di righe che possono essere stampate in una pagina
             Dim righePerPagina As Integer = Math.Ceiling(RectTabella.Height / Hriga) 'Altezza righe
@@ -276,25 +276,25 @@
             For i As Integer = RigheStampate To RigheStampate + righePerPagina - 2
 
                 Dim RectRiga As New Rectangle(PosX, PosY, U, Hriga)
-                Dim RectImballo As New Rectangle(RectTitoloRiga.Right, PosY, U * 3, Hriga)
-                Dim RectQt As New Rectangle(RectTitoloImballo.Right, PosY, U * 2, Hriga)
+                Dim RectImballo As New Rectangle(RectTitoloRiga.Right, PosY, U * 2, Hriga)
+                Dim RectQt As New Rectangle(RectTitoloImballo.Right, PosY, U, Hriga)
                 Dim RectDescrizione As New Rectangle(RectTitoloQt.Right, PosY, U * 5, Hriga)
                 Dim RectIndice As New Rectangle(RectTitoloDescrizione.Right, PosY, U * 2, Hriga)
                 Dim RectM3 As New Rectangle(RectTitoloIndice.Right, PosY, U * 2, Hriga)
-                Dim RectRivestimento As New Rectangle(RectTitoloM3.Right, PosY, U, Hriga)
-                Dim RectPrezzo As New Rectangle(RectTitoloRivestimento.Right, PosY, U * 2, Hriga)
+                Dim RectConsegna As New Rectangle(RectTitoloM3.Right, PosY, U * 3, Hriga)
+                Dim RectPrezzo As New Rectangle(RectTitoloConsegna.Right, PosY, U * 2, Hriga)
                 Dim RectPrezzoTot As New Rectangle(RectTitoloPrezzo.Right, PosY, U * 2, Hriga)
 
-                If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightBlue, PosX, PosY, e.MarginBounds.Width, 25)
-                e.Graphics.DrawRectangles(Pens.LightGray, {RectRiga, RectImballo, RectQt, RectDescrizione, RectIndice, RectM3, RectRivestimento, RectPrezzo, RectPrezzoTot})
+                If RigheStampate Mod 2 <> 0 Then e.Graphics.FillRectangle(Brushes.LightBlue, PosX, PosY, e.MarginBounds.Width, Hriga)
+                e.Graphics.DrawRectangles(Pens.LightGray, {RectRiga, RectImballo, RectQt, RectDescrizione, RectIndice, RectM3, RectConsegna, RectPrezzo, RectPrezzoTot})
 
                 With DS.Tables(0).Rows(RigheStampate)
-
-
 
                     Dim Descrizione As String = " Cm " & .Item(4) & " x " & .Item(5)
                     If Not .Item(6) = 0 Then Descrizione += " x " & .Item(6)
                     Descrizione += " " & .Item(3)
+                    If Not String.IsNullOrEmpty(.Item(9)) Then Descrizione += " (" & .Item(9) & ")"
+                    Descrizione += vbCrLf & "Commessa: " & .Item(13).ToString.TrimEnd("-")
 
 
                     Dim prezzo As Decimal = .Item(10)
@@ -306,7 +306,7 @@
                     e.Graphics.DrawString(Descrizione, FontRighe, Brushes.Black, RectDescrizione, FMT)
                     e.Graphics.DrawString(.Item(7), FontRighe, Brushes.Black, RectIndice, FMT)
                     e.Graphics.DrawString(.Item(8), FontRighe, Brushes.Black, RectM3, FMT)
-                    e.Graphics.DrawString(.Item(9), FontRighe, Brushes.Black, RectRivestimento, FMT)
+                    e.Graphics.DrawString(.Item(11), FontRighe, Brushes.Black, RectConsegna, FMT)
                     e.Graphics.DrawString("€ " & prezzo.ToString("N2"), FontRighe, Brushes.Black, RectPrezzo, FMT)
                     e.Graphics.DrawString("€ " & PrezzoTot.ToString("N2"), FontRighe, Brushes.Black, RectPrezzoTot, FMT)
 

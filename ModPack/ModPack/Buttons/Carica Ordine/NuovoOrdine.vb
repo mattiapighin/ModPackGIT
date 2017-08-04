@@ -244,7 +244,7 @@
                     If R.Length = 20 Then ' Controlla che la riga sia formattata correttamente (non prende in considerazione righe vuote o sbagliate
 
                         Dim Riga_INPUT As New RigaOrdineINPUT With
-                            {.Riga = R(0), .Indice = R(1), .Qt = R(2), .Cliente = R(3), .Codice = R(4), .Commessa = R(5), .L = R(6), .P = R(7), .H = R(8), .Tipo = R(9), .Zoccoli = R(10),
+                            {.Riga = R(0), .Indice = R(1), .Qt = R(2), .Cliente = R(3), .Codice = R(4).ToString.TrimEnd("-"), .Commessa = R(5).ToString.TrimEnd("-"), .L = R(6), .P = R(7), .H = R(8), .Tipo = R(9), .Zoccoli = R(10),
                             .Rivestimento = R(11), .TipoRivestimento = R(12), .Note = R(13), .DataConsegna = R(14), .HT = R(15), .DT = R(16), .BM = R(17), .Rivest_Tot = R(18), .Diagonali = R(19),
                             .NumeroOrdine = NumeroOrdine}
 
