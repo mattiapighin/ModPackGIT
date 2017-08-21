@@ -77,6 +77,7 @@ Partial Class Form_Preferenze
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Txt_utente = New System.Windows.Forms.TextBox()
+        Me.CkNoteDinamico = New System.Windows.Forms.CheckBox()
         Me.GB_etichette.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -274,7 +275,7 @@ Partial Class Form_Preferenze
         'Bt_Salva
         '
         Me.Bt_Salva.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Bt_Salva.Location = New System.Drawing.Point(533, 461)
+        Me.Bt_Salva.Location = New System.Drawing.Point(533, 455)
         Me.Bt_Salva.Name = "Bt_Salva"
         Me.Bt_Salva.Size = New System.Drawing.Size(90, 38)
         Me.Bt_Salva.TabIndex = 12
@@ -305,6 +306,7 @@ Partial Class Form_Preferenze
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.CkNoteDinamico)
         Me.GroupBox1.Controls.Add(Me.Txt_LimiteStorico)
         Me.GroupBox1.Controls.Add(Me.Ck_CheckCaricamento)
         Me.GroupBox1.Controls.Add(Me.Label11)
@@ -313,7 +315,7 @@ Partial Class Form_Preferenze
         Me.GroupBox1.Controls.Add(Me.Ck_ColoraScaduti)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 134)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(378, 144)
+        Me.GroupBox1.Size = New System.Drawing.Size(378, 167)
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Preferenze"
@@ -339,7 +341,7 @@ Partial Class Form_Preferenze
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(18, 115)
+        Me.Label11.Location = New System.Drawing.Point(15, 115)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(257, 13)
         Me.Label11.TabIndex = 27
@@ -366,7 +368,7 @@ Partial Class Form_Preferenze
         Me.GroupBox2.Controls.Add(Me.Nu_RigheDistinta)
         Me.GroupBox2.Controls.Add(Me.Nu_FontDistinta)
         Me.GroupBox2.Controls.Add(Me.Ck_Barcode)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 284)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 307)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(378, 71)
         Me.GroupBox2.TabIndex = 15
@@ -457,7 +459,7 @@ Partial Class Form_Preferenze
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.TxtScegliExcel)
         Me.GroupBox3.Controls.Add(Me.Bt_ScegliExcel)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 361)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 384)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(378, 88)
         Me.GroupBox3.TabIndex = 17
@@ -559,7 +561,7 @@ Partial Class Form_Preferenze
         Me.CkDeveloper.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CkDeveloper.AutoSize = True
         Me.CkDeveloper.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.CkDeveloper.Location = New System.Drawing.Point(452, 482)
+        Me.CkDeveloper.Location = New System.Drawing.Point(452, 476)
         Me.CkDeveloper.Name = "CkDeveloper"
         Me.CkDeveloper.Size = New System.Drawing.Size(75, 17)
         Me.CkDeveloper.TabIndex = 26
@@ -665,12 +667,23 @@ Partial Class Form_Preferenze
         Me.Txt_utente.Size = New System.Drawing.Size(217, 20)
         Me.Txt_utente.TabIndex = 0
         '
+        'CkNoteDinamico
+        '
+        Me.CkNoteDinamico.AutoSize = True
+        Me.CkNoteDinamico.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CkNoteDinamico.Location = New System.Drawing.Point(15, 138)
+        Me.CkNoteDinamico.Name = "CkNoteDinamico"
+        Me.CkNoteDinamico.Size = New System.Drawing.Size(243, 17)
+        Me.CkNoteDinamico.TabIndex = 29
+        Me.CkNoteDinamico.Text = "Button ""Note"" dinamico nel modulo ""Archivio"""
+        Me.CkNoteDinamico.UseVisualStyleBackColor = True
+        '
         'Form_Preferenze
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(632, 511)
+        Me.ClientSize = New System.Drawing.Size(632, 505)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
@@ -763,4 +776,5 @@ Partial Class Form_Preferenze
     Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents Txt_utente As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents CkNoteDinamico As CheckBox
 End Class

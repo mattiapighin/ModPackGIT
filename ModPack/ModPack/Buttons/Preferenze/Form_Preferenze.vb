@@ -42,6 +42,7 @@
         Ck_ColoraEvasi.Checked = My.Settings.OrdiniAperti_ColoraEvasi
         Ck_CheckCaricamento.Checked = My.Settings.CheckInserimentoImballo
         Ck_BiancoNero.Checked = My.Settings.FormatoStampa.Color
+        CkNoteDinamico.Checked = My.Settings.NoteDinamico
     End Sub
     Private Sub SalvaSettingsCK()
         My.Settings.CK_ConfermaEvaso = Ck_Evaso.Checked
@@ -49,6 +50,7 @@
         My.Settings.OrdiniAperti_ColoraEvasi = Ck_ColoraEvasi.Checked
         My.Settings.CheckInserimentoImballo = Ck_CheckCaricamento.Checked
         My.Settings.FormatoStampa.Color = Ck_BiancoNero.Checked
+        My.Settings.NoteDinamico = CkNoteDinamico.Checked
     End Sub
 
     Private Sub CaricaSettingsDistinta()

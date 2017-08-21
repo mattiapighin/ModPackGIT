@@ -79,6 +79,8 @@ Partial Class Form_ModificaImballo
         Me.DistintaTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter()
         Me.Bt_Salva = New System.Windows.Forms.Button()
         Me.PanelModifica = New System.Windows.Forms.Panel()
+        Me.Bt_EliminaIndice = New System.Windows.Forms.Button()
+        Me.Bt_AddIndice = New System.Windows.Forms.Button()
         Me.Bt_SpostaIndice = New System.Windows.Forms.Button()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -105,8 +107,6 @@ Partial Class Form_ModificaImballo
         Me.Bt_EliminaCodice = New System.Windows.Forms.Button()
         Me.Bt_Duplica = New System.Windows.Forms.Button()
         Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Bt_AddIndice = New System.Windows.Forms.Button()
-        Me.Bt_EliminaIndice = New System.Windows.Forms.Button()
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelCodice.SuspendLayout()
@@ -664,6 +664,24 @@ Partial Class Form_ModificaImballo
         Me.PanelModifica.Size = New System.Drawing.Size(866, 504)
         Me.PanelModifica.TabIndex = 7
         '
+        'Bt_EliminaIndice
+        '
+        Me.Bt_EliminaIndice.Image = CType(resources.GetObject("Bt_EliminaIndice.Image"), System.Drawing.Image)
+        Me.Bt_EliminaIndice.Location = New System.Drawing.Point(823, 422)
+        Me.Bt_EliminaIndice.Name = "Bt_EliminaIndice"
+        Me.Bt_EliminaIndice.Size = New System.Drawing.Size(36, 36)
+        Me.Bt_EliminaIndice.TabIndex = 35
+        Me.Bt_EliminaIndice.UseVisualStyleBackColor = True
+        '
+        'Bt_AddIndice
+        '
+        Me.Bt_AddIndice.Image = CType(resources.GetObject("Bt_AddIndice.Image"), System.Drawing.Image)
+        Me.Bt_AddIndice.Location = New System.Drawing.Point(823, 462)
+        Me.Bt_AddIndice.Name = "Bt_AddIndice"
+        Me.Bt_AddIndice.Size = New System.Drawing.Size(36, 36)
+        Me.Bt_AddIndice.TabIndex = 34
+        Me.Bt_AddIndice.UseVisualStyleBackColor = True
+        '
         'Bt_SpostaIndice
         '
         Me.Bt_SpostaIndice.Image = CType(resources.GetObject("Bt_SpostaIndice.Image"), System.Drawing.Image)
@@ -913,24 +931,6 @@ Partial Class Form_ModificaImballo
         '
         Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
         Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
-        '
-        'Bt_AddIndice
-        '
-        Me.Bt_AddIndice.Image = CType(resources.GetObject("Bt_AddIndice.Image"), System.Drawing.Image)
-        Me.Bt_AddIndice.Location = New System.Drawing.Point(823, 462)
-        Me.Bt_AddIndice.Name = "Bt_AddIndice"
-        Me.Bt_AddIndice.Size = New System.Drawing.Size(36, 36)
-        Me.Bt_AddIndice.TabIndex = 34
-        Me.Bt_AddIndice.UseVisualStyleBackColor = True
-        '
-        'Bt_EliminaIndice
-        '
-        Me.Bt_EliminaIndice.Image = CType(resources.GetObject("Bt_EliminaIndice.Image"), System.Drawing.Image)
-        Me.Bt_EliminaIndice.Location = New System.Drawing.Point(823, 422)
-        Me.Bt_EliminaIndice.Name = "Bt_EliminaIndice"
-        Me.Bt_EliminaIndice.Size = New System.Drawing.Size(36, 36)
-        Me.Bt_EliminaIndice.TabIndex = 35
-        Me.Bt_EliminaIndice.UseVisualStyleBackColor = True
         '
         'Form_ModificaImballo
         '

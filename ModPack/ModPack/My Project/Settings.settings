@@ -121,5 +121,8 @@
     <Setting Name="Utente" Type="System.String" Scope="User">
       <Value Profile="(Default)">Nuovo Utente</Value>
     </Setting>
+    <Setting Name="NoteDinamico" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

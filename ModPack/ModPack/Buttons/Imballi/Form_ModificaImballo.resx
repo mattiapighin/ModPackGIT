@@ -174,23 +174,23 @@
   </data>
   <data name="Bt_EliminaIndice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAAKYAAACmAd19/zgAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAAA80lEQVRIS7WV2w2DMAxF2SNLdhNmbBcJOii26htCnIp+nCrE98FLdKu1Bt6lvD6l7Lo/Aw9e3Q8H
-        Lbw20iVozaclvpDwdAka8YSS82cQbgxLmInWsZJZuNGVsCeaDrJTwoaXsJbZiH3Z0LiaKecJLV3yAn61
-        XvBgSXheoQAQiGGF7mUIBwZCMWbowqHbMDBIwB2X4XC5CZgk5I61AgwSkCF3ixCKcYX7h4xADL8QSp4O
-        N7xkNRxdWnsWsJDBCD8r1jIbsf//c414UtKFG8xE65CJxsWDkmG4gUY8/V+mISXTcAOt+b7DIQihlaTD
-        DTwaXmvdDhJZSyxU4ACTAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        pgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADzSURBVEhLtZXb
+        DYMwDEXZI0t2E2ZsFwk6KLbqG0Kcin6cKsT3wUt0q7UG3qW8PqXsuj8DD17dDwctvDbSJWjNpyW+kPB0
+        CRrxhJLzZxBuDEuYidaxklm40ZWwJ5oOslPChpewltmIfdnQuJop5wktXfICfrVe8GBJeF6hABCIYYXu
+        ZQgHBkIxZujCodswMEjAHZfhcLkJmCTkjrUCDBKQIXeLEIpxhfuHjEAMvxBKng43vGQ1HF1aexawkMEI
+        PyvWMhux//9zjXhS0oUbzETrkInGxYOSYbiBRjz9X6YhJdNwA635vsMhCKGVpMMNPBpea90OEllLLFTg
+        AJMAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="Bt_AddIndice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAB+kAAAfpAZR6PEAAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAAAwklEQVRIS+2W0QnCMBiE4yzpLhY0HcHh0hG6RSfoKj7F/9KA5jwQ1IgPefggHH/uoP2P1qWUXuKS
-        O/j5fPExrBk7Q1OzjBQZP0+jGadHhng6qllGiswQw/IcEBY1y0iRMcONA6CpWUaKDMzIvAfUwIzM/yhg
-        L9E0llWEkeJqcAA0NbtlL/OEt5UoN5Qvfwc03g6ovx74nPUHAa0fUfOXrFaLKRc5oDf5DszIvAfUlBWu
-        AqCpWUaKTPOP/l7Gd35bkrsBJNeylABMhS8AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAH
+        6QAAB+kBlHo8QAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADCSURBVEhL7ZbR
+        CcIwGITjLOkuFjQdweHSEbpFJ+gqPsX/0oDmPBDUiA95+CAcf+6g/Y/WpZRe4pI7+Pl88TGsGTtDU7OM
+        FBk/T6MZp0eGeDqqWUaKzBDD8hwQFjXLSJExw40DoKlZRooMzMi8B9TAjMz/KGAv0TSWVYSR4mpwADQ1
+        u2Uv84S3lSg3lC9/BzTeDqi/Hvic9QcBrR9R85esVospFzmgN/kOzMi8B9SUFa4CoKlZRopM84/+XsZ3
+        fluSuwEk17KUAEyFLwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="Bt_SpostaIndice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

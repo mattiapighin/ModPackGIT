@@ -507,6 +507,18 @@ Namespace My
                 Me("Utente") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property NoteDinamico() As Boolean
+            Get
+                Return CType(Me("NoteDinamico"),Boolean)
+            End Get
+            Set
+                Me("NoteDinamico") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

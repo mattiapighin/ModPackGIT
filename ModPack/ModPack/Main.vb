@@ -23,6 +23,10 @@ Public Class Main
     Dim RowOrdine As New List(Of RigaOrdine)
     Dim RowIndici As New List(Of Integer)
 
+    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        OperazioniPreliminari()
+    End Sub
+
     Public Sub CaricaMemo()
         Try
             Using MemoTable As New ModPackDBDataSetTableAdapters.MemoTableAdapter
@@ -82,8 +86,8 @@ Public Class Main
 
             'LOG.Write("Inizio sessione")
             CaricaMemo()
-            SQL.PuliziaOrdini()
-            My.Settings.Scarto = SQL.GetPrezzoMateriale("SCART")
+            SQL.PuliziaOrdini() 'Se attivo elimina tutti gli ordini prima di una certa data (default false)
+            My.Settings.Scarto = SQL.GetPrezzoMateriale("SCART") 'salva in memoria la percentuale di scarto in modo da non dover fare la query ogni volta
             My.Settings.Save()
 
         Catch ex As Exception
@@ -91,11 +95,6 @@ Public Class Main
         End Try
 
     End Sub
-
-    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        OperazioniPreliminari()
-    End Sub
-
 
     Private Sub Calendario_DateChanged(sender As Object, e As DateRangeEventArgs) Handles Calendario.DateChanged
         MostraMemo()
@@ -175,11 +174,11 @@ Public Class Main
                             For K = 0 To row.Length - 1
                                 If row(K)(26) = False Then
                                     OrdiniTree.Nodes(I).Nodes.Add(row(K)(3) & "  (" & row(K)(5) & ")" & "  (" & row(K)(7) & ")  (" & row(K)(8) & ")")
-                                    Try
-                                        'If row(K)(17) < Date.Today.Date Then OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Red Else OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
-                                    Catch ex As Exception
-                                        Errore.Show("Evidenziare scaduti \ Treeview", ex.Message)
-                                    End Try
+                                    'Try
+                                    ' If row(K)(17) < Date.Today.Date And row(K)(26) = False Then OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Red Else OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
+                                    'Catch ex As Exception
+                                    'Errore.Show("Evidenziare scaduti \ Treeview", ex.Message)
+                                    'End Try
                                 End If
                             Next
                             I += 1

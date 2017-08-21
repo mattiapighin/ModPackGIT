@@ -195,7 +195,7 @@ Public Class Form_Imballi
     Private Sub Bt_Colonne_Click(sender As Object, e As EventArgs) Handles Bt_Colonne.Click
         If Form_Imballi_Colonne.ShowDialog = DialogResult.OK Then
             FiltraColonne()
-            Rinfresh()
+            'Rinfresh()
         End If
     End Sub
 
@@ -236,19 +236,78 @@ Public Class Form_Imballi
 
     Private Sub Bt_MostraDistinta_Click(sender As Object, e As EventArgs) Handles Bt_MostraDistinta.Click
         SplitSopra.Panel2Collapsed = Not SplitSopra.Panel2Collapsed
+        DgwDistinta.Columns(0).Visible = False
+        DgwDistinta.Columns(1).Visible = False
+
     End Sub
     Private Sub Bt_MostraInfo_Click(sender As Object, e As EventArgs) Handles Bt_MostraInfo.Click
         SplitIntero.Panel2Collapsed = Not SplitIntero.Panel2Collapsed
         SplitSotto.SplitterDistance = SplitSotto.Width / 2
+        DGW_Note.Columns(0).Visible = False
+        DGW_Note.Columns(1).Visible = False
+        DgwIndici.Columns(0).Visible = False
+        DgwIndici.Columns(1).Visible = False
+    End Sub
+
+    Private Sub Bt_NoteSave_Click(sender As Object, e As EventArgs) Handles Bt_NoteSave.Click
+        If MsgBox("Salvare le modifiche apportate alle note?", MsgBoxStyle.YesNo, "Elimina") = MsgBoxResult.Yes Then
+            Try
+                Me.NoteImballiTableAdapter.Update(Me.ModPackDBDataSet.NoteImballi)
+            Catch ex As Exception
+                Errore.Show("Modifica nota imballo", ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub Bt_NoteRemove_Click(sender As Object, e As EventArgs) Handles Bt_NoteRemove.Click
+        If MsgBox("Eliminare nota selezionata?", MsgBoxStyle.YesNo, "Elimina") = MsgBoxResult.Yes Then
+            Try
+
+                Dim ID As Integer = DGW_Note.CurrentRow.Cells(0).Value
+                Dim Imballo As String = DGW_Note.CurrentRow.Cells(1).Value
+                Dim Nota As String = DGW_Note.CurrentRow.Cells(2).Value
+
+                If Not Nota.Contains("'") Then
+                    SQL.Query("DELETE FROM NoteImballi WHERE ID = '" & ID & "' AND Imballo = '" & Imballo & "' AND Nota = '" & Nota & "'")
+                    Me.NoteImballiTableAdapter.Update(Me.ModPackDBDataSet.NoteImballi)
+                    Me.NoteImballiTableAdapter.Fill(Me.ModPackDBDataSet.NoteImballi)
+                Else
+                    MsgBox("È necessario rimuovere il carattere ' dalla stringa per proseguire con l'eliminazione")
+                End If
+
+            Catch ex As Exception
+                Errore.Show("Elimina nota imballo", ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub Bt_Note_Add_Click(sender As Object, e As EventArgs) Handles Bt_Note_Add.Click
+        Bt_Note_Click(sender, e)
     End Sub
 
 
-    Private Sub DGW_Note_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGW_Note.CellEndEdit
-        Try
-            Me.NoteImballiTableAdapter.Update(Me.ModPackDBDataSet.NoteImballi)
-        Catch ex As Exception
-            Errore.Show("Modifica nota imballo", ex.Message)
-        End Try
+    Private Sub DgwImballi_SelectionChanged(sender As Object, e As EventArgs) Handles DgwImballi.SelectionChanged
+        If My.Settings.NoteDinamico = True Then
+            If DgwImballi.SelectedRows.Count > 0 Then
+                Dim FontG As New Font(Bt_Note.Font, FontStyle.Bold)
+                Dim Font As New Font(Bt_Note.Font, FontStyle.Regular)
+                Dim I As Integer = 0
+
+                Bt_Note.Font = Font
+                Bt_Note.Text = "Note"
+
+                For Each row As ModPackDBDataSet.NoteImballiRow In ModPackDBDataSet.NoteImballi
+                    If row.Imballo = DgwImballi.CurrentRow.Cells("ImballoDataGridViewTextBoxColumn").Value Then
+                        I += 1
+                    End If
+                Next
+
+                If I > 0 Then
+                    Bt_Note.Font = FontG
+                    Bt_Note.Text = "Note (" & I & ")"
+                End If
+            End If
+        End If
     End Sub
 End Class
 

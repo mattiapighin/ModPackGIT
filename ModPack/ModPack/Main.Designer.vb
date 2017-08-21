@@ -206,13 +206,13 @@ Partial Class Main
         'TS_Archivio
         '
         Me.TS_Archivio.Name = "TS_Archivio"
-        Me.TS_Archivio.Size = New System.Drawing.Size(152, 22)
+        Me.TS_Archivio.Size = New System.Drawing.Size(128, 22)
         Me.TS_Archivio.Text = "ARCHIVIO"
         '
         'TS_Crea
         '
         Me.TS_Crea.Name = "TS_Crea"
-        Me.TS_Crea.Size = New System.Drawing.Size(152, 22)
+        Me.TS_Crea.Size = New System.Drawing.Size(128, 22)
         Me.TS_Crea.Text = "CREA"
         '
         'TS_Tools
@@ -290,13 +290,13 @@ Partial Class Main
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(760, 429)
+        Me.Controls.Add(Me.OrdiniTree)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.Calendario)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DGW_Memo)
-        Me.Controls.Add(Me.OrdiniTree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
