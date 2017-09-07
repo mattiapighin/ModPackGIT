@@ -1,14 +1,25 @@
 ﻿Namespace Rivestimenti
     Module Invio_Rivestimenti
 
-        Dim BC As String
+        Dim B As String
+        Dim C As String
         Dim F As String
         Dim T As String
         Dim Note1 As String
         Dim Note2 As String
 
+        Dim SetupRiv As New ModPackDBDataSet.Setup_RivestDataTable
+
+        Public Sub RiempiDataSetRivestimenti()
+            Using TA As New ModPackDBDataSetTableAdapters.Setup_RivestTableAdapter
+                TA.Fill(SetupRiv)
+            End Using
+        End Sub
+
 
         Public Sub Invia(ByVal Ordine As String)
+
+            RiempiDataSetRivestimenti()
 
             Dim xml = XDocument.Load(My.Settings.XMLpath)
             Dim Ip_sezionatrice As String = xml.<Data>.<IP_Sezionatrice>.Value
@@ -18,9 +29,8 @@
 
                 Try
 
-                    ' Dim Path As String = "\\" & Ip_sezionatrice & "\sezionatrice\ModPack"
-
-                    Dim Path As String = My.Computer.FileSystem.SpecialDirectories.Desktop
+                    Dim Path As String = "\\" & Ip_sezionatrice & "\sezionatrice\ModPack"
+                    'Dim Path As String = My.Computer.FileSystem.SpecialDirectories.Desktop
 
                     Dim Righe As New List(Of String)
                     Dim Magazzino As String = ""
@@ -38,13 +48,15 @@
                                             Magazzino = Row.Magazzino
                                         End If
 
+                                        Dim ID As String = Row.Riga & DateTime.Now.Second & DateTime.Now.Millisecond & Row.Indice & Row.Id
                                         Dim Imballo As String = Row.Imballo & " (" & Row.Codice & ")"
                                         Dim Qt As String = Row.Qt
                                         Dim Rivestimento As String = ""
                                         If Not Row.IsTipo_RivestimentoNull Then Rivestimento = SQL.GetSQLValue("SELECT Descrizione FROM Rivestimenti WHERE Tipo_Rivestimento = '" & Row.Tipo_Rivestimento & "'")
 
 
-                                        BC = ""
+                                        B = ""
+                                        C = ""
                                         F = ""
                                         T = ""
                                         Note1 = ""
@@ -52,10 +64,10 @@
 
                                         RiempiStringa(Row)
 
-                                        If Not Row.IsNoteNull Then Note1 = Row.Note
-                                        If Not Row.IsRivest_TotNull Then Note2 = Row.Rivest_Tot
+                                        If Not Row.IsNoteNull Then Note2 = Row.Note
+                                        If Not Row.IsRivest_TotNull Then Note2 += " " & Row.Rivest_Tot
 
-                                        Righe.Add(Imballo & "|" & Qt & "|" & Rivestimento & "|" & BC & "|" & F & "|" & T & "|" & Note1 & "|" & Note2)
+                                        Righe.Add(Imballo & "|" & Qt & "|" & Rivestimento & "|" & B & "|" & C & "|" & F & "|" & T & "|" & Note1 & "|" & Note2 & "|" & ID)
 
                                     End If
                                 End If
@@ -64,12 +76,12 @@
                         End Using
                     End Using
 
-                    Dim NomeFile As String = Path & "\" & "MAG" & Magazzino & " RIV-" & Ordine & ".txt"
+                    Dim NomeFile As String = Path & "\" & "MAG" & Magazzino & " RIV-" & Ordine & ".riv"
 
                     If Not My.Computer.FileSystem.DirectoryExists(Path) Then
                         'Controlla che esista la directory ModPack se no la crea
                         My.Computer.FileSystem.CreateDirectory(Path)
-                        MsgBox("Creata")
+                        MsgBox("Directory Creata")
                     End If
 
                     If IO.File.Exists(NomeFile) Then
@@ -79,7 +91,7 @@
                             If String.IsNullOrEmpty(NomeFile) Then Exit Sub
 
                             NomeFile = ""
-                            NomeFile = Path & "\" & "MAG" & Magazzino & " RIV-" & NuovoNome & ".txt"
+                            NomeFile = Path & "\" & "MAG" & Magazzino & " RIV-" & NuovoNome & ".riv"
 
                         Else
                             Exit Sub
@@ -100,23 +112,29 @@
 
         End Sub
 
-        Public Sub RiempiStringa(Row As ModPackDBDataSet.OrdiniRow)
-            BC = ""
+        Public Sub RiempiStringa(riga As ModPackDBDataSet.OrdiniRow)
+            B = ""
+            C = ""
             F = ""
             T = ""
 
-            Select Case Row.Tipo
-                Case "GST"
-                    BC = (Row.L + 3) & " x " & (Row.P + 3) & " = " & (Row.Qt) & "( + " & (Row.Qt) & " FAESITE)"
-                    F = (Row.L - 1) & " x " & (Row.H - 2) & " = " & (Row.Qt * 2)
-                    T = (Row.P - 5) & " x " & (Row.H - 2) & " = " & (Row.Qt * 2)
+            Dim TIPO As String = riga.Tipo
 
-                Case Else
-                    BC = (Row.L) & " x " & (Row.P) & " = " & (Row.Qt * 2)
-                    F = (Row.L - 5) & " x " & (Row.H - 5) & " = " & (Row.Qt * 2)
-                    T = (Row.P - 5) & " x " & (Row.H - 5) & " = " & (Row.Qt * 2)
 
-            End Select
+            For Each row As ModPackDBDataSet.Setup_RivestRow In SetupRiv
+                If row.Tipo = TIPO Then
+
+                    B = "B) " & riga.L + row._BX_ & " x " & riga.P + row._BY_ & " = " & riga.Qt
+                    C = "C) " & riga.L + row._CX_ & " x " & riga.P + row._CY_ & " = " & riga.Qt
+                    F = "F) " & riga.L + row._FX_ & " x " & riga.H + row._FY_ & " = " & riga.Qt * 2
+                    T = "T) " & riga.P + row._TX_ & " x " & riga.H + row._TY_ & " = " & riga.Qt * 2
+
+                    If Not row.IsNoteNull Then Note1 = row.Note
+
+                End If
+            Next
+
+
 
         End Sub
 

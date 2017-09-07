@@ -4,5 +4,7 @@
         Me.Close()
     End Sub
 
-
+    Private Sub Form_Avviso_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.BackColor = My.Settings.ColoreAvviso
+    End Sub
 End Class

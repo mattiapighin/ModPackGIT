@@ -31,38 +31,6 @@ Partial Class Form_Imballi
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DgwImballi = New System.Windows.Forms.DataGridView()
-        Me.DgwDistinta = New System.Windows.Forms.DataGridView()
-        Me.ImballiDistintaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DgwIndici = New System.Windows.Forms.DataGridView()
-        Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.Bt_Colonne = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_FiltroNome = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Filtro = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_MostraInfo = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_MostraDistinta = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.Bt_Modifica = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Simili = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_StampaImballo = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_MostraNuovi = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_PulisciNuovi = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_Note = New System.Windows.Forms.ToolStripButton()
-        Me.SplitSopra = New System.Windows.Forms.SplitContainer()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Lbl_Conteggio = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.PrintImballo = New System.Drawing.Printing.PrintDocument()
-        Me.ImballiIndiciBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DGW_Note = New System.Windows.Forms.DataGridView()
-        Me.ImballiNoteImballiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SplitIntero = New System.Windows.Forms.SplitContainer()
-        Me.SplitSotto = New System.Windows.Forms.SplitContainer()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-        Me.Bt_Note_Add = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_NoteRemove = New System.Windows.Forms.ToolStripButton()
-        Me.Bt_NoteSave = New System.Windows.Forms.ToolStripButton()
         Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -86,6 +54,7 @@ Partial Class Form_Imballi
         Me.DataCreazioneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ModPackDBDataSet = New ModPack.ModPackDBDataSet()
+        Me.DgwDistinta = New System.Windows.Forms.DataGridView()
         Me.IdDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RigaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -95,9 +64,8 @@ Partial Class Form_Imballi
         Me.ZDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImballoDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballiDistintaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DgwIndici = New System.Windows.Forms.DataGridView()
         Me.IdDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImballoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IndiceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -105,11 +73,49 @@ Partial Class Form_Imballi
         Me.NoteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RivestTotDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NoteBICDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.Bt_Colonne = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_FiltroNome = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Filtro = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_MostraInfo = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_MostraDistinta = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Bt_Modifica = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Simili = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_StampaImballo = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_MostraNuovi = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_PulisciNuovi = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Note = New System.Windows.Forms.ToolStripButton()
+        Me.SplitSopra = New System.Windows.Forms.SplitContainer()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Lbl_Conteggio = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_Descrizione = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.PrintImballo = New System.Drawing.Printing.PrintDocument()
+        Me.ImballiIndiciBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DGW_Note = New System.Windows.Forms.DataGridView()
+        Me.IdDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballoDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImballiNoteImballiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SplitIntero = New System.Windows.Forms.SplitContainer()
+        Me.SplitSotto = New System.Windows.Forms.SplitContainer()
+        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.Bt_Note_Add = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_NoteRemove = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_NoteSave = New System.Windows.Forms.ToolStripButton()
         Me.ImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.ImballiTableAdapter()
         Me.DistintaTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.DistintaTableAdapter()
         Me.IndiciTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.IndiciTableAdapter()
         Me.NoteImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.NoteImballiTableAdapter()
+        Me.CM_Copia = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DgwImballi, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwDistinta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImballiDistintaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -132,8 +138,7 @@ Partial Class Form_Imballi
         Me.SplitSotto.Panel2.SuspendLayout()
         Me.SplitSotto.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
-        CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CM_Copia.SuspendLayout()
         Me.SuspendLayout()
         '
         'DgwImballi
@@ -165,357 +170,6 @@ Partial Class Form_Imballi
         Me.DgwImballi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgwImballi.Size = New System.Drawing.Size(1159, 666)
         Me.DgwImballi.TabIndex = 0
-        '
-        'DgwDistinta
-        '
-        Me.DgwDistinta.AllowUserToAddRows = False
-        Me.DgwDistinta.AllowUserToDeleteRows = False
-        Me.DgwDistinta.AllowUserToResizeColumns = False
-        Me.DgwDistinta.AllowUserToResizeRows = False
-        Me.DgwDistinta.AutoGenerateColumns = False
-        Me.DgwDistinta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgwDistinta.ColumnHeadersVisible = False
-        Me.DgwDistinta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn1, Me.ImballoDataGridViewTextBoxColumn1, Me.RigaDataGridViewTextBoxColumn, Me.PartDataGridViewTextBoxColumn, Me.XDataGridViewTextBoxColumn, Me.YDataGridViewTextBoxColumn, Me.ZDataGridViewTextBoxColumn, Me.NDataGridViewTextBoxColumn, Me.TagDataGridViewTextBoxColumn})
-        Me.DgwDistinta.DataSource = Me.ImballiDistintaBindingSource
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgwDistinta.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DgwDistinta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DgwDistinta.GridColor = System.Drawing.Color.Gainsboro
-        Me.DgwDistinta.Location = New System.Drawing.Point(0, 0)
-        Me.DgwDistinta.Name = "DgwDistinta"
-        Me.DgwDistinta.ReadOnly = True
-        Me.DgwDistinta.RowHeadersVisible = False
-        Me.DgwDistinta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgwDistinta.Size = New System.Drawing.Size(96, 100)
-        Me.DgwDistinta.TabIndex = 1
-        '
-        'ImballiDistintaBindingSource
-        '
-        Me.ImballiDistintaBindingSource.DataMember = "Imballi_Distinta"
-        Me.ImballiDistintaBindingSource.DataSource = Me.ImballiBindingSource
-        '
-        'DgwIndici
-        '
-        Me.DgwIndici.AllowUserToAddRows = False
-        Me.DgwIndici.AllowUserToDeleteRows = False
-        Me.DgwIndici.AllowUserToResizeColumns = False
-        Me.DgwIndici.AllowUserToResizeRows = False
-        Me.DgwIndici.AutoGenerateColumns = False
-        Me.DgwIndici.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgwIndici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgwIndici.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn2, Me.ImballoDataGridViewTextBoxColumn2, Me.IndiceDataGridViewTextBoxColumn, Me.CodiceDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn, Me.RivestTotDataGridViewTextBoxColumn, Me.NoteBICDataGridViewTextBoxColumn})
-        Me.DgwIndici.DataSource = Me.ImballiIndiciBindingSource1
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgwIndici.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DgwIndici.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DgwIndici.Location = New System.Drawing.Point(0, 0)
-        Me.DgwIndici.Name = "DgwIndici"
-        Me.DgwIndici.ReadOnly = True
-        Me.DgwIndici.RowHeadersVisible = False
-        Me.DgwIndici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgwIndici.Size = New System.Drawing.Size(121, 46)
-        Me.DgwIndici.TabIndex = 2
-        '
-        'ImballiIndiciBindingSource1
-        '
-        Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
-        Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.AutoSize = False
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Colonne, Me.Bt_Refresh, Me.Bt_FiltroNome, Me.Bt_Filtro, Me.Bt_MostraInfo, Me.Bt_MostraDistinta, Me.ToolStripSeparator1, Me.Bt_Modifica, Me.Bt_Simili, Me.Bt_StampaImballo, Me.Bt_MostraNuovi, Me.Bt_PulisciNuovi, Me.Bt_Note})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1159, 36)
-        Me.ToolStrip1.TabIndex = 3
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'Bt_Colonne
-        '
-        Me.Bt_Colonne.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_Colonne.Image = CType(resources.GetObject("Bt_Colonne.Image"), System.Drawing.Image)
-        Me.Bt_Colonne.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Colonne.Name = "Bt_Colonne"
-        Me.Bt_Colonne.Size = New System.Drawing.Size(23, 33)
-        Me.Bt_Colonne.Text = "Colonne"
-        '
-        'Bt_Refresh
-        '
-        Me.Bt_Refresh.Image = CType(resources.GetObject("Bt_Refresh.Image"), System.Drawing.Image)
-        Me.Bt_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Refresh.Name = "Bt_Refresh"
-        Me.Bt_Refresh.Size = New System.Drawing.Size(66, 33)
-        Me.Bt_Refresh.Text = "Refresh"
-        '
-        'Bt_FiltroNome
-        '
-        Me.Bt_FiltroNome.Image = CType(resources.GetObject("Bt_FiltroNome.Image"), System.Drawing.Image)
-        Me.Bt_FiltroNome.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_FiltroNome.Name = "Bt_FiltroNome"
-        Me.Bt_FiltroNome.Size = New System.Drawing.Size(57, 33)
-        Me.Bt_FiltroNome.Text = "Cerca"
-        '
-        'Bt_Filtro
-        '
-        Me.Bt_Filtro.Image = CType(resources.GetObject("Bt_Filtro.Image"), System.Drawing.Image)
-        Me.Bt_Filtro.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Filtro.Name = "Bt_Filtro"
-        Me.Bt_Filtro.Size = New System.Drawing.Size(53, 33)
-        Me.Bt_Filtro.Text = "Filtra"
-        '
-        'Bt_MostraInfo
-        '
-        Me.Bt_MostraInfo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.Bt_MostraInfo.Image = CType(resources.GetObject("Bt_MostraInfo.Image"), System.Drawing.Image)
-        Me.Bt_MostraInfo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_MostraInfo.Name = "Bt_MostraInfo"
-        Me.Bt_MostraInfo.Size = New System.Drawing.Size(23, 33)
-        Me.Bt_MostraInfo.ToolTipText = "Mostra info"
-        '
-        'Bt_MostraDistinta
-        '
-        Me.Bt_MostraDistinta.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.Bt_MostraDistinta.Image = CType(resources.GetObject("Bt_MostraDistinta.Image"), System.Drawing.Image)
-        Me.Bt_MostraDistinta.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_MostraDistinta.Name = "Bt_MostraDistinta"
-        Me.Bt_MostraDistinta.Size = New System.Drawing.Size(23, 33)
-        Me.Bt_MostraDistinta.ToolTipText = "Mostra distinta"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 36)
-        '
-        'Bt_Modifica
-        '
-        Me.Bt_Modifica.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.Bt_Modifica.Image = CType(resources.GetObject("Bt_Modifica.Image"), System.Drawing.Image)
-        Me.Bt_Modifica.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Modifica.Name = "Bt_Modifica"
-        Me.Bt_Modifica.Size = New System.Drawing.Size(117, 33)
-        Me.Bt_Modifica.Text = "Modifica imballo"
-        '
-        'Bt_Simili
-        '
-        Me.Bt_Simili.Image = CType(resources.GetObject("Bt_Simili.Image"), System.Drawing.Image)
-        Me.Bt_Simili.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Simili.Name = "Bt_Simili"
-        Me.Bt_Simili.Size = New System.Drawing.Size(95, 33)
-        Me.Bt_Simili.Text = "Imballi Simili"
-        '
-        'Bt_StampaImballo
-        '
-        Me.Bt_StampaImballo.Image = CType(resources.GetObject("Bt_StampaImballo.Image"), System.Drawing.Image)
-        Me.Bt_StampaImballo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_StampaImballo.Name = "Bt_StampaImballo"
-        Me.Bt_StampaImballo.Size = New System.Drawing.Size(67, 33)
-        Me.Bt_StampaImballo.Text = "Stampa"
-        '
-        'Bt_MostraNuovi
-        '
-        Me.Bt_MostraNuovi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.Bt_MostraNuovi.Image = CType(resources.GetObject("Bt_MostraNuovi.Image"), System.Drawing.Image)
-        Me.Bt_MostraNuovi.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_MostraNuovi.Name = "Bt_MostraNuovi"
-        Me.Bt_MostraNuovi.Size = New System.Drawing.Size(99, 33)
-        Me.Bt_MostraNuovi.Text = "Mostra Nuovi"
-        '
-        'Bt_PulisciNuovi
-        '
-        Me.Bt_PulisciNuovi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.Bt_PulisciNuovi.Image = CType(resources.GetObject("Bt_PulisciNuovi.Image"), System.Drawing.Image)
-        Me.Bt_PulisciNuovi.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_PulisciNuovi.Name = "Bt_PulisciNuovi"
-        Me.Bt_PulisciNuovi.Size = New System.Drawing.Size(123, 33)
-        Me.Bt_PulisciNuovi.Text = "Pulisci Lista Nuovi"
-        '
-        'Bt_Note
-        '
-        Me.Bt_Note.Image = CType(resources.GetObject("Bt_Note.Image"), System.Drawing.Image)
-        Me.Bt_Note.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Note.Name = "Bt_Note"
-        Me.Bt_Note.Size = New System.Drawing.Size(53, 33)
-        Me.Bt_Note.Text = "Note"
-        Me.Bt_Note.ToolTipText = "Aggiungi nota"
-        '
-        'SplitSopra
-        '
-        Me.SplitSopra.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitSopra.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
-        Me.SplitSopra.IsSplitterFixed = True
-        Me.SplitSopra.Location = New System.Drawing.Point(0, 0)
-        Me.SplitSopra.Name = "SplitSopra"
-        '
-        'SplitSopra.Panel1
-        '
-        Me.SplitSopra.Panel1.Controls.Add(Me.DgwImballi)
-        '
-        'SplitSopra.Panel2
-        '
-        Me.SplitSopra.Panel2.Controls.Add(Me.DgwDistinta)
-        Me.SplitSopra.Panel2Collapsed = True
-        Me.SplitSopra.Size = New System.Drawing.Size(1159, 666)
-        Me.SplitSopra.SplitterDistance = 748
-        Me.SplitSopra.TabIndex = 4
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.Lbl_Conteggio})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 702)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1159, 23)
-        Me.StatusStrip1.TabIndex = 1
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(47, 18)
-        Me.ToolStripStatusLabel1.Text = "Record:"
-        '
-        'Lbl_Conteggio
-        '
-        Me.Lbl_Conteggio.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.Lbl_Conteggio.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Lbl_Conteggio.Name = "Lbl_Conteggio"
-        Me.Lbl_Conteggio.Size = New System.Drawing.Size(35, 18)
-        Me.Lbl_Conteggio.Text = "Nrec"
-        '
-        'PrintImballo
-        '
-        '
-        'ImballiIndiciBindingSource
-        '
-        Me.ImballiIndiciBindingSource.DataMember = "Imballi_Indici"
-        Me.ImballiIndiciBindingSource.DataSource = Me.ImballiBindingSource
-        '
-        'DGW_Note
-        '
-        Me.DGW_Note.AllowUserToAddRows = False
-        Me.DGW_Note.AllowUserToResizeColumns = False
-        Me.DGW_Note.AllowUserToResizeRows = False
-        Me.DGW_Note.AutoGenerateColumns = False
-        Me.DGW_Note.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DGW_Note.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DGW_Note.BackgroundColor = System.Drawing.Color.White
-        Me.DGW_Note.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGW_Note.ColumnHeadersVisible = False
-        Me.DGW_Note.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn3, Me.ImballoDataGridViewTextBoxColumn3, Me.NotaDataGridViewTextBoxColumn})
-        Me.DGW_Note.DataSource = Me.ImballiNoteImballiBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGW_Note.DefaultCellStyle = DataGridViewCellStyle5
-        Me.DGW_Note.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGW_Note.Location = New System.Drawing.Point(24, 0)
-        Me.DGW_Note.Name = "DGW_Note"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.LightYellow
-        Me.DGW_Note.RowsDefaultCellStyle = DataGridViewCellStyle6
-        Me.DGW_Note.Size = New System.Drawing.Size(1, 46)
-        Me.DGW_Note.TabIndex = 0
-        '
-        'ImballiNoteImballiBindingSource
-        '
-        Me.ImballiNoteImballiBindingSource.DataMember = "Imballi_NoteImballi"
-        Me.ImballiNoteImballiBindingSource.DataSource = Me.ImballiBindingSource
-        '
-        'SplitIntero
-        '
-        Me.SplitIntero.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitIntero.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
-        Me.SplitIntero.Location = New System.Drawing.Point(0, 36)
-        Me.SplitIntero.Name = "SplitIntero"
-        Me.SplitIntero.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitIntero.Panel1
-        '
-        Me.SplitIntero.Panel1.Controls.Add(Me.SplitSopra)
-        '
-        'SplitIntero.Panel2
-        '
-        Me.SplitIntero.Panel2.Controls.Add(Me.SplitSotto)
-        Me.SplitIntero.Panel2Collapsed = True
-        Me.SplitIntero.Size = New System.Drawing.Size(1159, 666)
-        Me.SplitIntero.SplitterDistance = 465
-        Me.SplitIntero.TabIndex = 5
-        '
-        'SplitSotto
-        '
-        Me.SplitSotto.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitSotto.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
-        Me.SplitSotto.Location = New System.Drawing.Point(0, 0)
-        Me.SplitSotto.Name = "SplitSotto"
-        '
-        'SplitSotto.Panel1
-        '
-        Me.SplitSotto.Panel1.Controls.Add(Me.DGW_Note)
-        Me.SplitSotto.Panel1.Controls.Add(Me.ToolStrip2)
-        '
-        'SplitSotto.Panel2
-        '
-        Me.SplitSotto.Panel2.Controls.Add(Me.DgwIndici)
-        Me.SplitSotto.Size = New System.Drawing.Size(150, 46)
-        Me.SplitSotto.SplitterDistance = 25
-        Me.SplitSotto.TabIndex = 0
-        '
-        'ToolStrip2
-        '
-        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Note_Add, Me.Bt_NoteRemove, Me.Bt_NoteSave})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(24, 46)
-        Me.ToolStrip2.TabIndex = 1
-        Me.ToolStrip2.Text = "ToolStrip2"
-        '
-        'Bt_Note_Add
-        '
-        Me.Bt_Note_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_Note_Add.Image = CType(resources.GetObject("Bt_Note_Add.Image"), System.Drawing.Image)
-        Me.Bt_Note_Add.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_Note_Add.Name = "Bt_Note_Add"
-        Me.Bt_Note_Add.Size = New System.Drawing.Size(21, 20)
-        Me.Bt_Note_Add.Text = "Aggiungi Nota"
-        '
-        'Bt_NoteRemove
-        '
-        Me.Bt_NoteRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_NoteRemove.Image = CType(resources.GetObject("Bt_NoteRemove.Image"), System.Drawing.Image)
-        Me.Bt_NoteRemove.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_NoteRemove.Name = "Bt_NoteRemove"
-        Me.Bt_NoteRemove.Size = New System.Drawing.Size(23, 20)
-        Me.Bt_NoteRemove.Text = "Elimina Nota"
-        '
-        'Bt_NoteSave
-        '
-        Me.Bt_NoteSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Bt_NoteSave.Image = CType(resources.GetObject("Bt_NoteSave.Image"), System.Drawing.Image)
-        Me.Bt_NoteSave.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.Bt_NoteSave.Name = "Bt_NoteSave"
-        Me.Bt_NoteSave.Size = New System.Drawing.Size(23, 20)
-        Me.Bt_NoteSave.Text = "Salva Modifiche"
         '
         'IdDataGridViewTextBoxColumn
         '
@@ -705,6 +359,35 @@ Partial Class Form_Imballi
         Me.ModPackDBDataSet.DataSetName = "ModPackDBDataSet"
         Me.ModPackDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'DgwDistinta
+        '
+        Me.DgwDistinta.AllowUserToAddRows = False
+        Me.DgwDistinta.AllowUserToDeleteRows = False
+        Me.DgwDistinta.AllowUserToResizeColumns = False
+        Me.DgwDistinta.AllowUserToResizeRows = False
+        Me.DgwDistinta.AutoGenerateColumns = False
+        Me.DgwDistinta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgwDistinta.ColumnHeadersVisible = False
+        Me.DgwDistinta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn1, Me.ImballoDataGridViewTextBoxColumn1, Me.RigaDataGridViewTextBoxColumn, Me.PartDataGridViewTextBoxColumn, Me.XDataGridViewTextBoxColumn, Me.YDataGridViewTextBoxColumn, Me.ZDataGridViewTextBoxColumn, Me.NDataGridViewTextBoxColumn, Me.TagDataGridViewTextBoxColumn})
+        Me.DgwDistinta.DataSource = Me.ImballiDistintaBindingSource
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgwDistinta.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DgwDistinta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DgwDistinta.GridColor = System.Drawing.Color.Gainsboro
+        Me.DgwDistinta.Location = New System.Drawing.Point(0, 0)
+        Me.DgwDistinta.Name = "DgwDistinta"
+        Me.DgwDistinta.ReadOnly = True
+        Me.DgwDistinta.RowHeadersVisible = False
+        Me.DgwDistinta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgwDistinta.Size = New System.Drawing.Size(96, 100)
+        Me.DgwDistinta.TabIndex = 1
+        '
         'IdDataGridViewTextBoxColumn1
         '
         Me.IdDataGridViewTextBoxColumn1.DataPropertyName = "Id"
@@ -779,26 +462,38 @@ Partial Class Form_Imballi
         Me.TagDataGridViewTextBoxColumn.ReadOnly = True
         Me.TagDataGridViewTextBoxColumn.Width = 60
         '
-        'IdDataGridViewTextBoxColumn3
+        'ImballiDistintaBindingSource
         '
-        Me.IdDataGridViewTextBoxColumn3.DataPropertyName = "Id"
-        Me.IdDataGridViewTextBoxColumn3.HeaderText = "Id"
-        Me.IdDataGridViewTextBoxColumn3.Name = "IdDataGridViewTextBoxColumn3"
-        Me.IdDataGridViewTextBoxColumn3.ReadOnly = True
-        Me.IdDataGridViewTextBoxColumn3.Visible = False
+        Me.ImballiDistintaBindingSource.DataMember = "Imballi_Distinta"
+        Me.ImballiDistintaBindingSource.DataSource = Me.ImballiBindingSource
         '
-        'ImballoDataGridViewTextBoxColumn3
+        'DgwIndici
         '
-        Me.ImballoDataGridViewTextBoxColumn3.DataPropertyName = "Imballo"
-        Me.ImballoDataGridViewTextBoxColumn3.HeaderText = "Imballo"
-        Me.ImballoDataGridViewTextBoxColumn3.Name = "ImballoDataGridViewTextBoxColumn3"
-        Me.ImballoDataGridViewTextBoxColumn3.Visible = False
-        '
-        'NotaDataGridViewTextBoxColumn
-        '
-        Me.NotaDataGridViewTextBoxColumn.DataPropertyName = "Nota"
-        Me.NotaDataGridViewTextBoxColumn.HeaderText = "Nota"
-        Me.NotaDataGridViewTextBoxColumn.Name = "NotaDataGridViewTextBoxColumn"
+        Me.DgwIndici.AllowUserToAddRows = False
+        Me.DgwIndici.AllowUserToDeleteRows = False
+        Me.DgwIndici.AllowUserToResizeColumns = False
+        Me.DgwIndici.AllowUserToResizeRows = False
+        Me.DgwIndici.AutoGenerateColumns = False
+        Me.DgwIndici.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DgwIndici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgwIndici.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn2, Me.ImballoDataGridViewTextBoxColumn2, Me.IndiceDataGridViewTextBoxColumn, Me.CodiceDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn, Me.RivestTotDataGridViewTextBoxColumn, Me.NoteBICDataGridViewTextBoxColumn})
+        Me.DgwIndici.DataSource = Me.ImballiIndiciBindingSource1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgwIndici.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DgwIndici.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DgwIndici.Location = New System.Drawing.Point(0, 0)
+        Me.DgwIndici.Name = "DgwIndici"
+        Me.DgwIndici.ReadOnly = True
+        Me.DgwIndici.RowHeadersVisible = False
+        Me.DgwIndici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgwIndici.Size = New System.Drawing.Size(121, 46)
+        Me.DgwIndici.TabIndex = 2
         '
         'IdDataGridViewTextBoxColumn2
         '
@@ -851,6 +546,335 @@ Partial Class Form_Imballi
         Me.NoteBICDataGridViewTextBoxColumn.Name = "NoteBICDataGridViewTextBoxColumn"
         Me.NoteBICDataGridViewTextBoxColumn.ReadOnly = True
         '
+        'ImballiIndiciBindingSource1
+        '
+        Me.ImballiIndiciBindingSource1.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource1.DataSource = Me.ImballiBindingSource
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.AutoSize = False
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Colonne, Me.Bt_Refresh, Me.Bt_FiltroNome, Me.Bt_Filtro, Me.Bt_MostraInfo, Me.Bt_MostraDistinta, Me.ToolStripSeparator1, Me.Bt_Modifica, Me.Bt_Simili, Me.Bt_StampaImballo, Me.Bt_MostraNuovi, Me.Bt_PulisciNuovi, Me.Bt_Note})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(1159, 36)
+        Me.ToolStrip1.TabIndex = 3
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'Bt_Colonne
+        '
+        Me.Bt_Colonne.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Colonne.Image = CType(resources.GetObject("Bt_Colonne.Image"), System.Drawing.Image)
+        Me.Bt_Colonne.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Colonne.Name = "Bt_Colonne"
+        Me.Bt_Colonne.Size = New System.Drawing.Size(23, 33)
+        Me.Bt_Colonne.Text = "Colonne"
+        '
+        'Bt_Refresh
+        '
+        Me.Bt_Refresh.Image = CType(resources.GetObject("Bt_Refresh.Image"), System.Drawing.Image)
+        Me.Bt_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Refresh.Name = "Bt_Refresh"
+        Me.Bt_Refresh.Size = New System.Drawing.Size(66, 33)
+        Me.Bt_Refresh.Text = "Refresh"
+        '
+        'Bt_FiltroNome
+        '
+        Me.Bt_FiltroNome.Image = CType(resources.GetObject("Bt_FiltroNome.Image"), System.Drawing.Image)
+        Me.Bt_FiltroNome.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_FiltroNome.Name = "Bt_FiltroNome"
+        Me.Bt_FiltroNome.Size = New System.Drawing.Size(57, 33)
+        Me.Bt_FiltroNome.Text = "Cerca"
+        '
+        'Bt_Filtro
+        '
+        Me.Bt_Filtro.Image = CType(resources.GetObject("Bt_Filtro.Image"), System.Drawing.Image)
+        Me.Bt_Filtro.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Filtro.Name = "Bt_Filtro"
+        Me.Bt_Filtro.Size = New System.Drawing.Size(53, 33)
+        Me.Bt_Filtro.Text = "Filtra"
+        '
+        'Bt_MostraInfo
+        '
+        Me.Bt_MostraInfo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_MostraInfo.Image = CType(resources.GetObject("Bt_MostraInfo.Image"), System.Drawing.Image)
+        Me.Bt_MostraInfo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_MostraInfo.Name = "Bt_MostraInfo"
+        Me.Bt_MostraInfo.Size = New System.Drawing.Size(23, 33)
+        Me.Bt_MostraInfo.ToolTipText = "Mostra info"
+        '
+        'Bt_MostraDistinta
+        '
+        Me.Bt_MostraDistinta.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_MostraDistinta.Image = CType(resources.GetObject("Bt_MostraDistinta.Image"), System.Drawing.Image)
+        Me.Bt_MostraDistinta.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_MostraDistinta.Name = "Bt_MostraDistinta"
+        Me.Bt_MostraDistinta.Size = New System.Drawing.Size(23, 33)
+        Me.Bt_MostraDistinta.ToolTipText = "Mostra distinta"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 36)
+        '
+        'Bt_Modifica
+        '
+        Me.Bt_Modifica.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_Modifica.Image = CType(resources.GetObject("Bt_Modifica.Image"), System.Drawing.Image)
+        Me.Bt_Modifica.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Modifica.Name = "Bt_Modifica"
+        Me.Bt_Modifica.Size = New System.Drawing.Size(117, 33)
+        Me.Bt_Modifica.Text = "Modifica imballo"
+        '
+        'Bt_Simili
+        '
+        Me.Bt_Simili.Image = CType(resources.GetObject("Bt_Simili.Image"), System.Drawing.Image)
+        Me.Bt_Simili.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Simili.Name = "Bt_Simili"
+        Me.Bt_Simili.Size = New System.Drawing.Size(95, 33)
+        Me.Bt_Simili.Text = "Imballi Simili"
+        '
+        'Bt_StampaImballo
+        '
+        Me.Bt_StampaImballo.Image = CType(resources.GetObject("Bt_StampaImballo.Image"), System.Drawing.Image)
+        Me.Bt_StampaImballo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_StampaImballo.Name = "Bt_StampaImballo"
+        Me.Bt_StampaImballo.Size = New System.Drawing.Size(67, 33)
+        Me.Bt_StampaImballo.Text = "Stampa"
+        '
+        'Bt_MostraNuovi
+        '
+        Me.Bt_MostraNuovi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_MostraNuovi.Image = CType(resources.GetObject("Bt_MostraNuovi.Image"), System.Drawing.Image)
+        Me.Bt_MostraNuovi.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_MostraNuovi.Name = "Bt_MostraNuovi"
+        Me.Bt_MostraNuovi.Size = New System.Drawing.Size(99, 33)
+        Me.Bt_MostraNuovi.Text = "Mostra Nuovi"
+        '
+        'Bt_PulisciNuovi
+        '
+        Me.Bt_PulisciNuovi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_PulisciNuovi.Image = CType(resources.GetObject("Bt_PulisciNuovi.Image"), System.Drawing.Image)
+        Me.Bt_PulisciNuovi.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_PulisciNuovi.Name = "Bt_PulisciNuovi"
+        Me.Bt_PulisciNuovi.Size = New System.Drawing.Size(123, 33)
+        Me.Bt_PulisciNuovi.Text = "Pulisci Lista Nuovi"
+        '
+        'Bt_Note
+        '
+        Me.Bt_Note.Image = CType(resources.GetObject("Bt_Note.Image"), System.Drawing.Image)
+        Me.Bt_Note.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Note.Name = "Bt_Note"
+        Me.Bt_Note.Size = New System.Drawing.Size(53, 33)
+        Me.Bt_Note.Text = "Note"
+        Me.Bt_Note.ToolTipText = "Aggiungi nota"
+        '
+        'SplitSopra
+        '
+        Me.SplitSopra.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitSopra.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.SplitSopra.IsSplitterFixed = True
+        Me.SplitSopra.Location = New System.Drawing.Point(0, 0)
+        Me.SplitSopra.Name = "SplitSopra"
+        '
+        'SplitSopra.Panel1
+        '
+        Me.SplitSopra.Panel1.Controls.Add(Me.DgwImballi)
+        '
+        'SplitSopra.Panel2
+        '
+        Me.SplitSopra.Panel2.Controls.Add(Me.DgwDistinta)
+        Me.SplitSopra.Panel2Collapsed = True
+        Me.SplitSopra.Size = New System.Drawing.Size(1159, 666)
+        Me.SplitSopra.SplitterDistance = 748
+        Me.SplitSopra.TabIndex = 4
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.Lbl_Conteggio, Me.ToolStripStatusLabel2, Me.LBL_Descrizione})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 702)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1159, 23)
+        Me.StatusStrip1.TabIndex = 1
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(47, 18)
+        Me.ToolStripStatusLabel1.Text = "Record:"
+        '
+        'Lbl_Conteggio
+        '
+        Me.Lbl_Conteggio.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.Lbl_Conteggio.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lbl_Conteggio.Name = "Lbl_Conteggio"
+        Me.Lbl_Conteggio.Size = New System.Drawing.Size(35, 18)
+        Me.Lbl_Conteggio.Text = "Nrec"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.AutoSize = False
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(20, 18)
+        '
+        'LBL_Descrizione
+        '
+        Me.LBL_Descrizione.AutoSize = False
+        Me.LBL_Descrizione.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_Descrizione.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
+        Me.LBL_Descrizione.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.LBL_Descrizione.Name = "LBL_Descrizione"
+        Me.LBL_Descrizione.Size = New System.Drawing.Size(1042, 18)
+        Me.LBL_Descrizione.Spring = True
+        Me.LBL_Descrizione.Text = "ToolStripStatusLabel2"
+        '
+        'PrintImballo
+        '
+        '
+        'ImballiIndiciBindingSource
+        '
+        Me.ImballiIndiciBindingSource.DataMember = "Imballi_Indici"
+        Me.ImballiIndiciBindingSource.DataSource = Me.ImballiBindingSource
+        '
+        'DGW_Note
+        '
+        Me.DGW_Note.AllowUserToAddRows = False
+        Me.DGW_Note.AllowUserToResizeColumns = False
+        Me.DGW_Note.AllowUserToResizeRows = False
+        Me.DGW_Note.AutoGenerateColumns = False
+        Me.DGW_Note.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGW_Note.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DGW_Note.BackgroundColor = System.Drawing.Color.White
+        Me.DGW_Note.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGW_Note.ColumnHeadersVisible = False
+        Me.DGW_Note.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn3, Me.ImballoDataGridViewTextBoxColumn3, Me.NotaDataGridViewTextBoxColumn})
+        Me.DGW_Note.DataSource = Me.ImballiNoteImballiBindingSource
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGW_Note.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGW_Note.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGW_Note.Location = New System.Drawing.Point(24, 0)
+        Me.DGW_Note.Name = "DGW_Note"
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.LightYellow
+        Me.DGW_Note.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.DGW_Note.Size = New System.Drawing.Size(1, 46)
+        Me.DGW_Note.TabIndex = 0
+        '
+        'IdDataGridViewTextBoxColumn3
+        '
+        Me.IdDataGridViewTextBoxColumn3.DataPropertyName = "Id"
+        Me.IdDataGridViewTextBoxColumn3.HeaderText = "Id"
+        Me.IdDataGridViewTextBoxColumn3.Name = "IdDataGridViewTextBoxColumn3"
+        Me.IdDataGridViewTextBoxColumn3.ReadOnly = True
+        Me.IdDataGridViewTextBoxColumn3.Visible = False
+        '
+        'ImballoDataGridViewTextBoxColumn3
+        '
+        Me.ImballoDataGridViewTextBoxColumn3.DataPropertyName = "Imballo"
+        Me.ImballoDataGridViewTextBoxColumn3.HeaderText = "Imballo"
+        Me.ImballoDataGridViewTextBoxColumn3.Name = "ImballoDataGridViewTextBoxColumn3"
+        Me.ImballoDataGridViewTextBoxColumn3.Visible = False
+        '
+        'NotaDataGridViewTextBoxColumn
+        '
+        Me.NotaDataGridViewTextBoxColumn.DataPropertyName = "Nota"
+        Me.NotaDataGridViewTextBoxColumn.HeaderText = "Nota"
+        Me.NotaDataGridViewTextBoxColumn.Name = "NotaDataGridViewTextBoxColumn"
+        '
+        'ImballiNoteImballiBindingSource
+        '
+        Me.ImballiNoteImballiBindingSource.DataMember = "Imballi_NoteImballi"
+        Me.ImballiNoteImballiBindingSource.DataSource = Me.ImballiBindingSource
+        '
+        'SplitIntero
+        '
+        Me.SplitIntero.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitIntero.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.SplitIntero.Location = New System.Drawing.Point(0, 36)
+        Me.SplitIntero.Name = "SplitIntero"
+        Me.SplitIntero.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitIntero.Panel1
+        '
+        Me.SplitIntero.Panel1.Controls.Add(Me.SplitSopra)
+        '
+        'SplitIntero.Panel2
+        '
+        Me.SplitIntero.Panel2.Controls.Add(Me.SplitSotto)
+        Me.SplitIntero.Panel2Collapsed = True
+        Me.SplitIntero.Size = New System.Drawing.Size(1159, 666)
+        Me.SplitIntero.SplitterDistance = 465
+        Me.SplitIntero.TabIndex = 5
+        '
+        'SplitSotto
+        '
+        Me.SplitSotto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitSotto.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.SplitSotto.Location = New System.Drawing.Point(0, 0)
+        Me.SplitSotto.Name = "SplitSotto"
+        '
+        'SplitSotto.Panel1
+        '
+        Me.SplitSotto.Panel1.Controls.Add(Me.DGW_Note)
+        Me.SplitSotto.Panel1.Controls.Add(Me.ToolStrip2)
+        '
+        'SplitSotto.Panel2
+        '
+        Me.SplitSotto.Panel2.Controls.Add(Me.DgwIndici)
+        Me.SplitSotto.Size = New System.Drawing.Size(150, 46)
+        Me.SplitSotto.SplitterDistance = 25
+        Me.SplitSotto.TabIndex = 0
+        '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Note_Add, Me.Bt_NoteRemove, Me.Bt_NoteSave})
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.Size = New System.Drawing.Size(24, 46)
+        Me.ToolStrip2.TabIndex = 1
+        Me.ToolStrip2.Text = "ToolStrip2"
+        '
+        'Bt_Note_Add
+        '
+        Me.Bt_Note_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Note_Add.Image = CType(resources.GetObject("Bt_Note_Add.Image"), System.Drawing.Image)
+        Me.Bt_Note_Add.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Note_Add.Name = "Bt_Note_Add"
+        Me.Bt_Note_Add.Size = New System.Drawing.Size(21, 20)
+        Me.Bt_Note_Add.Text = "Aggiungi Nota"
+        '
+        'Bt_NoteRemove
+        '
+        Me.Bt_NoteRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_NoteRemove.Image = CType(resources.GetObject("Bt_NoteRemove.Image"), System.Drawing.Image)
+        Me.Bt_NoteRemove.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_NoteRemove.Name = "Bt_NoteRemove"
+        Me.Bt_NoteRemove.Size = New System.Drawing.Size(23, 20)
+        Me.Bt_NoteRemove.Text = "Elimina Nota"
+        '
+        'Bt_NoteSave
+        '
+        Me.Bt_NoteSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_NoteSave.Image = CType(resources.GetObject("Bt_NoteSave.Image"), System.Drawing.Image)
+        Me.Bt_NoteSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_NoteSave.Name = "Bt_NoteSave"
+        Me.Bt_NoteSave.Size = New System.Drawing.Size(23, 20)
+        Me.Bt_NoteSave.Text = "Salva Modifiche"
+        '
         'ImballiTableAdapter
         '
         Me.ImballiTableAdapter.ClearBeforeFill = True
@@ -867,6 +891,18 @@ Partial Class Form_Imballi
         '
         Me.NoteImballiTableAdapter.ClearBeforeFill = True
         '
+        'CM_Copia
+        '
+        Me.CM_Copia.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiaToolStripMenuItem})
+        Me.CM_Copia.Name = "CM_Copia"
+        Me.CM_Copia.Size = New System.Drawing.Size(106, 26)
+        '
+        'CopiaToolStripMenuItem
+        '
+        Me.CopiaToolStripMenuItem.Name = "CopiaToolStripMenuItem"
+        Me.CopiaToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.CopiaToolStripMenuItem.Text = "Copia"
+        '
         'Form_Imballi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -880,6 +916,8 @@ Partial Class Form_Imballi
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Archivio Imballi"
         CType(Me.DgwImballi, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgwDistinta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImballiDistintaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DgwIndici, System.ComponentModel.ISupportInitialize).EndInit()
@@ -906,8 +944,7 @@ Partial Class Form_Imballi
         Me.SplitSotto.ResumeLayout(False)
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
-        CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CM_Copia.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -992,4 +1029,8 @@ Partial Class Form_Imballi
     Friend WithEvents Bt_NoteRemove As ToolStripButton
     Friend WithEvents Bt_NoteSave As ToolStripButton
     Friend WithEvents Bt_Note_Add As ToolStripButton
+    Friend WithEvents LBL_Descrizione As ToolStripStatusLabel
+    Friend WithEvents CM_Copia As ContextMenuStrip
+    Friend WithEvents CopiaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
 End Class

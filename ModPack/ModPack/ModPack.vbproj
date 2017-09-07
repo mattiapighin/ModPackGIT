@@ -13,6 +13,22 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\mattia.pighin\Desktop\Modpack Release\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,16 +68,33 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0516FE0D2FA9CFA33CB5E91C66B3461F80EFCA0A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ModPack_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\Imballi-Modine-Resources\Info\itextsharp\itextsharp-dll-core\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -83,6 +116,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Buttons\Imballi\Form_Imballi_Colonne.Designer.vb">
       <DependentUpon>Form_Imballi_Colonne.vb</DependentUpon>
     </Compile>
@@ -123,6 +157,12 @@
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </Compile>
     <Compile Include="Buttons\Preferenze\Form_Preferenze.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\FRM_TestConnessioni.Designer.vb">
+      <DependentUpon>FRM_TestConnessioni.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\Preferenze\FRM_TestConnessioni.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Creazione Manuale Imballi\Form_Crea_Manuale.Designer.vb">
@@ -216,10 +256,22 @@
     <Compile Include="Tools\Form_StoricoOrdini.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\Form_StoricoOrdini_ScegliColonne.Designer.vb">
+      <DependentUpon>Form_StoricoOrdini_ScegliColonne.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Form_StoricoOrdini_ScegliColonne.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\Frm_NoteImballo.Designer.vb">
       <DependentUpon>Frm_NoteImballo.vb</DependentUpon>
     </Compile>
     <Compile Include="Tools\Frm_NoteImballo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\FRM_SetupRivestimenti.Designer.vb">
+      <DependentUpon>FRM_SetupRivestimenti.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\FRM_SetupRivestimenti.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tools\Invio_Rivestimenti.vb" />
@@ -292,6 +344,9 @@
     <EmbeddedResource Include="Buttons\Preferenze\Form_Preferenze.resx">
       <DependentUpon>Form_Preferenze.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Buttons\Preferenze\FRM_TestConnessioni.resx">
+      <DependentUpon>FRM_TestConnessioni.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Creazione Manuale Imballi\Form_Crea_Manuale.resx">
       <DependentUpon>Form_Crea_Manuale.vb</DependentUpon>
     </EmbeddedResource>
@@ -343,8 +398,14 @@
     <EmbeddedResource Include="Tools\Form_StoricoOrdini.resx">
       <DependentUpon>Form_StoricoOrdini.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Form_StoricoOrdini_ScegliColonne.resx">
+      <DependentUpon>Form_StoricoOrdini_ScegliColonne.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\Frm_NoteImballo.resx">
       <DependentUpon>Frm_NoteImballo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\FRM_SetupRivestimenti.resx">
+      <DependentUpon>FRM_SetupRivestimenti.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Varie\MsgBox\MsgMoraliFrescoHT.resx">
       <DependentUpon>MsgMoraliFrescoHT.vb</DependentUpon>
@@ -362,6 +423,7 @@
     <None Include="ModPackDBDataSet.xss">
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="ModPack_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -416,6 +478,17 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

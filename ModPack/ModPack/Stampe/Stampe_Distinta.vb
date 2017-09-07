@@ -28,9 +28,21 @@
         Dim Stringa1Riv As String
         Dim Stringa2Riv As String
         Dim Stringa3Riv As String
+        Dim Stringa4Riv As String
+        Dim stringa5riv As String
         Dim QT1Riv As Integer = 0
         Dim QT2Riv As Integer = 0
         Dim QT3Riv As Integer = 0
+        Dim QT4Riv As Integer = 0
+
+        Dim SetupRiv As New ModPackDBDataSet.Setup_RivestDataTable
+
+        Public Sub RiempiDataSetRivestimenti()
+            Using TA As New ModPackDBDataSetTableAdapters.Setup_RivestTableAdapter
+                TA.Fill(SetupRiv)
+            End Using
+        End Sub
+
 
         Private Sub CaricaDati(Riga As RigaOrdine)
             PrimoMorale = 0
@@ -502,7 +514,7 @@
 
             '######### RIVESTIMENTO ##########
 
-            Dim RectRivestimento As New Rectangle(RectIMG.Left, RectIMG.Bottom + 5, RectIMG.Width, 100)
+            Dim RectRivestimento As New Rectangle(RectIMG.Left, RectIMG.Bottom + 5, RectIMG.Width, 150)
 
             If riga.Rivestimento = True Then
 
@@ -510,54 +522,66 @@
                 Dim Riga2RIV As New Rectangle(Riga1RIV.Left, Riga1RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
                 Dim Riga3RIV As New Rectangle(Riga1RIV.Left, Riga2RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
                 Dim Riga4RIV As New Rectangle(Riga1RIV.Left, Riga3RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
-                e.Graphics.DrawRectangles(Pens.LightGray, {Riga1RIV, Riga2RIV, Riga3RIV, Riga4RIV})
+                Dim Riga5RIV As New Rectangle(Riga1RIV.Left, Riga4RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
+                Dim RigaNoteRIV As New Rectangle(Riga1RIV.Left, Riga5RIV.Bottom, Riga1RIV.Width, Riga1RIV.Height)
+
+                e.Graphics.DrawRectangles(Pens.LightGray, {Riga1RIV, Riga2RIV, Riga3RIV, Riga4RIV, Riga5RIV})
 
                 Dim Q As Single = Riga1RIV.Width / 6
 
-                Dim RectBCRiv As New Rectangle(Riga2RIV.Left, Riga2RIV.Top, Q, Riga2RIV.Height)
-                Dim RectFRiv As New Rectangle(Riga3RIV.Left, Riga3RIV.Top, Q, Riga3RIV.Height)
-                Dim RectTRiv As New Rectangle(Riga4RIV.Left, Riga4RIV.Top, Q, Riga4RIV.Height)
+                Dim RectBRiv As New Rectangle(Riga2RIV.Left, Riga2RIV.Top, Q, Riga2RIV.Height)
+                Dim RectCRiv As New Rectangle(Riga2RIV.Left, Riga3RIV.Top, Q, Riga2RIV.Height)
+                Dim RectFRiv As New Rectangle(Riga3RIV.Left, Riga4RIV.Top, Q, Riga3RIV.Height)
+                Dim RectTRiv As New Rectangle(Riga4RIV.Left, Riga5RIV.Top, Q, Riga4RIV.Height)
 
-                Dim RectBCRivValore As New Rectangle(RectBCRiv.Right, Riga2RIV.Top, Q * 3, Riga2RIV.Height)
-                Dim RectFRivValore As New Rectangle(RectFRiv.Right, Riga3RIV.Top, Q * 3, Riga3RIV.Height)
-                Dim RectTRivValore As New Rectangle(RectTRiv.Right, Riga4RIV.Top, Q * 3, Riga4RIV.Height)
+                Dim RectBRivValore As New Rectangle(RectBRiv.Right, Riga2RIV.Top, Q * 3, Riga2RIV.Height)
+                Dim RectCRivValore As New Rectangle(RectBRiv.Right, Riga3RIV.Top, Q * 3, Riga2RIV.Height)
+                Dim RectFRivValore As New Rectangle(RectFRiv.Right, Riga4RIV.Top, Q * 3, Riga3RIV.Height)
+                Dim RectTRivValore As New Rectangle(RectTRiv.Right, Riga5RIV.Top, Q * 3, Riga4RIV.Height)
 
-                Dim RectBCRivQt As New Rectangle(RectBCRivValore.Right, Riga2RIV.Top, Q, Riga2RIV.Height)
-                Dim RectFRivQt As New Rectangle(RectFRivValore.Right, Riga3RIV.Top, Q, Riga3RIV.Height)
-                Dim RectTRivQt As New Rectangle(RectTRivValore.Right, Riga4RIV.Top, Q, Riga4RIV.Height)
+                Dim RectBRivQt As New Rectangle(RectBRivValore.Right, Riga2RIV.Top, Q, Riga2RIV.Height)
+                Dim RectCRivQt As New Rectangle(RectCRivValore.Right, Riga3RIV.Top, Q, Riga2RIV.Height)
+                Dim RectFRivQt As New Rectangle(RectFRivValore.Right, Riga4RIV.Top, Q, Riga3RIV.Height)
+                Dim RectTRivQt As New Rectangle(RectTRivValore.Right, Riga5RIV.Top, Q, Riga4RIV.Height)
 
-                Dim RectBCRivQt2 As New Rectangle(RectBCRivQt.Right, Riga2RIV.Top, Q, Riga2RIV.Height)
-                Dim RectFRivQt2 As New Rectangle(RectFRivQt.Right, Riga3RIV.Top, Q, Riga3RIV.Height)
-                Dim RectTRivQt2 As New Rectangle(RectTRivQt.Right, Riga4RIV.Top, Q, Riga4RIV.Height)
+                Dim RectBRivQt2 As New Rectangle(RectBRivQt.Right, Riga2RIV.Top, Q, Riga2RIV.Height)
+                Dim RectCRivQt2 As New Rectangle(RectBRivQt.Right, Riga3RIV.Top, Q, Riga2RIV.Height)
+                Dim RectFRivQt2 As New Rectangle(RectFRivQt.Right, Riga4RIV.Top, Q, Riga3RIV.Height)
+                Dim RectTRivQt2 As New Rectangle(RectTRivQt.Right, Riga5RIV.Top, Q, Riga4RIV.Height)
 
 
-                e.Graphics.DrawRectangles(Pens.LightGray, {RectBCRiv, RectFRiv, RectTRiv, RectBCRivQt, RectFRivQt, RectTRivQt})
+                e.Graphics.DrawRectangles(Pens.LightGray, {RectBRiv, RectCRiv, RectFRiv, RectTRiv, RectBRivQt, RectCRivQt, RectFRivQt, RectTRivQt})
 
-                e.Graphics.DrawString("B+C", fnt, Brushes.Black, RectBCRiv, FMT)
+                e.Graphics.DrawString("B", fnt, Brushes.Black, RectBRiv, FMT)
+                e.Graphics.DrawString("C", fnt, Brushes.Black, RectCRiv, FMT)
                 e.Graphics.DrawString("F", fnt, Brushes.Black, RectFRiv, FMT)
                 e.Graphics.DrawString("T", fnt, Brushes.Black, RectTRiv, FMT)
 
                 ScriviRivestimento(riga)
 
-                e.Graphics.DrawString(Stringa1Riv, fnt, Brushes.Black, RectBCRivValore, FMT)
-                e.Graphics.DrawString(Stringa2Riv, fnt, Brushes.Black, RectFRivValore, FMT)
-                e.Graphics.DrawString(Stringa3Riv, fnt, Brushes.Black, RectTRivValore, FMT)
+                e.Graphics.DrawString(Stringa1Riv, fnt, Brushes.Black, RectBRivValore, FMT)
+                e.Graphics.DrawString(Stringa2Riv, fnt, Brushes.Black, RectCRivValore, FMT)
+                e.Graphics.DrawString(Stringa3Riv, fnt, Brushes.Black, RectFRivValore, FMT)
+                e.Graphics.DrawString(Stringa4Riv, fnt, Brushes.Black, RectTRivValore, FMT)
 
-                e.Graphics.DrawString(QT1Riv, fnt, Brushes.Black, RectBCRivQt, FMT)
-                e.Graphics.DrawString(QT2Riv, fnt, Brushes.Black, RectFRivQt, FMT)
-                e.Graphics.DrawString(QT3Riv, fnt, Brushes.Black, RectTRivQt, FMT)
+                e.Graphics.DrawString(stringa5riv, fnt, Brushes.Black, RigaNoteRIV, FMT)
+
+                e.Graphics.DrawString(QT1Riv, fnt, Brushes.Black, RectBRivQt, FMT)
+                e.Graphics.DrawString(QT2Riv, fnt, Brushes.Black, RectCRivQt, FMT)
+                e.Graphics.DrawString(QT3Riv, fnt, Brushes.Black, RectFRivQt, FMT)
+                e.Graphics.DrawString(QT4Riv, fnt, Brushes.Black, RectTRivQt, FMT)
 
                 If riga.Qt > 1 Then
-                    e.Graphics.DrawString("[" & riga.Qt * QT1Riv & "]", fnt, Brushes.Black, RectBCRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * QT2Riv & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
-                    e.Graphics.DrawString("[" & riga.Qt * QT3Riv & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT1Riv & "]", fnt, Brushes.Black, RectBRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT2Riv & "]", fnt, Brushes.Black, RectCRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT3Riv & "]", fnt, Brushes.Black, RectFRivQt2, FMT)
+                    e.Graphics.DrawString("[" & riga.Qt * QT4Riv & "]", fnt, Brushes.Black, RectTRivQt2, FMT)
                 End If
-
 
                 e.Graphics.DrawString(DescrizioneRivestimento, New Font("Calibri", My.Settings.DimensioneFontDistinta, FontStyle.Bold), Brushes.Black, Riga1RIV, FMT)
 
-                Dim RectRIV As New Rectangle(Riga1RIV.Left, Riga1RIV.Top, Riga1RIV.Width, 100)
-                e.Graphics.DrawRectangle(New Pen(Color.LightGray, 3), RectRIV)
+                'Dim RectRIV As New Rectangle(Riga1RIV.Left, Riga1RIV.Top, Riga1RIV.Width, 125)
+                e.Graphics.DrawRectangle(New Pen(Color.LightGray, 3), RectRivestimento)
             End If
 
             '######### INFO TIPO GABBIA ##########
@@ -679,6 +703,8 @@
         End Sub
 
         Public Sub Stampa_Distinte(sender As Object, e As Printing.PrintPageEventArgs, Riga As RigaOrdine)
+            RiempiDataSetRivestimenti()
+
             Try
                 CaricaDati(Riga)
                 Intestazione(sender, e, Riga)
@@ -697,36 +723,35 @@
             Stringa1Riv = ""
             Stringa2Riv = ""
             Stringa3Riv = ""
+            Stringa4Riv = ""
+            stringa5riv = ""
             QT1Riv = 0
             QT2Riv = 0
             QT3Riv = 0
+            QT4Riv = 0
+
+            Dim TIPO As String = riga.Tipo
 
 
+            For Each row As ModPackDBDataSet.Setup_RivestRow In SetupRiv
+                If row.Tipo = TIPO Then
 
-            Select Case riga.Tipo
-                Case "GST"
-
-                    Stringa1Riv = riga.L + 3 & " x " & riga.P + 3
+                    Stringa1Riv = riga.L + row._BX_ & " x " & riga.P + row._BY_
                     QT1Riv = 1
 
-                    Stringa2Riv = riga.L - 1 & " x " & riga.H - 2
-                    QT2Riv = 2
+                    Stringa2Riv = riga.L + row._CX_ & " x " & riga.P + row._CY_
+                    QT2Riv = 1
 
-                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 2
+                    Stringa3Riv = riga.L + row._FX_ & " x " & riga.H + row._FY_
                     QT3Riv = 2
 
+                    Stringa4Riv = riga.P + row._TX_ & " x " & riga.H + row._TY_
+                    QT4Riv = 2
 
-                Case Else
-                    'Tutti gli altri tipi di gabbie
-                    Stringa1Riv = riga.L & " x " & riga.P
-                    QT1Riv = 2
+                    If Not row.IsNoteNull Then stringa5riv = row.Note
 
-                    Stringa2Riv = riga.L - 5 & " x " & riga.H - 5
-                    QT2Riv = 2
-
-                    Stringa3Riv = riga.P - 5 & " x " & riga.H - 5
-                    QT3Riv = 2
-            End Select
+                End If
+            Next
 
         End Sub
 

@@ -135,6 +135,54 @@ Namespace My
                 Me("Nascondi") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property FullScreen() As Boolean
+            Get
+                Return CType(Me("FullScreen"),Boolean)
+            End Get
+            Set
+                Me("FullScreen") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Calibri")>  _
+        Public Property Font() As String
+            Get
+                Return CType(Me("Font"),String)
+            End Get
+            Set
+                Me("Font") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 128")>  _
+        Public Property ColoreAvviso() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("ColoreAvviso"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("ColoreAvviso") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("224, 224, 224")>  _
+        Public Property SfondoTabella() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("SfondoTabella"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("SfondoTabella") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

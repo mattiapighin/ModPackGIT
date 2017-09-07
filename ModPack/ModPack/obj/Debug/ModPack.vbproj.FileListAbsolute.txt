@@ -73,3 +73,11 @@ C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.DLG_
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_GestioneTipi.resources
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.ErrorBox.resources
 C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Frm_NoteImballo.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.FRM_SetupRivestimenti.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.FRM_TestConnessioni.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.Form_StoricoOrdini_ScegliColonne.resources
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.exe.manifest
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\bin\Debug\ModPack.application
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.TrustInfo.xml
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.exe.manifest
+C:\Users\mattia.pighin\Desktop\ModPackGIT\ModPack\ModPack\obj\Debug\ModPack.application

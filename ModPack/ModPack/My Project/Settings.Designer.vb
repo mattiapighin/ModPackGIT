@@ -519,6 +519,42 @@ Namespace My
                 Me("NoteDinamico") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0011011111111010010000000010")>  _
+        Public Property FiltroColonneOrdini() As String
+            Get
+                Return CType(Me("FiltroColonneOrdini"),String)
+            End Get
+            Set
+                Me("FiltroColonneOrdini") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property TestoIconeMain() As Boolean
+            Get
+                Return CType(Me("TestoIconeMain"),Boolean)
+            End Get
+            Set
+                Me("TestoIconeMain") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DialogConfrontoIndici() As Boolean
+            Get
+                Return CType(Me("DialogConfrontoIndici"),Boolean)
+            End Get
+            Set
+                Me("DialogConfrontoIndici") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

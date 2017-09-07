@@ -65,6 +65,7 @@ Partial Class Form_StoricoOrdini
         Me.Bt_CancellaFiltro = New System.Windows.Forms.ToolStripButton()
         Me.Bt_FiltraPerData = New System.Windows.Forms.ToolStripButton()
         Me.Bt_Refresh = New System.Windows.Forms.ToolStripButton()
+        Me.Bt_Colonne = New System.Windows.Forms.ToolStripButton()
         Me.OrdiniTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.OrdiniTableAdapter()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         CType(Me.DGW_Ordini, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -354,7 +355,7 @@ Partial Class Form_StoricoOrdini
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TxtCerca, Me.ToolStripLabel1, Me.ToolStripSeparator1, Me.Cb_Colonna, Me.Bt_Cerca, Me.Bt_CancellaFiltro, Me.Bt_FiltraPerData, Me.Bt_Refresh})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TxtCerca, Me.ToolStripLabel1, Me.ToolStripSeparator1, Me.Cb_Colonna, Me.Bt_Cerca, Me.Bt_CancellaFiltro, Me.Bt_FiltraPerData, Me.Bt_Refresh, Me.Bt_Colonne})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1186, 25)
@@ -389,7 +390,7 @@ Partial Class Form_StoricoOrdini
         Me.Bt_Cerca.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.Bt_Cerca.Name = "Bt_Cerca"
         Me.Bt_Cerca.Size = New System.Drawing.Size(23, 22)
-        Me.Bt_Cerca.Text = "ToolStripButton1"
+        Me.Bt_Cerca.Text = "AggiungiFiltro"
         Me.Bt_Cerca.ToolTipText = "Filtra"
         '
         'Bt_CancellaFiltro
@@ -419,12 +420,19 @@ Partial Class Form_StoricoOrdini
         Me.Bt_Refresh.Size = New System.Drawing.Size(23, 22)
         Me.Bt_Refresh.Text = "Refresh"
         '
+        'Bt_Colonne
+        '
+        Me.Bt_Colonne.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.Bt_Colonne.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.Bt_Colonne.Image = CType(resources.GetObject("Bt_Colonne.Image"), System.Drawing.Image)
+        Me.Bt_Colonne.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Bt_Colonne.Name = "Bt_Colonne"
+        Me.Bt_Colonne.Size = New System.Drawing.Size(23, 22)
+        Me.Bt_Colonne.Text = "Colonne"
+        '
         'OrdiniTableAdapter
         '
         Me.OrdiniTableAdapter.ClearBeforeFill = True
-        '
-        'PrintDocument1
-        '
         '
         'Form_StoricoOrdini
         '
@@ -492,4 +500,5 @@ Partial Class Form_StoricoOrdini
     Friend WithEvents Bt_FiltraPerData As ToolStripButton
     Friend WithEvents Bt_Refresh As ToolStripButton
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents Bt_Colonne As ToolStripButton
 End Class

@@ -1,15 +1,23 @@
 ﻿Public Class Form_Preferenze
 
     Private Sub Bt_FormatoStampa_Click(sender As Object, e As EventArgs) Handles Bt_FormatoStampa.Click
-        Dim PageFormat As New PageSetupDialog With {.Document = New Printing.PrintDocument, .EnableMetric = True}
+        Try
+            Dim PageFormat As New PageSetupDialog With {.Document = New Printing.PrintDocument, .EnableMetric = True, .PageSettings = My.Settings.FormatoStampa}
 
-        If Not My.Settings.FormatoStampa Is Nothing Then PageFormat.PageSettings = My.Settings.FormatoStampa
+            If PageFormat.ShowDialog = DialogResult.OK Then
+                My.Settings.FormatoStampa = PageFormat.PageSettings
+                My.Settings.Save()
+            End If
 
-        If PageFormat.ShowDialog = DialogResult.OK Then
-            My.Settings.FormatoStampa = PageFormat.PageSettings
-            My.Settings.Save()
-        End If
-
+        Catch ex As Exception
+            Errore.Show("Apertura formato stampa", ex.Message)
+            If MsgBox("Azzerare formato stampa?", vbYesNo, "Errore") = MsgBoxResult.Yes Then
+                Dim PageSetupDialog As New PageSetupDialog With {.Document = New Printing.PrintDocument, .EnableMetric = True}
+                If PageSetupDialog.ShowDialog = DialogResult.OK Then
+                    My.Settings.FormatoStampa = PageSetupDialog.PageSettings
+                End If
+            End If
+        End Try
 
     End Sub
     Private Sub CaricaSettingsEtichette()
@@ -43,6 +51,8 @@
         Ck_CheckCaricamento.Checked = My.Settings.CheckInserimentoImballo
         Ck_BiancoNero.Checked = My.Settings.FormatoStampa.Color
         CkNoteDinamico.Checked = My.Settings.NoteDinamico
+        Ck_TextMain.Checked = My.Settings.TestoIconeMain
+        CkNotificaCambioIndice.Checked = My.Settings.DialogConfrontoIndici
     End Sub
     Private Sub SalvaSettingsCK()
         My.Settings.CK_ConfermaEvaso = Ck_Evaso.Checked
@@ -51,6 +61,8 @@
         My.Settings.CheckInserimentoImballo = Ck_CheckCaricamento.Checked
         My.Settings.FormatoStampa.Color = Ck_BiancoNero.Checked
         My.Settings.NoteDinamico = CkNoteDinamico.Checked
+        My.Settings.TestoIconeMain = Ck_TextMain.Checked
+        My.Settings.DialogConfrontoIndici = CkNotificaCambioIndice.Checked
     End Sub
 
     Private Sub CaricaSettingsDistinta()
@@ -73,7 +85,6 @@
         RBexcel_nuovi.Checked = My.Settings.ListaNuoviExcel
         RBtext_nuovi.Checked = Not My.Settings.ListaNuoviExcel
         TxtScegliExcel.Text = My.Settings.ExcelPath
-        CkDeveloper.Checked = My.Settings.Developer
     End Sub
     Private Sub SalvaRiferimenti()
         If Not String.IsNullOrEmpty(Txt_utente.Text) Then My.Settings.Utente = Txt_utente.Text
@@ -81,15 +92,35 @@
         My.Settings.ListaNuoviExcel = RBexcel_nuovi.Checked
         My.Settings.ListaNuoviExcel = Not RBtext_nuovi.Checked
         If Not String.IsNullOrEmpty(TxtScegliExcel.Text) Then My.Settings.ExcelPath = TxtScegliExcel.Text
-        My.Settings.Developer = CkDeveloper.Checked
     End Sub
 
 
     Private Sub Form_Preferenze_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CaricaSettingsEtichette()
-        CaricaSettingsCK()
-        CaricaSettingsDistinta()
-        CaricaRiferimenti()
+        Try
+            CaricaSettingsEtichette()
+        Catch ex As Exception
+            Errore.Show("Caricamento settings etichette", ex.Message)
+        End Try
+
+        Try
+            CaricaSettingsCK()
+        Catch ex As Exception
+            Errore.Show("Caricamento settings CheckBox", ex.Message)
+        End Try
+
+        Try
+            CaricaSettingsDistinta()
+        Catch ex As Exception
+            Errore.Show("Caricamento settings Distinta", ex.Message)
+        End Try
+
+        Try
+            CaricaRiferimenti()
+        Catch ex As Exception
+            Errore.Show("Caricamento riferimenti", ex.Message)
+        End Try
+
+        Box_Developer.Enabled = My.Settings.Developer
 
     End Sub
     Private Sub Bt_Salva_Click(sender As Object, e As EventArgs) Handles Bt_Salva.Click
@@ -112,22 +143,7 @@
     End Sub
 
     Private Sub Bt_TestConnessioni_Click(sender As Object, e As EventArgs) Handles Bt_TestConnessioni.Click
-        Dim xml = XDocument.Load(My.Settings.XMLpath)
-        Dim Ip_produzione As String = xml.<Data>.<IP_Produzione>.Value
-        Dim Ip_sezionatrice As String = xml.<Data>.<IP_Sezionatrice>.Value
-
-        If My.Computer.Network.Ping(Ip_produzione) Then
-            MsgBox("PC Produzione connesso", vbOKOnly, "Test")
-        Else
-            MsgBox("PC Produzione disconnesso", vbCritical, "Test")
-        End If
-
-
-        If My.Computer.Network.Ping(Ip_sezionatrice) Then
-            MsgBox("PC Sezionatrice connesso", vbOKOnly, "Test")
-        Else
-            MsgBox("PC Sezionatrice disconnesso", vbCritical, "Test")
-        End If
+        FRM_TestConnessioni.Show()
     End Sub
 
     Private Sub Bt_ScegliExcel_Click(sender As Object, e As EventArgs) Handles Bt_ScegliExcel.Click
@@ -237,5 +253,72 @@
 
     Private Sub Bt_Log_Click(sender As Object, e As EventArgs) Handles Bt_Log.Click
         Process.Start(My.Settings.FileLogPath)
+    End Sub
+
+    Private Sub BT_SetupRives_Click(sender As Object, e As EventArgs) Handles BT_SetupRives.Click
+        FRM_SetupRivestimenti.Show()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (3)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
+                If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (2)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
+                    If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (1)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
+
+                    SQL.Query("TRUNCATE TABLE Distinta")
+                            SQL.Query("TRUNCATE TABLE Imballi")
+                            SQL.Query("TRUNCATE TABLE Indici")
+                            SQL.Query("TRUNCATE TABLE Ordini")
+                            SQL.Query("TRUNCATE TABLE NoteImballi")
+                            SQL.Query("TRUNCATE TABLE Memo")
+                            IO.File.Delete(My.Settings.XMLpath)
+                            Debug.WriteLine("Truncato tutto")
+                            XML.CreaXML()
+
+                End If
+                End If
+            End If
+
+
+
+    End Sub
+
+    Private Sub Bt_InviaQuery_Click(sender As Object, e As EventArgs) Handles Bt_InviaQuery.Click
+        Try
+            Dim Query As String = InputBox("Query", "Query", "")
+
+            If Not String.IsNullOrEmpty(Query) Then
+                SQL.Query(Query)
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+
+
+    Private Sub Form_Preferenze_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.Control And e.Alt And e.KeyCode = Keys.F10 Then
+            My.Settings.Developer = Not My.Settings.Developer
+            My.Settings.Save()
+            Box_Developer.Enabled = My.Settings.Developer
+            If My.Settings.Developer = True Then
+                MsgBox("Opzioni sviluppatore attivate!", vbInformation, "Developer")
+            Else
+                MsgBox("Opzioni sviluppatore disattivate!", vbInformation, "Developer")
+            End If
+
+        End If
+    End Sub
+
+    Private Sub Bt_ResetSettings_Click(sender As Object, e As EventArgs) Handles Bt_ResetSettings.Click
+
+        If MsgBox("Reimpostare i settings a default?", vbYesNo, "Reset Settings") = MsgBoxResult.Yes Then
+            My.Settings.Reset()
+            MsgBox("Reset completato!", vbInformation, "Reset Settings")
+        End If
+
     End Sub
 End Class

@@ -24,7 +24,7 @@ Partial Class DLG_ConfrontaIndici
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DLG_ConfrontaIndici))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
@@ -51,6 +51,7 @@ Partial Class DLG_ConfrontaIndici
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -73,7 +74,7 @@ Partial Class DLG_ConfrontaIndici
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(119, 49)
         Me.OK_Button.TabIndex = 0
-        Me.OK_Button.Text = "   Crea Nuovo"
+        Me.OK_Button.Text = "   Cerca Nuovo"
         Me.OK_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.OK_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         Me.ToolTip1.SetToolTip(Me.OK_Button, "Verrà creato un imballo come da riga ordine. L'indice verrà rimosso dal vecchio i" &
@@ -105,14 +106,14 @@ Partial Class DLG_ConfrontaIndici
         Me.DGW_Confronto.AllowUserToResizeColumns = False
         Me.DGW_Confronto.AllowUserToResizeRows = False
         Me.DGW_Confronto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGW_Confronto.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGW_Confronto.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGW_Confronto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_Confronto.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Imballo, Me.L, Me.P, Me.H, Me.Tipo, Me.Zoccoli, Me.Rivestimento, Me.TipoRivestimento, Me.HT, Me.DT, Me.BM, Me.Diagonali})
         Me.DGW_Confronto.Location = New System.Drawing.Point(8, 111)
@@ -204,6 +205,7 @@ Partial Class DLG_ConfrontaIndici
         '
         'Lbl_Info
         '
+        Me.Lbl_Info.BackColor = System.Drawing.Color.White
         Me.Lbl_Info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl_Info.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lbl_Info.Location = New System.Drawing.Point(8, 49)
@@ -215,6 +217,7 @@ Partial Class DLG_ConfrontaIndici
         '
         'Lbl_Info1
         '
+        Me.Lbl_Info1.BackColor = System.Drawing.Color.White
         Me.Lbl_Info1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Lbl_Info1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lbl_Info1.Location = New System.Drawing.Point(8, 9)
@@ -230,6 +233,7 @@ Partial Class DLG_ConfrontaIndici
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FloralWhite
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(1058, 287)
         Me.ControlBox = False

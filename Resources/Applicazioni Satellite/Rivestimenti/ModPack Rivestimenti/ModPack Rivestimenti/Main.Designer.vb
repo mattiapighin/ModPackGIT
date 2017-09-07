@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Main
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Main
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -28,6 +28,8 @@ Partial Class Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.DGW_Lista = New System.Windows.Forms.DataGridView()
         Me.Colonna = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Ordine = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Bt_Mostra = New System.Windows.Forms.Button()
         Me.Bt_Elimina = New System.Windows.Forms.Button()
         Me.ListaFiles = New System.Windows.Forms.ListBox()
@@ -52,7 +54,7 @@ Partial Class Main
         Me.DGW_Lista.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DGW_Lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGW_Lista.ColumnHeadersVisible = False
-        Me.DGW_Lista.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Colonna})
+        Me.DGW_Lista.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Colonna, Me.ID, Me.Ordine})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -64,7 +66,8 @@ Partial Class Main
         Me.DGW_Lista.Location = New System.Drawing.Point(221, 12)
         Me.DGW_Lista.Name = "DGW_Lista"
         Me.DGW_Lista.RowHeadersVisible = False
-        Me.DGW_Lista.Size = New System.Drawing.Size(778, 510)
+        Me.DGW_Lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.DGW_Lista.Size = New System.Drawing.Size(817, 530)
         Me.DGW_Lista.TabIndex = 9
         '
         'Colonna
@@ -72,11 +75,23 @@ Partial Class Main
         Me.Colonna.HeaderText = "Colonna"
         Me.Colonna.Name = "Colonna"
         '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.Visible = False
+        '
+        'Ordine
+        '
+        Me.Ordine.HeaderText = "Ordine"
+        Me.Ordine.Name = "Ordine"
+        Me.Ordine.Visible = False
+        '
         'Bt_Mostra
         '
         Me.Bt_Mostra.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Bt_Mostra.Image = CType(resources.GetObject("Bt_Mostra.Image"), System.Drawing.Image)
-        Me.Bt_Mostra.Location = New System.Drawing.Point(175, 482)
+        Me.Bt_Mostra.Location = New System.Drawing.Point(175, 502)
         Me.Bt_Mostra.Name = "Bt_Mostra"
         Me.Bt_Mostra.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Mostra.TabIndex = 8
@@ -86,7 +101,7 @@ Partial Class Main
         '
         Me.Bt_Elimina.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Bt_Elimina.Image = CType(resources.GetObject("Bt_Elimina.Image"), System.Drawing.Image)
-        Me.Bt_Elimina.Location = New System.Drawing.Point(129, 482)
+        Me.Bt_Elimina.Location = New System.Drawing.Point(129, 502)
         Me.Bt_Elimina.Name = "Bt_Elimina"
         Me.Bt_Elimina.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Elimina.TabIndex = 7
@@ -99,14 +114,15 @@ Partial Class Main
         Me.ListaFiles.FormattingEnabled = True
         Me.ListaFiles.Location = New System.Drawing.Point(12, 12)
         Me.ListaFiles.Name = "ListaFiles"
-        Me.ListaFiles.Size = New System.Drawing.Size(203, 459)
+        Me.ListaFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.ListaFiles.Size = New System.Drawing.Size(203, 472)
         Me.ListaFiles.TabIndex = 6
         '
         'Bt_Opzioni
         '
         Me.Bt_Opzioni.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Bt_Opzioni.Image = CType(resources.GetObject("Bt_Opzioni.Image"), System.Drawing.Image)
-        Me.Bt_Opzioni.Location = New System.Drawing.Point(12, 482)
+        Me.Bt_Opzioni.Location = New System.Drawing.Point(12, 502)
         Me.Bt_Opzioni.Name = "Bt_Opzioni"
         Me.Bt_Opzioni.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Opzioni.TabIndex = 5
@@ -125,7 +141,7 @@ Partial Class Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1011, 527)
+        Me.ClientSize = New System.Drawing.Size(1050, 547)
         Me.Controls.Add(Me.DGW_Lista)
         Me.Controls.Add(Me.Bt_Mostra)
         Me.Controls.Add(Me.Bt_Elimina)
@@ -145,6 +161,8 @@ Partial Class Main
     Friend WithEvents ListaFiles As ListBox
     Friend WithEvents Bt_Opzioni As Button
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Colonna As DataGridViewTextBoxColumn
     Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents Colonna As DataGridViewTextBoxColumn
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Ordine As DataGridViewTextBoxColumn
 End Class

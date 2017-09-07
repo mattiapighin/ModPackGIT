@@ -287,8 +287,8 @@ Public Class Form_Imballi
 
 
     Private Sub DgwImballi_SelectionChanged(sender As Object, e As EventArgs) Handles DgwImballi.SelectionChanged
-        If My.Settings.NoteDinamico = True Then
-            If DgwImballi.SelectedRows.Count > 0 Then
+        If DgwImballi.SelectedRows.Count > 0 Then
+            If My.Settings.NoteDinamico = True Then
                 Dim FontG As New Font(Bt_Note.Font, FontStyle.Bold)
                 Dim Font As New Font(Bt_Note.Font, FontStyle.Regular)
                 Dim I As Integer = 0
@@ -307,6 +307,37 @@ Public Class Form_Imballi
                     Bt_Note.Text = "Note (" & I & ")"
                 End If
             End If
+            LBL_Descrizione.Text = Descrizione(DgwImballi.CurrentRow)
+        End If
+
+    End Sub
+
+    'LBL DESCRIZIONE
+    Private Function Descrizione(ByVal Riga As DataGridViewRow) As String
+        With Riga
+
+            Dim Desc As String = "CM " & .Cells(2).Value & " x " & .Cells(3).Value
+            If Not .Cells(4).Value = 0 Then Desc += " x " & .Cells(4).Value
+            Desc += " " & .Cells(5).Value
+            Desc += " " & .Cells(6).Value
+            If Not String.IsNullOrEmpty(.Cells(8).Value) Then Desc += " (" & .Cells(8).Value & " - M2 " & .Cells(16).Value & ")"
+            Desc += " M3 " & .Cells(17).Value
+
+            Return Desc
+        End With
+    End Function
+    Private Sub LBL_Descrizione_MouseDown(sender As Object, e As MouseEventArgs) Handles LBL_Descrizione.MouseDown
+        If e.Button = MouseButtons.Right Then
+            CM_Copia.Show(MousePosition)
+        End If
+    End Sub
+    Private Sub CopiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiaToolStripMenuItem.Click
+        Clipboard.SetText(LBL_Descrizione.Text)
+        LBL_Descrizione.Text = "Descrizione copiata!"
+    End Sub
+    Private Sub CopiaToolStripMenuItem_MouseLeave(sender As Object, e As EventArgs) Handles LBL_Descrizione.MouseLeave
+        If DgwImballi.SelectedRows.Count > 0 Then
+            LBL_Descrizione.Text = Descrizione(DgwImballi.CurrentRow)
         End If
     End Sub
 End Class

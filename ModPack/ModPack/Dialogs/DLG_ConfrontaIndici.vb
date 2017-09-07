@@ -21,7 +21,7 @@ Public Class DLG_ConfrontaIndici
     Public Sub MostraDifferenze(NomeVecchio As String, Vecchio As RigaOrdineINPUT, NomeNuovo As String, Nuovo As RigaOrdineINPUT)
         DGW_Confronto.Rows.Clear()
         Dim RowVecio() = {NomeVecchio, Vecchio.L, Vecchio.P, Vecchio.H, Vecchio.Tipo, Vecchio.Zoccoli, Vecchio.Rivestimento, Vecchio.TipoRivestimento, Vecchio.HT, Vecchio.DT, Vecchio.BM, Vecchio.Diagonali}
-        Dim RowNuovo() = {NomeNuovo, Nuovo.L, Nuovo.P, Nuovo.H, Nuovo.Tipo, Nuovo.Zoccoli, Nuovo.Rivestimento, Nuovo.TipoRivestimento, Nuovo.HT, Nuovo.DT, Nuovo.BM, Nuovo.Diagonali}
+        Dim RowNuovo() = {"", Nuovo.L, Nuovo.P, Nuovo.H, Nuovo.Tipo, Nuovo.Zoccoli, Nuovo.Rivestimento, Nuovo.TipoRivestimento, Nuovo.HT, Nuovo.DT, Nuovo.BM, Nuovo.Diagonali}
 
         Lbl_Info1.Text = "D: [" & Nuovo.Codice & "] C: [" & Nuovo.Commessa & "] Pz. " & Nuovo.Qt
 
@@ -49,7 +49,7 @@ Public Class DLG_ConfrontaIndici
     End Sub
 
     Private Sub DLG_ConfrontaIndici_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Stringa As String = "L'indice " & NuovaRiga.Indice & " non corrisponde all'imballo " & VecchioNome & " a cui era associato." & vbCrLf & "Vuoi creare un imballo nuovo (" & NuovoNome & ") o mantenere il vecchio?"
+        Dim Stringa As String = "L'indice " & NuovaRiga.Indice & " non corrisponde all'imballo " & VecchioNome & " a cui era stato associato." & vbCrLf & "Vuoi cercare l'imballo nuovo (" & NuovoNome & ") o mantenere il vecchio?"
 
         Lbl_Info.Text = Stringa
     End Sub
