@@ -1,7 +1,7 @@
 ﻿Public Class Form_Memo
     Private Sub RbData_CheckedChanged(sender As Object, e As EventArgs) Handles RbData.CheckedChanged
         DatePicker.Enabled = RbData.Checked
-        TxtCodice.Enabled = RbCodice.Checked
+
     End Sub
 
     Private Sub Bt_Ok_Click(sender As Object, e As EventArgs) Handles Bt_Ok.Click
@@ -13,7 +13,7 @@
                 If RbData.Checked = True Then
                     Table.Insert(DatePicker.Value, TxtMemo.Text, Nothing)
                 Else
-                    Table.Insert(Nothing, TxtMemo.Text, TxtCodice.Text)
+                    Table.Insert(Nothing, TxtMemo.Text, "")
                 End If
 
                 Table.Update(DS)
@@ -21,7 +21,7 @@
                 MsgBox("Memo salvato!", vbInformation, "Memo")
 
                 DatePicker.Value = Date.Today
-                TxtCodice.Text = ""
+
                 TxtMemo.Text = ""
 
             Catch ex As Exception

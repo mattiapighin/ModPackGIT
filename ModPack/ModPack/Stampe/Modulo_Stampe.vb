@@ -33,10 +33,10 @@
         Public Sub CheckList(sender As Object, e As Printing.PrintPageEventArgs, Ordine As String, DS As DataSet)
             Dim FMT As StringFormat = Stampe.FMT
 
-            Dim FontTitoloBold As New Font("Calibri", 16, FontStyle.Bold)
-            Dim FontTitolo As New Font("Calibri", 16)
-            Dim FontRighe As New Font("Calibri", 8)
-            Dim FontEvaso As New Font("Calibri", 8, FontStyle.Strikeout)
+            Dim FontTitoloBold As New Font("Calibri", 14, FontStyle.Bold)
+            Dim FontTitolo As New Font("Calibri", 10)
+            Dim FontRighe As New Font("Calibri", 12)
+            Dim FontEvaso As New Font("Calibri", 12, FontStyle.Strikeout)
 
             Dim RectLogo As New Rectangle(e.MarginBounds.Left, e.MarginBounds.Top, 200, 50)
             Dim RectTitolo As New Rectangle(RectLogo.Right, e.MarginBounds.Top, e.MarginBounds.Width - 350, 50)

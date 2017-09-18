@@ -51,6 +51,10 @@
                     .WriteValue("45")
                     .WriteEndElement()
 
+                    .WriteStartElement("MultiUtente")
+                    .WriteValue("False")
+                    .WriteEndElement()
+
                     .WriteStartElement("Pulizia_Ordine")
                     .WriteValue("True")
                     .WriteEndElement()

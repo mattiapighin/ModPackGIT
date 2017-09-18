@@ -104,5 +104,10 @@ Public Class Form_Imballi_Filtro
         CaricaDati()
     End Sub
 
+    Private Sub NU_L_Da_Enter(sender As Object, e As EventArgs) Handles NU_L_Da.Enter, NU_L_A.Enter, NU_P_Da.Enter, NU_P_A.Enter, NU_H_Da.Enter, NU_H_A.Enter, NU_Prezzo_DA.Enter, NU_Prezzo_A.Enter
+        Dim NU As NumericUpDown = sender
+        NU.Select(0, NU.Value.ToString.Length)
+
+    End Sub
 
 End Class

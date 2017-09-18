@@ -53,6 +53,7 @@
         CkNoteDinamico.Checked = My.Settings.NoteDinamico
         Ck_TextMain.Checked = My.Settings.TestoIconeMain
         CkNotificaCambioIndice.Checked = My.Settings.DialogConfrontoIndici
+        CK_DescrizioneClipboard.Checked = My.Settings.NumeroOrdineClipboard
     End Sub
     Private Sub SalvaSettingsCK()
         My.Settings.CK_ConfermaEvaso = Ck_Evaso.Checked
@@ -63,6 +64,7 @@
         My.Settings.NoteDinamico = CkNoteDinamico.Checked
         My.Settings.TestoIconeMain = Ck_TextMain.Checked
         My.Settings.DialogConfrontoIndici = CkNotificaCambioIndice.Checked
+        My.Settings.NumeroOrdineClipboard = CK_DescrizioneClipboard.Checked
     End Sub
 
     Private Sub CaricaSettingsDistinta()

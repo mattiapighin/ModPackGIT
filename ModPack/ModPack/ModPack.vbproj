@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -292,6 +292,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModPackDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Varie\Moduli Vari\ControlloMultiUtente.vb" />
     <Compile Include="Varie\Moduli Vari\Errore.vb" />
     <Compile Include="Varie\Moduli Vari\Module_Barcode.vb" />
     <Compile Include="Controlli\Module_Controlli.vb" />

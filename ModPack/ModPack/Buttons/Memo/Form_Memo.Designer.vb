@@ -24,9 +24,7 @@ Partial Class Form_Memo
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Memo))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TxtCodice = New System.Windows.Forms.TextBox()
         Me.DatePicker = New System.Windows.Forms.DateTimePicker()
-        Me.RbCodice = New System.Windows.Forms.RadioButton()
         Me.RbData = New System.Windows.Forms.RadioButton()
         Me.TxtMemo = New System.Windows.Forms.TextBox()
         Me.Bt_Agenda = New System.Windows.Forms.Button()
@@ -36,24 +34,14 @@ Partial Class Form_Memo
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TxtCodice)
         Me.GroupBox1.Controls.Add(Me.DatePicker)
-        Me.GroupBox1.Controls.Add(Me.RbCodice)
         Me.GroupBox1.Controls.Add(Me.RbData)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(296, 90)
+        Me.GroupBox1.Size = New System.Drawing.Size(296, 53)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Ricordami per"
-        '
-        'TxtCodice
-        '
-        Me.TxtCodice.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtCodice.Location = New System.Drawing.Point(81, 54)
-        Me.TxtCodice.Name = "TxtCodice"
-        Me.TxtCodice.Size = New System.Drawing.Size(200, 20)
-        Me.TxtCodice.TabIndex = 3
         '
         'DatePicker
         '
@@ -61,17 +49,6 @@ Partial Class Form_Memo
         Me.DatePicker.Name = "DatePicker"
         Me.DatePicker.Size = New System.Drawing.Size(200, 20)
         Me.DatePicker.TabIndex = 1
-        '
-        'RbCodice
-        '
-        Me.RbCodice.AutoSize = True
-        Me.RbCodice.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.RbCodice.Location = New System.Drawing.Point(14, 56)
-        Me.RbCodice.Name = "RbCodice"
-        Me.RbCodice.Size = New System.Drawing.Size(58, 17)
-        Me.RbCodice.TabIndex = 2
-        Me.RbCodice.Text = "Codice"
-        Me.RbCodice.UseVisualStyleBackColor = True
         '
         'RbData
         '
@@ -89,7 +66,7 @@ Partial Class Form_Memo
         'TxtMemo
         '
         Me.TxtMemo.BackColor = System.Drawing.SystemColors.Info
-        Me.TxtMemo.Location = New System.Drawing.Point(12, 108)
+        Me.TxtMemo.Location = New System.Drawing.Point(12, 71)
         Me.TxtMemo.Multiline = True
         Me.TxtMemo.Name = "TxtMemo"
         Me.TxtMemo.Size = New System.Drawing.Size(296, 228)
@@ -100,7 +77,7 @@ Partial Class Form_Memo
         Me.Bt_Agenda.FlatAppearance.BorderSize = 0
         Me.Bt_Agenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Agenda.Image = CType(resources.GetObject("Bt_Agenda.Image"), System.Drawing.Image)
-        Me.Bt_Agenda.Location = New System.Drawing.Point(12, 342)
+        Me.Bt_Agenda.Location = New System.Drawing.Point(12, 305)
         Me.Bt_Agenda.Name = "Bt_Agenda"
         Me.Bt_Agenda.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Agenda.TabIndex = 4
@@ -111,7 +88,7 @@ Partial Class Form_Memo
         Me.Bt_Ok.FlatAppearance.BorderSize = 0
         Me.Bt_Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Bt_Ok.Image = CType(resources.GetObject("Bt_Ok.Image"), System.Drawing.Image)
-        Me.Bt_Ok.Location = New System.Drawing.Point(268, 342)
+        Me.Bt_Ok.Location = New System.Drawing.Point(268, 305)
         Me.Bt_Ok.Name = "Bt_Ok"
         Me.Bt_Ok.Size = New System.Drawing.Size(40, 40)
         Me.Bt_Ok.TabIndex = 2
@@ -121,7 +98,7 @@ Partial Class Form_Memo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(324, 393)
+        Me.ClientSize = New System.Drawing.Size(324, 355)
         Me.Controls.Add(Me.Bt_Agenda)
         Me.Controls.Add(Me.Bt_Ok)
         Me.Controls.Add(Me.TxtMemo)
@@ -139,9 +116,7 @@ Partial Class Form_Memo
     End Sub
 
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TxtCodice As TextBox
     Friend WithEvents DatePicker As DateTimePicker
-    Friend WithEvents RbCodice As RadioButton
     Friend WithEvents RbData As RadioButton
     Friend WithEvents TxtMemo As TextBox
     Friend WithEvents Bt_Ok As Button

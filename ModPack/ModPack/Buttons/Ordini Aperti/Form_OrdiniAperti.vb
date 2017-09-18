@@ -19,7 +19,7 @@ Public Class Form_OrdiniAperti
         Bt_CheckList.Enabled = False
         Bt_ListaRivestimenti.Enabled = False
         Bt_QrCodes.Enabled = False
-
+        Bt_Evaso.Enabled = False
     End Sub
     Private Sub SbloccaButtons()
         Bt_Etichette.Enabled = True
@@ -28,6 +28,7 @@ Public Class Form_OrdiniAperti
         Bt_CheckList.Enabled = True
         Bt_ListaRivestimenti.Enabled = True
         Bt_QrCodes.Enabled = True
+        Bt_Evaso.Enabled = True
     End Sub
 
     '### Qui avvengono le operazioni più importanti ###
@@ -39,6 +40,10 @@ Public Class Form_OrdiniAperti
     '        MsgBox(Riga.Cells("Imballo").Value)
     'Next
 
+    Private Sub SSwrite(text As String)
+        TX_Ss.Text = text
+
+    End Sub
     Private Sub Form_OrdiniAperti_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CaricaListaOrdiniAperti()
         CaricaTuttiNonEvasi()
@@ -155,6 +160,22 @@ Public Class Form_OrdiniAperti
         End If
     End Sub
 
+    Private Function CopiaDescrizione(row As DataGridViewRow) As String
+        Dim Descrizione As String = "D " & row.Cells(6).Value & " C " & row.Cells(7).Value
+        If DGW_OrdiniAperti.SelectedCells.Count > 0 Then
+            If My.Settings.NumeroOrdineClipboard = True Then Descrizione += " (Ordine: " & DGW_OrdiniAperti.CurrentCell.Value & ")"
+        End If
+
+        SSwrite(Descrizione & " evaso!")
+
+        If Descrizione.Length > 60 Then
+            Descrizione = Descrizione.Remove(58)
+            Descrizione += ".."
+        End If
+
+        Return Descrizione
+    End Function
+
     Private Sub Bt_Evaso_Click(sender As Object, e As EventArgs) Handles Bt_Evaso.Click
         If Not (Control.ModifierKeys = Keys.Control) Then
             For Each Row As DataGridViewRow In Dgw_Ordine.SelectedRows
@@ -163,11 +184,13 @@ Public Class Form_OrdiniAperti
                         SQL.Query("UPDATE Ordini SET Evaso = 'True' WHERE Id = " & Row.Cells("Id").Value)
                         LOG.Write("Evaso imballo " & Row.Cells("Imballo").Value)
                         Row.Cells("Evaso").Value = True
+                        Clipboard.SetText(CopiaDescrizione(Row))
                     End If
                 Else
                     SQL.Query("UPDATE Ordini SET Evaso = 'True' WHERE Id = " & Row.Cells("Id").Value)
                     LOG.Write("Evaso imballo " & Row.Cells("Imballo").Value)
                     Row.Cells("Evaso").Value = True
+                    Clipboard.SetText(CopiaDescrizione(Row))
                 End If
             Next
         Else
@@ -175,6 +198,7 @@ Public Class Form_OrdiniAperti
                 SQL.Query("UPDATE Ordini SET Evaso = 'False' WHERE Id = " & Row.Cells("Id").Value)
                 LOG.Write("Non più evaso imballo " & Row.Cells("Imballo").Value)
                 Row.Cells("Evaso").Value = False
+                Clipboard.SetText(CopiaDescrizione(Row))
             Next
         End If
         ColoraEvasi()
@@ -223,6 +247,8 @@ Public Class Form_OrdiniAperti
 
                 Print_ConfermaOrdine.DocumentName = "CO" & Ordine
                 Print_ConfermaOrdine.Print()
+
+                SSwrite("Conferma d'ordine stampata " & Ordine)
             End If
         Else
             MsgBox("Selezionare prima un'ordine nella lista di sinistra", vbInformation, "Attenzione")
@@ -552,5 +578,9 @@ Public Class Form_OrdiniAperti
 
         End If
 
+    End Sub
+
+    Private Sub Dgw_Ordine_MouseEnter(sender As Object, e As EventArgs) Handles Dgw_Ordine.MouseEnter
+        SSwrite("")
     End Sub
 End Class

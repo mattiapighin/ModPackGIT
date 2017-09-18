@@ -1,4 +1,5 @@
-﻿Imports System.Xml
+﻿Imports System.ComponentModel
+Imports System.Xml
 
 Public Class Main
 
@@ -45,7 +46,6 @@ Public Class Main
         End If
     End Sub
 
-
     Public Sub CaricaMemo()
         Try
             Using MemoTable As New ModPackDBDataSetTableAdapters.MemoTableAdapter
@@ -90,6 +90,7 @@ Public Class Main
             Mostra_Nascondi_Testo()
 
             If My.Settings.Utente = "Nuovo Utente" Then
+                'Quando nuova installazione oppure se si vuole resettare le impostazioni
                 Dim Utente As String = ""
                 Utente = InputBox("Inserire nome utente", "Nuovo Utente", System.Environment.UserName)
                 If Not String.IsNullOrEmpty(Utente) Then My.Settings.Utente = Utente
@@ -112,16 +113,13 @@ Public Class Main
                     .Etichette_MargineLeft = 5
                     .Etichette_MargineRight = 5
                     .Etichette_MargineTop = 5
-
                 End With
-
-
 
                 My.Settings.Save()
                 If MsgBox("Impostare subito le preferenze?", vbYesNo, "Preferenze") = MsgBoxResult.Yes Then Form_Preferenze.ShowDialog()
             End If
 
-                If Not My.Computer.FileSystem.DirectoryExists(My.Settings.Root & "\Disegni") Then My.Computer.FileSystem.CreateDirectory(My.Settings.Root & "\Disegni")
+            If Not My.Computer.FileSystem.DirectoryExists(My.Settings.Root & "\Disegni") Then My.Computer.FileSystem.CreateDirectory(My.Settings.Root & "\Disegni")
 
             If Not My.Computer.FileSystem.FileExists(My.Settings.FileLogPath) Then
                 IO.File.Create(My.Settings.FileLogPath)
@@ -136,7 +134,7 @@ Public Class Main
 
             XML.CreaXML()
 
-            'LOG.Write("Inizio sessione")
+            LOG.Write("Inizio sessione " & System.Environment.UserName)
             CaricaMemo()
             SQL.PuliziaOrdini() 'Se attivo elimina tutti gli ordini prima di una certa data (default false)
             My.Settings.Scarto = SQL.GetPrezzoMateriale("SCART") 'salva in memoria la percentuale di scarto in modo da non dover fare la query ogni volta
@@ -165,7 +163,6 @@ Public Class Main
             Errore.Show("Drag&Drop \ Main", ex.Message)
         End Try
     End Sub
-
     Private Sub Main_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
         Try
             Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
@@ -184,7 +181,6 @@ Public Class Main
         End Try
     End Sub
 
-
     Private Sub CaricaOrdiniAperti()
         OrdiniTree.Nodes.Clear()
         Try
@@ -192,34 +188,56 @@ Public Class Main
                 Using DS As New ModPackDBDataSet.OrdiniDataTable
                     Table.Fill(DS)
 
-                    Dim names = From row In DS.AsEnumerable()
-                                Select row.Field(Of String)("Ordine") Distinct
+                    Dim Ordini = From row In DS.AsEnumerable()
+                                 Select row.Field(Of String)("Ordine") Distinct
 
                     Dim I As Integer = 0
 
-                    For Each Ordine As String In names
+                    For Each Ordine As String In Ordini
 
                         Dim Evaso = True
                         Dim row() As DataRow = DS.Select("Ordine = '" & Ordine & "'")
 
-                        'Prima scorre tutto l'ordine per cercare se ci sono imballi non evasi
-
                         For K = 0 To row.Length - 1
+                            'Se in tutto l'ordine c'è almeno un imballo inevaso prosegue
                             If row(K)(26) = False Then Evaso = False
                         Next
 
-
                         If Evaso = False Then
+                            'Se esiste un imballo inevaso carica il nodo Ordine
                             OrdiniTree.Nodes.Add(Ordine)
+
                             For K = 0 To row.Length - 1
+                                'E poi carica gli imballi inevasi
                                 If row(K)(26) = False Then
                                     OrdiniTree.Nodes(I).Nodes.Add(row(K)(3) & "  (" & row(K)(5) & ")" & "  (" & row(K)(7) & ")  (" & row(K)(8) & ")")
-                                    'Try
-                                    'non va un cazzo è inutile
-                                    ' If row(K)(17) < Date.Today.Date And row(K)(26) = False Then OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Red Else OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
-                                    'Catch ex As Exception
-                                    'Errore.Show("Evidenziare scaduti \ Treeview", ex.Message)
-                                    'End Try
+                                    OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
+
+                                    If row(K)(24) = False Then
+                                        'Se non è stampato icona "new"
+                                        OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.SaddleBrown
+                                        OrdiniTree.Nodes(I).Nodes(K).ImageIndex = 4
+                                        OrdiniTree.Nodes(I).Nodes(K).SelectedImageIndex = 4
+                                    Else
+                                        'Se è stampato icona "attesa"
+                                        OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Blue
+                                        OrdiniTree.Nodes(I).Nodes(K).ImageIndex = 1
+                                        OrdiniTree.Nodes(I).Nodes(K).SelectedImageIndex = 1
+                                    End If
+
+                                    If row(K)(25) = True Then
+                                        'Se è in produzione icona "lavoro"
+                                        OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Black
+                                        OrdiniTree.Nodes(I).Nodes(K).ImageIndex = 2
+                                        OrdiniTree.Nodes(I).Nodes(K).SelectedImageIndex = 2
+                                    End If
+
+                                Else
+                                    OrdiniTree.Nodes(I).Nodes.Add(row(K)(3) & "  (" & row(K)(5) & ")" & "  (" & row(K)(7) & ")  (" & row(K)(8) & ")")
+                                    OrdiniTree.Nodes(I).Nodes(K).ForeColor = Color.Green
+                                    'Se è evaso icona check
+                                    OrdiniTree.Nodes(I).Nodes(K).ImageIndex = 3
+                                    OrdiniTree.Nodes(I).Nodes(K).SelectedImageIndex = 3
                                 End If
                             Next
                             I += 1

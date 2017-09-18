@@ -9,13 +9,22 @@ Namespace My
     ' NetworkAvailabilityChanged: generato quando la connessione di rete viene connessa o disconnessa.
 
     Partial Friend Class MyApplication
+
+        Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+            If MultiUtente.Controllo = True Then
+                MsgBox("Un altro utente sta utilizzando l'applicazione (" & IO.File.ReadAllText(My.Settings.Root & "\usage") & ")", vbInformation, "Multiutente disattivato")
+                e.Cancel = True
+            Else
+                MultiUtente.CreaFile()
+            End If
+        End Sub
+
+        Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
+            MultiUtente.CancellaFile()
+        End Sub
+
         Private Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException
-            Try
-
-            Catch ex As Exception
-                MsgBox(e.Exception.Message)
-            End Try
-
+            MultiUtente.CancellaFile()
         End Sub
     End Class
 End Namespace

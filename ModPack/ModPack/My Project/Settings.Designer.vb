@@ -555,6 +555,18 @@ Namespace My
                 Me("DialogConfrontoIndici") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property NumeroOrdineClipboard() As Boolean
+            Get
+                Return CType(Me("NumeroOrdineClipboard"),Boolean)
+            End Get
+            Set
+                Me("NumeroOrdineClipboard") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
