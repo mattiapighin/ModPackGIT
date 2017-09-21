@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModPack.exe" size="5001168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModPack.exe" size="5005776">
       <assemblyIdentity name="ModPack" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XbPw84dtu8b0er9UvpddovG9M6/i4WhrKBG06Iq+gJg=</dsig:DigestValue>
+        <dsig:DigestValue>+sDTV30Sbbeh8mHgC4d2WBV7zpPwuyFNUm7bJCqY52U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -81,7 +81,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>FOUk5+Pz77Ju36K2GZ2hKI57SXL0I9ROLnhCTciN/ig=</dsig:DigestValue>
+      <dsig:DigestValue>xpZsyxyWrKlbBUti6uZh4L2NURmm36xIMZ0HTpaReLU=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

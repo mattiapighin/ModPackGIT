@@ -96,13 +96,18 @@ Public Class Main
                 If Not String.IsNullOrEmpty(Utente) Then My.Settings.Utente = Utente
 
                 If MsgBox("Azzerare formato stampa?", vbYesNo, "Nuovo Utente") = MsgBoxResult.Yes Then
-                    Dim PageSetupDialog As New PageSetupDialog With {.Document = New Printing.PrintDocument, .EnableMetric = True}
-                    If PageSetupDialog.ShowDialog = DialogResult.OK Then
-                        My.Settings.FormatoStampa = PageSetupDialog.PageSettings
-                    End If
-                End If
+                    Dim DocumentoFit As New Printing.PrintDocument
+                    Dim PageSetupFit As New PageSetupDialog With {.Document = DocumentoFit, .EnableMetric = True}
 
-                With My.Settings
+                    If PageSetupFit.ShowDialog = DialogResult.OK Then
+                        My.Settings.FormatoStampa = PageSetupFit.PageSettings
+                    End If
+                    My.Settings.Save()
+                    End If
+
+
+                    With My.Settings
+
                     .LogType = "normal"
                     .NumeroRigheDistinta = 15
                     .DimensioneFontDistinta = 12
@@ -315,5 +320,6 @@ Public Class Main
     Private Sub TS_Listino_Click(sender As Object, e As EventArgs) Handles TS_Listino.Click
         Form_Listino.Show()
     End Sub
+
 
 End Class

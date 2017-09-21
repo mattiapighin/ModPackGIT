@@ -107,6 +107,7 @@ Partial Class Form_ModificaImballo
         Me.Bt_EliminaCodice = New System.Windows.Forms.Button()
         Me.Bt_Duplica = New System.Windows.Forms.Button()
         Me.ImballiIndiciBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Tool = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelCodice.SuspendLayout()
@@ -689,6 +690,7 @@ Partial Class Form_ModificaImballo
         Me.Bt_SpostaIndice.Name = "Bt_SpostaIndice"
         Me.Bt_SpostaIndice.Size = New System.Drawing.Size(36, 36)
         Me.Bt_SpostaIndice.TabIndex = 33
+        Me.Tool.SetToolTip(Me.Bt_SpostaIndice, "Sposta indice su altro imballo")
         Me.Bt_SpostaIndice.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
@@ -1051,4 +1053,5 @@ Partial Class Form_ModificaImballo
     Friend WithEvents ImballiIndiciBindingSource1 As BindingSource
     Friend WithEvents Bt_AddIndice As Button
     Friend WithEvents Bt_EliminaIndice As Button
+    Friend WithEvents Tool As ToolTip
 End Class

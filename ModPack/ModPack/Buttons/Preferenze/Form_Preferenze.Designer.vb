@@ -82,7 +82,7 @@ Partial Class Form_Preferenze
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Txt_utente = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Bt_AzzeraDB = New System.Windows.Forms.Button()
         Me.Box_Developer = New System.Windows.Forms.GroupBox()
         Me.Bt_ResetSettings = New System.Windows.Forms.Button()
         Me.Bt_InviaQuery = New System.Windows.Forms.Button()
@@ -774,22 +774,22 @@ Partial Class Form_Preferenze
         Me.Txt_utente.Size = New System.Drawing.Size(217, 20)
         Me.Txt_utente.TabIndex = 0
         '
-        'Button1
+        'Bt_AzzeraDB
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(7, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(216, 30)
-        Me.Button1.TabIndex = 31
-        Me.Button1.Text = "Azzera database"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Bt_AzzeraDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Bt_AzzeraDB.Location = New System.Drawing.Point(7, 19)
+        Me.Bt_AzzeraDB.Name = "Bt_AzzeraDB"
+        Me.Bt_AzzeraDB.Size = New System.Drawing.Size(216, 30)
+        Me.Bt_AzzeraDB.TabIndex = 31
+        Me.Bt_AzzeraDB.Text = "Azzera database"
+        Me.Bt_AzzeraDB.UseVisualStyleBackColor = True
         '
         'Box_Developer
         '
         Me.Box_Developer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Box_Developer.Controls.Add(Me.Bt_ResetSettings)
         Me.Box_Developer.Controls.Add(Me.Bt_InviaQuery)
-        Me.Box_Developer.Controls.Add(Me.Button1)
+        Me.Box_Developer.Controls.Add(Me.Bt_AzzeraDB)
         Me.Box_Developer.Location = New System.Drawing.Point(425, 501)
         Me.Box_Developer.Name = "Box_Developer"
         Me.Box_Developer.Size = New System.Drawing.Size(229, 142)
@@ -920,7 +920,7 @@ Partial Class Form_Preferenze
     Friend WithEvents Label12 As Label
     Friend WithEvents CkNoteDinamico As CheckBox
     Friend WithEvents BT_SetupRives As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents Bt_AzzeraDB As Button
     Friend WithEvents Ck_TextMain As CheckBox
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents CkNotificaCambioIndice As CheckBox

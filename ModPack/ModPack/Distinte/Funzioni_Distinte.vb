@@ -51,6 +51,9 @@
                 Interasse = (BTL - (PrimoMorale * 2)) / (N - 1)
             Loop
 
+            If BTL <= 150 Then N = 3
+            If BTL <= 100 Then N = 2
+
             Return N
         End Function
         Public Function NumeroTavoleSopra(Interasse, interasseMAX)

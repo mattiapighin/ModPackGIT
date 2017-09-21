@@ -113,6 +113,13 @@ Partial Class Form_Imballi
         Me.NoteImballiTableAdapter = New ModPack.ModPackDBDataSetTableAdapters.NoteImballiTableAdapter()
         Me.CM_Copia = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Cm_Imballo = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Bt_CM_Modifica = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Bt_CM_ImbSimili = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Bt_CM_Stampa = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Bt_CM_AggNota = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Bt_Cm_MostraDistinta = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Bt_Cm_MostraIndici = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DgwImballi, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImballiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ModPackDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,6 +146,7 @@ Partial Class Form_Imballi
         Me.SplitSotto.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.CM_Copia.SuspendLayout()
+        Me.Cm_Imballo.SuspendLayout()
         Me.SuspendLayout()
         '
         'DgwImballi
@@ -168,7 +176,7 @@ Partial Class Form_Imballi
         Me.DgwImballi.ReadOnly = True
         Me.DgwImballi.RowHeadersVisible = False
         Me.DgwImballi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DgwImballi.Size = New System.Drawing.Size(1159, 666)
+        Me.DgwImballi.Size = New System.Drawing.Size(935, 666)
         Me.DgwImballi.TabIndex = 0
         '
         'IdDataGridViewTextBoxColumn
@@ -557,7 +565,7 @@ Partial Class Form_Imballi
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_Colonne, Me.Bt_Refresh, Me.Bt_FiltroNome, Me.Bt_Filtro, Me.Bt_MostraInfo, Me.Bt_MostraDistinta, Me.ToolStripSeparator1, Me.Bt_Modifica, Me.Bt_Simili, Me.Bt_StampaImballo, Me.Bt_MostraNuovi, Me.Bt_PulisciNuovi, Me.Bt_Note})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1159, 36)
+        Me.ToolStrip1.Size = New System.Drawing.Size(935, 36)
         Me.ToolStrip1.TabIndex = 3
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -686,7 +694,7 @@ Partial Class Form_Imballi
         '
         Me.SplitSopra.Panel2.Controls.Add(Me.DgwDistinta)
         Me.SplitSopra.Panel2Collapsed = True
-        Me.SplitSopra.Size = New System.Drawing.Size(1159, 666)
+        Me.SplitSopra.Size = New System.Drawing.Size(935, 666)
         Me.SplitSopra.SplitterDistance = 748
         Me.SplitSopra.TabIndex = 4
         '
@@ -696,7 +704,7 @@ Partial Class Form_Imballi
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.Lbl_Conteggio, Me.ToolStripStatusLabel2, Me.LBL_Descrizione})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 702)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1159, 23)
+        Me.StatusStrip1.Size = New System.Drawing.Size(935, 23)
         Me.StatusStrip1.TabIndex = 1
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -731,7 +739,7 @@ Partial Class Form_Imballi
         Me.LBL_Descrizione.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
         Me.LBL_Descrizione.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.LBL_Descrizione.Name = "LBL_Descrizione"
-        Me.LBL_Descrizione.Size = New System.Drawing.Size(1042, 18)
+        Me.LBL_Descrizione.Size = New System.Drawing.Size(818, 18)
         Me.LBL_Descrizione.Spring = True
         Me.LBL_Descrizione.Text = "ToolStripStatusLabel2"
         '
@@ -814,7 +822,7 @@ Partial Class Form_Imballi
         '
         Me.SplitIntero.Panel2.Controls.Add(Me.SplitSotto)
         Me.SplitIntero.Panel2Collapsed = True
-        Me.SplitIntero.Size = New System.Drawing.Size(1159, 666)
+        Me.SplitIntero.Size = New System.Drawing.Size(935, 666)
         Me.SplitIntero.SplitterDistance = 465
         Me.SplitIntero.TabIndex = 5
         '
@@ -903,11 +911,53 @@ Partial Class Form_Imballi
         Me.CopiaToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
         Me.CopiaToolStripMenuItem.Text = "Copia"
         '
+        'Cm_Imballo
+        '
+        Me.Cm_Imballo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bt_CM_Modifica, Me.Bt_CM_ImbSimili, Me.Bt_CM_Stampa, Me.Bt_CM_AggNota, Me.Bt_Cm_MostraDistinta, Me.Bt_Cm_MostraIndici})
+        Me.Cm_Imballo.Name = "Cm_Imballo"
+        Me.Cm_Imballo.Size = New System.Drawing.Size(175, 136)
+        '
+        'Bt_CM_Modifica
+        '
+        Me.Bt_CM_Modifica.Name = "Bt_CM_Modifica"
+        Me.Bt_CM_Modifica.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_CM_Modifica.Text = "Modifica"
+        '
+        'Bt_CM_ImbSimili
+        '
+        Me.Bt_CM_ImbSimili.Name = "Bt_CM_ImbSimili"
+        Me.Bt_CM_ImbSimili.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_CM_ImbSimili.Text = "Cerca imballi simili"
+        '
+        'Bt_CM_Stampa
+        '
+        Me.Bt_CM_Stampa.Name = "Bt_CM_Stampa"
+        Me.Bt_CM_Stampa.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_CM_Stampa.Text = "Stampa"
+        '
+        'Bt_CM_AggNota
+        '
+        Me.Bt_CM_AggNota.Name = "Bt_CM_AggNota"
+        Me.Bt_CM_AggNota.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_CM_AggNota.Text = "Aggiungi Nota"
+        '
+        'Bt_Cm_MostraDistinta
+        '
+        Me.Bt_Cm_MostraDistinta.Name = "Bt_Cm_MostraDistinta"
+        Me.Bt_Cm_MostraDistinta.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_Cm_MostraDistinta.Text = "Mostra Distinta"
+        '
+        'Bt_Cm_MostraIndici
+        '
+        Me.Bt_Cm_MostraIndici.Name = "Bt_Cm_MostraIndici"
+        Me.Bt_Cm_MostraIndici.Size = New System.Drawing.Size(174, 22)
+        Me.Bt_Cm_MostraIndici.Text = "Mostra info"
+        '
         'Form_Imballi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1159, 725)
+        Me.ClientSize = New System.Drawing.Size(935, 725)
         Me.Controls.Add(Me.SplitIntero)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.StatusStrip1)
@@ -945,6 +995,7 @@ Partial Class Form_Imballi
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
         Me.CM_Copia.ResumeLayout(False)
+        Me.Cm_Imballo.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1033,4 +1084,11 @@ Partial Class Form_Imballi
     Friend WithEvents CM_Copia As ContextMenuStrip
     Friend WithEvents CopiaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
+    Friend WithEvents Cm_Imballo As ContextMenuStrip
+    Friend WithEvents Bt_CM_Modifica As ToolStripMenuItem
+    Friend WithEvents Bt_CM_ImbSimili As ToolStripMenuItem
+    Friend WithEvents Bt_CM_Stampa As ToolStripMenuItem
+    Friend WithEvents Bt_CM_AggNota As ToolStripMenuItem
+    Friend WithEvents Bt_Cm_MostraDistinta As ToolStripMenuItem
+    Friend WithEvents Bt_Cm_MostraIndici As ToolStripMenuItem
 End Class

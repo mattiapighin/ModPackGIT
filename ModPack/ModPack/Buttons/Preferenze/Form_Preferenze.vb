@@ -127,6 +127,7 @@
     End Sub
     Private Sub Bt_Salva_Click(sender As Object, e As EventArgs) Handles Bt_Salva.Click
         If MsgBox("Salvare le modifiche?", vbYesNo, "Preferenze") = MsgBoxResult.Yes Then
+            If Txt_utente.Text <> My.Settings.Utente Then LOG.Write("Utente modificato da [" & My.Settings.Utente & "] a [" & Txt_utente.Text & "]")
             SalvaSettingsEtichette()
             SalvaSettingsCK()
             SalvaSettingsDistinta()
@@ -261,25 +262,25 @@
         FRM_SetupRivestimenti.Show()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Bt_AzzeraDB_Click(sender As Object, e As EventArgs) Handles Bt_AzzeraDB.Click
 
         If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (3)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
-                If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (2)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
-                    If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (1)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
+            If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (2)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
+                If MsgBox("Questa operazione azzera completamente tutti i dati caricati, continuare? (1)", vbYesNo, "Azzera") = MsgBoxResult.Yes Then
 
                     SQL.Query("TRUNCATE TABLE Distinta")
-                            SQL.Query("TRUNCATE TABLE Imballi")
-                            SQL.Query("TRUNCATE TABLE Indici")
-                            SQL.Query("TRUNCATE TABLE Ordini")
-                            SQL.Query("TRUNCATE TABLE NoteImballi")
-                            SQL.Query("TRUNCATE TABLE Memo")
-                            IO.File.Delete(My.Settings.XMLpath)
-                            Debug.WriteLine("Truncato tutto")
-                            XML.CreaXML()
+                    SQL.Query("TRUNCATE TABLE Imballi")
+                    SQL.Query("TRUNCATE TABLE Indici")
+                    SQL.Query("TRUNCATE TABLE Ordini")
+                    SQL.Query("TRUNCATE TABLE NoteImballi")
+                    SQL.Query("TRUNCATE TABLE Memo")
+                    IO.File.Delete(My.Settings.XMLpath)
+                    Debug.WriteLine("Truncato tutto")
+                    XML.CreaXML()
 
                 End If
-                End If
             End If
+        End If
 
 
 

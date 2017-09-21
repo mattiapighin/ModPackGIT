@@ -340,6 +340,38 @@ Public Class Form_Imballi
             LBL_Descrizione.Text = Descrizione(DgwImballi.CurrentRow)
         End If
     End Sub
+
+    'Context menu imballo
+
+
+    Private Sub Bt_CM_Modifica_Click(sender As Object, e As EventArgs) Handles Bt_CM_Modifica.Click
+        Bt_Modifica_Click(sender, e)
+    End Sub
+    Private Sub Bt_CM_ImbSimili_Click(sender As Object, e As EventArgs) Handles Bt_CM_ImbSimili.Click
+        Bt_Simili_Click(sender, e)
+    End Sub
+    Private Sub Bt_CM_Stampa_Click(sender As Object, e As EventArgs) Handles Bt_CM_Stampa.Click
+        Bt_StampaImballo_Click(sender, e)
+    End Sub
+    Private Sub Bt_CM_AggNota_Click(sender As Object, e As EventArgs) Handles Bt_CM_AggNota.Click
+        Bt_Note_Click(sender, e)
+    End Sub
+    Private Sub Bt_Cm_MostraDistinta_Click(sender As Object, e As EventArgs) Handles Bt_Cm_MostraDistinta.Click
+        Bt_MostraDistinta_Click(sender, e)
+    End Sub
+    Private Sub Bt_Cm_MostraIndici_Click(sender As Object, e As EventArgs) Handles Bt_Cm_MostraIndici.Click
+        Bt_MostraInfo_Click(sender, e)
+    End Sub
+
+    Private Sub DgwImballi_MouseDown(sender As Object, e As MouseEventArgs) Handles DgwImballi.MouseDown
+        If e.Button = MouseButtons.Right Then
+            If Not DgwImballi.SelectedRows.Count = 0 Then
+                Cm_Imballo.Show(MousePosition)
+            End If
+        End If
+    End Sub
+
+
 End Class
 
 

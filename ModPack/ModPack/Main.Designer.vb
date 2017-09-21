@@ -26,7 +26,6 @@ Partial Class Main
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStrip = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ProgressBar = New System.Windows.Forms.ToolStripProgressBar()
@@ -309,7 +308,6 @@ Partial Class Main
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents PrintDocument1 As Printing.PrintDocument
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStrip As ToolStripStatusLabel
     Friend WithEvents ProgressBar As ToolStripProgressBar

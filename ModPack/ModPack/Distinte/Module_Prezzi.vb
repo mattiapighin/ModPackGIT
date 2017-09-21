@@ -55,8 +55,9 @@
                         PrezzoMateriale = 0
                     End If
 
-
                     PrezzoTotale = (PrezzoRivestimento * M2) + (PrezzoMateriale * M3) + (PrezzoMateriale * Scarto(M3))
+
+                    LOG.Write("Materiale € " & (PrezzoMateriale * M3) & " - Rivestimento € " & (PrezzoRivestimento * M2) & " - Scarto € " & (PrezzoMateriale * Scarto(M3)) & " - TOTALE € " & Math.Round(PrezzoTotale, 1))
 
                     TableTipi.Dispose()
                     TableRivestimenti.Dispose()
@@ -128,10 +129,12 @@
 
 
                     Dim M2_CP As Single = ((L * H * 2) + (P * H * 2) + (L * P)) * (10 ^ -4)
-                    Dim M2_FF As Single = (L * P) * (10 ^ -4)
+                    'Dal 20/09/2017 rimossa faesite sulla base
+                    Dim M2_FF As Single = 0 ' (L * P) * (10 ^ -4)
 
                     PrezzoTotale = (PrezzoMateriale * M3) + (PrezzoRivestimento * M2_CP) + (PrezzoFaesite * M2_FF) + (PrezzoMateriale * Scarto(M3))
 
+                    LOG.Write("Materiale € " & (PrezzoMateriale * M3) & " - Rivestimento € " & (PrezzoRivestimento * M2_CP) & " - Faesite € " & (PrezzoFaesite * M2_FF) & " - Scarto € " & (PrezzoMateriale * Scarto(M3)) & " - TOTALE € " & Math.Round(PrezzoTotale, 1))
 
                     TableTipi.Dispose()
                     TableRivestimenti.Dispose()
@@ -189,6 +192,7 @@
 
 
                     PrezzoTotale = (PrezzoOSB9 * M2_09) + (PrezzoOSB12 * M2_12) + (PrezzoZoccoli * m3) + PrezzoCostruzione + (PrezzoZoccoli * Scarto(m3))
+                    LOG.Write("OSB € " & (PrezzoOSB9 * M2_09) + (PrezzoOSB12 * M2_12) & " - Zoccoli € " & (PrezzoZoccoli * m3) & " - Costruzione € " & PrezzoCostruzione & " - Scarto € " & (PrezzoZoccoli * Scarto(m3)) & " - TOTALE € " & Math.Round(PrezzoTotale, 1))
 
                     MaterialiTable.Dispose()
                 TipiTable.Dispose()

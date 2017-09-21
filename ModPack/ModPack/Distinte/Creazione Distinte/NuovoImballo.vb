@@ -319,6 +319,8 @@
             Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
             Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
 
+            'se spazio maggiore di x diagonali si
+
             If Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav) Mod 2 <> 0 Then
                 NdiagT = 0
             End If
@@ -351,7 +353,7 @@
 
             D.AddRange({TTL, TM})
 
-            If Diagonali = True And NdiagT > 0 Then
+            If H >= 100 And NdiagT > 0 Then
                 Dim TD As New Riga_Distinta With {.X = Ltav, .Y = 1.8, .Z = LdiagT, .N = NdiagT, .Tag = "TD", .Part = "T"}
                 D.Add(TD)
             End If
@@ -672,8 +674,8 @@
             Dim Ltav As Integer = 10
             'If L <= My.Settings.LimiteTavole8 Then Ltav = 8
 
-            Dim MontanteSottoF As Integer = 1.8
-            Dim MontanteSottoT As Integer = 1.8
+            Dim MontanteSottoF As Single = 1.8
+            Dim MontanteSottoT As Single = 1.8
 
             '############ BANCALE ############
 
@@ -721,6 +723,8 @@
             Dim LdiagT As Integer = Imballo.Diagonali_lunghezza(SpazioFraMontantiT, H, Ltav)
             Dim GRADIdiagT As Single = Imballo.Diagonali_gradi(SpazioFraMontantiT, H, Ltav)
             Dim NdiagT As Single = Imballo.NumeroTavole(P, TIPO.SpazioMT, Ltav)
+
+            If NdiagT Mod 2 > 0 Then NdiagT += 1
 
             If GRADIdiagF < 0 Then GRADIdiagF = 0
             If GRADIdiagT < 0 Then GRADIdiagT = 0

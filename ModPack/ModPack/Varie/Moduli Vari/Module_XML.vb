@@ -24,6 +24,7 @@
                     .WriteEndElement()
 
                     'Conteggio dei codici salvati
+                    .WriteComment("Ultimo codice salvato (inizia a codificare da +1)")
                     .WriteStartElement("CodeCount")
                     .WriteValue("0")
                     .WriteEndElement()
@@ -31,6 +32,7 @@
                     'Tipo di scala Immagine
                     ' 0 = Scala solo Y
                     ' 1 = Scala XY
+                    .WriteComment("0: Scala solo Y - 1: Scala XY")
                     .WriteStartElement("TipoScalaIMG")
                     .WriteValue("1")
                     .WriteEndElement()
@@ -56,11 +58,11 @@
                     .WriteEndElement()
 
                     .WriteStartElement("Pulizia_Ordine")
-                    .WriteValue("True")
+                    .WriteValue("False")
                     .WriteEndElement()
 
                     .WriteStartElement("Giorni_Memoria_Ordine")
-                    .WriteValue("60")
+                    .WriteValue("90")
                     .WriteEndElement()
 
                     .WriteStartElement("Max_LOG")
@@ -74,6 +76,10 @@
                     .WriteStartElement("Inverti")
                     .WriteValue("True")
                     .WriteEndElement()
+                    .WriteEndElement()
+
+                    .WriteStartElement("StringaConnessione")
+                    .WriteValue("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=Z:\ModPack\ModPackDB.mdf;Integrated Security=True;Connect Timeout=30")
                     .WriteEndElement()
 
                     .WriteEndDocument()
@@ -93,6 +99,13 @@
             Dim X = XDocument.Load(My.Settings.XMLpath)
             Conta = X.<Data>.<CodeCount>.Value
             Return Conta
+        End Function
+
+        Public Function GetStringaConnessione() As String
+            Dim Stringa As String
+            Dim X = XDocument.Load(My.Settings.XMLpath)
+            Stringa = X.<Data>.<StringaConnessione>.Value
+            Return Stringa
         End Function
 
     End Module

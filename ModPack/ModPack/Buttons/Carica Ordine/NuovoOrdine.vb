@@ -303,7 +303,7 @@
                 '6 - Legge la lista appena creata e controlla se esistono in memoria imballi corrispondenti
 
                 For Each PACK As RigaOrdineINPUT In Lista
-
+                    LOG.Write("--- ELABORAZIONE RIGA " & PACK.Riga & " - ORDINE " & PACK.NumeroOrdine & " ---")
                     ProgC = "Riga: " & PACK.Riga & " - Progress: 0"
 
                     If Not Progressbar Is Nothing Then Progressbar.Value += 1
@@ -331,6 +331,7 @@
                                     .Stampato = False, .Produzione = False, .Evaso = False}
                                 ProgC += " 4"
                                 SQL.InsertRigaOrdini(RIGA_ORDINE)
+                                LOG.Write("IMBALLO: " & ImballoName)
                             Else
 
                                 'Crea righe per il confronto su msgbox
